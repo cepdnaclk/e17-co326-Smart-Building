@@ -86,3 +86,27 @@ CREATE TABLE smart_building.pull_alarm(
     room_no INT NOT NULL,
     active bool NOT NULL
 );
+CREATE TABLE smart_building.current_sensor(
+    record  DATETIME PRIMARY KEY,
+    floor_no INT NOT NULL,
+    room_no INT NOT NULL,
+    current FLOAT(3,2) NOT NULL
+);
+CREATE TABLE smart_building.voltage_sensor(
+    record  DATETIME PRIMARY KEY,
+    floor_no INT NOT NULL,
+    room_no INT NOT NULL,
+    voltage FLOAT(3,2) NOT NULL
+);
+CREATE TABLE smart_building.electric_meter(
+    record  DATETIME PRIMARY KEY,
+    floor_no INT NOT NULL,
+    room_no INT NOT NULL,
+    electric_level INT NOT NULL
+);
+CREATE TABLE smart_building.watt_meter(
+    record  DATETIME PRIMARY KEY,
+    floor_no INT NOT NULL,
+    room_no INT NOT NULL,
+    watts FLOAT(3,2) NOT NULL
+);
