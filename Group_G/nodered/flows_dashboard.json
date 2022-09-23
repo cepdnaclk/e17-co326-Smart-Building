@@ -428,8 +428,7 @@
         "y": 800,
         "wires": [
             [
-                "c53d0abd49424ff4",
-                "74be9d4d1cfac58b"
+                "bc43dae648264f72"
             ]
         ]
     },
@@ -450,7 +449,7 @@
         "y": 900,
         "wires": [
             [
-                "eb57c09bba91d916"
+                "bc43dae648264f72"
             ]
         ]
     },
@@ -490,7 +489,8 @@
         "y": 460,
         "wires": [
             [
-                "4e02622586b5a5b2"
+                "4e02622586b5a5b2",
+                "74be9d4d1cfac58b"
             ]
         ]
     },
@@ -507,8 +507,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 690,
-        "y": 660,
+        "x": 1190,
+        "y": 540,
         "wires": []
     },
     {
@@ -543,104 +543,113 @@
         "wires": []
     },
     {
-        "id": "c53d0abd49424ff4",
+        "id": "32774cbbf290225a",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "bc43dae648264f72",
+        "type": "join",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 590,
+        "y": 840,
+        "wires": [
+            [
+                "5bc1c5fd8482290c"
+            ]
+        ]
+    },
+    {
+        "id": "5bc1c5fd8482290c",
         "type": "function",
         "z": "89f1832e99218bc3",
-        "name": "function 12",
-        "func": "msg.payload = msg.payload.state;\nreturn msg;",
+        "name": "function 9",
+        "func": "var boiler = msg.payload['smartbuilding/hvac/control/boiler'].state;\nvar chiller = msg.payload['smartbuilding/hvac/control/chiller'].state;\nvar data = [boiler, chiller];\nvar lable = [\"boiler\", \"chiller\"];\n\nmsg.payload = [{\n    series: [],\n    data: [data],\n    labels: lable\n}];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
-        "y": 800,
+        "x": 820,
+        "y": 860,
         "wires": [
             [
-                "d9cceb04b5df328b"
+                "32774cbbf290225a",
+                "d76c1a342a0b81c8"
             ]
         ]
     },
     {
-        "id": "d9cceb04b5df328b",
-        "type": "ui_led",
+        "id": "d76c1a342a0b81c8",
+        "type": "ui_chart",
         "z": "89f1832e99218bc3",
-        "order": 0,
+        "name": "",
         "group": "9168820b335f153b",
+        "order": 0,
         "width": 0,
         "height": 0,
-        "label": "Boiler Status",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "#ff0000",
-                "value": "0",
-                "valueType": "num"
-            },
-            {
-                "color": "#008000",
-                "value": "1",
-                "valueType": "num"
-            }
+        "label": "Boiler/Chiller Status",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
         ],
-        "allowColorForValueInMessage": false,
-        "shape": "square",
-        "showGlow": true,
-        "name": "",
-        "x": 810,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "eb57c09bba91d916",
-        "type": "function",
-        "z": "89f1832e99218bc3",
-        "name": "function 13",
-        "func": "msg.payload = msg.payload.state;\nreturn msg;",
         "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 550,
-        "y": 900,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 820,
         "wires": [
-            [
-                "eea51e24898db9d8"
-            ]
+            []
         ]
-    },
-    {
-        "id": "eea51e24898db9d8",
-        "type": "ui_led",
-        "z": "89f1832e99218bc3",
-        "order": 0,
-        "group": "9168820b335f153b",
-        "width": 0,
-        "height": 0,
-        "label": "Chiller Status",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "#ff0000",
-                "value": "0",
-                "valueType": "num"
-            },
-            {
-                "color": "#008000",
-                "value": "1",
-                "valueType": "num"
-            }
-        ],
-        "allowColorForValueInMessage": false,
-        "shape": "square",
-        "showGlow": true,
-        "name": "",
-        "x": 810,
-        "y": 880,
-        "wires": []
     },
     {
         "id": "b48421c1f6853c92",
