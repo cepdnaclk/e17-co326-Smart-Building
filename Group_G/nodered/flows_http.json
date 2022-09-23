@@ -1,0 +1,668 @@
+[
+    {
+        "id": "0c7bacd04bdd03e5",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b7740835d6b8e5c5",
+        "type": "http in",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "url": "/humidity",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "dfd58b40f11bbc8f"
+            ]
+        ]
+    },
+    {
+        "id": "dfd58b40f11bbc8f",
+        "type": "function",
+        "z": "0c7bacd04bdd03e5",
+        "name": "function 5",
+        "func": "msg.topic = \"SELECT * from humidity;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "9edbd447f7d93f25"
+            ]
+        ]
+    },
+    {
+        "id": "9edbd447f7d93f25",
+        "type": "mysql",
+        "z": "0c7bacd04bdd03e5",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "7039e61bf1229b2e"
+            ]
+        ]
+    },
+    {
+        "id": "7039e61bf1229b2e",
+        "type": "template",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <style>\ntable,th, td{\n    border:1px solid black;\n}\n\n    </style>\n<body>\n<table>\n<tr>\n    <th>record</th>\n    <th> floor_no </th>\n    <th> room_no </th>\n    <th> humidity_level</th>\n</tr>\n\n\n{{#payload}}\n<tr>\n    <td> {{record}}</td>\n    <td> {{floor_no}}</td>\n    <td> {{room_no}}</td>\n    <td> {{humidity_level}}</td>\n</tr>\n\n{{/payload}}\n</table>\n</body>\n</html>",
+        "output": "str",
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "968624206bdcd3d2",
+                "a77577e6448925b5"
+            ]
+        ]
+    },
+    {
+        "id": "968624206bdcd3d2",
+        "type": "http response",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a77577e6448925b5",
+        "type": "debug",
+        "z": "0c7bacd04bdd03e5",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0adc3c9afce73f05",
+        "type": "http in",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "url": "/temp",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 400,
+        "wires": [
+            [
+                "3ed29fdf0b2901ab"
+            ]
+        ]
+    },
+    {
+        "id": "3ed29fdf0b2901ab",
+        "type": "function",
+        "z": "0c7bacd04bdd03e5",
+        "name": "function 6",
+        "func": "msg.topic = \"SELECT * from thermostat;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "5c1aabae8e512db3"
+            ]
+        ]
+    },
+    {
+        "id": "5c1aabae8e512db3",
+        "type": "mysql",
+        "z": "0c7bacd04bdd03e5",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 600,
+        "y": 400,
+        "wires": [
+            [
+                "ceb1b2f5ba9a67bf"
+            ]
+        ]
+    },
+    {
+        "id": "ceb1b2f5ba9a67bf",
+        "type": "template",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <style>\ntable,th, td{\n    border:1px solid black;\n}\n\n    </style>\n<body>\n<table>\n<tr>\n    <th>record</th>\n    <th> floor_no </th>\n    <th> room_no </th>\n    <th> temp_level</th>\n</tr>\n\n\n{{#payload}}\n<tr>\n    <td> {{record}}</td>\n    <td> {{floor_no}}</td>\n    <td> {{room_no}}</td>\n    <td> {{temp_level}}</td>\n</tr>\n\n{{/payload}}\n</table>\n</body>\n</html>",
+        "output": "str",
+        "x": 880,
+        "y": 400,
+        "wires": [
+            [
+                "6a7463ed9bf26c05",
+                "76a782310e3e7ac6"
+            ]
+        ]
+    },
+    {
+        "id": "6a7463ed9bf26c05",
+        "type": "http response",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "76a782310e3e7ac6",
+        "type": "debug",
+        "z": "0c7bacd04bdd03e5",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9f1a76d45f46d47a",
+        "type": "http in",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "url": "/boiler",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 560,
+        "wires": [
+            [
+                "360d16228afbc75e"
+            ]
+        ]
+    },
+    {
+        "id": "360d16228afbc75e",
+        "type": "function",
+        "z": "0c7bacd04bdd03e5",
+        "name": "function 7",
+        "func": "msg.topic = \"SELECT * from boiler;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 560,
+        "wires": [
+            [
+                "e760d0dd6af9cf54"
+            ]
+        ]
+    },
+    {
+        "id": "e760d0dd6af9cf54",
+        "type": "mysql",
+        "z": "0c7bacd04bdd03e5",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 600,
+        "y": 560,
+        "wires": [
+            [
+                "2bc8a4a1ad43faec"
+            ]
+        ]
+    },
+    {
+        "id": "2bc8a4a1ad43faec",
+        "type": "template",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <style>\ntable,th, td{\n    border:1px solid black;\n}\n\n    </style>\n<body>\n<table>\n<tr>\n    <th>record</th>\n    <th> floor_no </th>\n    <th> room_no </th>\n    <th> active</th>\n</tr>\n\n\n{{#payload}}\n<tr>\n    <td> {{record}}</td>\n    <td> {{floor_no}}</td>\n    <td> {{room_no}}</td>\n    <td> {{active}}</td>\n</tr>\n\n{{/payload}}\n</table>\n</body>\n</html>",
+        "output": "str",
+        "x": 880,
+        "y": 560,
+        "wires": [
+            [
+                "cf02021e5863ba13",
+                "3aed12f8e5e9b9d3"
+            ]
+        ]
+    },
+    {
+        "id": "cf02021e5863ba13",
+        "type": "http response",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "3aed12f8e5e9b9d3",
+        "type": "debug",
+        "z": "0c7bacd04bdd03e5",
+        "name": "debug 9",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b0694e881431ea6e",
+        "type": "http in",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "url": "/chiller",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 740,
+        "wires": [
+            [
+                "43941d7a73a36b84"
+            ]
+        ]
+    },
+    {
+        "id": "43941d7a73a36b84",
+        "type": "function",
+        "z": "0c7bacd04bdd03e5",
+        "name": "function 8",
+        "func": "msg.topic = \"SELECT * from chiller;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 740,
+        "wires": [
+            [
+                "b7bbad676d28b2b6"
+            ]
+        ]
+    },
+    {
+        "id": "b7bbad676d28b2b6",
+        "type": "mysql",
+        "z": "0c7bacd04bdd03e5",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 600,
+        "y": 740,
+        "wires": [
+            [
+                "8bb1f445c3270219"
+            ]
+        ]
+    },
+    {
+        "id": "8bb1f445c3270219",
+        "type": "template",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <style>\ntable,th, td{\n    border:1px solid black;\n}\n\n    </style>\n<body>\n<table>\n<tr>\n    <th>record</th>\n    <th> floor_no </th>\n    <th> room_no </th>\n    <th> active</th>\n</tr>\n\n\n{{#payload}}\n<tr>\n    <td> {{record}}</td>\n    <td> {{floor_no}}</td>\n    <td> {{room_no}}</td>\n    <td> {{active}}</td>\n</tr>\n\n{{/payload}}\n</table>\n</body>\n</html>",
+        "output": "str",
+        "x": 880,
+        "y": 740,
+        "wires": [
+            [
+                "8a0ce6529ec3965d",
+                "720439ca5848c827"
+            ]
+        ]
+    },
+    {
+        "id": "8a0ce6529ec3965d",
+        "type": "http response",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "720439ca5848c827",
+        "type": "debug",
+        "z": "0c7bacd04bdd03e5",
+        "name": "debug 10",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "9df037cc5fafa0c0",
+        "type": "http in",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "url": "/light",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 940,
+        "wires": [
+            [
+                "9d98e34d5e97bc53"
+            ]
+        ]
+    },
+    {
+        "id": "9d98e34d5e97bc53",
+        "type": "function",
+        "z": "0c7bacd04bdd03e5",
+        "name": "function 9",
+        "func": "msg.topic = \"SELECT * from light;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 940,
+        "wires": [
+            [
+                "22ebd9e3a0a2d52b"
+            ]
+        ]
+    },
+    {
+        "id": "22ebd9e3a0a2d52b",
+        "type": "mysql",
+        "z": "0c7bacd04bdd03e5",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 600,
+        "y": 940,
+        "wires": [
+            [
+                "bd9dd15ae5a22fd6"
+            ]
+        ]
+    },
+    {
+        "id": "bd9dd15ae5a22fd6",
+        "type": "template",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <style>\ntable,th, td{\n    border:1px solid black;\n}\n\n    </style>\n<body>\n<table>\n<tr>\n    <th>record</th>\n    <th> floor_no </th>\n    <th> room_no </th>\n    <th> active</th>\n</tr>\n\n\n{{#payload}}\n<tr>\n    <td> {{record}}</td>\n    <td> {{floor_no}}</td>\n    <td> {{room_no}}</td>\n    <td> {{active}}</td>\n</tr>\n\n{{/payload}}\n</table>\n</body>\n</html>",
+        "output": "str",
+        "x": 880,
+        "y": 940,
+        "wires": [
+            [
+                "8e6d5533adcb0ff0",
+                "8bf7db48abaae47c"
+            ]
+        ]
+    },
+    {
+        "id": "8e6d5533adcb0ff0",
+        "type": "http response",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "8bf7db48abaae47c",
+        "type": "debug",
+        "z": "0c7bacd04bdd03e5",
+        "name": "debug 11",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "0fa2a97d1a990bb9",
+        "type": "http in",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "url": "/intensity",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 1120,
+        "wires": [
+            [
+                "7794b575ba92046d"
+            ]
+        ]
+    },
+    {
+        "id": "7794b575ba92046d",
+        "type": "function",
+        "z": "0c7bacd04bdd03e5",
+        "name": "function 10",
+        "func": "msg.topic = \"SELECT * from intensity;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 1120,
+        "wires": [
+            [
+                "9c2e4e612a397446"
+            ]
+        ]
+    },
+    {
+        "id": "9c2e4e612a397446",
+        "type": "mysql",
+        "z": "0c7bacd04bdd03e5",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 600,
+        "y": 1120,
+        "wires": [
+            [
+                "b86e51d57c8d7168"
+            ]
+        ]
+    },
+    {
+        "id": "b86e51d57c8d7168",
+        "type": "template",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <style>\ntable,th, td{\n    border:1px solid black;\n}\n\n    </style>\n<body>\n<table>\n<tr>\n    <th>record</th>\n    <th> floor_no </th>\n    <th> room_no </th>\n    <th> light_level</th>\n</tr>\n\n\n{{#payload}}\n<tr>\n    <td> {{record}}</td>\n    <td> {{floor_no}}</td>\n    <td> {{room_no}}</td>\n    <td> {{light_level}}</td>\n</tr>\n\n{{/payload}}\n</table>\n</body>\n</html>",
+        "output": "str",
+        "x": 880,
+        "y": 1120,
+        "wires": [
+            [
+                "4bdb3f011444359a",
+                "23792c9aa72edc8e"
+            ]
+        ]
+    },
+    {
+        "id": "4bdb3f011444359a",
+        "type": "http response",
+        "z": "0c7bacd04bdd03e5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "23792c9aa72edc8e",
+        "type": "debug",
+        "z": "0c7bacd04bdd03e5",
+        "name": "debug 12",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "cf57633788808378",
+        "type": "comment",
+        "z": "0c7bacd04bdd03e5",
+        "name": "Humidity",
+        "info": "",
+        "x": 200,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "1ea499ab0109eed9",
+        "type": "comment",
+        "z": "0c7bacd04bdd03e5",
+        "name": "Temperature",
+        "info": "",
+        "x": 210,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "5977b8001443e1e2",
+        "type": "comment",
+        "z": "0c7bacd04bdd03e5",
+        "name": "boiler",
+        "info": "",
+        "x": 190,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "0d427b6ceb0e700a",
+        "type": "comment",
+        "z": "0c7bacd04bdd03e5",
+        "name": "chiller",
+        "info": "",
+        "x": 190,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "b5987b0e19f6a585",
+        "type": "comment",
+        "z": "0c7bacd04bdd03e5",
+        "name": "light",
+        "info": "",
+        "x": 190,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "85c770e1d50d2fd2",
+        "type": "comment",
+        "z": "0c7bacd04bdd03e5",
+        "name": "intensity",
+        "info": "",
+        "x": 200,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "b48421c1f6853c92",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "smart_building",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]

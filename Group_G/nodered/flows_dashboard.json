@@ -1,0 +1,721 @@
+[
+    {
+        "id": "89f1832e99218bc3",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "561a2ed71e7d5f6e",
+        "type": "mysql",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 1220,
+        "y": 200,
+        "wires": [
+            [
+                "ab583edcb5831eef",
+                "4a8cecdf2ac1d0bf"
+            ]
+        ]
+    },
+    {
+        "id": "2a0bf7d175d5cf9c",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "function 2",
+        "func": "msg.topic = \"SELECT * from humidity;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 140,
+        "wires": [
+            [
+                "561a2ed71e7d5f6e"
+            ]
+        ]
+    },
+    {
+        "id": "c4cc41bc2b22bc3b",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1340,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f9888ebc4caa06c5",
+        "type": "ui_button",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "",
+        "group": "68755d2ba0f93e7a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "SELECT * from humidity;",
+        "topicType": "str",
+        "x": 760,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a4b7ef4f48f44ac3",
+        "type": "ui_chart",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "",
+        "group": "68755d2ba0f93e7a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1770,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a8cecdf2ac1d0bf",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ab583edcb5831eef",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "function 3",
+        "func": "var data = [];\nvar month = [];\nmsg.payload.forEach(function (value) {\n    data.push(value['humidity_level']);\n    month.push(value['floor_no']*10+value['room_no']);\n});\n\nmsg.payload = [{\n    series: [],\n    data: [data],\n    labels: month\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 220,
+        "wires": [
+            [
+                "a4b7ef4f48f44ac3",
+                "c4cc41bc2b22bc3b"
+            ]
+        ]
+    },
+    {
+        "id": "d7b1ce7609da34ad",
+        "type": "http in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "url": "/humidity",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "e6c971b960db737a"
+            ]
+        ]
+    },
+    {
+        "id": "a77d93d83b171e4c",
+        "type": "http response",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e6c971b960db737a",
+        "type": "template",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "This is the payload: {{payload}} !",
+        "output": "str",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "a77d93d83b171e4c"
+            ]
+        ]
+    },
+    {
+        "id": "f8c130570c7bd583",
+        "type": "ui_gauge",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "group": "68755d2ba0f93e7a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 630,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7d06e1a49b5b806e",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "topic": "smartbuilding/hvac/0/1/humid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "e22a8d200207bae0"
+            ]
+        ]
+    },
+    {
+        "id": "e22a8d200207bae0",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "name": "function 4",
+        "func": "msg.payload =  msg.payload.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 240,
+        "wires": [
+            [
+                "f8c130570c7bd583",
+                "8f13cfe28b98a938"
+            ]
+        ]
+    },
+    {
+        "id": "8f13cfe28b98a938",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f2a386076b23f450",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "d": true,
+        "name": "",
+        "topic": "smartbuilding/hvac/0/1/humid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 960,
+        "y": 60,
+        "wires": [
+            [
+                "2a0bf7d175d5cf9c"
+            ]
+        ]
+    },
+    {
+        "id": "3812ea303d1c6ca9",
+        "type": "ui_gauge",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "group": "68755d2ba0f93e7a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "15",
+        "max": "35",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 630,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "8b818df810081988",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "topic": "smartbuilding/hvac/0/1/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 440,
+        "wires": [
+            [
+                "54362dd41678f748"
+            ]
+        ]
+    },
+    {
+        "id": "54362dd41678f748",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "name": "function 6",
+        "func": "msg.payload =  msg.payload.temperature;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "3812ea303d1c6ca9",
+                "74162287aea110aa"
+            ]
+        ]
+    },
+    {
+        "id": "74162287aea110aa",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "70465f4dfbf4a29d",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "topic": "smartbuilding/hvac/control/boiler",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 800,
+        "wires": [
+            [
+                "bc43dae648264f72"
+            ]
+        ]
+    },
+    {
+        "id": "3f644aeff381dc5b",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "topic": "smartbuilding/hvac/control/chiller",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 900,
+        "wires": [
+            [
+                "bc43dae648264f72"
+            ]
+        ]
+    },
+    {
+        "id": "bfe00f97ac8231cc",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "topic": "smartbuilding/lighting/0/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 930,
+        "y": 460,
+        "wires": [
+            [
+                "8178d0286c5257bd"
+            ]
+        ]
+    },
+    {
+        "id": "8178d0286c5257bd",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "name": "function 11",
+        "func": "var level = msg.payload.lightlevel;\nif (level < 50) {\n    msg.payload = false;\n} else {\n    msg.payload = true;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 460,
+        "wires": [
+            [
+                "4e02622586b5a5b2",
+                "74be9d4d1cfac58b"
+            ]
+        ]
+    },
+    {
+        "id": "74be9d4d1cfac58b",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "4e02622586b5a5b2",
+        "type": "ui_led",
+        "z": "89f1832e99218bc3",
+        "order": 4,
+        "group": "68755d2ba0f93e7a",
+        "width": 0,
+        "height": 0,
+        "label": "Light Status",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 1430,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "32774cbbf290225a",
+        "type": "debug",
+        "z": "89f1832e99218bc3",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "bc43dae648264f72",
+        "type": "join",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 590,
+        "y": 840,
+        "wires": [
+            [
+                "5bc1c5fd8482290c"
+            ]
+        ]
+    },
+    {
+        "id": "5bc1c5fd8482290c",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "name": "function 9",
+        "func": "var boiler = msg.payload['smartbuilding/hvac/control/boiler'].state;\nvar chiller = msg.payload['smartbuilding/hvac/control/chiller'].state;\nvar data = [boiler, chiller];\nvar lable = [\"boiler\", \"chiller\"];\n\nmsg.payload = [{\n    series: [],\n    data: [data],\n    labels: lable\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 860,
+        "wires": [
+            [
+                "32774cbbf290225a",
+                "d76c1a342a0b81c8"
+            ]
+        ]
+    },
+    {
+        "id": "d76c1a342a0b81c8",
+        "type": "ui_chart",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "group": "9168820b335f153b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Boiler/Chiller Status",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b48421c1f6853c92",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "smart_building",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "68755d2ba0f93e7a",
+        "type": "ui_group",
+        "name": "Room Data",
+        "tab": "ba366b44953c94ed",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f63eafa0adcd4199",
+        "type": "mqtt-broker",
+        "name": "SmartBuilding",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9168820b335f153b",
+        "type": "ui_group",
+        "name": "Common System Info",
+        "tab": "ba366b44953c94ed",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ba366b44953c94ed",
+        "type": "ui_tab",
+        "name": "Gauge",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
