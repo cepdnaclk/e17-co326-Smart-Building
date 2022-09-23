@@ -619,6 +619,110 @@
         ]
     },
     {
+        "id": "956c0e997607dac7",
+        "type": "debug",
+        "z": "f98f3e081b8dc560",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "a72f2b257e1b06da",
+        "type": "mqtt in",
+        "z": "f98f3e081b8dc560",
+        "name": "",
+        "topic": "smartbuilding/lighting/0/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1260,
+        "wires": [
+            [
+                "e8afd48674809072"
+            ]
+        ]
+    },
+    {
+        "id": "4a8a4a4e647089bb",
+        "type": "mysql",
+        "z": "f98f3e081b8dc560",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 980,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39f1f0ca1991bb02",
+        "type": "function",
+        "z": "f98f3e081b8dc560",
+        "name": "function 10",
+        "func": "msg.topic = \"INSERT INTO intensity VALUES ('\" + msg.payload.timestamp + \"',\" + msg.payload.floorno+ \",\"+msg.payload.roomno+\",\"+msg.payload.lightlevel+\");\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 1360,
+        "wires": [
+            [
+                "4a8a4a4e647089bb",
+                "81cb126abd8b13a2"
+            ]
+        ]
+    },
+    {
+        "id": "81cb126abd8b13a2",
+        "type": "debug",
+        "z": "f98f3e081b8dc560",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "e8afd48674809072",
+        "type": "json",
+        "z": "f98f3e081b8dc560",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 410,
+        "y": 1360,
+        "wires": [
+            [
+                "956c0e997607dac7",
+                "39f1f0ca1991bb02"
+            ]
+        ]
+    },
+    {
         "id": "f63eafa0adcd4199",
         "type": "mqtt-broker",
         "name": "SmartBuilding",

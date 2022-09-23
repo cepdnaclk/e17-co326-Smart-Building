@@ -424,11 +424,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
-        "y": 600,
+        "x": 250,
+        "y": 800,
         "wires": [
             [
-                "bc43dae648264f72"
+                "c53d0abd49424ff4",
+                "74be9d4d1cfac58b"
             ]
         ]
     },
@@ -445,19 +446,59 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
-        "y": 700,
+        "x": 250,
+        "y": 900,
         "wires": [
             [
-                "bc43dae648264f72"
+                "eb57c09bba91d916"
             ]
         ]
     },
     {
-        "id": "32774cbbf290225a",
+        "id": "bfe00f97ac8231cc",
+        "type": "mqtt in",
+        "z": "89f1832e99218bc3",
+        "name": "",
+        "topic": "smartbuilding/lighting/0/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 930,
+        "y": 460,
+        "wires": [
+            [
+                "8178d0286c5257bd"
+            ]
+        ]
+    },
+    {
+        "id": "8178d0286c5257bd",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "name": "function 11",
+        "func": "var level = msg.payload.lightlevel;\nif (level < 50) {\n    msg.payload = false;\n} else {\n    msg.payload = true;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 460,
+        "wires": [
+            [
+                "4e02622586b5a5b2"
+            ]
+        ]
+    },
+    {
+        "id": "74be9d4d1cfac58b",
         "type": "debug",
         "z": "89f1832e99218bc3",
-        "name": "debug 13",
+        "name": "debug 15",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -466,101 +507,140 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1030,
-        "y": 500,
+        "x": 690,
+        "y": 660,
         "wires": []
     },
     {
-        "id": "bc43dae648264f72",
-        "type": "join",
+        "id": "4e02622586b5a5b2",
+        "type": "ui_led",
         "z": "89f1832e99218bc3",
+        "order": 4,
+        "group": "68755d2ba0f93e7a",
+        "width": 0,
+        "height": 0,
+        "label": "Light Status",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
         "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 610,
-        "y": 640,
-        "wires": [
-            [
-                "5bc1c5fd8482290c"
-            ]
-        ]
+        "x": 1430,
+        "y": 440,
+        "wires": []
     },
     {
-        "id": "5bc1c5fd8482290c",
+        "id": "c53d0abd49424ff4",
         "type": "function",
         "z": "89f1832e99218bc3",
-        "name": "function 9",
-        "func": "var boiler = msg.payload['smartbuilding/hvac/control/boiler'].state;\nvar chiller = msg.payload['smartbuilding/hvac/control/chiller'].state;\nvar data = [boiler, chiller];\nvar lable = [\"boiler\", \"chiller\"];\n\nmsg.payload = [{\n    series: [],\n    data: [data],\n    labels: lable\n}];\nreturn msg;",
+        "name": "function 12",
+        "func": "msg.payload = msg.payload.state;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
-        "y": 660,
+        "x": 550,
+        "y": 800,
         "wires": [
             [
-                "32774cbbf290225a",
-                "d76c1a342a0b81c8"
+                "d9cceb04b5df328b"
             ]
         ]
     },
     {
-        "id": "d76c1a342a0b81c8",
-        "type": "ui_chart",
+        "id": "d9cceb04b5df328b",
+        "type": "ui_led",
         "z": "89f1832e99218bc3",
-        "name": "",
-        "group": "9168820b335f153b",
         "order": 0,
+        "group": "9168820b335f153b",
         "width": 0,
         "height": 0,
-        "label": "Boiler/Chiller Status",
-        "chartType": "bar",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "0",
-        "ymax": "1",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
+        "label": "Boiler Status",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "0",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            }
         ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 810,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "eb57c09bba91d916",
+        "type": "function",
+        "z": "89f1832e99218bc3",
+        "name": "function 13",
+        "func": "msg.payload = msg.payload.state;\nreturn msg;",
         "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 1170,
-        "y": 620,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 900,
         "wires": [
-            []
+            [
+                "eea51e24898db9d8"
+            ]
         ]
+    },
+    {
+        "id": "eea51e24898db9d8",
+        "type": "ui_led",
+        "z": "89f1832e99218bc3",
+        "order": 0,
+        "group": "9168820b335f153b",
+        "width": 0,
+        "height": 0,
+        "label": "Chiller Status",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "0",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "1",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 810,
+        "y": 880,
+        "wires": []
     },
     {
         "id": "b48421c1f6853c92",
