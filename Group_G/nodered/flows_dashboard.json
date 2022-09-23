@@ -215,6 +215,91 @@
         ]
     },
     {
+        "id": "89a71754d9b7c53f",
+        "type": "ui_gauge",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "group": "14f3a60bbfe2b157",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 950,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c7d493c06d0d8163",
+        "type": "mqtt in",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "topic": "smartbuilding/hvac/0/1/humid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 580,
+        "y": 240,
+        "wires": [
+            [
+                "aafc41a418c578fc"
+            ]
+        ]
+    },
+    {
+        "id": "aafc41a418c578fc",
+        "type": "function",
+        "z": "dc65346dd5897674",
+        "name": "function 4",
+        "func": "msg.payload =  msg.payload.humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 240,
+        "wires": [
+            [
+                "89a71754d9b7c53f",
+                "d8668f3ce73530af"
+            ]
+        ]
+    },
+    {
+        "id": "d8668f3ce73530af",
+        "type": "debug",
+        "z": "dc65346dd5897674",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 320,
+        "wires": []
+    },
+    {
         "id": "b48421c1f6853c92",
         "type": "MySQLdatabase",
         "name": "",
@@ -234,6 +319,33 @@
         "width": "6",
         "collapse": false,
         "className": ""
+    },
+    {
+        "id": "f63eafa0adcd4199",
+        "type": "mqtt-broker",
+        "name": "SmartBuilding",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
         "id": "d7b567922c1e7cec",

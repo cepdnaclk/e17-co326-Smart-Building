@@ -12,7 +12,8 @@ mqtt_server = "127.0.0.1"
 mqtt_port = 1883
 
 #mosquitto_pub -h localhost -t smartbuilding/hvac/humid -m "{\"humidity\":6.4,\"timestamp\":20231230,\"floorno\":2,\"roomno\":4}"
-topic = "smartbuilding/hvac/humid"
+topic = "smartbuilding/hvac/0/1/humid"
+topic_arr = topic.split("/")
 topic_sub = ""
 
 
@@ -44,8 +45,8 @@ while(1):
 	# Upload the data in 'x' variable continuously with 2 second interval 
 	x = {
         "humidity": randint(0,10),
-        "floorno": randint(0,2),
-        "roomno": randint(0,10),
+        "floorno": topic_arr[2], # randint(0,2),
+        "roomno": topic_arr[3], #randint(0,10),
 		"timestamp": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
 	} 
     # time.time()

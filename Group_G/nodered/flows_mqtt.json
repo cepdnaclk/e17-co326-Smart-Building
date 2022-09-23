@@ -3,7 +3,7 @@
         "id": "3a5d816e8bd1e1e8",
         "type": "tab",
         "label": "Flow 1",
-        "disabled": true,
+        "disabled": false,
         "info": "",
         "env": []
     },
@@ -64,7 +64,7 @@
         "type": "mqtt in",
         "z": "3a5d816e8bd1e1e8",
         "name": "",
-        "topic": "topic/humid",
+        "topic": "smartbuilding/hvac/0/1/humid",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "f63eafa0adcd4199",
@@ -72,7 +72,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
+        "x": 160,
         "y": 360,
         "wires": [
             [
