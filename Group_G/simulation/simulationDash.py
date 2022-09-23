@@ -19,6 +19,9 @@ topic_arr_h = topich.split("/")
 topict = "smartbuilding/hvac/0/1/temp"
 topic_arr_t = topict.split("/")
 
+topic_light = "smartbuilding/lighting/0/1"
+topic_arr_light = topic_light.split("/")
+
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -66,8 +69,16 @@ while(1):
         "floorno": topic_arr_t[2], # randint(0,2),
         "roomno": topic_arr_t[3], #randint(0,10),
 		"timestamp": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
-	} 
+	}
+    light = {
+        "lightlevel": randint(0,100),
+        "floorno": topic_arr_light[2], # randint(0,2),
+        "roomno": topic_arr_light[3], #randint(0,10),
+        "timestamp": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    }
 
+    payload = json.dumps(light)
+    client.publish(topic_light, payload=payload, qos=0, retain=False)
     payload = json.dumps(hum)
     client.publish(topich, payload=payload, qos=0, retain=False)
     payload = json.dumps(tem)
