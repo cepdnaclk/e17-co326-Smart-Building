@@ -1,0 +1,246 @@
+[
+    {
+        "id": "dc65346dd5897674",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "702ddc40242a949f",
+        "type": "mysql",
+        "z": "dc65346dd5897674",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 360,
+        "y": 500,
+        "wires": [
+            [
+                "0c8f5c92cd26df42",
+                "e1d5d249028d2579"
+            ]
+        ]
+    },
+    {
+        "id": "600bc55de2c35451",
+        "type": "function",
+        "z": "dc65346dd5897674",
+        "name": "function 2",
+        "func": "msg.topic = \"SELECT * from humidity;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 460,
+        "wires": [
+            [
+                "702ddc40242a949f"
+            ]
+        ]
+    },
+    {
+        "id": "016c676e2337fa79",
+        "type": "debug",
+        "z": "dc65346dd5897674",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "183bb4ac53402ec4",
+        "type": "ui_button",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "group": "14f3a60bbfe2b157",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "SELECT * from humidity;",
+        "topicType": "str",
+        "x": 80,
+        "y": 300,
+        "wires": [
+            [
+                "600bc55de2c35451"
+            ]
+        ]
+    },
+    {
+        "id": "588faa52b85bf9ac",
+        "type": "ui_chart",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "group": "14f3a60bbfe2b157",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 910,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0c8f5c92cd26df42",
+        "type": "debug",
+        "z": "dc65346dd5897674",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e1d5d249028d2579",
+        "type": "function",
+        "z": "dc65346dd5897674",
+        "name": "function 3",
+        "func": "var data = [];\nvar month = [];\nmsg.payload.forEach(function (value) {\n    data.push(value['humidity_level']);\n    month.push(value['floor_no']*10+value['room_no']);\n});\n\nmsg.payload = [{\n    series: [],\n    data: [data],\n    labels: month\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 520,
+        "wires": [
+            [
+                "588faa52b85bf9ac",
+                "016c676e2337fa79"
+            ]
+        ]
+    },
+    {
+        "id": "b7740835d6b8e5c5",
+        "type": "http in",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "url": "/humidity",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "7039e61bf1229b2e"
+            ]
+        ]
+    },
+    {
+        "id": "968624206bdcd3d2",
+        "type": "http response",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7039e61bf1229b2e",
+        "type": "template",
+        "z": "dc65346dd5897674",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "This is the payload: {{payload}} !",
+        "output": "str",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "968624206bdcd3d2"
+            ]
+        ]
+    },
+    {
+        "id": "b48421c1f6853c92",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "smart_building",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "14f3a60bbfe2b157",
+        "type": "ui_group",
+        "name": "Humidity",
+        "tab": "d7b567922c1e7cec",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d7b567922c1e7cec",
+        "type": "ui_tab",
+        "name": "Gauge",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

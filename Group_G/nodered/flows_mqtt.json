@@ -1,0 +1,216 @@
+[
+    {
+        "id": "3a5d816e8bd1e1e8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "85dfd2293887844b",
+        "type": "debug",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "030af897f5aeac58",
+        "type": "debug",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0f1f81720c5edc37",
+        "type": "mqtt out",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "pub",
+        "topic": "topic/humid",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f63eafa0adcd4199",
+        "x": 710,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2ffcc0116c225910",
+        "type": "mqtt in",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "",
+        "topic": "topic/humid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f63eafa0adcd4199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "9344ff26daf1434d"
+            ]
+        ]
+    },
+    {
+        "id": "fb6fcd43117dc78f",
+        "type": "inject",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "topic/humid",
+        "payload": "{\"humidity\": 6.3}",
+        "payloadType": "json",
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "030af897f5aeac58",
+                "0f1f81720c5edc37"
+            ]
+        ]
+    },
+    {
+        "id": "398990bb6c18cab8",
+        "type": "mysql",
+        "z": "3a5d816e8bd1e1e8",
+        "mydb": "b48421c1f6853c92",
+        "name": "",
+        "x": 1000,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2acd7f3470a425a2",
+        "type": "function",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "function 1",
+        "func": "msg.topic = \"INSERT INTO humidity VALUES ('\" + msg.payload.timestamp + \"',\" + msg.payload.floorno+ \",\"+msg.payload.roomno+\",\"+msg.payload.humidity+\");\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 480,
+        "wires": [
+            [
+                "398990bb6c18cab8",
+                "e33466e176f69e1b"
+            ]
+        ]
+    },
+    {
+        "id": "e33466e176f69e1b",
+        "type": "debug",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "9344ff26daf1434d",
+        "type": "json",
+        "z": "3a5d816e8bd1e1e8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 290,
+        "y": 480,
+        "wires": [
+            [
+                "85dfd2293887844b",
+                "2acd7f3470a425a2"
+            ]
+        ]
+    },
+    {
+        "id": "f63eafa0adcd4199",
+        "type": "mqtt-broker",
+        "name": "SmartBuilding",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b48421c1f6853c92",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "smart_building",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
