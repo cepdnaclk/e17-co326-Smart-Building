@@ -8,11 +8,11 @@ from random import seed
 from random import randint
 import datetime
 
-mqtt_server = "127.0.0.1"
-mqtt_port = 1883
+mqtt_server = "172.17.0.11"
+mqtt_port = 8883
 
 #mosquitto_pub -h localhost -t smartbuilding/hvac/humid -m "{\"humidity\":6.4,\"timestamp\":20231230,\"floorno\":2,\"roomno\":4}"
-topic = "smartbuilding/hvac/humid"
+topic = "326project/smartbuilding/sensor/temp"
 topic_sub = ""
 
 
