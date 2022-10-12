@@ -1,0 +1,556 @@
+[
+    {
+        "id": "3552192094f0556b",
+        "type": "tab",
+        "label": "MQTT Data, Broker -> Database",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "24b5f83b3f352f99",
+        "type": "inject",
+        "z": "3552192094f0556b",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "500",
+        "payloadType": "num",
+        "x": 150,
+        "y": 560,
+        "wires": [
+            [
+                "b8a2ecbbb3ae8dc0"
+            ]
+        ]
+    },
+    {
+        "id": "b8a2ecbbb3ae8dc0",
+        "type": "mqtt out",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/lightsensor/inside/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6c604693389fd1e1",
+        "x": 550,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "adbcda73aa932d09",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/test",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 660,
+        "wires": [
+            [
+                "ad94342f100ed648",
+                "b3d91d9e753bd3a3"
+            ]
+        ]
+    },
+    {
+        "id": "2f2d0564af4423af",
+        "type": "debug",
+        "z": "3552192094f0556b",
+        "name": "test_data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ad94342f100ed648",
+        "type": "function",
+        "z": "3552192094f0556b",
+        "name": "set the collection here",
+        "func": "msg.collection = \"co326_lighting_test\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 660,
+        "wires": [
+            [
+                "307a8947961c2da4"
+            ]
+        ]
+    },
+    {
+        "id": "307a8947961c2da4",
+        "type": "function",
+        "z": "3552192094f0556b",
+        "name": "format the payload accordingly",
+        "func": "let time = new Date().toLocaleString();\nlet data = msg.payload;\n\nmsg.payload = {\"time\":time, \"data\":data};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 660,
+        "wires": [
+            [
+                "22ccf6bd6111a6bd",
+                "2f2d0564af4423af"
+            ]
+        ]
+    },
+    {
+        "id": "22ccf6bd6111a6bd",
+        "type": "mongodb out",
+        "z": "3552192094f0556b",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 1020,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "82a04eec2a8c7f3f",
+        "type": "inject",
+        "z": "3552192094f0556b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 820,
+        "wires": [
+            [
+                "29a759d8703f16b1"
+            ]
+        ]
+    },
+    {
+        "id": "29a759d8703f16b1",
+        "type": "function",
+        "z": "3552192094f0556b",
+        "name": "all_records_in_test",
+        "func": "msg.limit = 5;\nmsg.skip = 0;\nmsg.sort = { _id: -1};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 820,
+        "wires": [
+            [
+                "d7cd4e9564aef6da"
+            ]
+        ]
+    },
+    {
+        "id": "d7cd4e9564aef6da",
+        "type": "mongodb in",
+        "z": "3552192094f0556b",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_status",
+        "operation": "find",
+        "x": 610,
+        "y": 820,
+        "wires": [
+            [
+                "a1c347fd3b1ab18d"
+            ]
+        ]
+    },
+    {
+        "id": "a1c347fd3b1ab18d",
+        "type": "debug",
+        "z": "3552192094f0556b",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "b3d91d9e753bd3a3",
+        "type": "debug",
+        "z": "3552192094f0556b",
+        "name": "debug msg object passed from mqtt broker",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "6114f915619c9250",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/inside/1",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "d48894eebe9305a1"
+            ]
+        ]
+    },
+    {
+        "id": "463b0221bea282a0",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/inside/2",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "d48894eebe9305a1"
+            ]
+        ]
+    },
+    {
+        "id": "d5de9a5d7ac6672f",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/outside/1",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "d48894eebe9305a1"
+            ]
+        ]
+    },
+    {
+        "id": "d48894eebe9305a1",
+        "type": "function",
+        "z": "3552192094f0556b",
+        "name": "set_properties_control",
+        "func": "let str = msg.topic;\nstr = str.substring(34, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_lighting_control\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "add5e82c763aef40"
+            ]
+        ]
+    },
+    {
+        "id": "8266170a6484f765",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/led/inside/1",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "66a9d197bdb0a2e0"
+            ]
+        ]
+    },
+    {
+        "id": "b7e03360c4dce917",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/led/inside/2",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "66a9d197bdb0a2e0"
+            ]
+        ]
+    },
+    {
+        "id": "18f0dcc0879e5301",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/led/outside/1",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 300,
+        "wires": [
+            [
+                "66a9d197bdb0a2e0"
+            ]
+        ]
+    },
+    {
+        "id": "66a9d197bdb0a2e0",
+        "type": "function",
+        "z": "3552192094f0556b",
+        "name": "set_properties_status",
+        "func": "let str = msg.topic;\nstr = str.substring(34, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_lighting_status\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 300,
+        "wires": [
+            [
+                "7bf3e258f2b2c13f"
+            ]
+        ]
+    },
+    {
+        "id": "9794622048fb1ddf",
+        "type": "mqtt in",
+        "z": "3552192094f0556b",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/lightsensor/inside/1",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "b1611b913563fa83"
+            ]
+        ]
+    },
+    {
+        "id": "b1611b913563fa83",
+        "type": "function",
+        "z": "3552192094f0556b",
+        "name": "set_properties_sensor_data",
+        "func": "let str = msg.topic;\nstr = str.substring(34, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_lighting_sensor_data\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 440,
+        "wires": [
+            [
+                "a1d5c85db96978fe"
+            ]
+        ]
+    },
+    {
+        "id": "add5e82c763aef40",
+        "type": "mongodb out",
+        "z": "3552192094f0556b",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 980,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7bf3e258f2b2c13f",
+        "type": "mongodb out",
+        "z": "3552192094f0556b",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 980,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a1d5c85db96978fe",
+        "type": "mongodb out",
+        "z": "3552192094f0556b",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 980,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "a16192764e32d0ea",
+        "type": "comment",
+        "z": "3552192094f0556b",
+        "name": "Use this flow to simulate data publishing",
+        "info": "",
+        "x": 350,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "022a03ef4f8d97c9",
+        "type": "comment",
+        "z": "3552192094f0556b",
+        "name": "Use this flow to simulate data stroing to a collection",
+        "info": "",
+        "x": 390,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c32774f87c92c329",
+        "type": "comment",
+        "z": "3552192094f0556b",
+        "name": "Use this flow to simulate data retrival from mongoDB",
+        "info": "",
+        "x": 390,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "6c604693389fd1e1",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "17ee7c2e0f7a90f8",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]
