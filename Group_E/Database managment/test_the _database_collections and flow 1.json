@@ -1,0 +1,507 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Database",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 370,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "d14dacd16fb4defe",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "Ultrasonic_sensor",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "fa630398b64c9557",
+                "882d3e3fc123247b"
+            ]
+        ]
+    },
+    {
+        "id": "fa630398b64c9557",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 7",
+        "func": "let payload = msg.payload;\n\nlet i = 0;\n\nif(payload == 1){\n    i = 1;\n}else{\n    i = -1;\n}\n\n\n\nmsg.payload = {\n    \"prev\":msg.payload,\n    \"increment value\" : i\n}\n\nmsg.topic = \"us_sensor_value\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "090795567272df1a"
+            ]
+        ]
+    },
+    {
+        "id": "b0727c3bee2b9151",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "882d3e3fc123247b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 8",
+        "func": "\nmsg.collection = \"co326_count_test\";\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 560,
+        "wires": [
+            [
+                "c502cb872bf45327"
+            ]
+        ]
+    },
+    {
+        "id": "c502cb872bf45327",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "operation": "find",
+        "x": 600,
+        "y": 560,
+        "wires": [
+            [
+                "090795567272df1a",
+                "1745a123bc45cc0d"
+            ]
+        ]
+    },
+    {
+        "id": "1316fae925552c51",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"room_number\":1,\"count\":10}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 180,
+        "wires": [
+            [
+                "d1dcf75e6cd60c0f"
+            ]
+        ]
+    },
+    {
+        "id": "d1dcf75e6cd60c0f",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test2",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 480,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4e8f47932175635c",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "b0727c3bee2b9151"
+            ]
+        ]
+    },
+    {
+        "id": "77d1b9533d05c7fb",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "090795567272df1a",
+        "type": "join",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 690,
+        "y": 380,
+        "wires": [
+            [
+                "58f8dfdb34603073"
+            ]
+        ]
+    },
+    {
+        "id": "58f8dfdb34603073",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 9",
+        "func": "\nmsg.payload = msg.payload.us_sensor_value;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 420,
+        "wires": [
+            [
+                "77d1b9533d05c7fb"
+            ]
+        ]
+    },
+    {
+        "id": "1745a123bc45cc0d",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "3eb706123ed8cab8",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "ROOM1_FLOOR1",
+        "info": "",
+        "x": 230,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "35f6aa457952c6ab",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "operation": "find",
+        "x": 480,
+        "y": 1000,
+        "wires": [
+            [
+                "add5560a0354a8ef"
+            ]
+        ]
+    },
+    {
+        "id": "a5422aa9deb89f6f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 23",
+        "func": "\nmsg.collection = \"co326_count_test2\";\nmsg.payload = { \"room_number\" : 1 };\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 1000,
+        "wires": [
+            [
+                "35f6aa457952c6ab"
+            ]
+        ]
+    },
+    {
+        "id": "58facc7ecee33692",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 24",
+        "func": "msg.collection = \"co326_count_test2\";\nmsg.operation = \"update\";\nmsg.query = {\"room_number\":3}\nmsg.payload = {\"$set\":{\"room_number\" : 3,\"count\":2134}};\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 1320,
+        "wires": [
+            [
+                "224a25d22c8b46bc"
+            ]
+        ]
+    },
+    {
+        "id": "31a398221daf9114",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 1080,
+        "wires": [
+            [
+                "a5422aa9deb89f6f",
+                "58facc7ecee33692"
+            ]
+        ]
+    },
+    {
+        "id": "b694cff1de373513",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "224a25d22c8b46bc",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "update",
+        "x": 780,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "8d6cfa5c05d4895c",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "neq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 1300,
+        "wires": [
+            [
+                "b694cff1de373513"
+            ],
+            [
+                "6aa844870d893077"
+            ]
+        ]
+    },
+    {
+        "id": "6aa844870d893077",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "7c9af3ddf10bd2f0",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "add5560a0354a8ef",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 25",
+        "func": "let arr = msg.payload\nmsg.payload = arr.length;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 1060,
+        "wires": [
+            [
+                "8d6cfa5c05d4895c",
+                "7c9af3ddf10bd2f0"
+            ]
+        ]
+    },
+    {
+        "id": "c60c8d7bc953d7fa",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "10d3d4a81f37ba61",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]
