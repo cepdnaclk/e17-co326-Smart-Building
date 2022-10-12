@@ -1,0 +1,303 @@
+[
+    {
+        "id": "e2b1f59e058d27f9",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "d7e6a7f6fe3af104",
+            "a405cf4ad0562c77",
+            "7ab115ec6cf5cbf7",
+            "aaa99f88475670b8",
+            "e3cda0d1dbd299ac",
+            "88577ebb4f08300a",
+            "b3184a6743cb77d9",
+            "b8f136c836abad3d",
+            "9384cb85342809a8",
+            "1221d9338d3217bb",
+            "752c5a80e95b78ff",
+            "f7ad73e1236f4c6f"
+        ],
+        "x": 14,
+        "y": 1299,
+        "w": 1412,
+        "h": 147
+    },
+    {
+        "id": "d7e6a7f6fe3af104",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "0_1_us_sensor",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 1380,
+        "wires": [
+            [
+                "a405cf4ad0562c77"
+            ]
+        ]
+    },
+    {
+        "id": "a405cf4ad0562c77",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "parse_data and check database",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"01_ultrasonic_data\";\nmsg.operation = \"find\";\nmsg.query = {\"room_number\":1,\"floor_number\":0}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1380,
+        "wires": [
+            [
+                "7ab115ec6cf5cbf7",
+                "aaa99f88475670b8",
+                "752c5a80e95b78ff"
+            ]
+        ],
+        "icon": "font-awesome/fa-gears"
+    },
+    {
+        "id": "7ab115ec6cf5cbf7",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "parsed data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 465,
+        "y": 1340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "aaa99f88475670b8",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "get_current_count",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 630,
+        "y": 1380,
+        "wires": [
+            [
+                "e3cda0d1dbd299ac",
+                "b8f136c836abad3d"
+            ]
+        ]
+    },
+    {
+        "id": "e3cda0d1dbd299ac",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "db_results",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 705,
+        "y": 1340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "88577ebb4f08300a",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "update db ",
+        "func": "let arr = msg.payload[\"db_response\"];\nlet sensor_data = msg.payload[\"01_ultrasonic_data\"];\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\nif (arr.length == 0){\n    msg.payload = { \"$set\": { \"room_number\": 1, \"floor_number\": 0, \"count\": 1, \"last_update\": offsetTime.toLocaleString(),}};\n}\nelse{\n    msg.payload = {\"$set\":{\n        \"room_number\": 1, \"floor_number\": 0,\"last_update\":offsetTime.toLocaleString(), \n        \"count\":arr[0].count + sensor_data}}; \n}\n\nmsg.query = {\"room_number\":1,\"floor_number\":0};\nmsg.topic = \"db query\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 1380,
+        "wires": [
+            [
+                "b3184a6743cb77d9",
+                "1221d9338d3217bb"
+            ]
+        ]
+    },
+    {
+        "id": "b3184a6743cb77d9",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "check_payload_query",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1175,
+        "y": 1340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "b8f136c836abad3d",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "db response",
+        "func": "msg.topic = \"db_response\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 1380,
+        "wires": [
+            [
+                "9384cb85342809a8"
+            ]
+        ]
+    },
+    {
+        "id": "9384cb85342809a8",
+        "type": "join",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 990,
+        "y": 1380,
+        "wires": [
+            [
+                "88577ebb4f08300a"
+            ]
+        ]
+    },
+    {
+        "id": "1221d9338d3217bb",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "update_count",
+        "collection": "326_occupancy_room",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "update",
+        "x": 1320,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "752c5a80e95b78ff",
+        "type": "junction",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "x": 460,
+        "y": 1420,
+        "wires": [
+            [
+                "f7ad73e1236f4c6f"
+            ]
+        ]
+    },
+    {
+        "id": "f7ad73e1236f4c6f",
+        "type": "junction",
+        "z": "f6f2187d.f17ca8",
+        "g": "e2b1f59e058d27f9",
+        "x": 960,
+        "y": 1420,
+        "wires": [
+            [
+                "9384cb85342809a8"
+            ]
+        ]
+    },
+    {
+        "id": "c60c8d7bc953d7fa",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "10d3d4a81f37ba61",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]
