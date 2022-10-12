@@ -1,0 +1,366 @@
+[
+    {
+        "id": "2311550919fb7973",
+        "type": "tab",
+        "label": "Process controlling2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a09165549545df42",
+        "type": "mqtt in",
+        "z": "2311550919fb7973",
+        "name": "0-1-oustide sensor 1",
+        "topic": "326project/smartbuilding/lighting/0/1/lightsensor/outside/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "74e7590be569d3c8"
+            ]
+        ]
+    },
+    {
+        "id": "74e7590be569d3c8",
+        "type": "function",
+        "z": "2311550919fb7973",
+        "name": "threshold",
+        "func": "var t = 15;   //treshold value\nvar p = msg.payload;\nif (p < t) {\n    msg.payload = 1;\n}\nelse {\n    msg.payload = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 120,
+        "wires": [
+            [
+                "0f590c80270e3e60"
+            ]
+        ]
+    },
+    {
+        "id": "77760006c62fcc8f",
+        "type": "mqtt out",
+        "z": "2311550919fb7973",
+        "name": "0-1-outside switch 1",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/outside/1",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6c604693389fd1e1",
+        "x": 1200,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "612b037a9686144d",
+        "type": "function",
+        "z": "2311550919fb7973",
+        "name": "manual check",
+        "func": "msg.topic = \"manualon\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "7916557a0ad1295c"
+            ]
+        ]
+    },
+    {
+        "id": "0904a3e2c85e71d2",
+        "type": "inject",
+        "z": "2311550919fb7973",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1080,
+        "y": 120,
+        "wires": [
+            [
+                "77760006c62fcc8f"
+            ]
+        ]
+    },
+    {
+        "id": "4326b60b1dc71774",
+        "type": "inject",
+        "z": "2311550919fb7973",
+        "name": "time starts from 19:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 19 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "8aaa559cfb81e471",
+                "85cd603a7ec8368a"
+            ]
+        ]
+    },
+    {
+        "id": "8aaa559cfb81e471",
+        "type": "delay",
+        "z": "2311550919fb7973",
+        "name": "Delay 10 hours",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "3e17a7a54962236e"
+            ]
+        ]
+    },
+    {
+        "id": "3e17a7a54962236e",
+        "type": "function",
+        "z": "2311550919fb7973",
+        "name": "time validity out",
+        "func": "msg.topic = \"nighttime\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "7916557a0ad1295c"
+            ]
+        ]
+    },
+    {
+        "id": "0f590c80270e3e60",
+        "type": "function",
+        "z": "2311550919fb7973",
+        "name": "outside sensor",
+        "func": "msg.topic = \"outsidesensor\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 120,
+        "wires": [
+            [
+                "7916557a0ad1295c"
+            ]
+        ]
+    },
+    {
+        "id": "7916557a0ad1295c",
+        "type": "join",
+        "z": "2311550919fb7973",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 750,
+        "y": 180,
+        "wires": [
+            [
+                "ddfa00ac45fe4665"
+            ]
+        ]
+    },
+    {
+        "id": "ddfa00ac45fe4665",
+        "type": "function",
+        "z": "2311550919fb7973",
+        "name": "outside light",
+        "func": "var manual = msg.payload.manualon;\nvar light = msg.payload.outsidesensor;\nvar night = msg.payload.nighttime;\n\nif(manual==0){\n    msg.payload = 2;\n}\nelse if(manual==1){\n    msg.payload = 0\n}\nelse if(manual==2){\n    if (night == 1) {\n        msg.payload = 1;\n    } else {\n        if (light == 1) {\n            msg.payload = 1;\n        }else {\n            msg.payload = 0;\n        }\n    }\n    \n}\n    ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 180,
+        "wires": [
+            [
+                "77760006c62fcc8f"
+            ]
+        ]
+    },
+    {
+        "id": "29aa145156614427",
+        "type": "ui_multistate_switch",
+        "z": "2311550919fb7973",
+        "name": "Outside Switch",
+        "group": "dc7224ca64557b44",
+        "order": 2,
+        "width": 0,
+        "height": 1,
+        "label": "Outside Switch",
+        "stateField": "payload",
+        "enableField": "enable",
+        "passthroughField": "passthrough",
+        "inputMsgField": "inputmsg",
+        "rounded": true,
+        "useThemeColors": false,
+        "hideSelectedLabel": false,
+        "multilineLabel": false,
+        "passThrough": "never",
+        "inputMsg": "all",
+        "userInput": "enabled_show",
+        "options": [
+            {
+                "label": "ON",
+                "value": "0",
+                "valueType": "num",
+                "color": "#009933"
+            },
+            {
+                "label": "OFF",
+                "value": "1",
+                "valueType": "num",
+                "color": "#999999"
+            },
+            {
+                "label": "Auto",
+                "value": "2",
+                "valueType": "num",
+                "color": "#2d74e6"
+            }
+        ],
+        "topic": "",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "612b037a9686144d"
+            ]
+        ]
+    },
+    {
+        "id": "85cd603a7ec8368a",
+        "type": "debug",
+        "z": "2311550919fb7973",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "6c604693389fd1e1",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dc7224ca64557b44",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "831ca7d85637f6e7",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "831ca7d85637f6e7",
+        "type": "ui_tab",
+        "name": "Floor 0",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
