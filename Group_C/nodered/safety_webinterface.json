@@ -1,0 +1,907 @@
+[
+    {
+        "id": "d85ab886bb3338cf",
+        "type": "tab",
+        "label": "Web Interface",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "763d55c646760a59",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_smoke_detect/floor0/room0",
+        "operation": "find",
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "92a5d657508eeca5"
+            ]
+        ]
+    },
+    {
+        "id": "8e59416eb2795b37",
+        "type": "debug",
+        "z": "d85ab886bb3338cf",
+        "name": "WebInterface",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d63a9b13f021751d",
+        "type": "ui_chart",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "group": "2701b1ecd02534d5",
+        "order": 4,
+        "width": 5,
+        "height": 5,
+        "label": "Smoke sensor data",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 930,
+        "y": 100,
+        "wires": [
+            [
+                "8e59416eb2795b37"
+            ]
+        ]
+    },
+    {
+        "id": "92a5d657508eeca5",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 9",
+        "func": "\nasync function sendSingleObj(payload) {\n    var data=[]\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].payload.value\n        let time = payload[i].payload.time\n        data.push({\"x\":time,\"y\":value})\n    }\n    return data;\n}\nvar data=await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Smoke sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 100,
+        "wires": [
+            [
+                "d63a9b13f021751d",
+                "8e59416eb2795b37"
+            ]
+        ]
+    },
+    {
+        "id": "6531c2640ccd4620",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_pull_station/floor1/room1",
+        "operation": "find",
+        "x": 370,
+        "y": 160,
+        "wires": [
+            [
+                "e132eddab4fd7a15"
+            ]
+        ]
+    },
+    {
+        "id": "d362f74e94b5a68d",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "6531c2640ccd4620"
+            ]
+        ]
+    },
+    {
+        "id": "e132eddab4fd7a15",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 13",
+        "func": "msg.payload=msg.payload[msg.payload.length-1].payload.value\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 160,
+        "wires": [
+            [
+                "8e59416eb2795b37",
+                "bc8ae38367d1b785",
+                "5116cd6fcf82b9f5",
+                "9b85da2e2c2b727b"
+            ]
+        ]
+    },
+    {
+        "id": "3de3b30a3e1b8713",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_fire_alarm/floor0/room0",
+        "operation": "find",
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "cfaecc4e067bdc80"
+            ]
+        ]
+    },
+    {
+        "id": "79fafe62ef50094a",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 220,
+        "wires": [
+            [
+                "3de3b30a3e1b8713"
+            ]
+        ]
+    },
+    {
+        "id": "cfaecc4e067bdc80",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 14",
+        "func": "msg.payload = msg.payload[msg.payload.length - 1].payload.value\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 220,
+        "wires": [
+            [
+                "22220bf6343e9fc3",
+                "8e59416eb2795b37",
+                "5116cd6fcf82b9f5",
+                "9b85da2e2c2b727b"
+            ]
+        ]
+    },
+    {
+        "id": "635b7a665cc0d9c4",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 280,
+        "wires": [
+            [
+                "ce1c4b85a04b92fb"
+            ]
+        ]
+    },
+    {
+        "id": "bc8ae38367d1b785",
+        "type": "ui_led",
+        "z": "d85ab886bb3338cf",
+        "order": 5,
+        "group": "2701b1ecd02534d5",
+        "width": 4,
+        "height": 1,
+        "label": "PULL station",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 890,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "22220bf6343e9fc3",
+        "type": "ui_led",
+        "z": "d85ab886bb3338cf",
+        "order": 6,
+        "group": "2701b1ecd02534d5",
+        "width": 4,
+        "height": 1,
+        "label": "Fire detection",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 890,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ce1c4b85a04b92fb",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_sprinkler/floor0/room0",
+        "operation": "find",
+        "x": 360,
+        "y": 280,
+        "wires": [
+            [
+                "dd17f758067dead6"
+            ]
+        ]
+    },
+    {
+        "id": "dd17f758067dead6",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 21",
+        "func": "msg.payload = msg.payload[msg.payload.length - 1].payload.value\nif(msg.payload){\n    msg.payload=\"ON\"\n}\nelse{\n    msg.payload=\"OFF\"\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 280,
+        "wires": [
+            [
+                "8e59416eb2795b37",
+                "142a244b6ca65548"
+            ]
+        ]
+    },
+    {
+        "id": "142a244b6ca65548",
+        "type": "ui_text",
+        "z": "d85ab886bb3338cf",
+        "group": "2701b1ecd02534d5",
+        "order": 8,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "Sprinkler",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 900,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5116cd6fcf82b9f5",
+        "type": "ui_toast",
+        "z": "d85ab886bb3338cf",
+        "position": "top right",
+        "displayTime": "10",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 1090,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "9b85da2e2c2b727b",
+        "type": "ui_audio",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "group": "2701b1ecd02534d5",
+        "voice": "Google UK English Female",
+        "always": true,
+        "x": 1080,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "86e36c227adc553e",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 340,
+        "wires": [
+            [
+                "a1208bc8d983ce32"
+            ]
+        ]
+    },
+    {
+        "id": "a1208bc8d983ce32",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_smoke_detectr/floor0/room0",
+        "operation": "find",
+        "x": 380,
+        "y": 340,
+        "wires": [
+            [
+                "081b17406e740431"
+            ]
+        ]
+    },
+    {
+        "id": "081b17406e740431",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 26",
+        "func": "msg.payload = msg.payload[msg.payload.length - 1].payload.value\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 340,
+        "wires": [
+            [
+                "9b530d67f99dcf04"
+            ]
+        ]
+    },
+    {
+        "id": "9b530d67f99dcf04",
+        "type": "ui_led",
+        "z": "d85ab886bb3338cf",
+        "order": 7,
+        "group": "2701b1ecd02534d5",
+        "width": 4,
+        "height": 1,
+        "label": "Smoke detection",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 890,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d63e2cafe513ae12",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_hvac_sensor_temp/floor0/room0",
+        "operation": "find",
+        "x": 390,
+        "y": 40,
+        "wires": [
+            [
+                "da2f42f41934a55d"
+            ]
+        ]
+    },
+    {
+        "id": "1b8959c6f38ccb71",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 40,
+        "wires": [
+            [
+                "d63e2cafe513ae12"
+            ]
+        ]
+    },
+    {
+        "id": "31a41f4ce45c1779",
+        "type": "ui_chart",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "group": "2701b1ecd02534d5",
+        "order": 1,
+        "width": 5,
+        "height": 5,
+        "label": "Temp sensor data",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 930,
+        "y": 40,
+        "wires": [
+            [
+                "8e59416eb2795b37"
+            ]
+        ]
+    },
+    {
+        "id": "da2f42f41934a55d",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 27",
+        "func": "\nasync function sendSingleObj(payload) {\n    var data=[]\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].payload.value\n        let time = payload[i].payload.time\n        data.push({\"x\":time,\"y\":value})\n    }\n    return data;\n}\nvar data=await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Smoke sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 40,
+        "wires": [
+            [
+                "31a41f4ce45c1779"
+            ]
+        ]
+    },
+    {
+        "id": "2048dc6732675eb0",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 100,
+        "wires": [
+            [
+                "763d55c646760a59"
+            ]
+        ]
+    },
+    {
+        "id": "2a14a8f906cd1bde",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 400,
+        "wires": [
+            [
+                "59d98cb54902230e"
+            ]
+        ]
+    },
+    {
+        "id": "59d98cb54902230e",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_hvac_sensor_humid/floor0/room0",
+        "operation": "find",
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "98cb0d5ab135140d"
+            ]
+        ]
+    },
+    {
+        "id": "98cb0d5ab135140d",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 28",
+        "func": "\nasync function sendSingleObj(payload) {\n    var data=[]\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].payload.value\n        let time = payload[i].payload.time\n        data.push({\"x\":time,\"y\":value})\n    }\n    return data;\n}\nvar data=await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Smoke sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 400,
+        "wires": [
+            [
+                "7c44617ff10f1064"
+            ]
+        ]
+    },
+    {
+        "id": "7c44617ff10f1064",
+        "type": "ui_chart",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "group": "2701b1ecd02534d5",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "label": "Humidity sensor data",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 940,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e8e4f125754d5f85",
+        "type": "inject",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 460,
+        "wires": [
+            [
+                "849cd9f05a789e19"
+            ]
+        ]
+    },
+    {
+        "id": "849cd9f05a789e19",
+        "type": "mongodb in",
+        "z": "d85ab886bb3338cf",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "326_hvac_sensor_temp/floor0/room0",
+        "operation": "find",
+        "x": 390,
+        "y": 460,
+        "wires": [
+            [
+                "448b8eb5e8e722c2"
+            ]
+        ]
+    },
+    {
+        "id": "448b8eb5e8e722c2",
+        "type": "function",
+        "z": "d85ab886bb3338cf",
+        "name": "function 29",
+        "func": "\nasync function sendSingleObj(payload) {\n    var data=[]\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].payload.value\n        let time = payload[i].payload.time\n        data.push({\"x\":time,\"y\":value})\n    }\n    return data;\n}\nvar data=await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Smoke sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 460,
+        "wires": [
+            [
+                "362a5cc2b421c745"
+            ]
+        ]
+    },
+    {
+        "id": "362a5cc2b421c745",
+        "type": "ui_chart",
+        "z": "d85ab886bb3338cf",
+        "name": "",
+        "group": "2701b1ecd02534d5",
+        "order": 3,
+        "width": 5,
+        "height": 5,
+        "label": "Pressure sensor data",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 940,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c013209c3d896cf1",
+        "type": "ui_spacer",
+        "z": "d85ab886bb3338cf",
+        "name": "spacer",
+        "group": "2701b1ecd02534d5",
+        "order": 9,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "de13983547e18743",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "2701b1ecd02534d5",
+        "type": "ui_group",
+        "name": "Room 01",
+        "tab": "00072b2f38cb6708",
+        "order": 1,
+        "disp": true,
+        "width": 24,
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "00072b2f38cb6708",
+        "type": "ui_tab",
+        "name": "Web Interface",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
