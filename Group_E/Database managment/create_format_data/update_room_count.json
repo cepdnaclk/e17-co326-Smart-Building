@@ -32,6 +32,65 @@
         "h": 202
     },
     {
+        "id": "1b1da6d969145b95",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "d7e6a7f6fe3af104",
+            "a405cf4ad0562c77",
+            "7ab115ec6cf5cbf7",
+            "aaa99f88475670b8",
+            "e3cda0d1dbd299ac",
+            "88577ebb4f08300a",
+            "b3184a6743cb77d9",
+            "b8f136c836abad3d",
+            "9384cb85342809a8",
+            "1221d9338d3217bb",
+            "494f0495058ad32b",
+            "752c5a80e95b78ff",
+            "f7ad73e1236f4c6f"
+        ],
+        "x": 94,
+        "y": 1259,
+        "w": 1412,
+        "h": 187
+    },
+    {
+        "id": "752c5a80e95b78ff",
+        "type": "junction",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "x": 540,
+        "y": 1420,
+        "wires": [
+            [
+                "f7ad73e1236f4c6f"
+            ]
+        ]
+    },
+    {
+        "id": "f7ad73e1236f4c6f",
+        "type": "junction",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "x": 1040,
+        "y": 1420,
+        "wires": [
+            [
+                "9384cb85342809a8"
+            ]
+        ]
+    },
+    {
         "id": "3cc11d24.ff01a2",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
@@ -490,6 +549,212 @@
         ]
     },
     {
+        "id": "d7e6a7f6fe3af104",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "0_1_us_sensor",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1380,
+        "wires": [
+            [
+                "a405cf4ad0562c77"
+            ]
+        ]
+    },
+    {
+        "id": "a405cf4ad0562c77",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "parse_data and check database",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"01_ultrasonic_data\";\nmsg.operation = \"find\";\nmsg.query = {\"room_number\":1,\"floor_number\":0}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 1380,
+        "wires": [
+            [
+                "7ab115ec6cf5cbf7",
+                "aaa99f88475670b8",
+                "752c5a80e95b78ff"
+            ]
+        ],
+        "icon": "font-awesome/fa-gears"
+    },
+    {
+        "id": "7ab115ec6cf5cbf7",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "parsed data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 545,
+        "y": 1340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "aaa99f88475670b8",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "get_current_count",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 710,
+        "y": 1380,
+        "wires": [
+            [
+                "e3cda0d1dbd299ac",
+                "b8f136c836abad3d"
+            ]
+        ]
+    },
+    {
+        "id": "e3cda0d1dbd299ac",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "db_results",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 785,
+        "y": 1340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "88577ebb4f08300a",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "update db ",
+        "func": "let arr = msg.payload[\"db_response\"];\nlet sensor_data = msg.payload[\"01_ultrasonic_data\"];\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\nif (arr.length == 0){\n    msg.payload = { \"$set\": { \"room_number\": 1, \"floor_number\": 0, \"count\": 1, \"last_update\": offsetTime.toLocaleString(),}};\n}\nelse{\n    msg.payload = {\"$set\":{\n        \"room_number\": 1, \"floor_number\": 0,\"last_update\":offsetTime.toLocaleString(), \n        \"count\":arr[0].count + sensor_data}}; \n}\n\nmsg.query = {\"room_number\":1,\"floor_number\":0};\nmsg.topic = \"db query\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 1380,
+        "wires": [
+            [
+                "b3184a6743cb77d9",
+                "1221d9338d3217bb"
+            ]
+        ]
+    },
+    {
+        "id": "b3184a6743cb77d9",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "check_payload_query",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1255,
+        "y": 1340,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "b8f136c836abad3d",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "db response",
+        "func": "msg.topic = \"db_response\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 1380,
+        "wires": [
+            [
+                "9384cb85342809a8"
+            ]
+        ]
+    },
+    {
+        "id": "9384cb85342809a8",
+        "type": "join",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1070,
+        "y": 1380,
+        "wires": [
+            [
+                "88577ebb4f08300a"
+            ]
+        ]
+    },
+    {
+        "id": "1221d9338d3217bb",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "update_count",
+        "collection": "326_occupancy_room",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "update",
+        "x": 1400,
+        "y": 1380,
+        "wires": []
+    },
+    {
         "id": "5a356f82b3ef1730",
         "type": "mongodb out",
         "z": "f6f2187d.f17ca8",
@@ -651,8 +916,7 @@
         "y": 1520,
         "wires": [
             [
-                "31ec8be0ed1c01eb",
-                "cdb5a2dd3d3c581d"
+                "31ec8be0ed1c01eb"
             ]
         ]
     },
@@ -742,6 +1006,17 @@
         "wires": []
     },
     {
+        "id": "494f0495058ad32b",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "1b1da6d969145b95",
+        "name": "Update floor1_room1 data",
+        "info": "",
+        "x": 230,
+        "y": 1300,
+        "wires": []
+    },
+    {
         "id": "c9e4b1c8699f794d",
         "type": "inject",
         "z": "f6f2187d.f17ca8",
@@ -802,182 +1077,6 @@
         "operation": "store",
         "x": 970,
         "y": 1660,
-        "wires": []
-    },
-    {
-        "id": "cdb5a2dd3d3c581d",
-        "type": "mqtt out",
-        "z": "f6f2187d.f17ca8",
-        "name": "recent_update",
-        "topic": "326project/smartbuilding/occupancy/recent_update",
-        "qos": "1",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "c60c8d7bc953d7fa",
-        "x": 1340,
-        "y": 1520,
-        "wires": []
-    },
-    {
-        "id": "d7e6a7f6fe3af104",
-        "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
-        "name": "0_1_us_sensor",
-        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "c60c8d7bc953d7fa",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 200,
-        "y": 1380,
-        "wires": [
-            [
-                "a405cf4ad0562c77"
-            ]
-        ]
-    },
-    {
-        "id": "a405cf4ad0562c77",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "parse_data and check database",
-        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"01_ultrasonic_data\";\nmsg.operation = \"find\";\nmsg.query = {\"room_number\":1,\"floor_number\":0}\n\nglobal.set(\"01_us_data\",msg.payload);\n\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 1380,
-        "wires": [
-            [
-                "7ab115ec6cf5cbf7",
-                "aaa99f88475670b8"
-            ]
-        ],
-        "icon": "font-awesome/fa-gears"
-    },
-    {
-        "id": "7ab115ec6cf5cbf7",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "parsed data",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 565,
-        "y": 1340,
-        "wires": [],
-        "l": false
-    },
-    {
-        "id": "aaa99f88475670b8",
-        "type": "mongodb in",
-        "z": "f6f2187d.f17ca8",
-        "mongodb": "10d3d4a81f37ba61",
-        "name": "get_current_count",
-        "collection": "326_occupancy_room",
-        "operation": "find",
-        "x": 910,
-        "y": 1380,
-        "wires": [
-            [
-                "e3cda0d1dbd299ac",
-                "88577ebb4f08300a"
-            ]
-        ]
-    },
-    {
-        "id": "e3cda0d1dbd299ac",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "db_results",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 985,
-        "y": 1340,
-        "wires": [],
-        "l": false
-    },
-    {
-        "id": "88577ebb4f08300a",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "update db ",
-        "func": "let arr = msg.payload;\nlet sensor_data = global.get(\"01_us_data\");\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\nif (arr.length == 0){\n    msg.payload = { \"$set\": { \"room_number\": 1, \"floor_number\": 0, \"count\": 1, \"last_update\": offsetTime.toLocaleString(),}};\n}\nelse{\n    msg.payload = {\"$set\":{\n        \"room_number\": 1, \"floor_number\": 0,\"last_update\":offsetTime.toLocaleString(), \n        \"count\":arr[0].count + sensor_data}}; \n}\n\nmsg.query = {\"room_number\":1,\"floor_number\":0};\nmsg.topic = \"db query\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1140,
-        "y": 1380,
-        "wires": [
-            [
-                "b3184a6743cb77d9",
-                "1221d9338d3217bb"
-            ]
-        ]
-    },
-    {
-        "id": "b3184a6743cb77d9",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "check_payload_query",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1195,
-        "y": 1340,
-        "wires": [],
-        "l": false
-    },
-    {
-        "id": "1221d9338d3217bb",
-        "type": "mongodb out",
-        "z": "f6f2187d.f17ca8",
-        "mongodb": "10d3d4a81f37ba61",
-        "name": "update_count",
-        "collection": "326_occupancy_room",
-        "payonly": true,
-        "upsert": true,
-        "multi": false,
-        "operation": "update",
-        "x": 1360,
-        "y": 1380,
-        "wires": []
-    },
-    {
-        "id": "494f0495058ad32b",
-        "type": "comment",
-        "z": "f6f2187d.f17ca8",
-        "name": "Update floor1_room1 data",
-        "info": "",
-        "x": 230,
-        "y": 1300,
         "wires": []
     },
     {
