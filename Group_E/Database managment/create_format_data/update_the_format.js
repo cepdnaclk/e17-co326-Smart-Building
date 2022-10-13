@@ -1,4 +1,4 @@
-let details = [];
+let details = []
 let arr = [{"_id":"63470c6b0502e71145f114f7","floor_number":0,"room_number":1,"count":20,"last_update":"10/13/2022, 1:28:05 PM"},
             {"_id":"6347be0e02f76600070dc7c4","room_number":2,"floor_number":0,"count":1,"last_update":"12/10/2022 12:57 PM"}            
 ];
@@ -29,12 +29,16 @@ for(let floor = 0; floor<4; floor++){
     }
     else{
         
-        inner_details.push({"name":"room"+ floor_data[floor].room_number,"count":floor_data[floor].count});
+        for(let j =0; j < floor_data.length; j++){
+            inner_details.push({"name":"room"+ floor_data[j].room_number,"count":floor_data[j].count});
+        }
+        
     }
 
-    details.push({"name":"floor"+floor,"details":inner_details});
+    details.push( {"name":"florr"+floor ,"details":inner_details});
+   
 }
 
-msg.payload = details;
+msg.payload = {"date_time":offsetTime.toLocaleString(),"details":details};
 
 console.log(msg.payload);
