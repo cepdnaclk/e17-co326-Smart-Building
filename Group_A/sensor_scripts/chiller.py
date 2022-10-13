@@ -1,4 +1,3 @@
-import tempfile
 import paho.mqtt.client as mqtt
 import json
 from time import asctime, time, sleep
@@ -6,10 +5,10 @@ from math import exp
 import csv
 
 
-# Boiler On-Model
+# Chiller On-Model
 on_vals = []
 
-with open('boiler-model.csv', 'r') as csvfile:
+with open('chiller-model.csv', 'r') as csvfile:
     csvreader = csv.reader(csvfile)
 
     for row in csvreader:
@@ -22,13 +21,13 @@ def on_model(temp):
 
 
 # Boiler Off Model
-off_model = lambda temp, t : 30 + (temp - 30)*exp(-t/2100)
+off_model = lambda temp, t : 35 + (temp - 35)*exp(-t/2100)
 
 
 # Initial values
-min_temp = 30.0    # Room temp
-max_temp = 88.0   # Boiler max temp
-temp = min_temp
+min_temp = 0.0    # Chiller min temp
+max_temp = 35.0   # Room temp
+temp = max_temp
 state = False
 
 # Initialize start time
@@ -38,8 +37,8 @@ start_time = time()
 # MQTT info
 broker_addr = "vpn.ce.pdn.ac.lk"
 broker_port = 8883
-boiler_topic = "326project/smartbuilding/hvac/control/boiler"
-sensor_topic = "326project/smartbuilding/hvac/sensor/boiler"
+chiller_topic = "326project/smartbuilding/hvac/control/chiller"
+sensor_topic = "326project/smartbuilding/hvac/sensor/chiller"
 
 # Get boiler state via MQTT
 def on_message(client, userdata, message):
@@ -49,18 +48,18 @@ def on_message(client, userdata, message):
 
     # Update state and start time
     state = True if data['state'] == 1 else False
-    print(f"Boiler {'ON' if state is True else 'OFF' }")
+    print(f"Chiller {'ON' if state is True else 'OFF' }")
     start_time = time()
 
 
 # Create MQTT client instance and connect to broker
-client = mqtt.Client("BoilerDuctTemp")
+client = mqtt.Client("ChillerDuctTemp")
 client.connect(broker_addr, broker_port)
 print("Connected to broker")
 
 # Subscribe to relevant topic
-client.subscribe(boiler_topic)
-print(f"Subscribed to {boiler_topic}")
+client.subscribe(chiller_topic)
+print(f"Subscribed to {chiller_topic}")
 
 # Listen for messages
 client.on_message = on_message
@@ -74,10 +73,10 @@ while True:
     # Update temp value
     match state:
         case True:
-            temp = on_model(temp) if temp < max_temp else max_temp
+            temp = on_model(temp) if temp > min_temp else min_temp
 
         case False:
-            temp = off_model(temp, elapsed_time) if temp > min_temp else min_temp
+            temp = off_model(temp, elapsed_time) if temp < max_temp else max_temp
 
     # Publish to MQTT topic
     data = json.dumps({"time": asctime(), "temp": round(temp, 2)})
