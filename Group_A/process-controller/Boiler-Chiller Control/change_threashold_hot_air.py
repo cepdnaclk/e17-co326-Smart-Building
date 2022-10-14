@@ -9,7 +9,7 @@ mqttBroker = "mqtt.eclipseprojects.io"
 client = mqtt.Client("Hot Air Temperature Threashold  value changer")
 # client.connect(mqttBroker)
 
-topic = "326project/smartbuilding/hvac/change/temp-threash-hotair"
+topic = "326project/smartbuilding/hvac/control/temp-thresh-hotairduct"
 
 client.connect("vpn.ce.pdn.ac.lk", port=8883)
 x = {
