@@ -1,0 +1,294 @@
+[
+    {
+        "id": "716eb563a8443fee",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/<floorno>/<roomno>/temperature",
+        "topic": "326project/smartbuilding/hvac/<floorno>/<roomno>/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "6d678e728b67a9f6"
+            ]
+        ]
+    },
+    {
+        "id": "95d6bb634cc45698",
+        "type": "inject",
+        "z": "2128043fc813c839",
+        "name": "Temp Sensor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 80,
+        "wires": [
+            [
+                "f93d6d961fa04516"
+            ]
+        ]
+    },
+    {
+        "id": "f93d6d961fa04516",
+        "type": "mqtt out",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/sensor/#",
+        "topic": "326project/smartbuilding/hvac/sensor/#",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "",
+        "x": 730,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c3af676bede9a33c",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "  326project/smartbuilding/hvac/<floorno>/<roomno>/humidity",
+        "topic": "  326project/smartbuilding/hvac/<floorno>/<roomno>/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "4ee6c6c68361e251"
+            ]
+        ]
+    },
+    {
+        "id": "bde6ac509fc16d78",
+        "type": "inject",
+        "z": "2128043fc813c839",
+        "name": "Humidity Sensor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "f93d6d961fa04516"
+            ]
+        ]
+    },
+    {
+        "id": "acb3e70f7911638b",
+        "type": "inject",
+        "z": "2128043fc813c839",
+        "name": "Pressure Sensor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "f93d6d961fa04516"
+            ]
+        ]
+    },
+    {
+        "id": "44a0f2b4fea11aed",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "  326project/smartbuilding/hvac/<floorno>/<roomno>/pressure",
+        "topic": "  326project/smartbuilding/hvac/<floorno>/<roomno>/pressure",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 460,
+        "wires": [
+            [
+                "a00d82b96e6e39d5"
+            ]
+        ]
+    },
+    {
+        "id": "6d678e728b67a9f6",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "32586d1d77084422",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "temp sensor zone 01 status",
+        "scope": [
+            "716eb563a8443fee"
+        ],
+        "x": 820,
+        "y": 260,
+        "wires": [
+            [
+                "6d678e728b67a9f6"
+            ]
+        ]
+    },
+    {
+        "id": "4ee6c6c68361e251",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bdcc4174298355b3",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "humidity sensor zone 1 status",
+        "scope": [
+            "c3af676bede9a33c"
+        ],
+        "x": 820,
+        "y": 340,
+        "wires": [
+            [
+                "4ee6c6c68361e251"
+            ]
+        ]
+    },
+    {
+        "id": "a00d82b96e6e39d5",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "727d18cbd49924e5",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "pressure sensor zone 01 status",
+        "scope": [
+            "44a0f2b4fea11aed"
+        ],
+        "x": 830,
+        "y": 420,
+        "wires": [
+            [
+                "a00d82b96e6e39d5"
+            ]
+        ]
+    },
+    {
+        "id": "93a52709f8718a12",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
