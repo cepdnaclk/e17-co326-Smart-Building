@@ -49,7 +49,7 @@ def on_message_for_temp_threshold_hot_air(client, userdata, message):
     tempHotAirThreashold = values[1]
     print()
     print("**********************************")
-    print("new threashold temperature of Cold Air is " + str(tempHotAirThreashold))
+    print("new threashold temperature of Hot Air is " + str(tempHotAirThreashold))
     print("**********************************")
     print()
 
@@ -76,8 +76,8 @@ def on_message_for_cold_air_duct(client, userdata, message):
     length = len(data)
     keys = list(data.keys())
     values = list(data.values())
-    if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
-        return
+    # if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
+    #     return
 
     temperature = values[1]
     print("Received Temperature from cold air duct " + str(temperature))
@@ -116,8 +116,8 @@ def on_message_for_hot_air_duct(client, userdata, message):
     length = len(data)
     keys = list(data.keys())
     values = list(data.values())
-    if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
-        return
+    # if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
+    #     return
 
     temperature = values[1]
     print("Received Temperature from hot air duct " + str(temperature))
