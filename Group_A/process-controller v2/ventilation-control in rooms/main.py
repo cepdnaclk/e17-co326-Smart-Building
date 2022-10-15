@@ -38,9 +38,12 @@ humidThreasholdChangeTopic = "326project/smartbuilding/hvac/control/humid-thresh
 flowRateThreasholdChangeTopic = "326project/smartbuilding/hvac/control/flowrate-thresh"
 
 
-temperatureThreashold = 30 # default
-humidityThreashold = 30 # default
+tempThreashold = 30 # default
+humidThreashold = 30 # default
 flowRateThreashold = 30 # default
+
+tempPrevious = 30 # default
+humidityPrevious = 30 # default
 
 # allowed ranges
 tempCanChange = 2
@@ -51,12 +54,12 @@ flowRateCanChange = 2
 def on_message_for_temp_threshold(client, userdata, message):
     data = json.loads(message.payload)
 
-    global temperatureThreashold
+    global tempThreashold
     values = list(data.values())
-    temperatureThreashold = values[1]
+    tempThreashold = values[1]
     print()
     print("**********************************")
-    print("new threashold temperature is " + str(temperatureThreashold))
+    print("new threashold temperature is " + str(tempThreashold))
     print("**********************************")
     print()
 
@@ -64,12 +67,12 @@ def on_message_for_temp_threshold(client, userdata, message):
 def on_message_for_humid_threshold(client, userdata, message):
     data = json.loads(message.payload)
 
-    global humidityThreashold
+    global humidThreashold
     values = list(data.values())
-    humidityThreashold = values[1]
+    humidThreashold = values[1]
     print()
     print("**********************************")
-    print("new threashold humidity is " + str(humidityThreashold))
+    print("new threashold humidity is " + str(humidThreashold))
     print("**********************************")
     print()
 
@@ -87,6 +90,70 @@ def on_message_for_flowRate_threshold(client, userdata, message):
     print()
 
 
+# controlling temperature
+def on_message_for_temp(client, userdata, message):
+    data = json.loads(message.payload)
+    print(data)
+
+    # data validation
+    length = len(data)
+    keys = list(data.keys())
+    values = list(data.values())
+    if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
+        return
+
+    tempPrevious = values[1]
+    create_blower_control_command(tempPrevious, humidityPrevious)
+
+# controlling humidity
+def on_message_for_humid(client, userdata, message):
+
+    data = json.loads(message.payload)
+    print(data)
+
+    # data validation
+    length = len(data)
+    keys = list(data.keys())
+    values = list(data.values())
+    if (length != 2 or keys[0] != 'time' or keys[1] != 'humid'):
+        return
+
+    humidityPrevious = values[1]
+
+    create_blower_control_command(tempPrevious, humidityPrevious)
+
+
+def create_blower_control_command(temp, humid):
+
+    # if temp and humid are higher
+    if ((tempThreashold+tempCanChange) < temp):
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "speed": 0.5
+        }
+        client.publish(blowerControlTopic, json.dumps(x))
+        print("published 'Increase fan speed ' to topic " + blowerControlTopic)
+
+    # if temp and humid are lower
+    elif ((tempThreashold-tempCanChange) > temp):
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "speed": -0.5
+        }
+        client.publish(blowerControlTopic, json.dumps(x))
+        print("published 'Decrease fan speed ' to topic " + blowerControlTopic)
+
+    # otherwise no change
+    else:
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "speed": 0
+        }
+        client.publish(blowerControlTopic, json.dumps(x))
+        print("published 'Don't change fan speed ' to topic " + blowerControlTopic)
+
+    print()
+
 
 
 
@@ -94,133 +161,8 @@ def on_message_for_flowRate_threshold(client, userdata, message):
 # -------------------------------------------------------------------------------------------------------------------
 
 
-tempColdAirThreashold = 25 #default
-tempHotAirThreashold = 15 #default
-tempThreashold = 30 #default
-
-#temparature range that allowed
-tempCanChange = 2
 
 
-# changing temp threashold value of Cold Air
-def on_message_for_temp_threshold_cold_air(client, userdata, message):
-    data = json.loads(message.payload)
-
-    global tempColdAirThreashold
-    values = list(data.values())
-    tempColdAirThreashold = values[1]
-    print()
-    print("**********************************")
-    print("new threashold temperature of Cold Air is " + str(tempColdAirThreashold))
-    print("**********************************")
-    print()
-
-
-# changing temp threashold value of Hot Air
-def on_message_for_temp_threshold_hot_air(client, userdata, message):
-    data = json.loads(message.payload)
-
-    global tempHotAirThreashold
-    values = list(data.values())
-    tempHotAirThreashold = values[1]
-    print()
-    print("**********************************")
-    print("new threashold temperature of Hot Air is " + str(tempHotAirThreashold))
-    print("**********************************")
-    print()
-
-
-
-# changing temp threashold value
-def on_message_for_temp_threshold(client, userdata, message):
-    data = json.loads(message.payload)
-
-    global tempThreashold
-    values = list(data.values())
-    tempThreashold = values[1]
-    print()
-    print("**********************************")
-    print("new threashold temperature is " + str(tempThreashold))
-    print("**********************************")
-    print()
-
-def on_message_for_cold_air_duct(client, userdata, message):
-    data = json.loads(message.payload)
-    # print(data)
-
-    # data validation
-    length = len(data)
-    keys = list(data.keys())
-    values = list(data.values())
-    # if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
-    #     return
-
-    temperature = values[1]
-    print("Received Temperature from cold air duct " + str(temperature))
-
-    if (temperature > (tempColdAirThreashold + tempCanChange)):
-        # Chiller On
-        x = {
-            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
-            "state": 1
-        }
-
-        #publish to controller
-        client.publish(chillerControlTopic, json.dumps(x))
-        print("published 'Chiller ON' to topic " + chillerControlTopic)
-
-    #on desired temparatures
-    elif (temperature < (tempColdAirThreashold + tempCanChange) and  temperature > (tempColdAirThreashold - tempCanChange)):
-        # Chiller Off
-         x = {
-            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
-            "state": 0
-             }
-         # client.publish(tempColdAirScadaTopic,json.dumps(x))
-         client.publish(chillerControlTopic, json.dumps(x))
-         print("published 'Chiller OFF' to topic " + chillerControlTopic)
-
-
-    print()
-
-
-def on_message_for_hot_air_duct(client, userdata, message):
-    data = json.loads(message.payload)
-    # print(data)
-
-    # data validation
-    length = len(data)
-    keys = list(data.keys())
-    values = list(data.values())
-    # if (length != 2 or keys[0] != 'time' or keys[1] != 'temp'):
-    #     return
-
-    temperature = values[1]
-    print("Received Temperature from hot air duct " + str(temperature))
-
-    if (temperature < (tempHotAirThreashold - tempCanChange)):
-        # Boiler On
-        x = {
-            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
-            "state": 1
-            }
-        # client.publish(tempHotAirScadaTopic  , json.dumps(x))
-        client.publish(boilerControlTopic , json.dumps(x))
-        print("published 'Boiler ON' to topic " + boilerControlTopic)
-
-    #on desired temparatures
-    else:
-
-        x = {
-            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
-            "state": 0
-             }
-        # client.publish(tempHotAirScadaTopic  , json.dumps(x))
-        client.publish(boilerControlTopic , json.dumps(x))
-        print("published 'Boiler OFF' to topic " + boilerControlTopic)
-
-
-    print()
 
 client.message_callback_add(tempSensorTopicFromColdAirDuct, on_message_for_cold_air_duct)
 client.message_callback_add(tempSensorTopicFromHotAirDuct, on_message_for_hot_air_duct)
