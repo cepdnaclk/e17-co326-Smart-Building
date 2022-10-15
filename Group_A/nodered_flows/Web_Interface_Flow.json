@@ -1,0 +1,215 @@
+[
+    {
+        "id": "dd5f6ba851c7e7d8",
+        "type": "tab",
+        "label": "Web Interface",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7d8955a1e0cc7467",
+        "type": "http in",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "DBdata",
+        "url": "/DBdata",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 70,
+        "y": 180,
+        "wires": [
+            [
+                "3fd738e2adecc631",
+                "46329b011deadef4",
+                "f09dd77e76f3d007"
+            ]
+        ]
+    },
+    {
+        "id": "3fd738e2adecc631",
+        "type": "mongodb in",
+        "z": "dd5f6ba851c7e7d8",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_temperature",
+        "operation": "find",
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "ec57893a8ad48c33"
+            ]
+        ]
+    },
+    {
+        "id": "46329b011deadef4",
+        "type": "mongodb in",
+        "z": "dd5f6ba851c7e7d8",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_humidity",
+        "operation": "find",
+        "x": 390,
+        "y": 180,
+        "wires": [
+            [
+                "14f37c155ce85040"
+            ]
+        ]
+    },
+    {
+        "id": "f09dd77e76f3d007",
+        "type": "mongodb in",
+        "z": "dd5f6ba851c7e7d8",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_pressure",
+        "operation": "find",
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "2c380dd8b42cc438"
+            ]
+        ]
+    },
+    {
+        "id": "ec57893a8ad48c33",
+        "type": "function",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 80,
+        "wires": [
+            [
+                "1faf959f59ac8b73"
+            ]
+        ]
+    },
+    {
+        "id": "14f37c155ce85040",
+        "type": "function",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "function 2",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 180,
+        "wires": [
+            [
+                "05de0e55fe0f51f1"
+            ]
+        ]
+    },
+    {
+        "id": "2c380dd8b42cc438",
+        "type": "function",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "function 3",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 280,
+        "wires": [
+            [
+                "42c57910986e1a55"
+            ]
+        ]
+    },
+    {
+        "id": "1faf959f59ac8b73",
+        "type": "tableify",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "",
+        "before": "Temperture Logs",
+        "after": "Temperature Data",
+        "tableStyle": "",
+        "theadStyle": "",
+        "tbodyStyle": "",
+        "trStyle": "",
+        "tdStyle": "",
+        "x": 920,
+        "y": 80,
+        "wires": [
+            [
+                "a47e59fd7fd41776"
+            ]
+        ]
+    },
+    {
+        "id": "05de0e55fe0f51f1",
+        "type": "tableify",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "",
+        "before": "Humidity Logs",
+        "after": "Humidity Data",
+        "tableStyle": "",
+        "theadStyle": "",
+        "tbodyStyle": "",
+        "trStyle": "",
+        "tdStyle": "",
+        "x": 920,
+        "y": 180,
+        "wires": [
+            [
+                "a47e59fd7fd41776"
+            ]
+        ]
+    },
+    {
+        "id": "42c57910986e1a55",
+        "type": "tableify",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "",
+        "before": "Pressure Logs",
+        "after": "",
+        "tableStyle": "",
+        "theadStyle": "",
+        "tbodyStyle": "",
+        "trStyle": "",
+        "tdStyle": "",
+        "x": 920,
+        "y": 280,
+        "wires": [
+            [
+                "a47e59fd7fd41776"
+            ]
+        ]
+    },
+    {
+        "id": "a47e59fd7fd41776",
+        "type": "http response",
+        "z": "dd5f6ba851c7e7d8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1170,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6c36cda79d9fbc4e",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]
