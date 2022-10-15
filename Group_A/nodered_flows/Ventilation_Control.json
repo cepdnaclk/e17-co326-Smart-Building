@@ -1,5 +1,13 @@
 [
     {
+        "id": "7ea2235092fd655a",
+        "type": "tab",
+        "label": "Ventilation in Rooms - Control",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "ac29f1d5f710530d",
         "type": "function",
         "z": "7ea2235092fd655a",
@@ -15,7 +23,11 @@
         "wires": [
             [
                 "2237ad5555374ede",
-                "b2b71d0e8c1d59eb"
+                "b2b71d0e8c1d59eb",
+                "5d6fd7de084feace",
+                "3686e2dc59912bcb",
+                "2d8356c3c08ff87e",
+                "7c2dc408a97e9e94"
             ]
         ]
     },
@@ -34,8 +46,12 @@
         "y": 280,
         "wires": [
             [
-                "ac0511af1a93f7ad",
-                "e123cef5b9e390ba"
+                "2237ad5555374ede",
+                "b2b71d0e8c1d59eb",
+                "46824488c996be24",
+                "c21df3dc5ef24279",
+                "8ddcfb39c6867e27",
+                "63b4c6781ae0d2bb"
             ]
         ]
     },
@@ -163,24 +179,6 @@
         "wires": []
     },
     {
-        "id": "ac0511af1a93f7ad",
-        "type": "mqtt out",
-        "z": "7ea2235092fd655a",
-        "name": "  326project/smartbuilding/hvac/<floorno>/<roomno>/control/set-temperature",
-        "topic": "  326project/smartbuilding/hvac/<floorno>/<roomno>/control/set-temperature",
-        "qos": "2",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "754a5662410298ba",
-        "x": 1210,
-        "y": 260,
-        "wires": []
-    },
-    {
         "id": "a4eb4c0e9ef9d255",
         "type": "mqtt out",
         "z": "7ea2235092fd655a",
@@ -233,22 +231,6 @@
         "wires": []
     },
     {
-        "id": "e123cef5b9e390ba",
-        "type": "debug",
-        "z": "7ea2235092fd655a",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1010,
-        "y": 320,
-        "wires": []
-    },
-    {
         "id": "74d7c9ad6d958220",
         "type": "debug",
         "z": "7ea2235092fd655a",
@@ -278,6 +260,144 @@
         "statusType": "auto",
         "x": 1010,
         "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5d6fd7de084feace",
+        "type": "mqtt out",
+        "z": "7ea2235092fd655a",
+        "name": "326project/smartbuilding/hvac/control/temp-thresh-hotairduct",
+        "topic": "326project/smartbuilding/hvac/control/temp-thresh-hotairduct",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 1160,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "3686e2dc59912bcb",
+        "type": "debug",
+        "z": "7ea2235092fd655a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "2d8356c3c08ff87e",
+        "type": "mqtt out",
+        "z": "7ea2235092fd655a",
+        "name": "326project/smartbuilding/hvac/control/boiler",
+        "topic": "326project/smartbuilding/hvac/control/boiler",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 1110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7c2dc408a97e9e94",
+        "type": "debug",
+        "z": "7ea2235092fd655a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "46824488c996be24",
+        "type": "mqtt out",
+        "z": "7ea2235092fd655a",
+        "name": "326project/smartbuilding/hvac/control/chiller",
+        "topic": "326project/smartbuilding/hvac/control/chiller",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 1110,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c21df3dc5ef24279",
+        "type": "debug",
+        "z": "7ea2235092fd655a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8ddcfb39c6867e27",
+        "type": "mqtt out",
+        "z": "7ea2235092fd655a",
+        "name": "326project/smartbuilding/hvac/control/temp-thresh-coldairduct",
+        "topic": "326project/smartbuilding/hvac/control/temp-thresh-coldairduct",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 1160,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "63b4c6781ae0d2bb",
+        "type": "debug",
+        "z": "7ea2235092fd655a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 780,
         "wires": []
     },
     {
