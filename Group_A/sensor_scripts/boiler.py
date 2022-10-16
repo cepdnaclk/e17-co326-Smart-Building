@@ -6,10 +6,10 @@ from math import exp
 import csv
 
 
-# Boiler-On Model
+# Boiler On-Model
 on_vals = []
 
-with open('on-model.csv', 'r') as csvfile:
+with open('boiler-model.csv', 'r') as csvfile:
     csvreader = csv.reader(csvfile)
 
     for row in csvreader:
@@ -26,8 +26,8 @@ off_model = lambda temp, t : 30 + (temp - 30)*exp(-t/2100)
 
 
 # Initial values
-min_temp = 30    # Room temp
-max_temp = 88   # Boiler max temp
+min_temp = 30.0    # Room temp
+max_temp = 88.0   # Boiler max temp
 temp = min_temp
 state = False
 
@@ -83,7 +83,7 @@ while True:
     data = json.dumps({"time": asctime(), "temp": round(temp, 2)})
     client.publish(sensor_topic, data)
 
-    print(temp)
+    print(round(temp,2))
     sleep(1)
 
 
