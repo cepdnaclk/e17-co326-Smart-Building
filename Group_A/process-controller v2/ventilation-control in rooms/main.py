@@ -44,11 +44,53 @@ flowRateThreashold = 30 # default
 
 tempPrevious = 30 # default
 humidityPrevious = 30 # default
+count = 0 # default
 
 # allowed ranges
 tempCanChange = 2
 humidCanChange = 2
 flowRateCanChange = 2
+
+def on_message_for_pressure(client, userdata, message):
+    data = json.loads(message.payload)
+    values = list(data.values())
+    airFlowRate = values[1]
+
+    if (airFlowRate < flowRateThreashold - flowRateCanChange):
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "msg": "remove inside air"
+        }
+        client.publish(blowerControlTopic, json.dumps(x))
+        print("published 'remove inside air ' to topic " + airFlowRateControl)
+
+    elif (airFlowRate > flowRateThreashold + flowRateCanChange):
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "msg": "provide outsider air"
+        }
+        client.publish(blowerControlTopic, json.dumps(x))
+        print("published 'provide outsider air ' to topic " + airFlowRateControl)
+
+    else:
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "msg": "maintain current flowrate"
+        }
+        client.publish(blowerControlTopic, json.dumps(x))
+        print("published 'maintain current flowrate ' to topic " + airFlowRateControl)
+
+
+def on_message_for_count(client, userdata, message):
+    data = json.loads(message.payload)
+
+    global count
+    values = list(data.values())
+    count = values[1]
+
+    print()
+    print("Occupancy is - " + str(count))
+    print()
 
 # changing temp threashold
 def on_message_for_temp_threshold(client, userdata, message):
@@ -125,6 +167,10 @@ def on_message_for_humid(client, userdata, message):
 
 def create_blower_control_command(temp, humid):
 
+    if (count <=0 ):
+        print("There is no one in the room. So operation will not be done !")
+        return
+
     # if temp and humid are higher
     if ((tempThreashold+tempCanChange) < temp):
         x = {
@@ -161,9 +207,13 @@ client.message_callback_add(humidThreasholdChangeTopic, on_message_for_humid_thr
 client.message_callback_add(flowRateThreasholdChangeTopic, on_message_for_flowRate_threshold)
 client.message_callback_add(tempSensorTopic, on_message_for_temp)
 client.message_callback_add(humidSensorTopic, on_message_for_humid)
+client.message_callback_add(countTopic, on_message_for_count)
+client.message_callback_add(presSensorTopic, on_message_for_pressure)
 
 client.connect("10.40.18.10", port=1883)
-client.subscribe([(tempThreasholdChangeTopic, 0), (humidThreasholdChangeTopic, 0), (flowRateThreasholdChangeTopic, 0), (tempSensorTopic, 0), (humidSensorTopic, 0)])
+client.subscribe([(tempThreasholdChangeTopic, 0), (humidThreasholdChangeTopic, 0),
+                  (flowRateThreasholdChangeTopic, 0), (tempSensorTopic, 0),
+                  (humidSensorTopic, 0), (countTopic, 0), (presSensorTopic, 0)])
 client.loop_forever()
 
 
