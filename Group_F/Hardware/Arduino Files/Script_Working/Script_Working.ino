@@ -9,6 +9,7 @@ const char* ssid = "Eng-Student";
 const char* password = "3nG5tuDt";
 
 const char* mqtt_server = "10.40.18.10";
+
 const char* topic_voltageSensor = "326project/smartbuilding/pv/pvVoltage";
 const char* topic_kwhmeterSensor = "326project/smartbuilding/pv/kWhmeter";
 const char* topic_sw1 = "326project/smartbuilding/pv/controls/sw1";
@@ -96,7 +97,9 @@ void reconnect() {
 void callback(String topic, byte* message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
-  Serial.print(". Message: ");
+  Serial.println();
+  Serial.print(" Message: ");
+  
   String messageTemp;
   
   for (int i = 0; i < length; i++) {
@@ -199,13 +202,15 @@ void loop() {
     Serial.println();
     Serial.print("Publish message: ");
     Serial.println(msg);
+    client.publish(topic_kwhmeterSensor, msg);
+    
     
 //End of kWpMeter Sensor reading Function
   
 //    input_val = analogRead(LDR);      // Reading Input
-//    snprintf (msg, MSG_BUFFER_SIZE, "%d", input_val);
+//    
 //    Serial.print("Publish message: ");
 //    Serial.println(input_val);
-//    client.publish(topic_voltageSensor, msg);
+//    client.publish(topic_kwhmeterSensor, msg);
   }
 }
