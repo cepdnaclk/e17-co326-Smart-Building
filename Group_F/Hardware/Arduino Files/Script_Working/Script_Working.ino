@@ -1,8 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <ArduinoJson.h>
 
 #define arraySize 10
-#define periodTime 500
+#define periodTime 2000
 #define MSG_BUFFER_SIZE 50
 
 const char* ssid = "Eng-Student";
@@ -95,6 +96,8 @@ void reconnect() {
 }
 
 void callback(String topic, byte* message, unsigned int length) {
+  DynamicJsonDocument doc(1024);
+  
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
   Serial.println();
@@ -108,17 +111,23 @@ void callback(String topic, byte* message, unsigned int length) {
   }
   Serial.println();
 
+  deserializeJson(doc, messageTemp);
+  JsonObject obj = doc.as<JsonObject>();
+
   // Feel free to add more if statements to control more GPIOs with MQTT
 
   // If a message is received on the topic room/lamp, you check if the message is either on or off. Turns the lamp GPIO according to the message
   if(topic==topic_sw2){
       Serial.print("Changing Room lamp to ");
-      if(messageTemp == "ON"){
-        digitalWrite(relay, HIGH);
+      String time1 = obj["time"];
+      String sw2 = obj["sw2"];
+      
+      if(sw2 == "ON"){
+        digitalWrite(relay, LOW);
         Serial.print("On");
       }
-      else if(messageTemp == "OFF"){
-        digitalWrite(relay, LOW);
+      else if(sw2 == "OFF"){
+        digitalWrite(relay, HIGH);
         Serial.print("Off");
       }
   }
