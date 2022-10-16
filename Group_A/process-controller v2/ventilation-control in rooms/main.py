@@ -154,24 +154,16 @@ def create_blower_control_command(temp, humid):
 
     print()
 
-
-
-
-
 # -------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-client.message_callback_add(tempSensorTopicFromColdAirDuct, on_message_for_cold_air_duct)
-client.message_callback_add(tempSensorTopicFromHotAirDuct, on_message_for_hot_air_duct)
-client.message_callback_add(tempThreasholdColdAirChangeTopic, on_message_for_temp_threshold_cold_air)
-client.message_callback_add(tempThreasholdHotAirChangeTopic, on_message_for_temp_threshold_hot_air)
 client.message_callback_add(tempThreasholdChangeTopic, on_message_for_temp_threshold)
+client.message_callback_add(humidThreasholdChangeTopic, on_message_for_humid_threshold)
+client.message_callback_add(flowRateThreasholdChangeTopic, on_message_for_flowRate_threshold)
+client.message_callback_add(tempSensorTopic, on_message_for_temp)
+client.message_callback_add(humidSensorTopic, on_message_for_humid)
 
 client.connect("10.40.18.10", port=1883)
-client.subscribe([(tempSensorTopicFromColdAirDuct, 0), (tempSensorTopicFromHotAirDuct, 0), (tempThreasholdColdAirChangeTopic, 0), (tempThreasholdHotAirChangeTopic, 0), (tempThreasholdChangeTopic, 0)])
+client.subscribe([(tempThreasholdChangeTopic, 0), (humidThreasholdChangeTopic, 0), (flowRateThreasholdChangeTopic, 0), (tempSensorTopic, 0), (humidSensorTopic, 0)])
 client.loop_forever()
 
 
