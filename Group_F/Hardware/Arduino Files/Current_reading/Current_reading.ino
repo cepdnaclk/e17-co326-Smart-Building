@@ -1,15 +1,20 @@
+#define arraySize 10
+
+
 float meterReading = 0;
 float adjustedValue = 0;
 float gradient = 5.0;
 float offset = 2690;
 
-int lastvalues[10]= {0,0,0,0,0,0,0,0,0,0};
+int lastvalues[arraySize]= {};
 int tempnew = 0;
 int templast = 0;
 
-int maxVal = 0;
-int minVal = 0;
+int maxVal = -32768;
+int minVal = 32768;
+
 int difference = 0;
+static int count = 0;
 
 const int analogIn = A0;
 
@@ -25,10 +30,15 @@ void loop(){
   adjustedValue = meterReading*gradient - offset;
   
   for (byte i = 1; i <= 10; i = i + 1) {
-    //a function to move values one down the array; 
-    tempnew = lastvalues[10-i];
-    lastvalues[10-i] = templast;
-    templast = tempnew;
+   if(count<arraySize){
+          lastvalues[count]=adjustedValue;
+          count++;  
+        }
+        else{
+          tempnew = lastvalues[arraySize-i];
+          lastvalues[arraySize-i] = templast;
+          templast = tempnew;
+        }
   }
   lastvalues[9] = adjustedValue;
 
@@ -56,8 +66,8 @@ void loop(){
 
   
   //making maxVal and MinVal zero for the next loop
-  maxVal = 0;
-  minVal = 0;
+  maxVal = -32768;
+  minVal = 32768;
 
   Serial.println();
 

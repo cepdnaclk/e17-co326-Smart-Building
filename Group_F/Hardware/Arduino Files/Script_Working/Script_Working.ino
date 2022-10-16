@@ -2,12 +2,14 @@
 #include <PubSubClient.h>
 
 #define arraySize 10
-#define periodTime 100
+#define periodTime 500
+#define MSG_BUFFER_SIZE 50
 
 const char* ssid = "Eng-Student";
 const char* password = "3nG5tuDt";
 
 const char* mqtt_server = "10.40.18.10";
+
 const char* topic_voltageSensor = "326project/smartbuilding/pv/pvVoltage";
 const char* topic_kwhmeterSensor = "326project/smartbuilding/pv/kWhmeter";
 const char* topic_sw1 = "326project/smartbuilding/pv/controls/sw1";
@@ -23,12 +25,13 @@ float gradient = 5.0;
 float offset = 2690;
 
 
-int lastvalues[arraySize]= {}; //initialize all the values to zero
+int lastvalues[arraySize]; //initialize all the values to zero
 int tempnew = 0;
 int templast = 0;
 
-int maxVal = -32768;
-int minVal = 32768;
+int maxVal = -32768;//minmul int value
+int minVal = 32768;//maximum int value
+static int count = 0;
 
 //INT_MIN
 //INT_MAX
@@ -37,9 +40,10 @@ int difference = 0;
 WiFiClient espClient;
 PubSubClient client(espClient);
 unsigned long lastMsg = 0;
-#define MSG_BUFFER_SIZE	(50)
 char msg[MSG_BUFFER_SIZE];
 int value = 0;
+
+char msg1[MSG_BUFFER_SIZE];
 
 void setup_wifi() {
 
@@ -93,7 +97,9 @@ void reconnect() {
 void callback(String topic, byte* message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
-  Serial.print(". Message: ");
+  Serial.println();
+  Serial.print(" Message: ");
+  
   String messageTemp;
   
   for (int i = 0; i < length; i++) {
@@ -143,27 +149,33 @@ void loop() {
       meterReading = analogRead(currentSensor);
       Serial.print("Sensor Vlaue = ");
       adjustedValue = meterReading*gradient - offset;
-  
+        
       for (byte i = 1; i <= arraySize; i = i + 1) {
         //a function to move values one down the array; 
-        tempnew = lastvalues[arraySize-i];
-        lastvalues[arraySize-i] = templast;
-        templast = tempnew;
+        if(count<arraySize){
+          lastvalues[count]=adjustedValue;
+          count++;  
+        }
+        else{
+          tempnew = lastvalues[arraySize-i];
+          lastvalues[arraySize-i] = templast;
+          templast = tempnew;
+        }
     }
     lastvalues[arraySize-1] = adjustedValue;
 
     Serial.println(adjustedValue);
-
+    
     for (byte i = 0; i < 10; i = i + 1) {
       //takes the max and min values in the array
       maxVal = max(lastvalues[i],maxVal);
       minVal = min(lastvalues[i],minVal);
 
       //a function to print the array values;
-      Serial.print(i);
-      Serial.print(" = ");
-      Serial.print(lastvalues[i]);
-      Serial.print(" ");
+//      Serial.print(i);
+//      Serial.print(" = ");
+//      Serial.print(lastvalues[i]);
+//      Serial.print(" ");
     }
     Serial.println();
     Serial.print("Max Value = ");
@@ -176,16 +188,29 @@ void loop() {
 
   
     //making maxVal and MinVal zero for the next loop
-    maxVal = 0;
-    minVal = 0;
+    maxVal = -32768;
+    minVal = 32768;
 
+    if(difference<=15){
+      snprintf(msg,MSG_BUFFER_SIZE,"%d",0);
+      snprintf(msg1,MSG_BUFFER_SIZE,"%s","Power not available");  
+    }
+    else{
+      snprintf(msg,MSG_BUFFER_SIZE,"%d",1);
+      snprintf(msg1,MSG_BUFFER_SIZE,"%s","Power available"); 
+     }
     Serial.println();
+    Serial.print("Publish message: ");
+    Serial.println(msg);
+    client.publish(topic_kwhmeterSensor, msg);
+    
+    
 //End of kWpMeter Sensor reading Function
   
 //    input_val = analogRead(LDR);      // Reading Input
-//    snprintf (msg, MSG_BUFFER_SIZE, "%d", input_val);
+//    
 //    Serial.print("Publish message: ");
 //    Serial.println(input_val);
-//    client.publish(topic_voltageSensor, msg);
+//    client.publish(topic_kwhmeterSensor, msg);
   }
 }
