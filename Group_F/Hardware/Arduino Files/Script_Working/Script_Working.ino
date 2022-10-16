@@ -123,11 +123,11 @@ void callback(String topic, byte* message, unsigned int length) {
       String sw2 = obj["sw2"];
       
       if(sw2 == "ON"){
-        digitalWrite(relay, HIGH);
+        digitalWrite(relay, LOW);
         Serial.print("On");
       }
       else if(sw2 == "OFF"){
-        digitalWrite(relay, LOW);
+        digitalWrite(relay, HIGH);
         Serial.print("Off");
       }
   }
