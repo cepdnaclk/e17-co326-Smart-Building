@@ -1,0 +1,403 @@
+[
+    {
+        "id": "9634ab0ef63355e4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nmsg.room = \"room0\"\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 260,
+        "wires": [
+            [
+                "c88cccf845b3f06b",
+                "bf7bb4dd54691058",
+                "971a27857e0ebb52",
+                "e687e6e958858f2c",
+                "7cb4f9ce1c9e27ba",
+                "3ab02892a68adec4"
+            ]
+        ]
+    },
+    {
+        "id": "af366433541a9de2",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1010,
+        "y": 260,
+        "wires": [
+            [
+                "9634ab0ef63355e4",
+                "4b04c177f05f4196"
+            ]
+        ]
+    },
+    {
+        "id": "cc57e2a083024ef5",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "5a4fe231c0529aec",
+                "7cae44e92378f7f4"
+            ]
+        ]
+    },
+    {
+        "id": "36b74bbb66e4b32c",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "6dea0ddf43ebc25c",
+                "b9f9e322df767698"
+            ]
+        ]
+    },
+    {
+        "id": "bbd0c028bc108cc3",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "405b862368fc72e0",
+                "f8b9a5043c654a67"
+            ]
+        ]
+    },
+    {
+        "id": "51929b932bd1276c",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 580,
+        "wires": [
+            [
+                "afb27be18807e1d1",
+                "901f91dea2151f04"
+            ]
+        ]
+    },
+    {
+        "id": "7cae44e92378f7f4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 17",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"smoke/room0\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "6dea0ddf43ebc25c",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 18",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"pull_station/room0\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "405b862368fc72e0",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 19",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"fire_detector/room0\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "5a4fe231c0529aec",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "b9f9e322df767698",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f8b9a5043c654a67",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "afb27be18807e1d1",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 20",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"temp/room0\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 560,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "901f91dea2151f04",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "4b04c177f05f4196",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c88cccf845b3f06b",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bf7bb4dd54691058",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1650,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "971a27857e0ebb52",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e687e6e958858f2c",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9faa1e76cfab210b",
+        "type": "mqtt-broker",
+        "name": "new_mqtt",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
