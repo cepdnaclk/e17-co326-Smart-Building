@@ -9,7 +9,7 @@ client =mqtt.Client("Cold Air duct")
 topic = "326project/smartbuilding/hvac/coldairduct/airflowrate"
 
 while True:
-    client.connect(mqttBroker, port=8883)
+    client.connect("10.40.18.10", port=1883)
     x = {
         "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
         "airflow": random.uniform(10, 30)

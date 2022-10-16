@@ -66,6 +66,6 @@ def on_message_for_airflow(client, userdata, message):
 
 client.message_callback_add(airFlowrateSensorTopic, on_message_for_airflow)
 client.message_callback_add(flowrateThreasholdChangeTopic, on_message_for_flowrate_threshold)
-client.connect(mqttBroker, port=8883)
+client.connect("10.40.18.10", port=1883)
 client.subscribe([(airFlowrateSensorTopic, 0), (flowrateThreasholdChangeTopic, 0)])
 client.loop_forever()
