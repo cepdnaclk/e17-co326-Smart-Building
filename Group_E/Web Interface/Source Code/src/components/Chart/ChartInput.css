@@ -1,0 +1,41 @@
+.new-expense__controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.room__{
+    margin-right: auto;
+    margin-left: 75px;
+}
+
+.date__{
+    margin-left: auto;
+    margin-right: 200px;
+}
+
+
+.new-expense__control label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: large;
+}
+
+.new-expense__control input {
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 20rem;
+    max-width: 100%;
+    height: 45px;
+    font-size: large;
+
+}
+
+.new-expense__actions {
+    text-align: right;
+}
