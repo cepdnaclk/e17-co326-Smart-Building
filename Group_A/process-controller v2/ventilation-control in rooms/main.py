@@ -137,6 +137,10 @@ def on_message_for_humid(client, userdata, message):
 
 def create_blower_control_command(temp, humid):
 
+    if (count <=0 ):
+        print("There is no one in the room. So operation will not be done !")
+        return
+
     # if temp and humid are higher
     if ((tempThreashold+tempCanChange) < temp):
         x = {
