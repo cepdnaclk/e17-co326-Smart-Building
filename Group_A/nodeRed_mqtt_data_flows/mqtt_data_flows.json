@@ -147,7 +147,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 260,
-        "y": 860,
+        "y": 1180,
         "wires": [
             [
                 "42eb296f8503e615"
@@ -168,7 +168,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 270,
-        "y": 940,
+        "y": 1260,
         "wires": [
             [
                 "05e197af6a5e21eb"
@@ -179,8 +179,8 @@
         "id": "7ac201b381ec1b12",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/1/1/control/ahu",
-        "topic": "326project/smartbuilding/hvac/1/1/control/ahu",
+        "name": "326project/smartbuilding/hvac/1/1/control/ahu/blower",
+        "topic": "326project/smartbuilding/hvac/1/1/control/ahu/blower",
         "qos": "2",
         "datatype": "auto",
         "broker": "93a52709f8718a12",
@@ -188,18 +188,20 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
-        "y": 1180,
+        "x": 290,
+        "y": 520,
         "wires": [
-            []
+            [
+                "484012dd276f1a9d"
+            ]
         ]
     },
     {
         "id": "60489341812e4251",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/1/2/control/ahu",
-        "topic": "326project/smartbuilding/hvac/1/2/control/ahu",
+        "name": "326project/smartbuilding/hvac/1/2/control/ahu/blower",
+        "topic": "326project/smartbuilding/hvac/1/2/control/ahu/blower",
         "qos": "2",
         "datatype": "auto",
         "broker": "93a52709f8718a12",
@@ -207,10 +209,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
-        "y": 1260,
+        "x": 290,
+        "y": 600,
         "wires": [
-            []
+            [
+                "484012dd276f1a9d"
+            ]
         ]
     },
     {
@@ -227,31 +231,10 @@
         "rh": 0,
         "inputs": 0,
         "x": 300,
-        "y": 520,
-        "wires": [
-            [
-                "f75fd2681d3d8e65"
-            ]
-        ]
-    },
-    {
-        "id": "2eafb167de2081c6",
-        "type": "mqtt in",
-        "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/state/boiler",
-        "topic": "326project/smartbuilding/hvac/state/boiler",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "93a52709f8718a12",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 260,
         "y": 1020,
         "wires": [
             [
-                "09cdc4b71499dad7"
+                "f75fd2681d3d8e65"
             ]
         ]
     },
@@ -269,7 +252,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 300,
-        "y": 600,
+        "y": 1100,
         "wires": [
             [
                 "45993e844753562b"
@@ -277,32 +260,11 @@
         ]
     },
     {
-        "id": "0ff37bfa6fc5667f",
-        "type": "mqtt in",
-        "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/state/chiller",
-        "topic": "326project/smartbuilding/hvac/state/chiller",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "93a52709f8718a12",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 260,
-        "y": 1100,
-        "wires": [
-            [
-                "58cb1313156a849f"
-            ]
-        ]
-    },
-    {
         "id": "333a37b27c40f101",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/1/1/state/ahu",
-        "topic": "326project/smartbuilding/hvac/1/1/state/ahu",
+        "name": "326project/smartbuilding/hvac/1/1/control/ahu/airflowrate",
+        "topic": "326project/smartbuilding/hvac/1/1/control/ahu/airflowrate",
         "qos": "2",
         "datatype": "auto",
         "broker": "93a52709f8718a12",
@@ -310,18 +272,20 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
-        "y": 1340,
+        "x": 310,
+        "y": 680,
         "wires": [
-            []
+            [
+                "ee585c4a1e8f6bac"
+            ]
         ]
     },
     {
         "id": "6fdd4af1938965d9",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/1/2/state/ahu",
-        "topic": "326project/smartbuilding/hvac/1/2/state/ahu",
+        "name": "326project/smartbuilding/hvac/1/2/control/ahu/airflowrate",
+        "topic": "326project/smartbuilding/hvac/1/2/control/ahu/airflowrate",
         "qos": "2",
         "datatype": "auto",
         "broker": "93a52709f8718a12",
@@ -329,10 +293,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
-        "y": 1420,
+        "x": 310,
+        "y": 760,
         "wires": [
-            []
+            [
+                "ee585c4a1e8f6bac"
+            ]
         ]
     },
     {
@@ -449,7 +415,7 @@
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 860,
+        "y": 1180,
         "wires": [
             [
                 "5bf25dff301b4de2"
@@ -468,48 +434,10 @@
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 940,
+        "y": 1260,
         "wires": [
             [
                 "df037b3e531e2e82"
-            ]
-        ]
-    },
-    {
-        "id": "09cdc4b71499dad7",
-        "type": "function",
-        "z": "46e41858838ea3eb",
-        "name": "insert_state_boiler",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet description = str.substring(0, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_state_boiler\";\n\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 670,
-        "y": 1020,
-        "wires": [
-            [
-                "e2957a5688467f34"
-            ]
-        ]
-    },
-    {
-        "id": "58cb1313156a849f",
-        "type": "function",
-        "z": "46e41858838ea3eb",
-        "name": "insert_state_chiller",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet description = str.substring(0, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_state_chiller\";\n\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 670,
-        "y": 1100,
-        "wires": [
-            [
-                "d301f2bd31a06da7"
             ]
         ]
     },
@@ -525,7 +453,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 860,
+        "y": 1180,
         "wires": []
     },
     {
@@ -540,37 +468,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 940,
-        "wires": []
-    },
-    {
-        "id": "e2957a5688467f34",
-        "type": "mongodb out",
-        "z": "46e41858838ea3eb",
-        "mongodb": "6c36cda79d9fbc4e",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 920,
-        "y": 1020,
-        "wires": []
-    },
-    {
-        "id": "d301f2bd31a06da7",
-        "type": "mongodb out",
-        "z": "46e41858838ea3eb",
-        "mongodb": "6c36cda79d9fbc4e",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 920,
-        "y": 1100,
+        "y": 1260,
         "wires": []
     },
     {
@@ -585,7 +483,7 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 520,
+        "y": 1020,
         "wires": [
             [
                 "ddc13240ac743dce"
@@ -604,7 +502,7 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 600,
+        "y": 1100,
         "wires": [
             [
                 "7b233bded67e80bc"
@@ -623,7 +521,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 520,
+        "y": 1020,
         "wires": []
     },
     {
@@ -638,7 +536,75 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 600,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "484012dd276f1a9d",
+        "type": "function",
+        "z": "46e41858838ea3eb",
+        "name": "insert_control_ahuBlower",
+        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_blower\";\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 520,
+        "wires": [
+            [
+                "7a8875480cad8122"
+            ]
+        ]
+    },
+    {
+        "id": "7a8875480cad8122",
+        "type": "mongodb out",
+        "z": "46e41858838ea3eb",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 920,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ee585c4a1e8f6bac",
+        "type": "function",
+        "z": "46e41858838ea3eb",
+        "name": "insert_control_ahuAirFlow",
+        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_airFlow\";\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 680,
+        "wires": [
+            [
+                "dccb0ad39e401526"
+            ]
+        ]
+    },
+    {
+        "id": "dccb0ad39e401526",
+        "type": "mongodb out",
+        "z": "46e41858838ea3eb",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 920,
+        "y": 680,
         "wires": []
     },
     {
