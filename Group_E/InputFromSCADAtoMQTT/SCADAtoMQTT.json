@@ -1,0 +1,1052 @@
+[
+    {
+        "id": "9a503164ce7c7288",
+        "type": "tab",
+        "label": "Floor 0 (ground floor)-part 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fce1d309b1b24435",
+        "type": "ui_button",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "group": "f66af050946e9e29",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Room limit exceeded",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Crowded",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 960,
+        "y": 140,
+        "wires": [
+            [
+                "4bb5293e7956da51",
+                "52746c1427cb07a9",
+                "6717486158cb781f"
+            ]
+        ]
+    },
+    {
+        "id": "464fe4ba1fdde95a",
+        "type": "ui_button",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "group": "f66af050946e9e29",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Clean the room",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Room should be cleaned",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "1b9593e5b4ac7b80"
+            ]
+        ]
+    },
+    {
+        "id": "4bb5293e7956da51",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/lcd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1730,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "1b9593e5b4ac7b80",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/lcd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1050,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "418f6d90995f2da8",
+        "type": "ui_switch",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "label": "Auto Mode",
+        "tooltip": "",
+        "group": "f66af050946e9e29",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "73f427c657064377"
+            ]
+        ]
+    },
+    {
+        "id": "73f427c657064377",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 12",
+        "func": "\n\n\n\nvar automode1 = msg.payload;\n\n\n\nif (automode1) {\n    \n    global.set(\"automode\",\"ON\");\n    return msg;\n}else{\n    global.set(\"automode\", \"OFF\");\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "af20a9a57bae5a3b"
+            ]
+        ]
+    },
+    {
+        "id": "52746c1427cb07a9",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "72c7ee2c799b552c",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/ledred",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1920,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a307e94494eaa59f",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 14",
+        "func": "\n\n\n\nvar count = msg.payload.count;\n\n\n\nif (count>10) {\n   global.set(\"sensorCount\", \"ON\");\n   return msg;\n\n}\nelse{\n   global.set(\"sensorCount\", \"OFF\");\n   return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "e8f5da0cb9f68d57",
+                "b17759fc67345686",
+                "244468dab8cff881",
+                "8831a562a13c6dc2"
+            ]
+        ]
+    },
+    {
+        "id": "b17759fc67345686",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 15",
+        "func": "\n/*var modestatus = global.get(\"automode\");\nvar sensorstatus = global.get(\"sensorCount\");\nmsg.payload = modestatus;\nreturn msg;\n\n/*if (sensorstatus===\"ON\") {\n    //if (modestatus === \"ON\" ){\n  \n    return msg;\n    //}\n    }*/\nvar modestatus = global.get(\"automode\");\nvar sensorstatus = global.get(\"sensorCount\");\n\n\nif (modestatus == \"ON\") {\n    if (sensorstatus == \"ON\")\n    return msg;\n\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 180,
+        "wires": [
+            [
+                "fce1d309b1b24435",
+                "b822c2603ac56432"
+            ]
+        ]
+    },
+    {
+        "id": "af20a9a57bae5a3b",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e8f5da0cb9f68d57",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 18",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b822c2603ac56432",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 19",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6717486158cb781f",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 17",
+        "func": "msg.payload =1;\nreturn msg;\n\n\n/*\nif (sensorstatus == \"ON\"){\n\n        msg.payload = 1;\n        return msg;\n\n}else{\n        msg.payload = 0;\n        return msg;\n\n}*/\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 160,
+        "wires": [
+            [
+                "72c7ee2c799b552c",
+                "98068c97ea177b4c"
+            ]
+        ]
+    },
+    {
+        "id": "98068c97ea177b4c",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1740,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "244468dab8cff881",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 18",
+        "func": "var roomlimit = global.get(\"sensorCount\");\n\n\n\n\n\n\nif (roomlimit===\"OFF\") {\n    global.set(\"roomlimit1\", \"OFF\");\n    msg.payload=0;\n   return msg;\n\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 240,
+        "wires": [
+            [
+                "22eaeb2192b3256a",
+                "9a6065d9db1d27ba"
+            ]
+        ]
+    },
+    {
+        "id": "22eaeb2192b3256a",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9a6065d9db1d27ba",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/ledred",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1840,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "750d282fb1cf6ccc",
+        "type": "mqtt in",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/rfid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 820,
+        "wires": [
+            [
+                "0e03c48e86972d5d"
+            ]
+        ]
+    },
+    {
+        "id": "072bc5a643f327d4",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 19",
+        "func": "\n\n\nvar access = msg.payload;\n\n\n\nif (access == 1) {\n    global.set(\"enterstate\", \"ON\");\n    return msg;\n\n}\n\n\nif (access == 0) {\n    global.set(\"enterstate\", \"OFF\");\n    return msg;\n\n\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 800,
+        "wires": [
+            [
+                "646eb447f1c9005b",
+                "2c07f9262c92fe63",
+                "ac79088eba8f2dda"
+            ]
+        ]
+    },
+    {
+        "id": "646eb447f1c9005b",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 24",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1840,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "0e03c48e86972d5d",
+        "type": "mongodb in",
+        "z": "9a503164ce7c7288",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_rfid",
+        "operation": "count",
+        "x": 1020,
+        "y": 920,
+        "wires": [
+            [
+                "beba6239d1ea3c17",
+                "072bc5a643f327d4"
+            ]
+        ]
+    },
+    {
+        "id": "beba6239d1ea3c17",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 25",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "c847332894405259",
+        "type": "ui_button",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "group": "f66af050946e9e29",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Security Alert !",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Security Alert !!",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1880,
+        "y": 800,
+        "wires": [
+            [
+                "5ad08baa1429bf7d"
+            ]
+        ]
+    },
+    {
+        "id": "5ad08baa1429bf7d",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/lcd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 2290,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "2c07f9262c92fe63",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 20",
+        "func": "\n/*var modestatus = global.get(\"automode\");\nvar sensorstatus = global.get(\"sensorCount\");\nmsg.payload = modestatus;\nreturn msg;\n\n/*if (sensorstatus===\"ON\") {\n    //if (modestatus === \"ON\" ){\n  \n    return msg;\n    //}\n    }*/\nvar modestatus = global.get(\"automode\");\nvar enterstate = global.get(\"enterstate\");\n\n\nif (modestatus == \"ON\") {\n    if (enterstate == \"OFF\")\n    return msg;\n\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1570,
+        "y": 700,
+        "wires": [
+            [
+                "c847332894405259"
+            ]
+        ]
+    },
+    {
+        "id": "c230638d7a716d8d",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/lcd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 2310,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "ac79088eba8f2dda",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 21",
+        "func": "\n/*var modestatus = global.get(\"automode\");\nvar sensorstatus = global.get(\"sensorCount\");\nmsg.payload = modestatus;\nreturn msg;\n\n/*if (sensorstatus===\"ON\") {\n    //if (modestatus === \"ON\" ){\n  \n    return msg;\n    //}\n    }*/\nvar modestatus = global.get(\"automode\");\nvar enterstate = global.get(\"enterstate\");\n\n\nif (modestatus == \"ON\") {\n    if (enterstate == \"ON\")\n    return msg;\n\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1670,
+        "y": 880,
+        "wires": [
+            [
+                "c4a19eb272a892f8"
+            ]
+        ]
+    },
+    {
+        "id": "c4a19eb272a892f8",
+        "type": "ui_button",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "group": "f66af050946e9e29",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "label": "Welcome",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Welcome",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 1860,
+        "y": 980,
+        "wires": [
+            [
+                "c230638d7a716d8d"
+            ]
+        ]
+    },
+    {
+        "id": "a9a3067fa78af244",
+        "type": "inject",
+        "z": "9a503164ce7c7288",
+        "name": "Saving test data on mongoDB",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "CB86",
+        "payloadType": "str",
+        "x": 240,
+        "y": 1140,
+        "wires": [
+            [
+                "5aa2f642d633b277"
+            ]
+        ]
+    },
+    {
+        "id": "5aa2f642d633b277",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "saving on mongodb",
+        "func": "let data = msg.payload;\nmsg.payload = { \"key\":data};\n\n\nmsg.collection =\"CO326_test_keypad\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1180,
+        "wires": [
+            [
+                "4deea269b3be7ba9",
+                "9dfe483a97a49f58"
+            ]
+        ]
+    },
+    {
+        "id": "4deea269b3be7ba9",
+        "type": "mongodb out",
+        "z": "9a503164ce7c7288",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_keypad",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 850,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "9dfe483a97a49f58",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 41",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "a032f5e396346265",
+        "type": "inject",
+        "z": "9a503164ce7c7288",
+        "name": "Incoming KEYPAD KEY",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "try87",
+        "payloadType": "str",
+        "x": 260,
+        "y": 1300,
+        "wires": [
+            [
+                "2d8725de32132e8c"
+            ]
+        ]
+    },
+    {
+        "id": "2d8725de32132e8c",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/keypad",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 720,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "caf172e9d2cbd26c",
+        "type": "mqtt in",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/keypad",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 1460,
+        "wires": [
+            [
+                "cd8c534577a58803",
+                "4d2a6b0db053f334"
+            ]
+        ]
+    },
+    {
+        "id": "cd8c534577a58803",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 42",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 638,
+        "y": 1405,
+        "wires": []
+    },
+    {
+        "id": "4d2a6b0db053f334",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "finding key oin database",
+        "func": "let incoming = msg.payload;\n\n\nmsg.collection = \"CO326_test_keypad\";\n\n\nmsg.payload = {\"key\":incoming};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 758,
+        "y": 1465,
+        "wires": [
+            [
+                "2f52f168e522d293"
+            ]
+        ]
+    },
+    {
+        "id": "2f52f168e522d293",
+        "type": "mongodb in",
+        "z": "9a503164ce7c7288",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_keypad",
+        "operation": "find",
+        "x": 1150,
+        "y": 1480,
+        "wires": [
+            [
+                "34dbe90c9006db1d",
+                "163c0bc2e1bbac79"
+            ]
+        ]
+    },
+    {
+        "id": "34dbe90c9006db1d",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 29",
+        "func": "let arr = msg.payload\n//msg.payload = arr[0];\nif(arr.length >= 1){\n    msg.payload = true;\n}else{\n    msg.payload = false;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1350,
+        "y": 1480,
+        "wires": [
+            [
+                "b85722e027ad1876"
+            ]
+        ]
+    },
+    {
+        "id": "b85722e027ad1876",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "163c0bc2e1bbac79",
+        "type": "debug",
+        "z": "9a503164ce7c7288",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "a99574512c1f479d",
+        "type": "mqtt in",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/count_update",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "a307e94494eaa59f"
+            ]
+        ]
+    },
+    {
+        "id": "5b48c7e7f1fe3f32",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "Auto Mode and Ultrasonic Sensor Data",
+        "info": "",
+        "x": 190,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d06276ad3ab7f44d",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "RFID Sensor Data",
+        "info": "",
+        "x": 150,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "01faa78996cc7a96",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "Keypad",
+        "info": "",
+        "x": 110,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "13a9e84481ff612e",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "Room 1",
+        "info": "****",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "5a7f112809906d47",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "Inputs from dashboard",
+        "info": "",
+        "x": 1840,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "7c708232e23ddd9c",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "Inputs from dashboard",
+        "info": "",
+        "x": 960,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e352f5919d4c2bb6",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "Inputs from dashboard",
+        "info": "",
+        "x": 240,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "3d5c5ab17d39e58b",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "published to actuator topics",
+        "info": "",
+        "x": 2230,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a34e909c9a2ad622",
+        "type": "comment",
+        "z": "9a503164ce7c7288",
+        "name": "published to actuator topics",
+        "info": "",
+        "x": 2450,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "85905f717d3f3a9c",
+        "type": "mqtt out",
+        "z": "9a503164ce7c7288",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/lcd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1930,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8831a562a13c6dc2",
+        "type": "function",
+        "z": "9a503164ce7c7288",
+        "name": "function 34",
+        "func": "var roomlimit = global.get(\"sensorCount\");\n\n\n\n\n\n\nif (roomlimit===\"OFF\") {\n    global.set(\"roomlimit1\", \"OFF\");\n    msg.payload=\"Not Crowded\";\n   return msg;\n\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1190,
+        "y": 380,
+        "wires": [
+            [
+                "85905f717d3f3a9c"
+            ]
+        ]
+    },
+    {
+        "id": "f66af050946e9e29",
+        "type": "ui_group",
+        "name": "Room 01",
+        "tab": "d191aabbb049903d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c60c8d7bc953d7fa",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "10d3d4a81f37ba61",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "d191aabbb049903d",
+        "type": "ui_tab",
+        "name": "Floor 0",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
