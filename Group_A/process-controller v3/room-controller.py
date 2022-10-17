@@ -50,7 +50,7 @@ def on_message_for_pressure(client, userdata, message):
         client.publish(ahuControlTopic, json.dumps(x))
         print("published to topic " + ahuControlTopic + " new blower speed - " + previousBlowerSpeed)
 
-    elif (airFlowRate > flowRateThreashold + flowRateCanChange):
+    elif (pressure > pressureThreashold + pressureCanChange):
         global previousBlowerSpeed
         global previousRatio
         previousBlowerSpeed -= 1
