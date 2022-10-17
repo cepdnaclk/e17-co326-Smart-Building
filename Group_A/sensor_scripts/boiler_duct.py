@@ -36,10 +36,10 @@ start_time = time()
 
 
 # MQTT info
-broker_addr = "vpn.ce.pdn.ac.lk"
-broker_port = 8883
+broker_addr = "10.40.18.10"
+broker_port = 1883
 boiler_topic = "326project/smartbuilding/hvac/control/boiler"
-sensor_topic = "326project/smartbuilding/hvac/sensor/boiler"
+sensor_topic = "326project/smartbuilding/hvac/hotairduct/temperature"
 
 # Get boiler state via MQTT
 def on_message(client, userdata, message):
