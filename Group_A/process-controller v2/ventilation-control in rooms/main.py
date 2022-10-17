@@ -172,7 +172,7 @@ def create_blower_control_command(temp, humid):
         return
 
     # if temp and humid are higher
-    if ((tempThreashold+tempCanChange) < temp):
+    if (((tempThreashold+tempCanChange) < temp) and ((humidThreashold+humidCanChange) < humid)):
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": 0.5
@@ -181,7 +181,7 @@ def create_blower_control_command(temp, humid):
         print("published 'Increase fan speed ' to topic " + blowerControlTopic)
 
     # if temp and humid are lower
-    elif ((tempThreashold-tempCanChange) > temp):
+    elif (((tempThreashold-tempCanChange) > temp) and (humid < (humidThreashold-humidCanChange))):
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": -0.5

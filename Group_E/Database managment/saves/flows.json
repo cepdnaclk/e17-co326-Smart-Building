@@ -1,0 +1,1632 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Database",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "acd09c9b23f6e785",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "5a356f82b3ef1730",
+            "fd26e41e3a17bf14",
+            "91acfa12388eead7",
+            "9dc36cd80d17fc1d",
+            "a7865c16e8bbc547"
+        ],
+        "x": 294,
+        "y": 2539,
+        "w": 852,
+        "h": 202
+    },
+    {
+        "id": "3e8f7cfa515e3b6c",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "g": "c72ebf0408868f7b",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "25b7d5d713be7073",
+            "156e5c39509aeda8",
+            "14cd0f9ad159919a",
+            "bd159c1077556631",
+            "aa874152ca57dfc8",
+            "5d652241d4a4db1f",
+            "70aafd5b2359b42c"
+        ],
+        "x": 134,
+        "y": 1859,
+        "w": 792,
+        "h": 202
+    },
+    {
+        "id": "59a61e4982bdde16",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "g": "21a1209ef88ebbf5",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "b8e20689b85ce73d",
+            "5cc612fdd55270fc",
+            "83671453577648e9",
+            "2abb4e46ca02d32a",
+            "31ec8be0ed1c01eb",
+            "11051deff47e3388",
+            "cdb5a2dd3d3c581d",
+            "d7e6a7f6fe3af104",
+            "a405cf4ad0562c77",
+            "7ab115ec6cf5cbf7",
+            "aaa99f88475670b8",
+            "e3cda0d1dbd299ac",
+            "88577ebb4f08300a",
+            "b3184a6743cb77d9",
+            "1221d9338d3217bb",
+            "494f0495058ad32b",
+            "efe51d5d295d5458",
+            "9fddcc10421edd80",
+            "9602db13483a6195",
+            "87ad89eb3029a4c5",
+            "73af631318988519"
+        ],
+        "x": 154,
+        "y": 1219,
+        "w": 1372,
+        "h": 322
+    },
+    {
+        "id": "eeac775bc40154c1",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "g": "21a1209ef88ebbf5",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "d9372e565e70033a",
+            "9a82f818c26a5df8",
+            "6183f0ec41c459c0",
+            "66103340cb04c75e",
+            "c4974f11144cf3d3",
+            "675043a41c330ccc"
+        ],
+        "x": 154,
+        "y": 1539,
+        "w": 772,
+        "h": 202
+    },
+    {
+        "id": "21a1209ef88ebbf5",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "g": "c72ebf0408868f7b",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "59a61e4982bdde16",
+            "eeac775bc40154c1"
+        ],
+        "x": 128,
+        "y": 1193,
+        "w": 1424,
+        "h": 574
+    },
+    {
+        "id": "c72ebf0408868f7b",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "3e8f7cfa515e3b6c",
+            "21a1209ef88ebbf5"
+        ],
+        "x": 102,
+        "y": 1167,
+        "w": 1476,
+        "h": 920
+    },
+    {
+        "id": "c5759a63b9138323",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "fa630398b64c9557",
+            "882d3e3fc123247b",
+            "c502cb872bf45327",
+            "77d1b9533d05c7fb",
+            "090795567272df1a",
+            "58f8dfdb34603073",
+            "1745a123bc45cc0d",
+            "3eb706123ed8cab8",
+            "35f6aa457952c6ab",
+            "a5422aa9deb89f6f",
+            "58facc7ecee33692",
+            "31a398221daf9114",
+            "b694cff1de373513",
+            "224a25d22c8b46bc",
+            "8d6cfa5c05d4895c",
+            "6aa844870d893077",
+            "7c9af3ddf10bd2f0",
+            "add5560a0354a8ef"
+        ],
+        "x": 494,
+        "y": 379,
+        "w": 1212,
+        "h": 502
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 370,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "fa630398b64c9557",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "function 7",
+        "func": "let payload = msg.payload;\n\nlet i = 0;\n\nif(payload == 1){\n    i = 1;\n}else{\n    i = -1;\n}\n\n\n\nmsg.payload = {\n    \"prev\":msg.payload,\n    \"increment value\" : i\n}\n\nmsg.topic = \"us_sensor_value\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 420,
+        "wires": [
+            [
+                "090795567272df1a"
+            ]
+        ]
+    },
+    {
+        "id": "b0727c3bee2b9151",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 770,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "882d3e3fc123247b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "function 8",
+        "func": "\nmsg.collection = \"co326_count_test\";\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 500,
+        "wires": [
+            [
+                "c502cb872bf45327"
+            ]
+        ]
+    },
+    {
+        "id": "c502cb872bf45327",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "operation": "find",
+        "x": 900,
+        "y": 500,
+        "wires": [
+            [
+                "090795567272df1a",
+                "1745a123bc45cc0d"
+            ]
+        ]
+    },
+    {
+        "id": "1316fae925552c51",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"room_number\":1,\"count\":10}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 180,
+        "wires": [
+            [
+                "d1dcf75e6cd60c0f"
+            ]
+        ]
+    },
+    {
+        "id": "d1dcf75e6cd60c0f",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test2",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 480,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4e8f47932175635c",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 250,
+        "y": 1100,
+        "wires": [
+            [
+                "b0727c3bee2b9151"
+            ]
+        ]
+    },
+    {
+        "id": "77d1b9533d05c7fb",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "090795567272df1a",
+        "type": "join",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1190,
+        "y": 480,
+        "wires": [
+            [
+                "58f8dfdb34603073"
+            ]
+        ]
+    },
+    {
+        "id": "58f8dfdb34603073",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "function 9",
+        "func": "\nmsg.payload = msg.payload.us_sensor_value;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 480,
+        "wires": [
+            [
+                "77d1b9533d05c7fb"
+            ]
+        ]
+    },
+    {
+        "id": "1745a123bc45cc0d",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "3eb706123ed8cab8",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "ROOM1_FLOOR1",
+        "info": "",
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "35f6aa457952c6ab",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "operation": "find",
+        "x": 1060,
+        "y": 740,
+        "wires": [
+            [
+                "add5560a0354a8ef"
+            ]
+        ]
+    },
+    {
+        "id": "a5422aa9deb89f6f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "function 23",
+        "func": "\nmsg.collection = \"co326_count_test2\";\nmsg.query = {  };\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 740,
+        "wires": [
+            [
+                "35f6aa457952c6ab"
+            ]
+        ]
+    },
+    {
+        "id": "58facc7ecee33692",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "function 24",
+        "func": "msg.collection = \"co326_count_test2\";\nmsg.operation = \"update\";\nmsg.query = {\"room_number\":3,\"count\":2134}\nmsg.payload = {\"$set\":{\"room_number\" : 3,\"count\":0}};\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 840,
+        "wires": [
+            [
+                "224a25d22c8b46bc"
+            ]
+        ]
+    },
+    {
+        "id": "31a398221daf9114",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 600,
+        "y": 780,
+        "wires": [
+            [
+                "a5422aa9deb89f6f",
+                "58facc7ecee33692"
+            ]
+        ]
+    },
+    {
+        "id": "b694cff1de373513",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "224a25d22c8b46bc",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "update",
+        "x": 1060,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "8d6cfa5c05d4895c",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "neq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1530,
+        "y": 740,
+        "wires": [
+            [
+                "b694cff1de373513"
+            ],
+            [
+                "6aa844870d893077"
+            ]
+        ]
+    },
+    {
+        "id": "6aa844870d893077",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "7c9af3ddf10bd2f0",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "add5560a0354a8ef",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "c5759a63b9138323",
+        "name": "function 25",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 740,
+        "wires": [
+            [
+                "8d6cfa5c05d4895c",
+                "7c9af3ddf10bd2f0"
+            ]
+        ]
+    },
+    {
+        "id": "5a356f82b3ef1730",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 950,
+        "y": 2700,
+        "wires": []
+    },
+    {
+        "id": "fd26e41e3a17bf14",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 2700,
+        "wires": [
+            [
+                "91acfa12388eead7"
+            ]
+        ]
+    },
+    {
+        "id": "91acfa12388eead7",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "function 28",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"dummy\";\nmsg.operation = \"remove\";\nmsg.payload = { \"room_number\": 1, \"floor_number\":0 }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 2700,
+        "wires": [
+            [
+                "5a356f82b3ef1730",
+                "9dc36cd80d17fc1d"
+            ]
+        ]
+    },
+    {
+        "id": "9dc36cd80d17fc1d",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "debug 39",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "a7865c16e8bbc547",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "Test function to delete",
+        "info": "",
+        "x": 440,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "b8e20689b85ce73d",
+        "type": "complete",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "",
+        "scope": [
+            "88577ebb4f08300a"
+        ],
+        "uncaught": false,
+        "x": 250,
+        "y": 1420,
+        "wires": [
+            [
+                "11051deff47e3388"
+            ]
+        ]
+    },
+    {
+        "id": "5cc612fdd55270fc",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "retrive_all_room_data",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"get_all_rooms_data\";\nmsg.operation = \"find\";\nmsg.payload = { }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1420,
+        "wires": [
+            [
+                "83671453577648e9"
+            ]
+        ]
+    },
+    {
+        "id": "83671453577648e9",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "retirve_all_data",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 880,
+        "y": 1420,
+        "wires": [
+            [
+                "2abb4e46ca02d32a"
+            ]
+        ]
+    },
+    {
+        "id": "2abb4e46ca02d32a",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "set_data_format",
+        "func": "let details = []\nlet arr = msg.payload;\n\n// Hnadle uncaught errors\nif (arr.length == 0) return msg;\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\n\n\n\n\nfor (let floor = 0; floor < 4; floor++) {\n    let floor_data = arr.filter(element => element.floor_number === floor);\n    let inner_details = [];\n\n    if (floor_data.length == 0) {\n        for(let temp =1; temp <=2; temp++){\n            inner_details.push({ \"name\": \"room\" + temp, \"count\": 0 });\n        }\n    }\n    else {\n\n        for (let j = 0; j < floor_data.length; j++) {\n            inner_details.push({ \"name\": \"room\" + floor_data[j].room_number, \"count\": floor_data[j].count });\n        }\n\n    }\n\n    details.push({ \"name\": \"floor\" + floor, \"details\": inner_details });\n\n}\n\nmsg.payload = { \"date_time\": offsetTime.toLocaleString(), \"details\": details };\n\nconsole.log(msg.payload);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 1420,
+        "wires": [
+            [
+                "31ec8be0ed1c01eb",
+                "cdb5a2dd3d3c581d"
+            ]
+        ]
+    },
+    {
+        "id": "31ec8be0ed1c01eb",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "check the foramt",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1155,
+        "y": 1380,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "11051deff47e3388",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 1420,
+        "wires": [
+            [
+                "5cc612fdd55270fc"
+            ]
+        ]
+    },
+    {
+        "id": "c9e4b1c8699f794d",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 360,
+        "y": 2500,
+        "wires": [
+            [
+                "c2961479d2e02c04"
+            ]
+        ]
+    },
+    {
+        "id": "c2961479d2e02c04",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 30",
+        "func": "msg.payload = {\"room_number\":2,\"floor_number\":0,\"count\":1,\"last_update\":\"12/10/2022 12:57 PM\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 2500,
+        "wires": [
+            [
+                "c8ba6fad9eaa4408"
+            ]
+        ]
+    },
+    {
+        "id": "c8ba6fad9eaa4408",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 930,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "cdb5a2dd3d3c581d",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "recent_update",
+        "topic": "326project/smartbuilding/occupancy/recent_update",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1400,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "d7e6a7f6fe3af104",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "0/1/us/sensor",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1340,
+        "wires": [
+            [
+                "a405cf4ad0562c77"
+            ]
+        ]
+    },
+    {
+        "id": "a405cf4ad0562c77",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "parse_data and check database",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"01_ultrasonic_data\";\nmsg.operation = \"find\";\nmsg.query = {\"room_number\":1,\"floor_number\":0}\n\nglobal.set(\"01_us_data\",msg.payload);\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1340,
+        "wires": [
+            [
+                "7ab115ec6cf5cbf7",
+                "aaa99f88475670b8"
+            ]
+        ],
+        "icon": "font-awesome/fa-gears"
+    },
+    {
+        "id": "7ab115ec6cf5cbf7",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "parsed data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 625,
+        "y": 1300,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "aaa99f88475670b8",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "get_current_count",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 970,
+        "y": 1340,
+        "wires": [
+            [
+                "e3cda0d1dbd299ac",
+                "88577ebb4f08300a"
+            ]
+        ]
+    },
+    {
+        "id": "e3cda0d1dbd299ac",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "db_results",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1045,
+        "y": 1300,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "88577ebb4f08300a",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "update_db_0/1/ ",
+        "func": "let arr = msg.payload;\nlet sensor_data = global.get(\"01_us_data\");\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\nlet count;\n\nif (arr.length == 0) {\n    count = 1;\n}\nelse {\n    count = arr[0].count + sensor_data;\n}\n\nmsg.payload = { \"$set\": { \"room_number\": 1, \"floor_number\": 0, \"count\": count, \"last_update\": offsetTime.toLocaleString() } }\n\nmsg.query = { \"room_number\": 1, \"floor_number\": 0 };\nmsg.topic = \"db query\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 1340,
+        "wires": [
+            [
+                "b3184a6743cb77d9",
+                "1221d9338d3217bb"
+            ]
+        ]
+    },
+    {
+        "id": "b3184a6743cb77d9",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "check_payload_query",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1255,
+        "y": 1300,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "1221d9338d3217bb",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "update_count",
+        "collection": "326_occupancy_room",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "update",
+        "x": 1420,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "494f0495058ad32b",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "Floor0_room1",
+        "info": "",
+        "x": 250,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "efe51d5d295d5458",
+        "type": "json",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "Updated_room",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 660,
+        "y": 1500,
+        "wires": [
+            [
+                "9fddcc10421edd80",
+                "87ad89eb3029a4c5"
+            ]
+        ]
+    },
+    {
+        "id": "9fddcc10421edd80",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "debug 47",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 715,
+        "y": 1460,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "9602db13483a6195",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "parse_message",
+        "func": "msg.payload = msg.payload[\"$set\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1500,
+        "wires": [
+            [
+                "efe51d5d295d5458"
+            ]
+        ]
+    },
+    {
+        "id": "87ad89eb3029a4c5",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "Count_update",
+        "topic": "326project/smartbuilding/occupancy/count_update",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 920,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "72efd15679825158",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/count_update",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1390,
+        "y": 2540,
+        "wires": [
+            [
+                "e331874f7cfbb928"
+            ]
+        ]
+    },
+    {
+        "id": "e331874f7cfbb928",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 48",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1720,
+        "y": 2540,
+        "wires": []
+    },
+    {
+        "id": "25b7d5d713be7073",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"floor_number\":0,\"room_number\":1,\"rfid\":[\"231 85 243 25\",\"233 65 234 52\",\"285 56 324 12\"]}",
+        "payloadType": "json",
+        "x": 230,
+        "y": 1960,
+        "wires": [
+            [
+                "156e5c39509aeda8"
+            ]
+        ]
+    },
+    {
+        "id": "156e5c39509aeda8",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "rfid",
+        "collection": "326_occupancy_rfid",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "store",
+        "x": 410,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "14cd0f9ad159919a",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_rfid",
+        "operation": "find",
+        "x": 720,
+        "y": 2020,
+        "wires": [
+            [
+                "5d652241d4a4db1f"
+            ]
+        ]
+    },
+    {
+        "id": "bd159c1077556631",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "name": "get_rfid_0/1",
+        "func": "msg.payload = {\"floor_number\":0,\"room_number\":1};\nmsg.operation = \"find\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 2020,
+        "wires": [
+            [
+                "14cd0f9ad159919a"
+            ]
+        ]
+    },
+    {
+        "id": "aa874152ca57dfc8",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 2020,
+        "wires": [
+            [
+                "bd159c1077556631"
+            ]
+        ]
+    },
+    {
+        "id": "5d652241d4a4db1f",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "name": "debug 49",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "70aafd5b2359b42c",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "3e8f7cfa515e3b6c",
+        "name": "Insert rfid and check data (Manual use only)",
+        "info": "**Please do not Inject without having the knowleddge of the collection's strcture**",
+        "x": 330,
+        "y": 1900,
+        "wires": [],
+        "icon": "node-red/alert.svg"
+    },
+    {
+        "id": "d9372e565e70033a",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "g": "eeac775bc40154c1",
+        "name": "0/1/rfid",
+        "topic": "326project/smartbuilding/occupancy/0/2/rfid",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1620,
+        "wires": [
+            [
+                "9a82f818c26a5df8"
+            ]
+        ]
+    },
+    {
+        "id": "9a82f818c26a5df8",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "eeac775bc40154c1",
+        "name": "get_rfid_for_room",
+        "func": "\n\nmsg.payload = {\"floor_number\":0,\"room_number\":1};\nmsg.operation = \"find\";\nmsg.collection = \"326_occupancy_rfid\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 1620,
+        "wires": [
+            [
+                "6183f0ec41c459c0"
+            ]
+        ]
+    },
+    {
+        "id": "6183f0ec41c459c0",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "g": "eeac775bc40154c1",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_rfid",
+        "operation": "find",
+        "x": 740,
+        "y": 1620,
+        "wires": [
+            [
+                "66103340cb04c75e"
+            ]
+        ]
+    },
+    {
+        "id": "66103340cb04c75e",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "eeac775bc40154c1",
+        "name": "debug 50",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 865,
+        "y": 1580,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "8d7a57887f79357f",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1120,
+        "y": 2420,
+        "wires": [
+            [
+                "c40babf9f2a20d49"
+            ]
+        ]
+    },
+    {
+        "id": "c40babf9f2a20d49",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/2/rfid",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1450,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "73af631318988519",
+        "type": "complete",
+        "z": "f6f2187d.f17ca8",
+        "g": "59a61e4982bdde16",
+        "name": "",
+        "scope": [
+            "88577ebb4f08300a"
+        ],
+        "uncaught": false,
+        "x": 250,
+        "y": 1500,
+        "wires": [
+            [
+                "9602db13483a6195"
+            ]
+        ]
+    },
+    {
+        "id": "c4974f11144cf3d3",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "g": "eeac775bc40154c1",
+        "name": "0/1/keypad",
+        "topic": "326project/smartbuilding/occupancy/0/2/rfid",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 1700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "675043a41c330ccc",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "eeac775bc40154c1",
+        "name": "function 32",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "72fd3af85ddcda18",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 440,
+        "y": 2280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c60c8d7bc953d7fa",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "10d3d4a81f37ba61",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]

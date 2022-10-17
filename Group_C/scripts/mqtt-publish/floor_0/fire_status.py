@@ -3,14 +3,11 @@
 import paho.mqtt.client as mqtt
 import json
 import time
-import random
 
-mqtt_server = "vpn.ce.pdn.ac.lk"
-mqtt_port = 8883
+mqtt_server = "10.40.18.10"
+mqtt_port = 1883
 
-topic = "co326project/smartbuilding/safety/1"
-topic_sub = "co326/test/subscribe"
-
+topic_fire = "326project/smartbuilding/safety/0/3/fire"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -36,16 +33,20 @@ client.connect(mqtt_server, port=mqtt_port, keepalive=60)
 # print("MQTT Data generator is started...")
 
 while(1):
-	# Upload the data in 'x' variable continuously with 2 second interval 
-	x = random.randint(30,40)
+	#publish fire status
+	fire = {
+            "time":"test_time",
+            "state": "Fire"
+        }
 
-	# payload = json.dumps(x)
-	payload = x
-	client.publish(topic, payload=payload, qos=0, retain=False)
-	print("Published", payload)
+	payload_fire = json.dumps(fire)
+	client.publish(topic_fire, payload=payload_fire, qos=0, retain=False)
+	print("Published", payload_fire)
+
+
 
 	client.loop()
-	time.sleep(5)
+	time.sleep(2)
 
 	
 

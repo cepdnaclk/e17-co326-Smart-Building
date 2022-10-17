@@ -12,9 +12,10 @@ int sensorValue = 0;
 const char* ssid = "Eng-Student";
 const char* password = "3nG5tuDt";
 
-// Change the variable to your Raspberry Pi IP address, so it connects to your MQTT broker
+const char* topicVoltage = "326project/smartbuilding/pv/voltagesensor";
+
 //const char* mqtt_server = "vpn.ce.pdn.ac.lk:8883";
-const char* mqtt_server = "mosquitto_326";
+const char* mqtt_server = "10.40.80.10";
 const char*port = "1883";
 
 // Initializes the espClient. You should change the espClient name if you have multiple ESPs running in your home automation system
@@ -66,7 +67,7 @@ void callback(String topic, byte* message, unsigned int length) {
   // Feel free to add more if statements to control more GPIOs with MQTT
 
   // If a message is received on the topic room/lamp, you check if the message is either on or off. Turns the lamp GPIO according to the message
-  if(topic=="326project/smartbuilding/pv/voltagesensor"){
+  if(topic==topicVoltage){
       Serial.print("Changing Room lamp to ");
       if(messageTemp.toInt() <= 400){
         digitalWrite(lamp, HIGH);
@@ -102,7 +103,7 @@ void reconnect() {
       Serial.println("connected");  
       // Subscribe or resubscribe to a topic
       // You can subscribe to more topics (to control more LEDs in this example)
-      client.subscribe("326project/smartbuilding/pv/voltagesensor");
+      client.subscribe(topicVoltage);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -149,6 +150,6 @@ void loop() {
     Serial.print(sensorValue);
 
     itoa(sensorValue,buffer1,10);
-    client.publish("326project/smartbuilding/pv/voltagesensor",buffer1 );
+    client.publish(topicVoltage,buffer1 );
   }
 } 
