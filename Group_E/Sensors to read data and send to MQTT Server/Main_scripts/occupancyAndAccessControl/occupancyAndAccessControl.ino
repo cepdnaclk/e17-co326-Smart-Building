@@ -180,12 +180,12 @@ void loop() {
 
   int diff = distance2 - distance1;
 
-  if (diff > 2){
+  if (diff > 1){
     Serial.println('A');
     Serial.println(1);
     delay(2000);
   }
-  else if (diff < -2){
+  else if (diff < -1){
     Serial.println('A');
     Serial.println(-1);
     delay(2000);

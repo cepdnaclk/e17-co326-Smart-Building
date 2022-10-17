@@ -3,9 +3,6 @@
 #include <PubSubClient.h>
 #include <SoftwareSerial.h>
 
-//#include <iostream>
-//#include <cstring>
-
 // Update these with values suitable for your network.
 const char* ssid = "Eng-Student";
 const char* password = "3nG5tuDt";
