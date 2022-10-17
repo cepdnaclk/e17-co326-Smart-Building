@@ -608,6 +608,35 @@
         "wires": []
     },
     {
+        "id": "93d6fd3e3ba98605",
+        "type": "inject",
+        "z": "46e41858838ea3eb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/1/1/sensor/temperature",
+        "payload": "{ \"temp\" : 22}",
+        "payloadType": "json",
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "1b948c718d20de52"
+            ]
+        ]
+    },
+    {
         "id": "93a52709f8718a12",
         "type": "mqtt-broker",
         "name": "",
