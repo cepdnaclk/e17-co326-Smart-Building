@@ -6,15 +6,18 @@ import numpy as np
 from scipy.interpolate import interp1d
 import paho.mqtt.client as mqtt
 
-BAT_CAPACITY = 45000 # mAh
+BAT_CAPACITY = 65000 # mAh
 MQTT_SERVER = "10.40.18.10"
 MQTT_PORT = 1883
 MQTT_TOPIC = "326project/smartbuilding/pv"
 
 c = threading.Condition()
 c1 = threading.Condition()
-pwm_duty, prev_pwm_duty = 0, -1
+c2 = threading.Condition()
+c3 = threading.Condition()
+pwm_duty = 0
 loading = False
+ready = False
 
 """
     This module simulates a battery and publishes the battery voltage to the MQTT server.
@@ -37,9 +40,9 @@ class Battery(object):
         self.fully_charged = False
 
     def charge(self):
-        power_per_sec = self.charging_power / 60
+        power_per_min = self.charging_power / 60
         charge_in_kw = (self.SoC / 100) * self.battery_capacity
-        charge_in_kw += power_per_sec
+        charge_in_kw += power_per_min
         soc = charge_in_kw / self.battery_capacity * 100
         if soc < 100:
             self.SoC = soc
@@ -54,9 +57,9 @@ class Battery(object):
     # Ignore internal resistance.
     def load(self, load):
         if self.SoC > 0:
-            power_per_sec = load / 60
+            power_per_min = load / 60
             charge_in_kw = (self.SoC / 100) * self.battery_capacity
-            charge_in_kw -= power_per_sec
+            charge_in_kw -= power_per_min
             self.SoC = charge_in_kw / self.battery_capacity * 100
             self.voc = self.voc_lookup["%.1f" % self.SoC]
             self.fully_charged = False
@@ -67,97 +70,119 @@ class Battery(object):
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
-        print("Connected to MQTT server with result code " + str(rc))
-        client.subscribe(topic=f"{MQTT_TOPIC}/controls/sw1", qos=2)
+        print("Client " + client._client_id.decode() + " connected to MQTT server.", "with result code " + str(rc))
     else:
         print("Connection failed with result code " + str(rc))
 
 def on_disconnect(client, userdata, rc):
-    print("Disconnected with result code " + str(rc))
+    print("Client " + client._client_id.decode() + " disconnected from MQTT server.")
+
+battery = Battery(BAT_CAPACITY, 0, 0)
 
 if __name__ == '__main__':
-    battery = Battery(BAT_CAPACITY, 0, 0)
-    client = mqtt.Client("Battery Simulator")
-    client.connect(MQTT_SERVER, MQTT_PORT, 60)
-    client.on_connect = on_connect
-    client.on_disconnect = on_disconnect
-    client.on_log = lambda client, userdata, level, buf: print("log: ", buf)
+    clients = []
 
     def sample_load():
-        global loading
+        global loading, ready, battery
         while True:
             c1.acquire()
             if not loading:
                 c1.release()
                 continue
+            print("Battery loading...")
             c1.release()
-            battery.load(1000)
-            client.publish(topic=f"{MQTT_TOPIC}/sensors/voltage", payload=json.dumps({"voltage": battery.voc}), qos=2)
-            time.sleep(2)
-            c1.acquire()
+            c3.acquire()
+            # 20 kWh load
+            battery.load(20000)
+            soc = battery.SoC
+            c3.release()
+            c2.acquire()
+            if soc < 60 and ready:
+                ready = False
+            c2.release()
 
     def subscribing_sw1():
+        client = mqtt.Client("Battery Simulator - SW1")
+        client.connect(MQTT_SERVER, MQTT_PORT, 60)
+        client.on_connect = on_connect
+        client.on_disconnect = on_disconnect
         def on_message(client, userdata, message):
             global pwm_duty
-            print("Received message: " + str(message.payload.decode("utf-8")))
             payload = json.loads(message.payload.decode("utf-8"))
+            pwm = payload["pwm_duty"]
             c.acquire()
-            if prev_pwm_duty != payload["pwm_duty"]:
-                pwm_duty = payload["pwm_duty"]
-                c.notify_all()
-            else:
-                c.wait()
+            if pwm_duty != pwm:
+                pwm_duty = pwm
             c.release()
         client.message_callback_add(f"{MQTT_TOPIC}/controls/sw1", on_message)
-        
+        client.loop_start()
+        client.subscribe(topic=f"{MQTT_TOPIC}/controls/sw1", qos=2)
+        clients.append(client)
+
     def subscribing_sw2():
+        client = mqtt.Client("Battery Simulator - SW2")
+        client.connect(MQTT_SERVER, MQTT_PORT, 60)
+        client.on_connect = on_connect
+        client.on_disconnect = on_disconnect
         def on_message(client, userdata, message):
             global loading
             payload = json.loads(message.payload.decode("utf-8"))
-            if payload["sw2"] == "ON":
-                c1.acquire()
-                if not loading:
-                    loading = True
-                    print("Load thread started")
-                    c.notify_all()
-                else:
-                    c1.wait()
-                c1.release()
-            else:
-                c1.acquire()
-                if loading:
-                    loading = False
-                    print("Load thread stopped")
-                    c.notify_all()
-                else:
-                    c1.wait()
-                c1.release()
+            c1.acquire()
+            if payload["sw2"] == "ON" and not loading:
+                loading = True
+                time.sleep(1)
+                print("Load thread started")
+                time.sleep(1)
+            elif payload["sw2"] == "OFF" and loading:
+                loading = False
+                print("Load thread stopped")
+            c1.release()
         client.message_callback_add(f"{MQTT_TOPIC}/controls/sw2", on_message)
-
-    def publishing():
-        while True:
-            try:
-                # Charging power is regulated by PWM duty cycle.
-                c.acquire()
-                battery.set_charging_power(pwm_duty * BAT_CAPACITY / 100)
-                battery.charge()
-                client.publish(f"{MQTT_TOPIC}/battery/voltage", json.dumps({ "time": time.time(), "value": battery.voc }))
-                print(f"pwm duty: {pwm_duty}, SoC: {battery.SoC}%, Voc: {battery.voc}V")
-                c.wait()
-                c.release()
-                if battery.SoC >= 60:
-                    client.publish(f"{MQTT_TOPIC}/battery/ready", json.dumps({ "time": time.time(), "value": True }))
-            except KeyboardInterrupt:
-                client.loop_stop()
-                client.disconnect()
-                break
+        client.loop_start()
+        client.subscribe(topic=f"{MQTT_TOPIC}/controls/sw2", qos=2)
+        clients.append(client)
 
     load_thread = threading.Thread(target=sample_load)
     subscribing_sw1_thread = threading.Thread(target=subscribing_sw1)
     subscribing_sw2_thread = threading.Thread(target=subscribing_sw2)
-    publishing_thread = threading.Thread(target=publishing)
 
     load_thread.start()
+    time.sleep(1)
     subscribing_sw1_thread.start()
+    time.sleep(1)
     subscribing_sw2_thread.start()
-    publishing_thread.start()
+    time.sleep(1)
+
+    client = mqtt.Client("Battery Simulator - Battery")
+    client.connect(MQTT_SERVER, MQTT_PORT, 60)
+    client.on_connect = on_connect
+    client.on_disconnect = on_disconnect
+    client.loop_start()
+    while True:
+        try:
+            # Charging power is regulated by PWM duty cycle.
+            c.acquire()
+            c3.acquire()
+            battery.set_charging_power(pwm_duty * BAT_CAPACITY / 100)
+            battery.charge()
+            soc, voc = battery.SoC, battery.voc
+            c3.release()
+            client.publish(f"{MQTT_TOPIC}/battery/voltage", json.dumps({ "time": time.time(), "value": voc }))
+            print(f"pwm duty: {pwm_duty}, SoC: {soc}%, Voc: {voc}V")
+            c.release()
+            c2.acquire()
+            if soc >= 60 and not ready:
+                ready = True
+                client.publish(f"{MQTT_TOPIC}/battery/ready", json.dumps({ "time": time.time(), "value": True }))
+            c2.release()
+        except KeyboardInterrupt:
+            client.loop_stop()
+            client.disconnect()
+            for client in clients:
+                client.loop_stop()
+                client.disconnect()
+            break
+
+    load_thread.join()
+    subscribing_sw1_thread.join()
+    subscribing_sw2_thread.join()

@@ -1,0 +1,448 @@
+[
+    {
+        "id": "2128043fc813c839",
+        "type": "tab",
+        "label": "Ventilation in Rooms - Sensing",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "716eb563a8443fee",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/<floorno>/<roomno>/temperature",
+        "topic": "326project/smartbuilding/hvac/<floorno>/<roomno>/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "754a5662410298ba",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 300,
+        "wires": [
+            [
+                "6d678e728b67a9f6"
+            ]
+        ]
+    },
+    {
+        "id": "95d6bb634cc45698",
+        "type": "inject",
+        "z": "2128043fc813c839",
+        "name": "Temp Sensor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 80,
+        "wires": [
+            [
+                "ecd51740c912652b",
+                "1c313434cd8d663d",
+                "4883dea3f6246f39"
+            ]
+        ]
+    },
+    {
+        "id": "c3af676bede9a33c",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "  326project/smartbuilding/hvac/<floorno>/<roomno>/humidity",
+        "topic": "  326project/smartbuilding/hvac/<floorno>/<roomno>/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "754a5662410298ba",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "4ee6c6c68361e251"
+            ]
+        ]
+    },
+    {
+        "id": "bde6ac509fc16d78",
+        "type": "inject",
+        "z": "2128043fc813c839",
+        "name": "Humidity Sensor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "1c313434cd8d663d"
+            ]
+        ]
+    },
+    {
+        "id": "acb3e70f7911638b",
+        "type": "inject",
+        "z": "2128043fc813c839",
+        "name": "Pressure Sensor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "1c313434cd8d663d"
+            ]
+        ]
+    },
+    {
+        "id": "44a0f2b4fea11aed",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "  326project/smartbuilding/hvac/<floorno>/<roomno>/pressure",
+        "topic": "  326project/smartbuilding/hvac/<floorno>/<roomno>/pressure",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "754a5662410298ba",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 460,
+        "wires": [
+            [
+                "a00d82b96e6e39d5"
+            ]
+        ]
+    },
+    {
+        "id": "6d678e728b67a9f6",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "32586d1d77084422",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "temp sensor status",
+        "scope": [
+            "716eb563a8443fee"
+        ],
+        "x": 790,
+        "y": 260,
+        "wires": [
+            [
+                "6d678e728b67a9f6"
+            ]
+        ]
+    },
+    {
+        "id": "4ee6c6c68361e251",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bdcc4174298355b3",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "humidity sensor status",
+        "scope": [
+            "c3af676bede9a33c"
+        ],
+        "x": 800,
+        "y": 340,
+        "wires": [
+            [
+                "4ee6c6c68361e251"
+            ]
+        ]
+    },
+    {
+        "id": "a00d82b96e6e39d5",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "727d18cbd49924e5",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "pressure sensor status",
+        "scope": [
+            "44a0f2b4fea11aed"
+        ],
+        "x": 800,
+        "y": 420,
+        "wires": [
+            [
+                "a00d82b96e6e39d5"
+            ]
+        ]
+    },
+    {
+        "id": "ecd51740c912652b",
+        "type": "mqtt out",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/hotairduct/temperature",
+        "topic": "326project/smartbuilding/hvac/hotairduct/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 780,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4883dea3f6246f39",
+        "type": "mqtt out",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/coldairduct/temperature",
+        "topic": "326project/smartbuilding/hvac/coldairduct/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 780,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "1c313434cd8d663d",
+        "type": "mqtt out",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/<floorno>/<roomno>/#",
+        "topic": "326project/smartbuilding/hvac/<floorno>/<roomno>/#",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "754a5662410298ba",
+        "x": 780,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "760766ad4028c4f6",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/hotairduct/temperature",
+        "topic": "326project/smartbuilding/hvac/hotairduct/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "754a5662410298ba",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 540,
+        "wires": [
+            [
+                "5653b7d47c8b7e33"
+            ]
+        ]
+    },
+    {
+        "id": "5653b7d47c8b7e33",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "d062ea4b20157341",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "hotairduct",
+        "scope": [
+            "760766ad4028c4f6"
+        ],
+        "x": 760,
+        "y": 500,
+        "wires": [
+            [
+                "5653b7d47c8b7e33"
+            ]
+        ]
+    },
+    {
+        "id": "182e533af2893996",
+        "type": "mqtt in",
+        "z": "2128043fc813c839",
+        "name": "326project/smartbuilding/hvac/coldairduct/temperature",
+        "topic": "326project/smartbuilding/hvac/coldairduct/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "754a5662410298ba",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 620,
+        "wires": [
+            [
+                "c7a710bba83cde74"
+            ]
+        ]
+    },
+    {
+        "id": "c7a710bba83cde74",
+        "type": "debug",
+        "z": "2128043fc813c839",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "1d12aaf77b50e9e7",
+        "type": "status",
+        "z": "2128043fc813c839",
+        "name": "coldairduct",
+        "scope": [
+            "182e533af2893996"
+        ],
+        "x": 760,
+        "y": 580,
+        "wires": [
+            [
+                "c7a710bba83cde74"
+            ]
+        ]
+    },
+    {
+        "id": "754a5662410298ba",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

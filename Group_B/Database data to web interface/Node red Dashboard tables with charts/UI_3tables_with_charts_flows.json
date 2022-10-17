@@ -1,0 +1,488 @@
+[
+    {
+        "id": "574d19729893f3c8",
+        "type": "tab",
+        "label": "Web Interface NR",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "990b82d7ff8d06a1",
+        "type": "inject",
+        "z": "574d19729893f3c8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 60,
+        "wires": [
+            [
+                "c7eb831b309d8ff9"
+            ]
+        ]
+    },
+    {
+        "id": "c7eb831b309d8ff9",
+        "type": "mongodb in",
+        "z": "574d19729893f3c8",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_control",
+        "operation": "find",
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "8cce0ef6439c690c",
+                "a7be3d135a5e3aa3"
+            ]
+        ]
+    },
+    {
+        "id": "8cce0ef6439c690c",
+        "type": "ui_table",
+        "z": "574d19729893f3c8",
+        "group": "8ecb2d346b595ec2",
+        "name": "Control Data Table",
+        "order": 2,
+        "width": "8",
+        "height": "6",
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 870,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a7be3d135a5e3aa3",
+        "type": "function",
+        "z": "574d19729893f3c8",
+        "name": "function 21",
+        "func": "var floor = \"0\"\nvar room = \"1\"\n\nasync function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        var floorTemp = payload[i].floor\n        var roomTemp = payload[i].room\n        if (floor == floorTemp && room == roomTemp) {\n            let dataTemp = payload[i].data\n            let time = payload[i].time\n            data.push({ \"x\": time, \"y\": dataTemp })\n        }\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Control Data reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 40,
+        "wires": [
+            [
+                "61f0a460fa1a334e",
+                "2a9c3f8f50aa9f66"
+            ]
+        ]
+    },
+    {
+        "id": "be6438f582e7c0e1",
+        "type": "inject",
+        "z": "574d19729893f3c8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 140,
+        "wires": [
+            [
+                "0d7083a49d8958a6"
+            ]
+        ]
+    },
+    {
+        "id": "d553d9a83a8d0f38",
+        "type": "function",
+        "z": "574d19729893f3c8",
+        "name": "function 22",
+        "func": "var floor = \"0\"\nvar room = \"1\"\n\nasync function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        var floorTemp = payload[i].floor\n        var roomTemp = payload[i].room\n        if (floor == floorTemp && room == roomTemp) {\n            let dataTemp = payload[i].data\n            let time = payload[i].time\n            data.push({ \"x\": time, \"y\": dataTemp })\n        }\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Sensor Data reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 120,
+        "wires": [
+            [
+                "be0a87c9aeabad8d",
+                "4365b1df1605a8d6"
+            ]
+        ]
+    },
+    {
+        "id": "dd8743d3dcafcc9d",
+        "type": "inject",
+        "z": "574d19729893f3c8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 240,
+        "wires": [
+            [
+                "e03d99c1c4c68b25"
+            ]
+        ]
+    },
+    {
+        "id": "f2f6cae64f6b487c",
+        "type": "ui_table",
+        "z": "574d19729893f3c8",
+        "group": "d8ca5c2405ef9c5e",
+        "name": "Status Data Table",
+        "order": 2,
+        "width": "8",
+        "height": "6",
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 870,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0f03786565d84c0b",
+        "type": "function",
+        "z": "574d19729893f3c8",
+        "name": "function 23",
+        "func": "var floor = \"0\"\nvar room = \"1\"\n\nasync function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        var floorTemp = payload[i].floor\n        var roomTemp = payload[i].room\n        if (floor == floorTemp && room == roomTemp) {\n            let dataTemp = payload[i].data\n            let time = payload[i].time\n            data.push({ \"x\": time, \"y\": dataTemp })\n        }\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Status Data reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 200,
+        "wires": [
+            [
+                "e5af7e351c680ca0",
+                "0b9b8d3bbaf151d7"
+            ]
+        ]
+    },
+    {
+        "id": "0d7083a49d8958a6",
+        "type": "mongodb in",
+        "z": "574d19729893f3c8",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_sensor_data",
+        "operation": "find",
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "f3ac4d63ad0c5de7",
+                "d553d9a83a8d0f38"
+            ]
+        ]
+    },
+    {
+        "id": "e03d99c1c4c68b25",
+        "type": "mongodb in",
+        "z": "574d19729893f3c8",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_status",
+        "operation": "find",
+        "x": 330,
+        "y": 240,
+        "wires": [
+            [
+                "f2f6cae64f6b487c",
+                "0f03786565d84c0b"
+            ]
+        ]
+    },
+    {
+        "id": "be0a87c9aeabad8d",
+        "type": "ui_chart",
+        "z": "574d19729893f3c8",
+        "name": "",
+        "group": "99df3225ed5499cb",
+        "order": 1,
+        "width": "5",
+        "height": "5",
+        "label": "Sensor Reading vs Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a9c3f8f50aa9f66",
+        "type": "debug",
+        "z": "574d19729893f3c8",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f3ac4d63ad0c5de7",
+        "type": "ui_table",
+        "z": "574d19729893f3c8",
+        "group": "99df3225ed5499cb",
+        "name": "Sensor Data Table",
+        "order": 2,
+        "width": "8",
+        "height": "6",
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 870,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e5af7e351c680ca0",
+        "type": "ui_chart",
+        "z": "574d19729893f3c8",
+        "name": "",
+        "group": "d8ca5c2405ef9c5e",
+        "order": 1,
+        "width": "5",
+        "height": "5",
+        "label": "Status  vs Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61f0a460fa1a334e",
+        "type": "ui_chart",
+        "z": "574d19729893f3c8",
+        "name": "",
+        "group": "8ecb2d346b595ec2",
+        "order": 1,
+        "width": "5",
+        "height": "5",
+        "label": "Control Data vs Time",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "1000",
+        "removeOlderUnit": "604800",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 880,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4365b1df1605a8d6",
+        "type": "debug",
+        "z": "574d19729893f3c8",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0b9b8d3bbaf151d7",
+        "type": "debug",
+        "z": "574d19729893f3c8",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "17ee7c2e0f7a90f8",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "8ecb2d346b595ec2",
+        "type": "ui_group",
+        "name": "Control Data",
+        "tab": "831ca7d85637f6e7",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d8ca5c2405ef9c5e",
+        "type": "ui_group",
+        "name": "Status Data",
+        "tab": "831ca7d85637f6e7",
+        "order": 3,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "99df3225ed5499cb",
+        "type": "ui_group",
+        "name": "Sensor Data",
+        "tab": "831ca7d85637f6e7",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "831ca7d85637f6e7",
+        "type": "ui_tab",
+        "name": "Web Interface",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
