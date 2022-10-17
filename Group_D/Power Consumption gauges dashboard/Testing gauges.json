@@ -1,0 +1,1063 @@
+[
+    {
+        "id": "a668badc5a5f4f07",
+        "type": "tab",
+        "label": "Test Power Consumption",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9180e1425435da4d",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e8dca7cf4c8b38cf",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "00fea07854343819",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4b54783e535cb43e",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8b983db1232c2de6",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "340864c4061dead2",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "10bf85449cd38612",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/ahu/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 630,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2c68e8dc20604417",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "30",
+        "payloadType": "num",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "9180e1425435da4d"
+            ]
+        ]
+    },
+    {
+        "id": "5004bd55082ff065",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "83",
+        "payloadType": "num",
+        "x": 137,
+        "y": 213,
+        "wires": [
+            [
+                "e8dca7cf4c8b38cf"
+            ]
+        ]
+    },
+    {
+        "id": "6bd61084962728fe",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "65",
+        "payloadType": "num",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "00fea07854343819"
+            ]
+        ]
+    },
+    {
+        "id": "0a3277cf9a877e6a",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "43",
+        "payloadType": "num",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "4b54783e535cb43e"
+            ]
+        ]
+    },
+    {
+        "id": "c09d689a84abf7f4",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "85",
+        "payloadType": "num",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "8b983db1232c2de6"
+            ]
+        ]
+    },
+    {
+        "id": "169b0e43e99c8a58",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "95",
+        "payloadType": "num",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "340864c4061dead2"
+            ]
+        ]
+    },
+    {
+        "id": "d98dad6b205d4e5f",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "58",
+        "payloadType": "num",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "10bf85449cd38612"
+            ]
+        ]
+    },
+    {
+        "id": "cd6f5c9f957ef574",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/b/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "7292c536ee7209af",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/c/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "1645cff1e1f1a9d2",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/b/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "65f81f71eafae700",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/c/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "bf682a4dd47b1c8f",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "30d3a8f54638bdd0",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room1/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "2c31dca18e4d1d1f",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "843d73fd2b689c40",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "226cc4c4cce043a7",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "db4f815e9415ae1a",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "2b5cf861c3f9218d",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "33",
+        "payloadType": "num",
+        "x": 190,
+        "y": 520,
+        "wires": [
+            [
+                "cd6f5c9f957ef574"
+            ]
+        ]
+    },
+    {
+        "id": "a2746e876cde65ab",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "72",
+        "payloadType": "num",
+        "x": 197,
+        "y": 573,
+        "wires": [
+            [
+                "7292c536ee7209af"
+            ]
+        ]
+    },
+    {
+        "id": "1b9adcc239f409d2",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "65",
+        "payloadType": "num",
+        "x": 190,
+        "y": 620,
+        "wires": [
+            [
+                "1645cff1e1f1a9d2"
+            ]
+        ]
+    },
+    {
+        "id": "b6131aedb704a47d",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "43",
+        "payloadType": "num",
+        "x": 190,
+        "y": 660,
+        "wires": [
+            [
+                "65f81f71eafae700"
+            ]
+        ]
+    },
+    {
+        "id": "1c6cc961153bf4f5",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "85",
+        "payloadType": "num",
+        "x": 190,
+        "y": 700,
+        "wires": [
+            [
+                "bf682a4dd47b1c8f"
+            ]
+        ]
+    },
+    {
+        "id": "1723773a0f9a4440",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 190,
+        "y": 740,
+        "wires": [
+            [
+                "30d3a8f54638bdd0"
+            ]
+        ]
+    },
+    {
+        "id": "b62388dd9ab13fbc",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "58",
+        "payloadType": "num",
+        "x": 190,
+        "y": 780,
+        "wires": [
+            [
+                "2c31dca18e4d1d1f"
+            ]
+        ]
+    },
+    {
+        "id": "db065a8b5d89f27c",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "85",
+        "payloadType": "num",
+        "x": 190,
+        "y": 880,
+        "wires": [
+            [
+                "843d73fd2b689c40"
+            ]
+        ]
+    },
+    {
+        "id": "6a026ff0b916bbed",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 190,
+        "y": 920,
+        "wires": [
+            [
+                "226cc4c4cce043a7"
+            ]
+        ]
+    },
+    {
+        "id": "56acad7ca517c769",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "58",
+        "payloadType": "num",
+        "x": 190,
+        "y": 960,
+        "wires": [
+            [
+                "db4f815e9415ae1a"
+            ]
+        ]
+    },
+    {
+        "id": "dddb0e7402d6bcc0",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "ef8d7984519c924c",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "db1fc6eb0dfabd78",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "73494f2c5df09433",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "c182d65cb8e2990e",
+        "type": "mqtt out",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 640,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "eb5524c8b862e399",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "65",
+        "payloadType": "num",
+        "x": 210,
+        "y": 1120,
+        "wires": [
+            [
+                "dddb0e7402d6bcc0"
+            ]
+        ]
+    },
+    {
+        "id": "12190cb204fd7805",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "43",
+        "payloadType": "num",
+        "x": 210,
+        "y": 1160,
+        "wires": [
+            [
+                "ef8d7984519c924c"
+            ]
+        ]
+    },
+    {
+        "id": "ed68fa97a96e00a4",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "85",
+        "payloadType": "num",
+        "x": 210,
+        "y": 1200,
+        "wires": [
+            [
+                "db1fc6eb0dfabd78"
+            ]
+        ]
+    },
+    {
+        "id": "abe83bf0c7edd3ef",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 210,
+        "y": 1240,
+        "wires": [
+            [
+                "73494f2c5df09433"
+            ]
+        ]
+    },
+    {
+        "id": "e34bf12bdf90cebf",
+        "type": "inject",
+        "z": "a668badc5a5f4f07",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "58",
+        "payloadType": "num",
+        "x": 210,
+        "y": 1280,
+        "wires": [
+            [
+                "c182d65cb8e2990e"
+            ]
+        ]
+    },
+    {
+        "id": "fcfecd717798b8b6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
