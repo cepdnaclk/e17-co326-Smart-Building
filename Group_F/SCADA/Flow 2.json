@@ -1,0 +1,586 @@
+[
+    {
+        "id": "69ea384fcb4e66d2",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dad832f2a59a070a",
+        "type": "status",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "scope": [
+            "204a42e248239081"
+        ],
+        "x": 140,
+        "y": 720,
+        "wires": [
+            [
+                "a47a105ddb1bff58"
+            ]
+        ]
+    },
+    {
+        "id": "a47a105ddb1bff58",
+        "type": "debug",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "53d67901deca8781",
+        "type": "mqtt in",
+        "z": "69ea384fcb4e66d2",
+        "name": "PV Voltage Sensor",
+        "topic": "326project/smartbuilding/pv/pvVoltage",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "a47a105ddb1bff58"
+            ]
+        ]
+    },
+    {
+        "id": "41f9407d936efc8a",
+        "type": "mqtt in",
+        "z": "69ea384fcb4e66d2",
+        "name": "kWh Meter",
+        "topic": "326project/smartbuilding/pv/kWhMeter",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "a47a105ddb1bff58",
+                "8a636b6bd42ef6f6"
+            ]
+        ]
+    },
+    {
+        "id": "2a5a4e67bb138a20",
+        "type": "mqtt in",
+        "z": "69ea384fcb4e66d2",
+        "name": "Watt Meter",
+        "topic": "326project/smartbuilding/pv/wattMeter",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 660,
+        "wires": [
+            [
+                "a47a105ddb1bff58"
+            ]
+        ]
+    },
+    {
+        "id": "204a42e248239081",
+        "type": "mqtt in",
+        "z": "69ea384fcb4e66d2",
+        "name": "PV Current Sensor",
+        "topic": "326project/smartbuilding/pv/pvCurrent",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "a47a105ddb1bff58",
+                "3a18def6a953dd10",
+                "e16276ca2ae8eab7"
+            ]
+        ]
+    },
+    {
+        "id": "1c8536794b1bb1f1",
+        "type": "function",
+        "z": "69ea384fcb4e66d2",
+        "name": "SW1",
+        "func": "// get the type of the sensor from the massage\nlet sensorType = msg.payload.sensor;\n\n// to get the previouse value and new value\nlet current;\nlet voltage;\n\n// get current and voltage readings\nif(sensorType === \"Current\"){\n    current = msg.payload.value;\n    voltage = flow.get(\"savedVoltage\").value;\n}else{\n    voltage = msg.payload.value;\n    current = flow.get(\"savedCurrent\").value;\n}\n\n// do the calculation\nlet result = current + 10*voltage;\n\n\nmsg.payload = result;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 380,
+        "wires": [
+            [
+                "87508a14700baa1b"
+            ]
+        ]
+    },
+    {
+        "id": "87508a14700baa1b",
+        "type": "debug",
+        "z": "69ea384fcb4e66d2",
+        "name": "results",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "31b36de81d82a053",
+        "type": "change",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "savedVoltage",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 600,
+        "wires": [
+            [
+                "bc93e85a43aecbf8"
+            ]
+        ]
+    },
+    {
+        "id": "e16276ca2ae8eab7",
+        "type": "json",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "489906c30566f22a"
+            ]
+        ]
+    },
+    {
+        "id": "489906c30566f22a",
+        "type": "change",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "savedCurrent",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 380,
+        "wires": [
+            [
+                "1c8536794b1bb1f1"
+            ]
+        ]
+    },
+    {
+        "id": "8a636b6bd42ef6f6",
+        "type": "json",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "31b36de81d82a053"
+            ]
+        ]
+    },
+    {
+        "id": "bc93e85a43aecbf8",
+        "type": "function",
+        "z": "69ea384fcb4e66d2",
+        "name": "SW2",
+        "func": "// get the type of the sensor from the massage\nlet sensorType = msg.payload.sensor;\n\n// to get the previouse value and new value\nlet current;\nlet voltage;\n\n// get current and voltage readings\nif(sensorType === \"Current\"){\n    current = msg.payload.value;\n    voltage = flow.get(\"savedVoltage\").value;\n}else{\n    voltage = msg.payload.value;\n    current = flow.get(\"savedCurrent\").value;\n}\n\n// do the calculation\nlet result = current + 10*voltage;\n\n\nmsg.payload = result;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48ce261b2bba215d",
+        "type": "mqtt in",
+        "z": "69ea384fcb4e66d2",
+        "name": "Battery Ready",
+        "topic": "326project/smartbuilding/pv/btReady",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "a47a105ddb1bff58"
+            ]
+        ]
+    },
+    {
+        "id": "8c1b74c8ee7d34af",
+        "type": "mqtt out",
+        "z": "69ea384fcb4e66d2",
+        "name": "PV Current Sensor",
+        "topic": "326project/smartbuilding/pv/pvCurrent",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 430,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "55f97a7560967315",
+        "type": "mqtt out",
+        "z": "69ea384fcb4e66d2",
+        "name": "PV Voltage Sensor",
+        "topic": "326project/smartbuilding/pv/pvVoltage",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 430,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f35d17f6f4e7667e",
+        "type": "mqtt out",
+        "z": "69ea384fcb4e66d2",
+        "name": "kWh Meter",
+        "topic": "326project/smartbuilding/pv/kWhMeter",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a81148ee0bd0644f",
+        "type": "mqtt out",
+        "z": "69ea384fcb4e66d2",
+        "name": "Watt Meter",
+        "topic": "326project/smartbuilding/pv/wattMeter",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 410,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "86c197019cfbe050",
+        "type": "inject",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "8c1b74c8ee7d34af"
+            ]
+        ]
+    },
+    {
+        "id": "2ea118018b62c755",
+        "type": "mqtt out",
+        "z": "69ea384fcb4e66d2",
+        "name": "Battery Ready",
+        "topic": "326project/smartbuilding/pv/btReady",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 420,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e40c2eb9e19d922d",
+        "type": "inject",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "55f97a7560967315"
+            ]
+        ]
+    },
+    {
+        "id": "12bdace49e4486d9",
+        "type": "inject",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "f35d17f6f4e7667e"
+            ]
+        ]
+    },
+    {
+        "id": "f7d73fac3b5c3631",
+        "type": "inject",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 220,
+        "wires": [
+            [
+                "a81148ee0bd0644f"
+            ]
+        ]
+    },
+    {
+        "id": "2d0f26b0b8305559",
+        "type": "inject",
+        "z": "69ea384fcb4e66d2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "2ea118018b62c755"
+            ]
+        ]
+    },
+    {
+        "id": "3a18def6a953dd10",
+        "type": "debug",
+        "z": "69ea384fcb4e66d2",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e6130bd0ccee4f4c",
+        "type": "function",
+        "z": "69ea384fcb4e66d2",
+        "name": "function 6",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d9af299d07b13199",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

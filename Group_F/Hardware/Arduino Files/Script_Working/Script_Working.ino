@@ -11,13 +11,18 @@ const char* password = "3nG5tuDt";
 
 const char* mqtt_server = "10.40.18.10";
 
-const char* topic_voltageSensor = "326project/smartbuilding/pv/pvVoltage";
+const char* topic_batteryReady = "3326project/smartbuilding/pv/battery/ready";
 const char* topic_kwhmeterSensor = "326project/smartbuilding/pv/kWhmeter";
 const char* topic_sw1 = "326project/smartbuilding/pv/controls/sw1";
 const char* topic_sw2 = "326project/smartbuilding/pv/controls/sw2";
 
 const int currentSensor = A0; // Defining LDR PIN 
 const int relay = D7;
+const int batteryReadyPin = D6;
+const int batteryNotReadyPin = D5;
+const int batteryChargingPin = D4;
+const int batteryNotChargingPin = D3;
+
 int input_val = 0;  // Varible to store Input values
 
 float meterReading = 0;
@@ -80,7 +85,8 @@ void reconnect() {
     // Attempt to connect
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
-      client.subscribe(topic_voltageSensor);
+      //client.subscribe(topic_voltageSensor);
+      client.subscribe(topic_batteryReady);
       client.subscribe(topic_sw1);
       client.subscribe(topic_sw2);
       client.subscribe(topic_kwhmeterSensor);
@@ -117,6 +123,23 @@ void callback(String topic, byte* message, unsigned int length) {
   // Feel free to add more if statements to control more GPIOs with MQTT
 
   // If a message is received on the topic room/lamp, you check if the message is either on or off. Turns the lamp GPIO according to the message
+  if(topic==topic_sw1){
+    Serial.print("Battery is");
+    String pwm_duty = obj["pwm_duty"];
+    int pwm = pwm_duty.toInt();
+
+    if(pwm<20){
+      digitalWrite(batteryNotChargingPin,HIGH);
+      digitalWrite(batteryChargingPin,LOW);
+      Serial.print(" not charging"); 
+    }
+    else{
+      digitalWrite(batteryNotChargingPin,LOW);
+      digitalWrite(batteryChargingPin,HIGH);
+      Serial.print(" Charging");  
+    }
+  }
+  
   if(topic==topic_sw2){
       Serial.print("Changing Room lamp to ");
       String time1 = obj["time"];
@@ -131,6 +154,20 @@ void callback(String topic, byte* message, unsigned int length) {
         Serial.print("Off");
       }
   }
+  if(topic == topic_batteryReady){
+      Serial.print("Battery is");
+      String value = obj["value"];
+      if(value=="True"){
+          digitalWrite(batteryNotReadyPin,LOW);
+          digitalWrite(batteryReadyPin,HIGH);
+          Serial.print("Ready");
+        }
+        else{
+          digitalWrite(batteryNotReadyPin,HIGH);
+          digitalWrite(batteryReadyPin,LOW);
+          Serial.print("Not Ready");
+          }
+    }
   Serial.println();
 }
 
