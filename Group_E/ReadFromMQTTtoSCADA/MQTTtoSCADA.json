@@ -1,0 +1,572 @@
+[
+    {
+        "id": "3872cf67c88fac65",
+        "type": "tab",
+        "label": "Floor 0 (ground floor)-part 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d748e4d518ecd0b7",
+        "type": "mqtt in",
+        "z": "3872cf67c88fac65",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/count_update",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "8dfb704bfb06cb8d",
+                "71ccfe0517f167ef",
+                "747d7f0941d636a9",
+                "b3336443a926a7bb"
+            ]
+        ]
+    },
+    {
+        "id": "564d58f6de56eef9",
+        "type": "mqtt in",
+        "z": "3872cf67c88fac65",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/rfid",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 540,
+        "wires": [
+            [
+                "762c6b8b802bc28a",
+                "e19ad5ea878f7f40"
+            ]
+        ]
+    },
+    {
+        "id": "8dfb704bfb06cb8d",
+        "type": "function",
+        "z": "3872cf67c88fac65",
+        "name": "function 2",
+        "func": "\n\nvar room_state = false;\n\n\n\nvar count = msg.payload.count;\n\n\n\nif (count > 10) {\n    room_state = true;\n\n}\n\nif (room_state) {\n    msg.payload=\"Room Limit Exceeded\"\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 140,
+        "wires": [
+            [
+                "44bb30abd316a56b",
+                "89c035d574cf7283"
+            ]
+        ]
+    },
+    {
+        "id": "8b440f0529bfb896",
+        "type": "function",
+        "z": "3872cf67c88fac65",
+        "name": "function 3",
+        "func": "\nvar entering_state = false;\n\n\nvar access = msg.payload;\n\n\n\nif (access == 1) {\n    entering_state = true;\n\n}\n\n\nif (!entering_state) {\n    msg.payload=\"no access\"\n    return msg;\n\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 540,
+        "wires": [
+            [
+                "35ace7bf5cc81194",
+                "c3be7b5ac1eebffa"
+            ]
+        ]
+    },
+    {
+        "id": "7edeef7009ffad8f",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": "Room 1",
+        "info": "",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "8e774a64c7c8c716",
+        "type": "ui_text",
+        "z": "3872cf67c88fac65",
+        "group": "f66af050946e9e29",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "No of people in the room",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1090,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "35ace7bf5cc81194",
+        "type": "ui_toast",
+        "z": "3872cf67c88fac65",
+        "position": "dialog",
+        "displayTime": "5",
+        "highlight": "white",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "An Unauthorized person is trying to access the room 01",
+        "name": "Un authorized person trying to access the room 01",
+        "x": 1250,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bcc550bbc1699d2e",
+        "type": "ui_gauge",
+        "z": "3872cf67c88fac65",
+        "name": "",
+        "group": "f66af050946e9e29",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Room Limit",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1050,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "44bb30abd316a56b",
+        "type": "ui_toast",
+        "z": "3872cf67c88fac65",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "Room limit",
+        "name": "Room limit",
+        "x": 1050,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89c035d574cf7283",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1340,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "71ccfe0517f167ef",
+        "type": "function",
+        "z": "3872cf67c88fac65",
+        "name": "function 12",
+        "func": "var room_state = false;\n\n\nvar count = msg.payload.count;\n\n\n\nif (count <= 10) {\n    room_state = true;\n  msg.payload=count;\n}\n\n\nif (count > 10) {\n    msg.payload = 10;\n\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 80,
+        "wires": [
+            [
+                "bcc550bbc1699d2e"
+            ]
+        ]
+    },
+    {
+        "id": "747d7f0941d636a9",
+        "type": "function",
+        "z": "3872cf67c88fac65",
+        "name": "function 13",
+        "func": "\nvar count = msg.payload.count;\nmsg.payload = count;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 200,
+        "wires": [
+            [
+                "8e774a64c7c8c716"
+            ]
+        ]
+    },
+    {
+        "id": "c3be7b5ac1eebffa",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "762c6b8b802bc28a",
+        "type": "mongodb in",
+        "z": "3872cf67c88fac65",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_rfid",
+        "operation": "count",
+        "x": 920,
+        "y": 640,
+        "wires": [
+            [
+                "4cfef632d34e787f",
+                "8b440f0529bfb896"
+            ]
+        ]
+    },
+    {
+        "id": "4cfef632d34e787f",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "b3336443a926a7bb",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e19ad5ea878f7f40",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 27",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "db6f857f1b5cc3d9",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": " Ultrasonic Sensor Data",
+        "info": "",
+        "x": 180,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "876a0833413d7d81",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": "RFID Sensor Data",
+        "info": "",
+        "x": 150,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "400b6991c72c783f",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": "Keypad",
+        "info": "",
+        "x": 170,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "f0cf91cf42f664b8",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": "Display elements in dashboard",
+        "info": "",
+        "x": 1370,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e1899746ebd361b0",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": "Display elements in dashboard",
+        "info": "",
+        "x": 1510,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c364e0e8d057ca5b",
+        "type": "comment",
+        "z": "3872cf67c88fac65",
+        "name": "Display elements in dashboard",
+        "info": "",
+        "x": 1530,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "28755c6432452c17",
+        "type": "mqtt in",
+        "z": "3872cf67c88fac65",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/keypad",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 1020,
+        "wires": [
+            [
+                "33e3c9923131a70e",
+                "1adf4e7ff8de8229"
+            ]
+        ]
+    },
+    {
+        "id": "5223a69c6c614ff3",
+        "type": "function",
+        "z": "3872cf67c88fac65",
+        "name": "function 33",
+        "func": "\nvar entering_state = false;\n\n\nvar access = msg.payload;\n\n\n\nif (access == 1) {\n    entering_state = true;\n\n}\n\n\nif (!entering_state) {\n    msg.payload=\"no access\"\n    return msg;\n\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 1020,
+        "wires": [
+            [
+                "5ff6dffad5855189",
+                "bc5fdc11571bf720"
+            ]
+        ]
+    },
+    {
+        "id": "5ff6dffad5855189",
+        "type": "ui_toast",
+        "z": "3872cf67c88fac65",
+        "position": "dialog",
+        "displayTime": "5",
+        "highlight": "white",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "An Unauthorized person is trying to access the room 01",
+        "name": "Un authorized person trying to access the room 01",
+        "x": 1330,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc5fdc11571bf720",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 51",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "33e3c9923131a70e",
+        "type": "mongodb in",
+        "z": "3872cf67c88fac65",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_keypad",
+        "operation": "count",
+        "x": 1010,
+        "y": 1120,
+        "wires": [
+            [
+                "530fe3bc820f353e",
+                "5223a69c6c614ff3"
+            ]
+        ]
+    },
+    {
+        "id": "530fe3bc820f353e",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 52",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "1adf4e7ff8de8229",
+        "type": "debug",
+        "z": "3872cf67c88fac65",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "c60c8d7bc953d7fa",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f66af050946e9e29",
+        "type": "ui_group",
+        "name": "Room 01",
+        "tab": "d191aabbb049903d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "10d3d4a81f37ba61",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "d191aabbb049903d",
+        "type": "ui_tab",
+        "name": "Floor 0",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
