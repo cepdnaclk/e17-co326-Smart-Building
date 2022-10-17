@@ -3,19 +3,18 @@
 #include <PubSubClient.h>
 #include "util.h"
 
-const int PIN_lighting = 10;
-const int PIN_sprinkler = 11;
-const int PIN_alarm = 12;
-
-// WiFi
-const char *ssid = "Eng-Student";  // WiFi name
-const char *password = "3nG5tuDt"; // password
-
-// MQTT Broker
-const char *mqtt_broker = "10.40.18.10";
+extern const int PIN_lighting = 10;
+extern const int PIN_sprinkler = 11;
+extern const int PIN_alarm = 12;
 const char *topic_alarm = "326project/smartbuilding/safety/<floorno>/<roomno>/firealarm";
 const char *topic_sprinkler = "326project/smartbuilding/safety/<floorno>/<roomno>/sprinkler";
 const char *topic_lighting = "326project/smartbuilding/safety/<floorno>/<roomno>/lighting";
+// WiFi
+const char *ssid = "EngStudent_NEW"; // WiFi name
+const char *password = "3nG5tuDt";   // password
+
+// MQTT Broker
+const char *mqtt_broker = "10.40.18.10";
 const char *mqtt_username = "";
 const char *mqtt_password = "";
 const int mqtt_port = 1883;
@@ -40,7 +39,7 @@ void callback(char *topic, byte *payload, unsigned int length)
   Serial.println();
   Serial.println("-----------------------");
 
-  controller(message, parse(message), topic);
+  controller(topic, message);
 }
 
 void setup()
