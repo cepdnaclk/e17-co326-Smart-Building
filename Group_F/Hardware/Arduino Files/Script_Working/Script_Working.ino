@@ -50,6 +50,8 @@ char msg[MSG_BUFFER_SIZE];
 int value = 0;
 
 char msg1[MSG_BUFFER_SIZE];
+char prevGridState[MSG_BUFFER_SIZE] = "0";
+
 
 void setup_wifi() {
 
@@ -128,7 +130,9 @@ void callback(String topic, byte* message, unsigned int length) {
     String pwm_duty = obj["pwm_duty"];
     int pwm = pwm_duty.toInt();
 
-    if(pwm<20){
+    if(pwm=0){
+      //Battery Charging = D3
+      //Battery Not Charging = D4
       digitalWrite(batteryNotChargingPin,HIGH);
       digitalWrite(batteryChargingPin,LOW);
       Serial.print(" not charging"); 
@@ -141,11 +145,12 @@ void callback(String topic, byte* message, unsigned int length) {
   }
   
   if(topic==topic_sw2){
-      Serial.print("Changing Room lamp to ");
+      Serial.print("Battery power is ");
       String time1 = obj["time"];
       String sw2 = obj["sw2"];
       
       if(sw2 == "ON"){
+        //Switch to battery
         digitalWrite(relay, LOW);
         Serial.print("On");
       }
@@ -156,8 +161,9 @@ void callback(String topic, byte* message, unsigned int length) {
   }
   if(topic == topic_batteryReady){
       Serial.print("Battery is");
-      String value = obj["value"];
-      if(value=="True"){
+      boolean value = obj["value"];
+      
+      if(value == true){
           digitalWrite(batteryNotReadyPin,LOW);
           digitalWrite(batteryReadyPin,HIGH);
           Serial.print("Ready");
@@ -248,7 +254,11 @@ void loop() {
     Serial.println();
     Serial.print("Publish message: ");
     Serial.println(msg);
-    client.publish(topic_kwhmeterSensor, msg);
+    
+    if(msg != prevGridState){
+      client.publish(topic_kwhmeterSensor, msg);
+      snprintf(prevGridState,MSG_BUFFER_SIZE,"%s",msg);
+    }
     
     
 //End of kWpMeter Sensor reading Function

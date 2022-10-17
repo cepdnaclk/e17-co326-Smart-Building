@@ -29,22 +29,22 @@ print("MQTT Data generator is started...")
 
 
 #275wattp, 31.6v
+while(1):
 
-with open("..\\Data\\simulation_data\\Plant_2_Time_vs_DCPower_Data.csv", 'r') as file:
-  csvreader = csv.reader(file)
-  for row in csvreader:
-    print(row[0])
-    x = float(row[0])
-    x = int((x/15000)* 31.6) 
-    
-    
-    payload = json.dumps(x)
-    client.publish(topic, payload=payload, qos=0, retain=False)
-    print("Published", payload)
+  with open("..\\Data\\simulation_data\\Plant_2_Time_vs_DCPower_Data.csv", 'r') as file:
+    csvreader = csv.reader(file)
+    for row in csvreader:
+      print(row[0])
+      x = float(row[0])
+      x = int((x/15000)* 31.6) 
+      
+      
+      payload = json.dumps(x)
+      client.publish(topic, payload=payload, qos=0, retain=False)
+      print("Published", payload)
 
-    client.loop()
-    time.sleep(2)
-
+      client.loop()
+      time.sleep(2)
 	
 
 
