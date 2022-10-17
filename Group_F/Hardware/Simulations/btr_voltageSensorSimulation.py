@@ -1,14 +1,12 @@
-# You cana install dependencies using following command:
-# pip install paho-mqtt
-
+## Batter output voltage sensor simulation
 import paho.mqtt.client as mqtt
 import json
 import time
-import csv
+
 mqtt_server = "10.40.18.10"
 mqtt_port = 1883
 
-topic = "326project/smartbuilding/pv/pvVoltage"
+topic = "326project/smartbuilding/pv/battery/voltage"
 
 
 
@@ -30,18 +28,13 @@ print("MQTT Data generator is started...")
 
 #275wattp, 31.6v
 while(1):
-
-  with open("..\\Data\\simulation_data\\Plant_2_Time_vs_DCPower_Data.csv", 'r') as file:
-    csvreader = csv.reader(file)
-    for row in csvreader:
-      print(row[0])
-      x = float(row[0])
-      x = int((x/15000)* 31.6) 
-      
-      
+    btrVoltageArray = [200,200,200,200,200,200,199,199,199,198,198] 
+    for v in btrVoltageArray:
+      x = float(v)
+    
       payload = json.dumps(x)
       client.publish(topic, payload=payload, qos=0, retain=False)
-      print("Published", payload)
+      print("Published voltage : ", payload)
 
       client.loop()
       time.sleep(2)
