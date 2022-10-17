@@ -1,0 +1,164 @@
+[
+    {
+        "id": "41287b22cc71b05d",
+        "type": "tab",
+        "label": "Web Interface test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "eda235e719f65f3c",
+        "type": "inject",
+        "z": "41287b22cc71b05d",
+        "name": "tempDataPushToDatabase",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "6e09c0b8e3f2d781"
+            ]
+        ]
+    },
+    {
+        "id": "d0c02add9bc64fc7",
+        "type": "mqtt out",
+        "z": "41287b22cc71b05d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/test/test",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 600,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6e09c0b8e3f2d781",
+        "type": "function",
+        "z": "41287b22cc71b05d",
+        "name": "function 80",
+        "func": "msg.payload=msg.payload%20\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 80,
+        "wires": [
+            [
+                "d0c02add9bc64fc7"
+            ]
+        ]
+    },
+    {
+        "id": "58671785689398fd",
+        "type": "mqtt in",
+        "z": "41287b22cc71b05d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/test/test",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "f920bc39d787c643"
+            ]
+        ]
+    },
+    {
+        "id": "f920bc39d787c643",
+        "type": "function",
+        "z": "41287b22cc71b05d",
+        "name": "SmokeDetect_Function",
+        "func": "msg.collection ='326_hvac_sensor_temp/floor0/room0'\nmsg.payload={\n    \n    \"time\": Date.now(),\n    \"value\": msg.payload\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "ac80492756990a72"
+            ]
+        ]
+    },
+    {
+        "id": "ac80492756990a72",
+        "type": "mongodb out",
+        "z": "41287b22cc71b05d",
+        "mongodb": "de13983547e18743",
+        "name": "",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9faa1e76cfab210b",
+        "type": "mqtt-broker",
+        "name": "new_mqtt",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "de13983547e18743",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]
