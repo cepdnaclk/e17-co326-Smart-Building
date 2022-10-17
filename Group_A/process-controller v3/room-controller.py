@@ -32,6 +32,39 @@ pressureCanChange = 2
 previousBlowerSpeed = 40 # default
 previousRatio = 0.3 # default
 
+def on_message_for_temp(client, userdata, message):
+    data = json.loads(message.payload)
+    values = list(data.values())
+    temperature = values[1]
+
+    global previousBlowerSpeed
+    global previousRatio
+
+    if (temperature < (tempThreashold - tempCanChange)):  # increase the ratio by 0.1
+        previousRatio += 0.1
+        if previousRatio > 1:
+            previousRatio = 1
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "speed": previousBlowerSpeed,
+            "ratio": previousRatio
+        }
+        client.publish(ahuControlTopic, json.dumps(x))
+        print("published to topic " + ahuControlTopic + " new ratio - " + str(previousRatio))
+
+    elif (temperature > tempThreashold + tempCanChange):
+        previousRatio -= 0.1
+        if previousRatio < 0:
+            previousRatio = 0
+
+        x = {
+            "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
+            "speed": previousBlowerSpeed,
+            "ratio": previousRatio
+        }
+        client.publish(ahuControlTopic, json.dumps(x))
+        print("published to topic " + ahuControlTopic + " new ratio - " + str(previousRatio))
+
 
 def on_message_for_pressure(client, userdata, message):
     data = json.loads(message.payload)
@@ -62,11 +95,12 @@ def on_message_for_pressure(client, userdata, message):
         print("published to topic " + ahuControlTopic + " new blower speed - " + str(previousBlowerSpeed))
 
 
+client.message_callback_add(tempSensorTopic, on_message_for_temp)
 client.message_callback_add(presSensorTopic, on_message_for_pressure)
 
-
 client.connect("10.40.18.10", port=1883)
-client.subscribe([(presSensorTopic, 0)])
+
+client.subscribe([(tempSensorTopic, 0), (presSensorTopic, 0)])
 client.loop_forever()
 
 
