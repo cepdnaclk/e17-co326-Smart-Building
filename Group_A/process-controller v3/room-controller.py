@@ -95,12 +95,46 @@ def on_message_for_pressure(client, userdata, message):
         print("published to topic " + ahuControlTopic + " new blower speed - " + str(previousBlowerSpeed))
 
 
+##### Change threasholds
+
+# changing temp threashold
+def on_message_for_temp_threshold(client, userdata, message):
+    data = json.loads(message.payload)
+
+    global tempThreashold
+    values = list(data.values())
+    tempThreashold = values[1]
+    print()
+    print("**********************************")
+    print("new threashold temperature is " + str(tempThreashold))
+    print("**********************************")
+    print()
+
+
+# changing pressure threashold
+def on_message_for_pressure_threshold(client, userdata, message):
+    data = json.loads(message.payload)
+
+    global pressureThreashold
+    values = list(data.values())
+    pressureThreashold = values[1]
+    print()
+    print("**********************************")
+    print("new threashold pressure is " + str(pressureThreashold))
+    print("**********************************")
+    print()
+
+
+
 client.message_callback_add(tempSensorTopic, on_message_for_temp)
 client.message_callback_add(presSensorTopic, on_message_for_pressure)
+client.message_callback_add(tempThreasholdChangeTopic, on_message_for_temp_threshold)
+client.message_callback_add(pressureThreasholdChangeTopic, on_message_for_pressure_threshold)
 
 client.connect("10.40.18.10", port=1883)
 
-client.subscribe([(tempSensorTopic, 0), (presSensorTopic, 0)])
+client.subscribe([(tempSensorTopic, 0), (presSensorTopic, 0),
+                  (tempThreasholdChangeTopic, 0), (pressureThreasholdChangeTopic, 0)])
 client.loop_forever()
 
 
