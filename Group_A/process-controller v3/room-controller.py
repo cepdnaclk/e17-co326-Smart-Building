@@ -38,9 +38,10 @@ def on_message_for_pressure(client, userdata, message):
     values = list(data.values())
     pressure = values[1]
 
+    global previousBlowerSpeed
+    global previousRatio
+
     if (pressure < (pressureThreashold - pressureCanChange)):  # increase the blower speed by 1
-        global previousBlowerSpeed
-        global previousRatio
         previousBlowerSpeed += 1
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
@@ -48,11 +49,9 @@ def on_message_for_pressure(client, userdata, message):
             "ratio": previousRatio
         }
         client.publish(ahuControlTopic, json.dumps(x))
-        print("published to topic " + ahuControlTopic + " new blower speed - " + previousBlowerSpeed)
+        print("published to topic " + ahuControlTopic + " new blower speed - " + str(previousBlowerSpeed))
 
     elif (pressure > pressureThreashold + pressureCanChange):
-        global previousBlowerSpeed
-        global previousRatio
         previousBlowerSpeed -= 1
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
@@ -60,9 +59,14 @@ def on_message_for_pressure(client, userdata, message):
             "ratio": previousRatio
         }
         client.publish(ahuControlTopic, json.dumps(x))
-        print("published to topic " + ahuControlTopic + " new blower speed - " + previousBlowerSpeed)
+        print("published to topic " + ahuControlTopic + " new blower speed - " + str(previousBlowerSpeed))
 
 
+client.message_callback_add(presSensorTopic, on_message_for_pressure)
 
+
+client.connect("10.40.18.10", port=1883)
+client.subscribe([(presSensorTopic, 0)])
+client.loop_forever()
 
 
