@@ -24,8 +24,8 @@ temp = 30
 
 
 # MQTT info
-broker_addr = "vpn.ce.pdn.ac.lk"
-broker_port = 8883
+broker_addr = "10.40.18.10"
+broker_port = 1883
 chiller_temp_topic = "326project/smartbuilding/hvac/sensor/chiller"
 boiler_temp_topic = "326project/smartbuilding/hvac/sensor/boiler"
 ahu_topic = "326project/smartbuilding/hvac/actuator/ahu/0/1"
@@ -44,12 +44,12 @@ def on_message(client, userdata, message):
     old_speed = speed
 
     # Update values based on MQTT data
-    if message.topic == "326project/smartbuilding/hvac/sensor/chiller":
+    if message.topic == chiller_temp_topic:
         data = json.loads(message.payload.decode("utf-8"))
         chiller_temp = data['temp']
         #print(f"Chiller: {chiller_temp}")
 
-    elif message.topic == "326project/smartbuilding/hvac/sensor/boiler":
+    elif message.topic == boiler_temp_topic:
         data = json.loads(message.payload.decode("utf-8"))
         boiler_temp = data['temp']
         #print(f"Boiler: {boiler_temp}")

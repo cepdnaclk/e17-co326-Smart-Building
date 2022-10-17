@@ -89,12 +89,13 @@ if __name__ == '__main__':
             if not loading:
                 c1.release()
                 continue
-            print("Battery loading...")
             c1.release()
             c3.acquire()
+            print("Load is consuming power...")
             # 20 kWh load
             battery.load(20000)
             soc = battery.SoC
+            c3.wait()
             c3.release()
             c2.acquire()
             if soc < 60 and ready:
@@ -130,11 +131,11 @@ if __name__ == '__main__':
             c1.acquire()
             if payload["sw2"] == "ON" and not loading:
                 loading = True
-                time.sleep(1)
+                print("SW2 is ON. Battery connected to load.")
                 print("Load thread started")
-                time.sleep(1)
             elif payload["sw2"] == "OFF" and loading:
                 loading = False
+                print("SW2 is OFF. Battery disconnected from load.")
                 print("Load thread stopped")
             c1.release()
         client.message_callback_add(f"{MQTT_TOPIC}/controls/sw2", on_message)
@@ -166,6 +167,7 @@ if __name__ == '__main__':
             battery.set_charging_power(pwm_duty * BAT_CAPACITY / 100)
             battery.charge()
             soc, voc = battery.SoC, battery.voc
+            c3.notify_all()
             c3.release()
             client.publish(f"{MQTT_TOPIC}/battery/voltage", json.dumps({ "time": time.time(), "value": voc }))
             print(f"pwm duty: {pwm_duty}, SoC: {soc}%, Voc: {voc}V")
