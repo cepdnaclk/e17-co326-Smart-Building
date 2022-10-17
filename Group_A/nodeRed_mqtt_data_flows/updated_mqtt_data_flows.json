@@ -29,27 +29,6 @@
         ]
     },
     {
-        "id": "d10fd8c35ca42df9",
-        "type": "mqtt in",
-        "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/0/1/sensor/humidity",
-        "topic": "326project/smartbuilding/hvac/0/1/sensor/humidity",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "93a52709f8718a12",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 290,
-        "y": 200,
-        "wires": [
-            [
-                "92856a3382833a97"
-            ]
-        ]
-    },
-    {
         "id": "42edb632a38b68e0",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
@@ -63,7 +42,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 290,
-        "y": 360,
+        "y": 200,
         "wires": [
             [
                 "7ffad8920900c940"
@@ -92,27 +71,6 @@
         ]
     },
     {
-        "id": "3f42306317028065",
-        "type": "mqtt in",
-        "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/0/0/sensor/humidity",
-        "topic": "326project/smartbuilding/hvac/0/0/sensor/humidity",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "93a52709f8718a12",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 290,
-        "y": 280,
-        "wires": [
-            [
-                "08f63848c86cab49"
-            ]
-        ]
-    },
-    {
         "id": "5cd6bdf7f7ac0f31",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
@@ -126,7 +84,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 290,
-        "y": 440,
+        "y": 280,
         "wires": [
             [
                 "8eed2c133a63aa14"
@@ -147,7 +105,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 260,
-        "y": 1180,
+        "y": 720,
         "wires": [
             [
                 "42eb296f8503e615"
@@ -168,7 +126,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 270,
-        "y": 1260,
+        "y": 800,
         "wires": [
             [
                 "05e197af6a5e21eb"
@@ -179,8 +137,8 @@
         "id": "7ac201b381ec1b12",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/0/1/control/ahu/blower",
-        "topic": "326project/smartbuilding/hvac/0/1/control/ahu/blower",
+        "name": "326project/smartbuilding/hvac/0/1/control/ahu",
+        "topic": "326project/smartbuilding/hvac/0/1/control/ahu",
         "qos": "2",
         "datatype": "auto",
         "broker": "93a52709f8718a12",
@@ -188,8 +146,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 290,
-        "y": 520,
+        "x": 270,
+        "y": 360,
         "wires": [
             [
                 "484012dd276f1a9d"
@@ -200,8 +158,8 @@
         "id": "60489341812e4251",
         "type": "mqtt in",
         "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/0/0/control/ahu/blower",
-        "topic": "326project/smartbuilding/hvac/0/0/control/ahu/blower",
+        "name": "326project/smartbuilding/hvac/0/0/control/ahu",
+        "topic": "326project/smartbuilding/hvac/0/0/control/ahu",
         "qos": "2",
         "datatype": "auto",
         "broker": "93a52709f8718a12",
@@ -209,8 +167,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 290,
-        "y": 600,
+        "x": 270,
+        "y": 440,
         "wires": [
             [
                 "4438af71ec705cfe"
@@ -231,7 +189,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 300,
-        "y": 1020,
+        "y": 560,
         "wires": [
             [
                 "f75fd2681d3d8e65"
@@ -252,52 +210,10 @@
         "rh": 0,
         "inputs": 0,
         "x": 300,
-        "y": 1100,
+        "y": 640,
         "wires": [
             [
                 "45993e844753562b"
-            ]
-        ]
-    },
-    {
-        "id": "333a37b27c40f101",
-        "type": "mqtt in",
-        "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/0/1/control/ahu/airflowrate",
-        "topic": "326project/smartbuilding/hvac/0/1/control/ahu/airflowrate",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "93a52709f8718a12",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 310,
-        "y": 680,
-        "wires": [
-            [
-                "ee585c4a1e8f6bac"
-            ]
-        ]
-    },
-    {
-        "id": "6fdd4af1938965d9",
-        "type": "mqtt in",
-        "z": "46e41858838ea3eb",
-        "name": "326project/smartbuilding/hvac/0/0/control/ahu/airflowrate",
-        "topic": "326project/smartbuilding/hvac/0/0/control/ahu/airflowrate",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "93a52709f8718a12",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 310,
-        "y": 760,
-        "wires": [
-            [
-                "0c170f3e81252869"
             ]
         ]
     },
@@ -336,40 +252,6 @@
         ]
     },
     {
-        "id": "92856a3382833a97",
-        "type": "function",
-        "z": "46e41858838ea3eb",
-        "name": "insert_sesnsor_humid",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_sensor_humid_floor0_room1\";\n\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 680,
-        "y": 200,
-        "wires": [
-            [
-                "03b56c09b672d751"
-            ]
-        ]
-    },
-    {
-        "id": "03b56c09b672d751",
-        "type": "mongodb out",
-        "z": "46e41858838ea3eb",
-        "mongodb": "6c36cda79d9fbc4e",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 920,
-        "y": 200,
-        "wires": []
-    },
-    {
         "id": "7ffad8920900c940",
         "type": "function",
         "z": "46e41858838ea3eb",
@@ -381,7 +263,7 @@
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 360,
+        "y": 200,
         "wires": [
             [
                 "59bf125187bd2fc7"
@@ -400,7 +282,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 360,
+        "y": 200,
         "wires": []
     },
     {
@@ -415,7 +297,7 @@
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 1180,
+        "y": 720,
         "wires": [
             [
                 "5bf25dff301b4de2"
@@ -434,7 +316,7 @@
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 1260,
+        "y": 800,
         "wires": [
             [
                 "df037b3e531e2e82"
@@ -453,7 +335,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 1180,
+        "y": 720,
         "wires": []
     },
     {
@@ -468,7 +350,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 1260,
+        "y": 800,
         "wires": []
     },
     {
@@ -483,7 +365,7 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 1020,
+        "y": 560,
         "wires": [
             [
                 "ddc13240ac743dce"
@@ -502,7 +384,7 @@
         "finalize": "",
         "libs": [],
         "x": 690,
-        "y": 1100,
+        "y": 640,
         "wires": [
             [
                 "7b233bded67e80bc"
@@ -521,7 +403,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 1020,
+        "y": 560,
         "wires": []
     },
     {
@@ -536,22 +418,22 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 1100,
+        "y": 640,
         "wires": []
     },
     {
         "id": "484012dd276f1a9d",
         "type": "function",
         "z": "46e41858838ea3eb",
-        "name": "insert_control_ahuBlower",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_blower_floor0/room1\";\n\nreturn msg",
+        "name": "insert_control_ahu",
+        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_floor0/room1\";\n\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 520,
+        "x": 670,
+        "y": 360,
         "wires": [
             [
                 "7a8875480cad8122"
@@ -570,41 +452,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 520,
-        "wires": []
-    },
-    {
-        "id": "ee585c4a1e8f6bac",
-        "type": "function",
-        "z": "46e41858838ea3eb",
-        "name": "insert_control_ahuAirFlow",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_airFlow_floor0/room1\";\n\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 680,
-        "wires": [
-            [
-                "dccb0ad39e401526"
-            ]
-        ]
-    },
-    {
-        "id": "dccb0ad39e401526",
-        "type": "mongodb out",
-        "z": "46e41858838ea3eb",
-        "mongodb": "6c36cda79d9fbc4e",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 920,
-        "y": 680,
+        "y": 360,
         "wires": []
     },
     {
@@ -653,7 +501,7 @@
         "finalize": "",
         "libs": [],
         "x": 680,
-        "y": 440,
+        "y": 280,
         "wires": [
             [
                 "9d31e5d0f1cd732d"
@@ -672,40 +520,6 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "08f63848c86cab49",
-        "type": "function",
-        "z": "46e41858838ea3eb",
-        "name": "insert_sesnsor_humid",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_sensor_humid_floor0/room0\";\n\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 680,
-        "y": 280,
-        "wires": [
-            [
-                "d637605941747398"
-            ]
-        ]
-    },
-    {
-        "id": "d637605941747398",
-        "type": "mongodb out",
-        "z": "46e41858838ea3eb",
-        "mongodb": "6c36cda79d9fbc4e",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 920,
         "y": 280,
         "wires": []
     },
@@ -713,15 +527,15 @@
         "id": "4438af71ec705cfe",
         "type": "function",
         "z": "46e41858838ea3eb",
-        "name": "insert_control_ahuBlower",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_blower_floor0/room0\";\n\nreturn msg",
+        "name": "insert_control_ahu",
+        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_floor0/room0\";\n\nreturn msg",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 600,
+        "x": 670,
+        "y": 440,
         "wires": [
             [
                 "c04bc8895a46772d"
@@ -740,41 +554,7 @@
         "multi": false,
         "operation": "store",
         "x": 920,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "0c170f3e81252869",
-        "type": "function",
-        "z": "46e41858838ea3eb",
-        "name": "insert_control_ahuAirFlow",
-        "func": "let str = msg.topic;\nstr = str.substring(30, str.length);\n\nlet floor = str.substring(0, 1);\nlet room = str.substring(2, 3);\nlet description = str.substring(4, str.length);\nlet data = msg.payload;\nlet time = new Date().toLocaleString();\n\nmsg.payload = {\n    \"floor\": floor,\n    \"room\": room,\n    \"description\": description,\n    \"data\": data,\n    \"time\": time\n};\n\nmsg.collection = \"co326_hvac_ahu_airFlow_floor0/room0\";\n\nreturn msg",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 690,
-        "y": 760,
-        "wires": [
-            [
-                "b94243d294f1f858"
-            ]
-        ]
-    },
-    {
-        "id": "b94243d294f1f858",
-        "type": "mongodb out",
-        "z": "46e41858838ea3eb",
-        "mongodb": "6c36cda79d9fbc4e",
-        "name": "",
-        "collection": "",
-        "payonly": true,
-        "upsert": false,
-        "multi": false,
-        "operation": "store",
-        "x": 920,
-        "y": 760,
+        "y": 440,
         "wires": []
     },
     {
