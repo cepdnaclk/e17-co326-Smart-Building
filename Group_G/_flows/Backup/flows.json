@@ -1,0 +1,3288 @@
+[
+    {
+        "id": "6639623a258bb78d",
+        "type": "tab",
+        "label": "Database",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3d3c0b53ec2c6c4b",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "sensor/temp",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 480,
+        "wires": [
+            [
+                "6517dbc474ed8ad3"
+            ]
+        ]
+    },
+    {
+        "id": "c3b0e15f557f1a85",
+        "type": "mqtt out",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "sensor/temp",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 670,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "49d82e520df81289",
+        "type": "inject",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"sensor\":\"temp\",\"value\":\"32\"}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "c3b0e15f557f1a85",
+                "829c59edb3a62abe"
+            ]
+        ]
+    },
+    {
+        "id": "6517dbc474ed8ad3",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "829c59edb3a62abe",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c703e09c6b682528",
+        "type": "http in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "url": "/safety",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "7390be68dfb379dc"
+            ]
+        ]
+    },
+    {
+        "id": "cda2cc5616d20a69",
+        "type": "http response",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 700,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "7390be68dfb379dc",
+        "type": "template",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "This is the payload: {{payload\n\nGET DATA FROM MONGODB AND DISPLAY HERE",
+        "output": "str",
+        "x": 550,
+        "y": 80,
+        "wires": [
+            [
+                "cda2cc5616d20a69"
+            ]
+        ]
+    },
+    {
+        "id": "4f7260e1142b759f",
+        "type": "comment",
+        "z": "6639623a258bb78d",
+        "name": "Group F(6)",
+        "info": "",
+        "x": 160,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "858d65803511b5a1",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "PV Current Sensor",
+        "topic": "326project/smartbuilding/pv/pvCurrent",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 840,
+        "wires": [
+            [
+                "a6b946e7e1f4a88d"
+            ]
+        ]
+    },
+    {
+        "id": "14def2b921828e9d",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "a6b946e7e1f4a88d",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_Current",
+        "func": "msg.collection = \"co326_pv_currentSensor\"\n\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time , \"current\" : msg.payload};\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 840,
+        "wires": [
+            [
+                "14def2b921828e9d",
+                "1388a872cd8ce88f"
+            ]
+        ]
+    },
+    {
+        "id": "1388a872cd8ce88f",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_currentSensor",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "a99fddfe2ed338b8",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "PV Voltage Sensor",
+        "topic": "326project/smartbuilding/pv/pvCurrent",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 940,
+        "wires": [
+            [
+                "c9e65c1da4e27aa0"
+            ]
+        ]
+    },
+    {
+        "id": "c9e65c1da4e27aa0",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_voltage",
+        "func": "msg.collection = \"co326_pv_voltageSensor\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"voltage\":msg.payload };\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 940,
+        "wires": [
+            [
+                "59f1582effeddae5",
+                "6be7e927c67ae729"
+            ]
+        ]
+    },
+    {
+        "id": "6be7e927c67ae729",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_voltageSensor",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "59f1582effeddae5",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "81e368632414c5e9",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Battery Ready",
+        "topic": "326project/smartbuilding/pv/battery/ready",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 1300,
+        "wires": [
+            [
+                "3c62f87040aa0ff6"
+            ]
+        ]
+    },
+    {
+        "id": "3c62f87040aa0ff6",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_batteryReady",
+        "func": "msg.collection = \"co326_pv_btr_ready\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"batterReady\":msg.payload };\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1300,
+        "wires": [
+            [
+                "91469b0b6de9f48e"
+            ]
+        ]
+    },
+    {
+        "id": "91469b0b6de9f48e",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_btr_ready",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 820,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "6f885f341e72d5a1",
+        "type": "comment",
+        "z": "6639623a258bb78d",
+        "name": "end of group F(6)",
+        "info": "",
+        "x": 140,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "b9705af99927e597",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Switch 1",
+        "topic": "326project/smartbuilding/pv/controls/sw1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 1460,
+        "wires": [
+            [
+                "ebe5fe823ca27ef2"
+            ]
+        ]
+    },
+    {
+        "id": "83814e78119ccae6",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Switch 2",
+        "topic": "326project/smartbuilding/pv/controls/sw2",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 1540,
+        "wires": [
+            [
+                "0c90c83457e452da"
+            ]
+        ]
+    },
+    {
+        "id": "ebe5fe823ca27ef2",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_switch1",
+        "func": "msg.collection = \"co326_pv_sw1\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"state\": msg.payload };\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1460,
+        "wires": [
+            [
+                "c5a81b70166d3413"
+            ]
+        ]
+    },
+    {
+        "id": "0c90c83457e452da",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_switch2",
+        "func": "msg.collection = \"co326_pv_sw2\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"state\": msg.payload };\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1540,
+        "wires": [
+            [
+                "5147569afe3075ce"
+            ]
+        ]
+    },
+    {
+        "id": "c5a81b70166d3413",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "co326_pv_sw1",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 810,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "5147569afe3075ce",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "co326_pv_sw2",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 810,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "6b0c95e7bbf88ea6",
+        "type": "comment",
+        "z": "6639623a258bb78d",
+        "name": "Group_D(4)",
+        "info": "",
+        "x": 150,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "d4360871f3c2bd1e",
+        "type": "comment",
+        "z": "6639623a258bb78d",
+        "name": "end of Group_D(4)",
+        "info": "",
+        "x": 150,
+        "y": 4780,
+        "wires": []
+    },
+    {
+        "id": "3edb476b02538b16",
+        "type": "inject",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"time\":\"2022-12-31 19:07:07AM\",\"power\":6656}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 1900,
+        "wires": [
+            [
+                "8f40afae3c685b8b"
+            ]
+        ]
+    },
+    {
+        "id": "8f40afae3c685b8b",
+        "type": "mqtt out",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room2/ahu/power",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6f2da96c2ca09d2e",
+        "x": 500,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "4e326b745ae876ee",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room2/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1980,
+        "wires": [
+            [
+                "f825eb18d5cb977e"
+            ]
+        ]
+    },
+    {
+        "id": "c112771e44c8b5b9",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 110",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "7b6f27ed96968170",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 880,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "59e794988d5ffb10",
+        "type": "inject",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 2120,
+        "wires": [
+            [
+                "95ce9e6d5aaa3099"
+            ]
+        ]
+    },
+    {
+        "id": "95ce9e6d5aaa3099",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "function 12",
+        "func": "return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 2120,
+        "wires": [
+            [
+                "2e23db528b86271b"
+            ]
+        ]
+    },
+    {
+        "id": "2e23db528b86271b",
+        "type": "mongodb in",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "operation": "find",
+        "x": 610,
+        "y": 2120,
+        "wires": [
+            [
+                "0cf5894f86af36fc"
+            ]
+        ]
+    },
+    {
+        "id": "0cf5894f86af36fc",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 111",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "f825eb18d5cb977e",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room2",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\" : (msg.payload).timestamp,\n    \"power\" : (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 1980,
+        "wires": [
+            [
+                "c112771e44c8b5b9",
+                "7b6f27ed96968170"
+            ]
+        ]
+    },
+    {
+        "id": "69b9153b5bdc1902",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room3/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2180,
+        "wires": [
+            [
+                "0a2eeb072cb70517"
+            ]
+        ]
+    },
+    {
+        "id": "6c3429710dbf4230",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 112",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "1174b7d814d00918",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "0a2eeb072cb70517",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room3",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 2180,
+        "wires": [
+            [
+                "6c3429710dbf4230",
+                "1174b7d814d00918"
+            ]
+        ]
+    },
+    {
+        "id": "1c0451a281d6ee06",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room5/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2260,
+        "wires": [
+            [
+                "4d97580d0ff9a44f"
+            ]
+        ]
+    },
+    {
+        "id": "987698ecaed0c401",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 113",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "2a6adbdeea647694",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "4d97580d0ff9a44f",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room5",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 2260,
+        "wires": [
+            [
+                "987698ecaed0c401",
+                "2a6adbdeea647694"
+            ]
+        ]
+    },
+    {
+        "id": "b0043a0eaf8aaa5f",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room6/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2340,
+        "wires": [
+            [
+                "f2cc4f458acb8df0"
+            ]
+        ]
+    },
+    {
+        "id": "374f40038ebda732",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 114",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "c6b073ec71752ffb",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2380,
+        "wires": []
+    },
+    {
+        "id": "f2cc4f458acb8df0",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room6",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 2340,
+        "wires": [
+            [
+                "374f40038ebda732",
+                "c6b073ec71752ffb"
+            ]
+        ]
+    },
+    {
+        "id": "f336b4287fe866b6",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room7/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2420,
+        "wires": [
+            [
+                "60dd362d59c38905"
+            ]
+        ]
+    },
+    {
+        "id": "f4757aa3ef87e692",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 115",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "6209a7112011508f",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2460,
+        "wires": []
+    },
+    {
+        "id": "60dd362d59c38905",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room7",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 2420,
+        "wires": [
+            [
+                "f4757aa3ef87e692",
+                "6209a7112011508f"
+            ]
+        ]
+    },
+    {
+        "id": "3713d78546f4474c",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room8/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2500,
+        "wires": [
+            [
+                "1981ee1e49b748d3"
+            ]
+        ]
+    },
+    {
+        "id": "ca5e286fdaf6b5bb",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 116",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "38f49fd6a6bb05de",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2540,
+        "wires": []
+    },
+    {
+        "id": "1981ee1e49b748d3",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room8",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 2500,
+        "wires": [
+            [
+                "ca5e286fdaf6b5bb",
+                "38f49fd6a6bb05de"
+            ]
+        ]
+    },
+    {
+        "id": "6023964f548cdb98",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room9/ahu/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2580,
+        "wires": [
+            [
+                "2bd0d664e7c63a9c"
+            ]
+        ]
+    },
+    {
+        "id": "c0be63cf5d67885c",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 117",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "8ce98a60090a95be",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2620,
+        "wires": []
+    },
+    {
+        "id": "2bd0d664e7c63a9c",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_ahu_floor0_room9",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 2580,
+        "wires": [
+            [
+                "c0be63cf5d67885c",
+                "8ce98a60090a95be"
+            ]
+        ]
+    },
+    {
+        "id": "ac93e8c39dfacf5b",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room2/b/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 2660,
+        "wires": [
+            [
+                "988ac68654062024"
+            ]
+        ]
+    },
+    {
+        "id": "0d4c811897cc4d91",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 118",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "699a9ab1e60583b0",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room5/b/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 2740,
+        "wires": [
+            [
+                "988ac68654062024"
+            ]
+        ]
+    },
+    {
+        "id": "823a16387fea496b",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2720,
+        "wires": []
+    },
+    {
+        "id": "988ac68654062024",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_boiler",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 2700,
+        "wires": [
+            [
+                "823a16387fea496b",
+                "0d4c811897cc4d91"
+            ]
+        ]
+    },
+    {
+        "id": "d7574cb7b6810627",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room2/c/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 2820,
+        "wires": [
+            [
+                "79ecfdaa3c68be67"
+            ]
+        ]
+    },
+    {
+        "id": "4e0f5b7d11421e53",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 119",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 2840,
+        "wires": []
+    },
+    {
+        "id": "302b0f8971ddad07",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 840,
+        "y": 2880,
+        "wires": []
+    },
+    {
+        "id": "79ecfdaa3c68be67",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_chiller",
+        "func": "var newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 2860,
+        "wires": [
+            [
+                "302b0f8971ddad07",
+                "4e0f5b7d11421e53"
+            ]
+        ]
+    },
+    {
+        "id": "7ae99611b8655295",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room5/c/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 2900,
+        "wires": [
+            [
+                "79ecfdaa3c68be67"
+            ]
+        ]
+    },
+    {
+        "id": "0bb20179fbe76ebe",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room0/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 2960,
+        "wires": [
+            [
+                "ab77b2aa5883e835"
+            ]
+        ]
+    },
+    {
+        "id": "699ef30bcd81de36",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 120",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 2960,
+        "wires": []
+    },
+    {
+        "id": "1d7e60349ae6cd97",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3000,
+        "wires": []
+    },
+    {
+        "id": "ab77b2aa5883e835",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room0",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n\n\n    \n       \n            \n                ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 2960,
+        "wires": [
+            [
+                "699ef30bcd81de36",
+                "1d7e60349ae6cd97"
+            ]
+        ]
+    },
+    {
+        "id": "cc255353aed748f0",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room1/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3040,
+        "wires": [
+            [
+                "d1e4de5d9a124d87"
+            ]
+        ]
+    },
+    {
+        "id": "c8f8ae328443647a",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 121",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3040,
+        "wires": []
+    },
+    {
+        "id": "58725cc24a9623ac",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3080,
+        "wires": []
+    },
+    {
+        "id": "d1e4de5d9a124d87",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room1",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3040,
+        "wires": [
+            [
+                "c8f8ae328443647a",
+                "58725cc24a9623ac"
+            ]
+        ]
+    },
+    {
+        "id": "fa21eeb342396f96",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room2/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3120,
+        "wires": [
+            [
+                "0314a933123d60f8"
+            ]
+        ]
+    },
+    {
+        "id": "299d973f89b625ba",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 122",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3120,
+        "wires": []
+    },
+    {
+        "id": "2e3e4f3e7daf91ab",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3160,
+        "wires": []
+    },
+    {
+        "id": "0314a933123d60f8",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room2",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3120,
+        "wires": [
+            [
+                "299d973f89b625ba",
+                "2e3e4f3e7daf91ab"
+            ]
+        ]
+    },
+    {
+        "id": "a16c141b19f6efaa",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room3/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3200,
+        "wires": [
+            [
+                "22586234a3f355d4"
+            ]
+        ]
+    },
+    {
+        "id": "d9c8145ffac14e41",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 123",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3200,
+        "wires": []
+    },
+    {
+        "id": "a57ce40df8849b3c",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3240,
+        "wires": []
+    },
+    {
+        "id": "22586234a3f355d4",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room3",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3200,
+        "wires": [
+            [
+                "d9c8145ffac14e41",
+                "a57ce40df8849b3c"
+            ]
+        ]
+    },
+    {
+        "id": "6a7c1fcfc1827fcb",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room4/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3280,
+        "wires": [
+            [
+                "85e0cc3d13596eed"
+            ]
+        ]
+    },
+    {
+        "id": "bc67e848c862e96e",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 124",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3280,
+        "wires": []
+    },
+    {
+        "id": "21f9eabfa9a8a90b",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3320,
+        "wires": []
+    },
+    {
+        "id": "85e0cc3d13596eed",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room4",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3280,
+        "wires": [
+            [
+                "bc67e848c862e96e",
+                "21f9eabfa9a8a90b"
+            ]
+        ]
+    },
+    {
+        "id": "433eaa847c3f835e",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room5/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3360,
+        "wires": [
+            [
+                "87f64644b1b241af"
+            ]
+        ]
+    },
+    {
+        "id": "42258c375a0da766",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 125",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3360,
+        "wires": []
+    },
+    {
+        "id": "67c1080638d72163",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3400,
+        "wires": []
+    },
+    {
+        "id": "87f64644b1b241af",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room5",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3360,
+        "wires": [
+            [
+                "42258c375a0da766",
+                "67c1080638d72163"
+            ]
+        ]
+    },
+    {
+        "id": "7beaa3e5c8ac89a8",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room6/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3440,
+        "wires": [
+            [
+                "74216ef4fc0533fd"
+            ]
+        ]
+    },
+    {
+        "id": "5f08df8e029dbc7e",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 126",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3440,
+        "wires": []
+    },
+    {
+        "id": "c073acbeafb94e8d",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3480,
+        "wires": []
+    },
+    {
+        "id": "74216ef4fc0533fd",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room6",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3440,
+        "wires": [
+            [
+                "5f08df8e029dbc7e",
+                "c073acbeafb94e8d"
+            ]
+        ]
+    },
+    {
+        "id": "f83f021d691bd27e",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room7/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3520,
+        "wires": [
+            [
+                "e717bb8ec885b59e"
+            ]
+        ]
+    },
+    {
+        "id": "555691c6406f8430",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 127",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3520,
+        "wires": []
+    },
+    {
+        "id": "0a517411414d505c",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3560,
+        "wires": []
+    },
+    {
+        "id": "e717bb8ec885b59e",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room7",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3520,
+        "wires": [
+            [
+                "555691c6406f8430",
+                "0a517411414d505c"
+            ]
+        ]
+    },
+    {
+        "id": "3732651da41ad19f",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room8/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3600,
+        "wires": [
+            [
+                "aa0a3b3a365a1d5e"
+            ]
+        ]
+    },
+    {
+        "id": "012f7aed311f5e00",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 128",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3600,
+        "wires": []
+    },
+    {
+        "id": "2e77d544655bffae",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3640,
+        "wires": []
+    },
+    {
+        "id": "aa0a3b3a365a1d5e",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room8",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3600,
+        "wires": [
+            [
+                "012f7aed311f5e00",
+                "2e77d544655bffae"
+            ]
+        ]
+    },
+    {
+        "id": "0f5a8e9ffd344eed",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room9/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 3680,
+        "wires": [
+            [
+                "d6ea66b76a353a41"
+            ]
+        ]
+    },
+    {
+        "id": "304d41c193589472",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 129",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "c462a85c7c15d2df",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3720,
+        "wires": []
+    },
+    {
+        "id": "d6ea66b76a353a41",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room9",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 3680,
+        "wires": [
+            [
+                "304d41c193589472",
+                "c462a85c7c15d2df"
+            ]
+        ]
+    },
+    {
+        "id": "079c3c97c9bda9c7",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room10/lighting/essential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 3760,
+        "wires": [
+            [
+                "98606ff6b7d3e029"
+            ]
+        ]
+    },
+    {
+        "id": "04e8bb4cc7a89a15",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 130",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 3760,
+        "wires": []
+    },
+    {
+        "id": "28a306862e957fc8",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3800,
+        "wires": []
+    },
+    {
+        "id": "98606ff6b7d3e029",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room10",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 3760,
+        "wires": [
+            [
+                "04e8bb4cc7a89a15",
+                "28a306862e957fc8"
+            ]
+        ]
+    },
+    {
+        "id": "6a95fbb0f89915b2",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room0/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 3900,
+        "wires": [
+            [
+                "623572787464f1bf"
+            ]
+        ]
+    },
+    {
+        "id": "54f745d712f5cca2",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 131",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 3900,
+        "wires": []
+    },
+    {
+        "id": "26e466c11e49f3dc",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 3940,
+        "wires": []
+    },
+    {
+        "id": "623572787464f1bf",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room0",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 3900,
+        "wires": [
+            [
+                "54f745d712f5cca2",
+                "26e466c11e49f3dc"
+            ]
+        ]
+    },
+    {
+        "id": "a65ea5b1c7a6f4a9",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room1/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 3980,
+        "wires": [
+            [
+                "a01cb852e339b1dd"
+            ]
+        ]
+    },
+    {
+        "id": "6c68cd824481bab4",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 132",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 3980,
+        "wires": []
+    },
+    {
+        "id": "1fde93f4ed900543",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4020,
+        "wires": []
+    },
+    {
+        "id": "a01cb852e339b1dd",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room1",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 3980,
+        "wires": [
+            [
+                "6c68cd824481bab4",
+                "1fde93f4ed900543"
+            ]
+        ]
+    },
+    {
+        "id": "c71e4cdadaae457f",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room2/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4060,
+        "wires": [
+            [
+                "10764b690cec390d"
+            ]
+        ]
+    },
+    {
+        "id": "4f99ccf1126e6020",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 133",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4060,
+        "wires": []
+    },
+    {
+        "id": "63f166029acd88ef",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4100,
+        "wires": []
+    },
+    {
+        "id": "10764b690cec390d",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room2",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4060,
+        "wires": [
+            [
+                "4f99ccf1126e6020",
+                "63f166029acd88ef"
+            ]
+        ]
+    },
+    {
+        "id": "4b73f0191cd7094b",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room3/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4140,
+        "wires": [
+            [
+                "0e0786a02d18dc9c"
+            ]
+        ]
+    },
+    {
+        "id": "082e7c62e4d35281",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 134",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4140,
+        "wires": []
+    },
+    {
+        "id": "3c90d6414d7cba19",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4180,
+        "wires": []
+    },
+    {
+        "id": "0e0786a02d18dc9c",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room3",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4140,
+        "wires": [
+            [
+                "082e7c62e4d35281",
+                "3c90d6414d7cba19"
+            ]
+        ]
+    },
+    {
+        "id": "4d9e5242db3fad46",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room4/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4220,
+        "wires": [
+            [
+                "987e5aad8ddd464a"
+            ]
+        ]
+    },
+    {
+        "id": "91bfe50834e0758d",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 135",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4220,
+        "wires": []
+    },
+    {
+        "id": "a62c949115759842",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4260,
+        "wires": []
+    },
+    {
+        "id": "987e5aad8ddd464a",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room4",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4220,
+        "wires": [
+            [
+                "91bfe50834e0758d",
+                "a62c949115759842"
+            ]
+        ]
+    },
+    {
+        "id": "3028bc9329a9f5b6",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room5/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4300,
+        "wires": [
+            [
+                "e65b1338756e9c70"
+            ]
+        ]
+    },
+    {
+        "id": "76c37f51991c6720",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 136",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4300,
+        "wires": []
+    },
+    {
+        "id": "ecc886a4fe6590c6",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4340,
+        "wires": []
+    },
+    {
+        "id": "e65b1338756e9c70",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room5",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4300,
+        "wires": [
+            [
+                "76c37f51991c6720",
+                "ecc886a4fe6590c6"
+            ]
+        ]
+    },
+    {
+        "id": "ac460b28226e63b4",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room6/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4380,
+        "wires": [
+            [
+                "d9c94723eeab5a4c"
+            ]
+        ]
+    },
+    {
+        "id": "15a84a655630a2fb",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 137",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4380,
+        "wires": []
+    },
+    {
+        "id": "3e9df3517274cb81",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4420,
+        "wires": []
+    },
+    {
+        "id": "d9c94723eeab5a4c",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room6",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4380,
+        "wires": [
+            [
+                "15a84a655630a2fb",
+                "3e9df3517274cb81"
+            ]
+        ]
+    },
+    {
+        "id": "29d273daa4247f14",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room7/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4460,
+        "wires": [
+            [
+                "53ec3ae3d65d89b9"
+            ]
+        ]
+    },
+    {
+        "id": "29777e85dc0e952a",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 138",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4460,
+        "wires": []
+    },
+    {
+        "id": "9b0972353b9b9ded",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4500,
+        "wires": []
+    },
+    {
+        "id": "53ec3ae3d65d89b9",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room7",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4460,
+        "wires": [
+            [
+                "29777e85dc0e952a",
+                "9b0972353b9b9ded"
+            ]
+        ]
+    },
+    {
+        "id": "b0452d669f9ef960",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room8/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4540,
+        "wires": [
+            [
+                "e5551657f2e5ca0c"
+            ]
+        ]
+    },
+    {
+        "id": "2251f2b90b5b4cb7",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 139",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4540,
+        "wires": []
+    },
+    {
+        "id": "13db1c9fb464a17c",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4580,
+        "wires": []
+    },
+    {
+        "id": "e5551657f2e5ca0c",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room8",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4540,
+        "wires": [
+            [
+                "2251f2b90b5b4cb7",
+                "13db1c9fb464a17c"
+            ]
+        ]
+    },
+    {
+        "id": "ac127fdbc3223df0",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room9/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 4620,
+        "wires": [
+            [
+                "3a31960168d19d57"
+            ]
+        ]
+    },
+    {
+        "id": "d0848b6e1eda0c03",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 140",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 4620,
+        "wires": []
+    },
+    {
+        "id": "f9ef72fd2def4e81",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4660,
+        "wires": []
+    },
+    {
+        "id": "3a31960168d19d57",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room9",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 4620,
+        "wires": [
+            [
+                "d0848b6e1eda0c03",
+                "f9ef72fd2def4e81"
+            ]
+        ]
+    },
+    {
+        "id": "b661d7b5b25e0127",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room10/lighting/nonessential/power",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 4700,
+        "wires": [
+            [
+                "b77bc01c1a0d84aa"
+            ]
+        ]
+    },
+    {
+        "id": "68ecfad8dbf54a06",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 141",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 4700,
+        "wires": []
+    },
+    {
+        "id": "5095856e0e42d33b",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 910,
+        "y": 4740,
+        "wires": []
+    },
+    {
+        "id": "b77bc01c1a0d84aa",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_pow_light_floor0_room10",
+        "func": "var newobject = {};\nnewobject = {\n    \"sensor_name\": (msg.payload).unit,\n    \"floor_no\": (msg.payload).floorno,\n    \"room_no\": (msg.payload).roomno,\n    \"state\": (msg.payload).line,\n    \"time\": (msg.payload).timestamp,\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 4700,
+        "wires": [
+            [
+                "68ecfad8dbf54a06",
+                "5095856e0e42d33b"
+            ]
+        ]
+    },
+    {
+        "id": "d24f3ce130f55a61",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Smart Meter",
+        "topic": "326project/smartbuilding/pv/kWhmeter",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 1040,
+        "wires": [
+            [
+                "a69a0cef85dd7648"
+            ]
+        ]
+    },
+    {
+        "id": "a69a0cef85dd7648",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_KWhmetre",
+        "func": "msg.collection = \"co326_pv_smartmeter\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"gird\" : msg.payload };\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1040,
+        "wires": [
+            [
+                "37174b517afa0d89",
+                "e4a6927f91802597"
+            ]
+        ]
+    },
+    {
+        "id": "37174b517afa0d89",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "e4a6927f91802597",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_KWhmeter",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 830,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "fb901121caec312b",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Btr Current Sensor",
+        "topic": "326project/smartbuilding/pv/battery/current",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1140,
+        "wires": [
+            [
+                "f66cf7022fd25559"
+            ]
+        ]
+    },
+    {
+        "id": "8a08db2d88051113",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 147",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "f66cf7022fd25559",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_Current",
+        "func": "msg.collection = \"co326_pv_btr_currentSensor\"\n\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time , \"current\" : msg.payload};\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1140,
+        "wires": [
+            [
+                "8a08db2d88051113",
+                "24bf242f934cc685"
+            ]
+        ]
+    },
+    {
+        "id": "24bf242f934cc685",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_btr_currentSensor",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 850,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "c035db73fb37b331",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Btr Voltage Sensor",
+        "topic": "326project/smartbuilding/pv/battery/voltage",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1240,
+        "wires": [
+            [
+                "96c43fe41efc0b7e"
+            ]
+        ]
+    },
+    {
+        "id": "96c43fe41efc0b7e",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_voltage",
+        "func": "msg.collection = \"co326_pv_btr_voltageSensor\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"voltage\":msg.payload };\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1240,
+        "wires": [
+            [
+                "abe25364e94e6955",
+                "8982a5de4b4a4833"
+            ]
+        ]
+    },
+    {
+        "id": "8982a5de4b4a4833",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_btr_voltageSensor",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 850,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "abe25364e94e6955",
+        "type": "debug",
+        "z": "6639623a258bb78d",
+        "name": "debug 148",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "bc238912d417bbb4",
+        "type": "mqtt in",
+        "z": "6639623a258bb78d",
+        "name": "Battery Temperature",
+        "topic": "326project/smartbuilding/pv/battery/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1380,
+        "wires": [
+            [
+                "968a94b858e32c96"
+            ]
+        ]
+    },
+    {
+        "id": "968a94b858e32c96",
+        "type": "function",
+        "z": "6639623a258bb78d",
+        "name": "set_props_batteryTemp",
+        "func": "msg.collection = \"co326_pv_btr_temp\"\n\nlet time = new Date().toLocaleString();\nmsg.payload = { time, \"batterReady\":msg.payload };\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1380,
+        "wires": [
+            [
+                "642f2a8cfe7f651a"
+            ]
+        ]
+    },
+    {
+        "id": "642f2a8cfe7f651a",
+        "type": "mongodb out",
+        "z": "6639623a258bb78d",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_btr_temp",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 820,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d9af299d07b13199",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6f2da96c2ca09d2e",
+        "type": "mqtt-broker",
+        "name": "mqtt.server",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

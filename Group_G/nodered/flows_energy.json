@@ -1,0 +1,785 @@
+[
+    {
+        "id": "e58fbb445769eea5",
+        "type": "tab",
+        "label": "Energy",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c551c04f27ed6342",
+        "type": "comment",
+        "z": "e58fbb445769eea5",
+        "name": "HVAC",
+        "info": "",
+        "x": 130,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "daefbcade79edb1a",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/tempereature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 700,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "ffef4dd54c38d8bf",
+        "type": "debug",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "ef458ca6013b55ba",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 180,
+        "wires": [
+            [
+                "4b12960763baa359"
+            ]
+        ]
+    },
+    {
+        "id": "4b12960763baa359",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/tempereature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 760,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fa3c1aa702cb5e7e",
+        "type": "function",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 820,
+        "wires": [
+            [
+                "ffef4dd54c38d8bf"
+            ]
+        ]
+    },
+    {
+        "id": "32e483566fba7eb4",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "855ad709632168f0"
+            ]
+        ]
+    },
+    {
+        "id": "855ad709632168f0",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/humidity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 740,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3667b8b544604f31",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 740,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "84d9f6a65e5753f5",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 260,
+        "wires": [
+            [
+                "f5c975bb13d4a266"
+            ]
+        ]
+    },
+    {
+        "id": "f5c975bb13d4a266",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/boiler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 730,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "427cefe7bab9f3f4",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/boiler",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 800,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "5c9c7241e881f0b4",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "d6731ec82b938e12"
+            ]
+        ]
+    },
+    {
+        "id": "d6731ec82b938e12",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/chiller",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 730,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "91b59f5cc5ac5736",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/chiller",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 860,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "77b974852696c1f9",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 340,
+        "wires": [
+            [
+                "dfcb19ced43b3d4e"
+            ]
+        ]
+    },
+    {
+        "id": "dfcb19ced43b3d4e",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/ahu",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "4c97af83469fce1f",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 920,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "8e2d83b3b979dda6",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "60427be672f1ed2f"
+            ]
+        ]
+    },
+    {
+        "id": "60427be672f1ed2f",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/intensity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 740,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f2a02964569084f6",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "56f1446a042ae314"
+            ]
+        ]
+    },
+    {
+        "id": "56f1446a042ae314",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 720,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "9156c99c9d88edd3",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 460,
+        "wires": [
+            [
+                "02b04cb83e332151"
+            ]
+        ]
+    },
+    {
+        "id": "02b04cb83e332151",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/fire_detect",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 740,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "f70edf4bad27d92a",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 500,
+        "wires": [
+            [
+                "6be2a9cbade3e3b3"
+            ]
+        ]
+    },
+    {
+        "id": "6be2a9cbade3e3b3",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/smoke_detect",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 750,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1686feb227fce96d",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 540,
+        "wires": [
+            [
+                "c82ec36d104e3b0d"
+            ]
+        ]
+    },
+    {
+        "id": "c82ec36d104e3b0d",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 740,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "4822c507880c2590",
+        "type": "inject",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"voltage\":3.3,\"current\":4}",
+        "payloadType": "str",
+        "x": 210,
+        "y": 580,
+        "wires": [
+            [
+                "161232ad8b337c32"
+            ]
+        ]
+    },
+    {
+        "id": "161232ad8b337c32",
+        "type": "mqtt out",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 740,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "27a514951cde8122",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/intensity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 980,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "307f4f7e24fa9147",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/light",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 1040,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "c52c263b826dc0ed",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/fire_detect",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 1100,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "4da04bfdcf8585cf",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/smoke_detect",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 1140,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "fdc251f94f8d8102",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/sprinkler",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 1180,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "34b6eef25cce65b1",
+        "type": "mqtt in",
+        "z": "e58fbb445769eea5",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/power/fire_alarm",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 1220,
+        "wires": [
+            [
+                "fa3c1aa702cb5e7e"
+            ]
+        ]
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.17.0.11",
+        "port": "8883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]
