@@ -51,6 +51,7 @@ class Battery(object):
             self.SoC = 100
             # self.voc = self.voc_lookup["%.1f" % soc]
             self.fully_charged = True
+            print("Battery is fully charged.")
         time.sleep(1)
 
     # Assumption: the relationship between SoC vs Voltage is the same in both charging and discharging.
@@ -77,11 +78,18 @@ def on_connect(client, userdata, flags, rc):
 def on_disconnect(client, userdata, rc):
     print("Client " + client._client_id.decode() + " disconnected from MQTT server.")
 
+# Global battery object which is shared by all threads.
+# It is initialized with a charging power of 0.
 battery = Battery(BAT_CAPACITY, 0, 0)
 
 if __name__ == '__main__':
+    # 3 MQTT clients are running simultaneously for:
+    # 1. Loading the battery.
+    # 2. Subscribing to SW1 and deciding whether to charge the battery.
+    # 3. Subscribing to SW2 and deciding whether to connect the battery to the load.
     clients = []
 
+    # This function mimics the loading of the battery by iteratively consuming power from the battery.
     def sample_load():
         global loading, ready, battery
         while True:
@@ -91,17 +99,13 @@ if __name__ == '__main__':
                 continue
             c1.release()
             c3.acquire()
-            print("Load is consuming power...")
-            # 20 kWh load
-            battery.load(20000)
-            soc = battery.SoC
             c3.wait()
+            print("Load is consuming power...")
+            # 60 Wh load
+            battery.load(60000)
             c3.release()
-            c2.acquire()
-            if soc < 60 and ready:
-                ready = False
-            c2.release()
 
+    # This function subscribes to SW1 and either shuts down charging or starts charging at the specified power level accordingly.
     def subscribing_sw1():
         client = mqtt.Client("Battery Simulator - SW1")
         client.connect(MQTT_SERVER, MQTT_PORT, 60)
@@ -114,12 +118,18 @@ if __name__ == '__main__':
             c.acquire()
             if pwm_duty != pwm:
                 pwm_duty = pwm
+                if pwm == 0:
+                    print("SW1 is off. Battery is not charging.")
+                else:
+                    print("SW1 is on. Battery is charging.")
+            c.notify_all()
             c.release()
         client.message_callback_add(f"{MQTT_TOPIC}/controls/sw1", on_message)
         client.loop_start()
         client.subscribe(topic=f"{MQTT_TOPIC}/controls/sw1", qos=2)
         clients.append(client)
 
+    # This function subscribes to SW2 and either connects the load to the battery or disconnects the load from the battery accordingly.
     def subscribing_sw2():
         client = mqtt.Client("Battery Simulator - SW2")
         client.connect(MQTT_SERVER, MQTT_PORT, 60)
@@ -154,6 +164,7 @@ if __name__ == '__main__':
     subscribing_sw2_thread.start()
     time.sleep(1)
 
+    # Main thread is publishing battery voltage (+ SoC) and battery ready status.
     client = mqtt.Client("Battery Simulator - Battery")
     client.connect(MQTT_SERVER, MQTT_PORT, 60)
     client.on_connect = on_connect
@@ -163,19 +174,25 @@ if __name__ == '__main__':
         try:
             # Charging power is regulated by PWM duty cycle.
             c.acquire()
+            c.wait()
             c3.acquire()
             battery.set_charging_power(pwm_duty * BAT_CAPACITY / 100)
             battery.charge()
             soc, voc = battery.SoC, battery.voc
             c3.notify_all()
             c3.release()
-            client.publish(f"{MQTT_TOPIC}/battery/voltage", json.dumps({ "time": time.time(), "value": voc }))
+            client.publish(f"{MQTT_TOPIC}/battery/voltage", json.dumps({ "time": time.time(), "value": voc, "soc": soc }))
             print(f"pwm duty: {pwm_duty}, SoC: {soc}%, Voc: {voc}V")
             c.release()
             c2.acquire()
-            if soc >= 60 and not ready:
+            if soc >= 60 and not ready: 
+                print("Battery is ready to load.")
                 ready = True
                 client.publish(f"{MQTT_TOPIC}/battery/ready", json.dumps({ "time": time.time(), "value": True }))
+            if soc < 60 and ready:
+                print("Battery is not ready to load.")
+                ready = False
+                client.publish(f"{MQTT_TOPIC}/battery/ready", json.dumps({ "time": time.time(), "value": False }))
             c2.release()
         except KeyboardInterrupt:
             client.loop_stop()
