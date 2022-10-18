@@ -171,6 +171,8 @@ if __name__ == '__main__':
     client.on_connect = on_connect
     client.on_disconnect = on_disconnect
     client.loop_start()
+    # Make the battery ready status initially False.
+    client.publish(f"{MQTT_TOPIC}/battery/ready", json.dumps({ "time": time.time(), "value": False }))
     while True:
         try:
             # Charging power is regulated by PWM duty cycle.
