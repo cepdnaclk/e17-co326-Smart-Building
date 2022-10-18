@@ -1,0 +1,2603 @@
+[
+    {
+        "id": "2a7c8826acd49e3d",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dae3335b496a60db",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "light_1",
+        "tooltip": "",
+        "group": "bf075debe55b4f14",
+        "order": 1,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"active\": true}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"active\": false}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "366edf69408631e6"
+            ]
+        ]
+    },
+    {
+        "id": "366edf69408631e6",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/1",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 440,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "0ae1c02c5ba2789e",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "light_2",
+        "tooltip": "",
+        "group": "bf075debe55b4f14",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"active\": true}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"active\": false}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "7fee59652bb00677"
+            ]
+        ]
+    },
+    {
+        "id": "7fee59652bb00677",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/2",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 440,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "07343d5a6dc8d2bf",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "light_3",
+        "tooltip": "",
+        "group": "bf075debe55b4f14",
+        "order": 5,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"active\": true}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"active\": false}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "08a22c19b854fab4"
+            ]
+        ]
+    },
+    {
+        "id": "08a22c19b854fab4",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/3",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 440,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e36d2c37f2fbdbf3",
+        "type": "ui_level",
+        "z": "2a7c8826acd49e3d",
+        "group": "bf075debe55b4f14",
+        "order": 7,
+        "width": 7,
+        "height": 2,
+        "name": "",
+        "label": "light_1_Intensity",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 590,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b5e91df856aa98ea",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "e36d2c37f2fbdbf3"
+            ]
+        ]
+    },
+    {
+        "id": "074a236d20963c22",
+        "type": "ui_level",
+        "z": "2a7c8826acd49e3d",
+        "group": "bf075debe55b4f14",
+        "order": 8,
+        "width": 7,
+        "height": 3,
+        "name": "",
+        "label": "light_1_Intensity",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 590,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c4ccc336407c2031",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 220,
+        "y": 360,
+        "wires": [
+            [
+                "074a236d20963c22"
+            ]
+        ]
+    },
+    {
+        "id": "929fb9fc7db22c25",
+        "type": "ui_level",
+        "z": "2a7c8826acd49e3d",
+        "group": "bf075debe55b4f14",
+        "order": 9,
+        "width": 7,
+        "height": 3,
+        "name": "",
+        "label": "light_1_Intensity",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 590,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "14c4374431b5955c",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 220,
+        "y": 400,
+        "wires": [
+            [
+                "929fb9fc7db22c25"
+            ]
+        ]
+    },
+    {
+        "id": "61e498ee54789fe7",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 2,
+        "group": "bf075debe55b4f14",
+        "width": 4,
+        "height": 1,
+        "label": "light_1_status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "{\"active\": true}",
+                "valueType": "json"
+            },
+            {
+                "color": "#ff0000",
+                "value": "{\"active\": false}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 510,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "ec0284657c32af09",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 460,
+        "wires": [
+            [
+                "61e498ee54789fe7"
+            ]
+        ]
+    },
+    {
+        "id": "75c41181ee14430e",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 4,
+        "group": "bf075debe55b4f14",
+        "width": 4,
+        "height": 1,
+        "label": "light_2_status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "{\"active\": false}",
+                "valueType": "json"
+            },
+            {
+                "color": "#008000",
+                "value": "{\"active\": true}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 510,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a8f5e1457829e14f",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/2",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 500,
+        "wires": [
+            [
+                "75c41181ee14430e"
+            ]
+        ]
+    },
+    {
+        "id": "f23f195aa9af9d0c",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 6,
+        "group": "bf075debe55b4f14",
+        "width": 4,
+        "height": 1,
+        "label": "light_3_status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "{\"active\": false}",
+                "valueType": "json"
+            },
+            {
+                "color": "#008000",
+                "value": "{\"active\": true}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 510,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "a6bd0e571ab8d8e7",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/1/3",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "f23f195aa9af9d0c"
+            ]
+        ]
+    },
+    {
+        "id": "1d48741dd9d051fd",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 1190,
+        "y": 220,
+        "wires": [
+            [
+                "e05ca0149139082c",
+                "2b156075b0b633c4"
+            ]
+        ]
+    },
+    {
+        "id": "d8671a3e34c81569",
+        "type": "function",
+        "z": "2a7c8826acd49e3d",
+        "name": "function 10",
+        "func": "msg.payload = {\n    \"floor_number\": 0,\n    \"room_number\": 1\n};\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 220,
+        "wires": [
+            [
+                "1d48741dd9d051fd"
+            ]
+        ]
+    },
+    {
+        "id": "931280ca1152773b",
+        "type": "inject",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 780,
+        "y": 360,
+        "wires": [
+            [
+                "d8671a3e34c81569"
+            ]
+        ]
+    },
+    {
+        "id": "e05ca0149139082c",
+        "type": "debug",
+        "z": "2a7c8826acd49e3d",
+        "name": "debug 107",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1470,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2b156075b0b633c4",
+        "type": "function",
+        "z": "2a7c8826acd49e3d",
+        "name": "function 11",
+        "func": "var count = msg.payload[0].count;\n\nmsg.payload = {\n    count\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 360,
+        "wires": [
+            [
+                "565a37a4398502dc",
+                "3547af3e21b2cc93"
+            ]
+        ]
+    },
+    {
+        "id": "565a37a4398502dc",
+        "type": "debug",
+        "z": "2a7c8826acd49e3d",
+        "name": "debug 108",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3547af3e21b2cc93",
+        "type": "ui_text",
+        "z": "2a7c8826acd49e3d",
+        "group": "49dfe063b16d8419",
+        "order": 1,
+        "width": 7,
+        "height": 1,
+        "name": "",
+        "label": "occupancy_count: ",
+        "format": "{{msg.payload.count}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "bce167627c3be846",
+        "type": "ui_widget_thermometer",
+        "z": "2a7c8826acd49e3d",
+        "group": "361ce57fa97ea726",
+        "order": 1,
+        "width": 3,
+        "height": 9,
+        "name": "Temperature",
+        "title": "Temperature",
+        "colorTop": "#2196f3",
+        "colorMiddle": "#8bc34a",
+        "colorBottom": "#f44336",
+        "unit": "°C",
+        "scale": "normal",
+        "minTemp": 0,
+        "maxTemp": 100,
+        "x": 2270,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ac7bf41fb90c7aa7",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1980,
+        "y": 140,
+        "wires": [
+            [
+                "bce167627c3be846"
+            ]
+        ]
+    },
+    {
+        "id": "cf0d462c7f750673",
+        "type": "ui_widget_humidity_tree",
+        "z": "2a7c8826acd49e3d",
+        "group": "361ce57fa97ea726",
+        "order": 2,
+        "width": 4,
+        "height": 9,
+        "name": "Humidity",
+        "title": "Humidity",
+        "colorHumidMax": "#006000",
+        "colorHumidMin": "#954418",
+        "x": 2260,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e4186381a9ade824",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1970,
+        "y": 200,
+        "wires": [
+            [
+                "cf0d462c7f750673"
+            ]
+        ]
+    },
+    {
+        "id": "6349649d477643c0",
+        "type": "ui_gauge",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "group": "361ce57fa97ea726",
+        "order": 3,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Fan Speed",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 2290,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "716dadee3ece893e",
+        "type": "ui_slider",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "361ce57fa97ea726",
+        "order": 6,
+        "width": 3,
+        "height": 2,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "10",
+        "max": "35",
+        "step": 1,
+        "className": "",
+        "x": 1830,
+        "y": 340,
+        "wires": [
+            [
+                "5c122eb801b3f87b"
+            ]
+        ]
+    },
+    {
+        "id": "5c122eb801b3f87b",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/temperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 2200,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "469caa533d21ce94",
+        "type": "ui_slider",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "361ce57fa97ea726",
+        "order": 7,
+        "width": 4,
+        "height": 2,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 1830,
+        "y": 420,
+        "wires": [
+            [
+                "3f0f7607991d1560"
+            ]
+        ]
+    },
+    {
+        "id": "3f0f7607991d1560",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 2190,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "f876c5a2d5ae7d79",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 5,
+        "group": "361ce57fa97ea726",
+        "width": 5,
+        "height": 2,
+        "label": "Boiler Status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2310,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8979b7dd36441aa0",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 8,
+        "group": "361ce57fa97ea726",
+        "width": 5,
+        "height": 2,
+        "label": "Chiller Status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2310,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "40af59da3cbe77d4",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/fan_speed",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1970,
+        "y": 260,
+        "wires": [
+            [
+                "6349649d477643c0"
+            ]
+        ]
+    },
+    {
+        "id": "e38784a953a5e3a9",
+        "type": "ui_slider",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "361ce57fa97ea726",
+        "order": 4,
+        "width": 5,
+        "height": 2,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0",
+        "max": "5",
+        "step": 1,
+        "className": "",
+        "x": 1850,
+        "y": 480,
+        "wires": [
+            [
+                "621ecec44ea64baf"
+            ]
+        ]
+    },
+    {
+        "id": "621ecec44ea64baf",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/fan_speed",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 2220,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c8a8e8c95a6bed96",
+        "type": "inject",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1820,
+        "y": 580,
+        "wires": [
+            [
+                "0eaa0bd86abab85a"
+            ]
+        ]
+    },
+    {
+        "id": "0eaa0bd86abab85a",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "326_fire_Alarm",
+        "operation": "find",
+        "x": 2000,
+        "y": 660,
+        "wires": [
+            [
+                "c5d950c8d3cfb257"
+            ]
+        ]
+    },
+    {
+        "id": "c5d950c8d3cfb257",
+        "type": "debug",
+        "z": "2a7c8826acd49e3d",
+        "name": "debug 142",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2310,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3a5fe5ae3d85d84d",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 1,
+        "group": "92448d83b69b6a0c",
+        "width": 0,
+        "height": 0,
+        "label": "Fire Alarm",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2950,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "3af5a6aa04519e60",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/firealarm",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2670,
+        "y": 340,
+        "wires": [
+            [
+                "3a5fe5ae3d85d84d"
+            ]
+        ]
+    },
+    {
+        "id": "060d0d8927c84855",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 2,
+        "group": "92448d83b69b6a0c",
+        "width": 0,
+        "height": 0,
+        "label": "Sprinkler",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2930,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "beedfc5bcb6d1c04",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/sprinkler",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2650,
+        "y": 400,
+        "wires": [
+            [
+                "060d0d8927c84855"
+            ]
+        ]
+    },
+    {
+        "id": "7e544622afb1b0e8",
+        "type": "ui_text",
+        "z": "2a7c8826acd49e3d",
+        "group": "92448d83b69b6a0c",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Smoker Detector:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2910,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5c06a4bb97918d97",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2600,
+        "y": 460,
+        "wires": [
+            [
+                "7e544622afb1b0e8"
+            ]
+        ]
+    },
+    {
+        "id": "1d71b21341912acf",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 4,
+        "group": "92448d83b69b6a0c",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 3130,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e002573a180ad5e6",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "Pull Switch",
+        "tooltip": "",
+        "group": "92448d83b69b6a0c",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2750,
+        "y": 560,
+        "wires": [
+            [
+                "164d8c5c22a879f7"
+            ]
+        ]
+    },
+    {
+        "id": "164d8c5c22a879f7",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/pullstation",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 3060,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "9def85bba25c59a9",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "light_1",
+        "tooltip": "",
+        "group": "564f8ea0b21b8a6e",
+        "order": 1,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"active\": true}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"active\": false}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 700,
+        "wires": [
+            [
+                "e590ce4d0f11723e"
+            ]
+        ]
+    },
+    {
+        "id": "e590ce4d0f11723e",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/2/1",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 440,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "050e477166200de1",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "light_2",
+        "tooltip": "",
+        "group": "564f8ea0b21b8a6e",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"active\": true}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"active\": false}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 760,
+        "wires": [
+            [
+                "b16c6f41548cffd5"
+            ]
+        ]
+    },
+    {
+        "id": "b16c6f41548cffd5",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/2/2",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 440,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "d8a0ccabf2e816fb",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "light_3",
+        "tooltip": "",
+        "group": "564f8ea0b21b8a6e",
+        "order": 5,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "{\"active\": true}",
+        "onvalueType": "json",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "{\"active\": false}",
+        "offvalueType": "json",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 820,
+        "wires": [
+            [
+                "91530762c33c5953"
+            ]
+        ]
+    },
+    {
+        "id": "91530762c33c5953",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/2/3",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 440,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "2fbfd3b0801f1765",
+        "type": "ui_level",
+        "z": "2a7c8826acd49e3d",
+        "group": "564f8ea0b21b8a6e",
+        "order": 7,
+        "width": 7,
+        "height": 2,
+        "name": "",
+        "label": "light_1_Intensity",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 590,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "130463c9697bd7cf",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 220,
+        "y": 880,
+        "wires": [
+            [
+                "2fbfd3b0801f1765"
+            ]
+        ]
+    },
+    {
+        "id": "601f4a40c27188b2",
+        "type": "ui_level",
+        "z": "2a7c8826acd49e3d",
+        "group": "564f8ea0b21b8a6e",
+        "order": 8,
+        "width": 7,
+        "height": 3,
+        "name": "",
+        "label": "light_1_Intensity",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 590,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "a1d68d739fccd8c0",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 220,
+        "y": 920,
+        "wires": [
+            [
+                "601f4a40c27188b2"
+            ]
+        ]
+    },
+    {
+        "id": "0b5d7263bd801f46",
+        "type": "ui_level",
+        "z": "2a7c8826acd49e3d",
+        "group": "564f8ea0b21b8a6e",
+        "order": 9,
+        "width": 7,
+        "height": 3,
+        "name": "",
+        "label": "light_1_Intensity",
+        "colorHi": "#e60000",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#00b33c",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 590,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "caaf9c91aebd25c3",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "operation": "find",
+        "x": 220,
+        "y": 960,
+        "wires": [
+            [
+                "0b5d7263bd801f46"
+            ]
+        ]
+    },
+    {
+        "id": "0042cfd38e362436",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 2,
+        "group": "564f8ea0b21b8a6e",
+        "width": 4,
+        "height": 1,
+        "label": "light_1_status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#008000",
+                "value": "{\"active\": true}",
+                "valueType": "json"
+            },
+            {
+                "color": "#ff0000",
+                "value": "{\"active\": false}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 510,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "26f6373b89c7b738",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/2/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1020,
+        "wires": [
+            [
+                "0042cfd38e362436"
+            ]
+        ]
+    },
+    {
+        "id": "2dcc29751cfe0295",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 4,
+        "group": "564f8ea0b21b8a6e",
+        "width": 4,
+        "height": 1,
+        "label": "light_2_status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "{\"active\": false}",
+                "valueType": "json"
+            },
+            {
+                "color": "#008000",
+                "value": "{\"active\": true}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 510,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "4dfd8ff672a4bf65",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/2/2",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1060,
+        "wires": [
+            [
+                "2dcc29751cfe0295"
+            ]
+        ]
+    },
+    {
+        "id": "cbf554e1a20eae7f",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 6,
+        "group": "564f8ea0b21b8a6e",
+        "width": 4,
+        "height": 1,
+        "label": "light_3_status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "{\"active\": false}",
+                "valueType": "json"
+            },
+            {
+                "color": "#008000",
+                "value": "{\"active\": true}",
+                "valueType": "json"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 510,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "d188fda10c7eba8b",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/0/2/3",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1100,
+        "wires": [
+            [
+                "cbf554e1a20eae7f"
+            ]
+        ]
+    },
+    {
+        "id": "6551ce44679430dd",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 1150,
+        "y": 880,
+        "wires": [
+            [
+                "6e30f4a61c1c2c83",
+                "77639165d0388417"
+            ]
+        ]
+    },
+    {
+        "id": "0216583cde94b9c0",
+        "type": "function",
+        "z": "2a7c8826acd49e3d",
+        "name": "function 13",
+        "func": "msg.payload = {\n    \"floor_number\": 0,\n    \"room_number\": 2\n};\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 880,
+        "wires": [
+            [
+                "6551ce44679430dd"
+            ]
+        ]
+    },
+    {
+        "id": "88b4d6bbfbf0ad64",
+        "type": "inject",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 740,
+        "y": 1020,
+        "wires": [
+            [
+                "0216583cde94b9c0"
+            ]
+        ]
+    },
+    {
+        "id": "6e30f4a61c1c2c83",
+        "type": "debug",
+        "z": "2a7c8826acd49e3d",
+        "name": "debug 143",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1430,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "77639165d0388417",
+        "type": "function",
+        "z": "2a7c8826acd49e3d",
+        "name": "function 14",
+        "func": "var count = msg.payload[0].count;\n\nmsg.payload = {\n    count\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 1020,
+        "wires": [
+            [
+                "94f00d6ec960ffe6",
+                "a7a2e76a9aa3aadf"
+            ]
+        ]
+    },
+    {
+        "id": "94f00d6ec960ffe6",
+        "type": "debug",
+        "z": "2a7c8826acd49e3d",
+        "name": "debug 144",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "a7a2e76a9aa3aadf",
+        "type": "ui_text",
+        "z": "2a7c8826acd49e3d",
+        "group": "7eb7e371cb275cec",
+        "order": 1,
+        "width": 7,
+        "height": 1,
+        "name": "",
+        "label": "occupancy_count: ",
+        "format": "{{msg.payload.count}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 1410,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "7baa76f9cc3c6c18",
+        "type": "ui_widget_thermometer",
+        "z": "2a7c8826acd49e3d",
+        "group": "5456c9340d5eb6aa",
+        "order": 1,
+        "width": 3,
+        "height": 9,
+        "name": "Temperature",
+        "title": "Temperature",
+        "colorTop": "#2196f3",
+        "colorMiddle": "#8bc34a",
+        "colorBottom": "#f44336",
+        "unit": "°C",
+        "scale": "normal",
+        "minTemp": 0,
+        "maxTemp": 100,
+        "x": 2210,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d14e011e58638e43",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/2/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1920,
+        "y": 740,
+        "wires": [
+            [
+                "7baa76f9cc3c6c18"
+            ]
+        ]
+    },
+    {
+        "id": "a3edb6c4c051fdb1",
+        "type": "ui_widget_humidity_tree",
+        "z": "2a7c8826acd49e3d",
+        "group": "5456c9340d5eb6aa",
+        "order": 2,
+        "width": 4,
+        "height": 9,
+        "name": "Humidity",
+        "title": "Humidity",
+        "colorHumidMax": "#006000",
+        "colorHumidMin": "#954418",
+        "x": 2200,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "8980ddd82c0223e3",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/2/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1910,
+        "y": 800,
+        "wires": [
+            [
+                "a3edb6c4c051fdb1"
+            ]
+        ]
+    },
+    {
+        "id": "b609586638b454bb",
+        "type": "ui_gauge",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "group": "5456c9340d5eb6aa",
+        "order": 3,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Fan Speed",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 2230,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "8e74b980ce10c4e0",
+        "type": "ui_slider",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "5456c9340d5eb6aa",
+        "order": 6,
+        "width": 3,
+        "height": 2,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "10",
+        "max": "35",
+        "step": 1,
+        "className": "",
+        "x": 1770,
+        "y": 940,
+        "wires": [
+            [
+                "40fdbc4b74a826d0"
+            ]
+        ]
+    },
+    {
+        "id": "40fdbc4b74a826d0",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/2/temperature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 2140,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "72b2aa7462fb4a6b",
+        "type": "ui_slider",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "5456c9340d5eb6aa",
+        "order": 7,
+        "width": 4,
+        "height": 2,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 1770,
+        "y": 1020,
+        "wires": [
+            [
+                "5f65a675e70d7332"
+            ]
+        ]
+    },
+    {
+        "id": "5f65a675e70d7332",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/2/humidity",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 2130,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "12feefd7b00ceb13",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 5,
+        "group": "5456c9340d5eb6aa",
+        "width": 5,
+        "height": 2,
+        "label": "Boiler Status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2250,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "49e1faad4be1aea2",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 8,
+        "group": "5456c9340d5eb6aa",
+        "width": 5,
+        "height": 2,
+        "label": "Chiller Status:",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2250,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "fda7a174c66ae5f6",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/2/fan_speed",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1910,
+        "y": 860,
+        "wires": [
+            [
+                "b609586638b454bb"
+            ]
+        ]
+    },
+    {
+        "id": "ef52c654681881ae",
+        "type": "ui_slider",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "5456c9340d5eb6aa",
+        "order": 4,
+        "width": 5,
+        "height": 2,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "0",
+        "max": "5",
+        "step": 1,
+        "className": "",
+        "x": 1790,
+        "y": 1080,
+        "wires": [
+            [
+                "3e39ffee44093844"
+            ]
+        ]
+    },
+    {
+        "id": "3e39ffee44093844",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/2/fan_speed",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 2160,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "8bf66b085b413481",
+        "type": "inject",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1760,
+        "y": 1180,
+        "wires": [
+            [
+                "77cdcf6095a64d83"
+            ]
+        ]
+    },
+    {
+        "id": "77cdcf6095a64d83",
+        "type": "mongodb in",
+        "z": "2a7c8826acd49e3d",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "326_fire_Alarm",
+        "operation": "find",
+        "x": 1940,
+        "y": 1260,
+        "wires": [
+            [
+                "a0f704ba50486e07"
+            ]
+        ]
+    },
+    {
+        "id": "a0f704ba50486e07",
+        "type": "debug",
+        "z": "2a7c8826acd49e3d",
+        "name": "debug 145",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2250,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "e612d52c14a9a05b",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 1,
+        "group": "723b1496c2ba16c9",
+        "width": 7,
+        "height": 1,
+        "label": "Fire Alarm",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2950,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "57d65c6e142d128d",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/2/firealarm",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2670,
+        "y": 720,
+        "wires": [
+            [
+                "e612d52c14a9a05b"
+            ]
+        ]
+    },
+    {
+        "id": "8beaba089cc92cbe",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 2,
+        "group": "723b1496c2ba16c9",
+        "width": 7,
+        "height": 1,
+        "label": "Sprinkler",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 2930,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "7e7b9ab75d2d0fc7",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/2/sprinkler",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2650,
+        "y": 780,
+        "wires": [
+            [
+                "8beaba089cc92cbe"
+            ]
+        ]
+    },
+    {
+        "id": "967e3a145c70605e",
+        "type": "ui_text",
+        "z": "2a7c8826acd49e3d",
+        "group": "723b1496c2ba16c9",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Smoker Detector:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2910,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "62701535e06e8c40",
+        "type": "mqtt in",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/2/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2600,
+        "y": 840,
+        "wires": [
+            [
+                "967e3a145c70605e"
+            ]
+        ]
+    },
+    {
+        "id": "4c99c37b4bb3edee",
+        "type": "ui_led",
+        "z": "2a7c8826acd49e3d",
+        "order": 4,
+        "group": "723b1496c2ba16c9",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showGlow": true,
+        "name": "",
+        "x": 3130,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "af8083501b2a4c56",
+        "type": "ui_switch",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "label": "Pull Switch",
+        "tooltip": "",
+        "group": "723b1496c2ba16c9",
+        "order": 5,
+        "width": 7,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2750,
+        "y": 940,
+        "wires": [
+            [
+                "42ceefdd698080c9"
+            ]
+        ]
+    },
+    {
+        "id": "42ceefdd698080c9",
+        "type": "mqtt out",
+        "z": "2a7c8826acd49e3d",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/2/pullstation",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 3060,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "bf075debe55b4f14",
+        "type": "ui_group",
+        "name": "Lighting",
+        "tab": "e023c8ebe299bf90",
+        "order": 2,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "49dfe063b16d8419",
+        "type": "ui_group",
+        "name": "Occupancy",
+        "tab": "e023c8ebe299bf90",
+        "order": 1,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "361ce57fa97ea726",
+        "type": "ui_group",
+        "name": "HVAC",
+        "tab": "e023c8ebe299bf90",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "92448d83b69b6a0c",
+        "type": "ui_group",
+        "name": "Safety",
+        "tab": "e023c8ebe299bf90",
+        "order": 4,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "564f8ea0b21b8a6e",
+        "type": "ui_group",
+        "name": "Lighting",
+        "tab": "ae1d027b445d5e5c",
+        "order": 2,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7eb7e371cb275cec",
+        "type": "ui_group",
+        "name": "Occupancy",
+        "tab": "ae1d027b445d5e5c",
+        "order": 1,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5456c9340d5eb6aa",
+        "type": "ui_group",
+        "name": "HVAC",
+        "tab": "ae1d027b445d5e5c",
+        "order": 3,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "723b1496c2ba16c9",
+        "type": "ui_group",
+        "name": "Safety",
+        "tab": "ae1d027b445d5e5c",
+        "order": 4,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e023c8ebe299bf90",
+        "type": "ui_tab",
+        "name": "floor_0_room_1",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ae1d027b445d5e5c",
+        "type": "ui_tab",
+        "name": "floor_0_room_2",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
