@@ -1,0 +1,12 @@
+//get the incoming RIID and process it and save it on a gloabal variable
+
+let incoming = msg.payload;
+incoming = incoming.substring(1);
+global.set("01_rfid",incoming);
+
+
+//get a list of RFID's valid for a given room
+msg.collection = "326_occupancy_rfid";
+msg.operation = "find";
+msg.payload = { "floor_number":0,"room_number":1 };
+return msg;

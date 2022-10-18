@@ -1,0 +1,14 @@
+
+//get the RFID list 
+let array =msg.payload[0].rfid;
+let found_list = array.filter(element => element === global.get("01_rfid"))
+
+//Match the incoming RFID with list of RFID's
+if (found_list.length == 0){
+    msg.payload = 0;
+}
+else{
+    msg.payload = 1;
+}
+//msg.payload = array;
+return msg;
