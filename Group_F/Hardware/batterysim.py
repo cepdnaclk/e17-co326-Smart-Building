@@ -83,10 +83,11 @@ def on_disconnect(client, userdata, rc):
 battery = Battery(BAT_CAPACITY, 0, 0)
 
 if __name__ == '__main__':
-    # 3 MQTT clients are running simultaneously for:
+    # 4 MQTT clients are running simultaneously for:
     # 1. Loading the battery.
     # 2. Subscribing to SW1 and deciding whether to charge the battery.
     # 3. Subscribing to SW2 and deciding whether to connect the battery to the load.
+    # 4. Publishing battery voltage, SoC and battery ready status.
     clients = []
 
     # This function mimics the loading of the battery by iteratively consuming power from the battery.
