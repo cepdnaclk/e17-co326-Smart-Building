@@ -1,0 +1,259 @@
+[
+    {
+        "id": "c43556585b2ae631",
+        "type": "tab",
+        "label": "Light-Control (Occupancy Based)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c513555d9b4ce9d3",
+        "type": "mqtt out",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/1/1/lightsensor/inside/1/",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 650,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "fac6ca21d93cb36b",
+        "type": "inject",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/lighting/1/1/lightsensor/inside/1/",
+        "payload": "{\"active\" : true}",
+        "payloadType": "json",
+        "x": 280,
+        "y": 60,
+        "wires": [
+            [
+                "c513555d9b4ce9d3"
+            ]
+        ]
+    },
+    {
+        "id": "368e0820b84cad8f",
+        "type": "mqtt in",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/1/1/lightsensor/inside/1/",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 280,
+        "wires": [
+            [
+                "a48e693ba9096483"
+            ]
+        ]
+    },
+    {
+        "id": "a48e693ba9096483",
+        "type": "json",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 710,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bfcde0457c450e57",
+        "type": "mqtt out",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/1/1/lightsensor/inside/1/",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 650,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "243c3d17a0fcc1f0",
+        "type": "inject",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/lighting/1/1/lightsensor/inside/1/",
+        "payload": "{\"active\" : false}",
+        "payloadType": "json",
+        "x": 280,
+        "y": 140,
+        "wires": [
+            [
+                "bfcde0457c450e57"
+            ]
+        ]
+    },
+    {
+        "id": "6ccf8b4535182e33",
+        "type": "mqtt in",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "topic": "326project/smartbuilding/lighting/1/1/lightsensor/inside/1/",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "03def0c84b9cc7f0"
+            ]
+        ]
+    },
+    {
+        "id": "03def0c84b9cc7f0",
+        "type": "json",
+        "z": "c43556585b2ae631",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 710,
+        "y": 400,
+        "wires": [
+            [
+                "112ea2a07cf47986"
+            ]
+        ]
+    },
+    {
+        "id": "b331ef446106cf81",
+        "type": "comment",
+        "z": "c43556585b2ae631",
+        "name": "Debugging",
+        "info": "",
+        "x": 440,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "247d53c3f5907886",
+        "type": "comment",
+        "z": "c43556585b2ae631",
+        "name": "Test Cases",
+        "info": "",
+        "x": 480,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "112ea2a07cf47986",
+        "type": "function",
+        "z": "c43556585b2ae631",
+        "name": "function 5",
+        "func": "var light_state = msg.payload.active;\n\nif (light_state == false) {\n    msg.payload = {\n        \"state\": \"OFF\"\n    };\n    return \"msg\";\n}\n\nelse {\n    return null;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 400,
+        "wires": [
+            [
+                "a090357d310cd156"
+            ]
+        ]
+    },
+    {
+        "id": "a090357d310cd156",
+        "type": "debug",
+        "z": "c43556585b2ae631",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

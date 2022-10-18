@@ -1,0 +1,11 @@
+//return a message for unauth access
+
+var modestatus = global.get("automode");
+var enterstate = global.get("enterstate");
+
+
+if (modestatus == "ON") {
+    if (enterstate == "OFF")
+    return msg;
+
+}

@@ -1,0 +1,1310 @@
+[
+    {
+        "id": "b32ac2eac68b582e",
+        "type": "tab",
+        "label": "HVAC",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0d02a1b1d7f24800",
+        "type": "inject",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "payload": "{\"temp\" : 20}",
+        "payloadType": "str",
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "73a124a0f2c4b690"
+            ]
+        ]
+    },
+    {
+        "id": "e7e702339474f966",
+        "type": "mqtt in",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 540,
+        "wires": [
+            [
+                "963f09b19a6f67bf"
+            ]
+        ]
+    },
+    {
+        "id": "73a124a0f2c4b690",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 680,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "963f09b19a6f67bf",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 540,
+        "wires": [
+            [
+                "8c9ea82053284e7c",
+                "ce17e83bf117ddb6"
+            ]
+        ]
+    },
+    {
+        "id": "08bd6aadda5626e5",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "64ae6f1450d0154d",
+        "type": "inject",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "payload": "{\"humidity\" : 31}",
+        "payloadType": "str",
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "d61311d0f431b336"
+            ]
+        ]
+    },
+    {
+        "id": "d61311d0f431b336",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 670,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "0896e0eefebc3ce6",
+        "type": "mqtt in",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "0a2eb289054a3e95"
+            ]
+        ]
+    },
+    {
+        "id": "4bf804b324261a4e",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "func": "// Thresholds\n\nvar boiler_state = false;\nvar chiller_state = false;\n\nvar normal_temp = msg.payload.temp;\nvar peack_temp = msg.payload.temp;\n\nvar amb_temprature = msg.payload.temprature;\nvar temp_thresh = msg.payload.set_temp;\nvar temp_min_thresh = msg.payload.amb_temprature - 5;\nvar temp_max_thresh = msg.payload.amb_temprature + 5;\n\n\nreturn msg;\nvar humidity = msg.payload.humidity;\nvar occupants = msg.payload.occupants;\n\n// Get the room and floor numbers\nvar arr = msg.topic.split(\"/\");\nvar floorno = arr[3];\nvar roomno = arr[4];\n\n\nif (occupants) {\n    if (temp < temp_min_thresh){\n            chiller_state = false;\n            boiler_state = true;\n    }\n    else if (temp > temp_max_thresh) {\n            chiller_state = false;\n            boiler_state = true;\n        \n    } else {\n        chiller_state = false;\n        boiler_state = false;\n    }\n}\nelse{\n    chiller_state = false;\n    boiler_state = false;\n}\n\n\nmsg.payload = [{\n    \"occupants\" : occupants,\n    \"temp_thresh\" : temp_thresh,\n    \"temp\" : temp,\n    \"chiller\" : chiller_state,\n    \"boiler\" : boiler_state,\n    \"floorno\" : parseInt(floorno),\n    \"roomno\" : parseInt(roomno),\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 600,
+        "wires": [
+            [
+                "1861b942bee540de"
+            ]
+        ]
+    },
+    {
+        "id": "50aaac29525b8df9",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1450,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c4569964c87eb9ec",
+        "type": "mqtt in",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/occupants",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 660,
+        "wires": [
+            [
+                "6583501876923909"
+            ]
+        ]
+    },
+    {
+        "id": "5917f2761ac6e412",
+        "type": "inject",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/occupancy/0/1/occupants",
+        "payload": "{\"occupants\" : 31}",
+        "payloadType": "str",
+        "x": 340,
+        "y": 260,
+        "wires": [
+            [
+                "5d134694f40a1237"
+            ]
+        ]
+    },
+    {
+        "id": "5d134694f40a1237",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/occupants",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 690,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "14b30bd32d18bfa1",
+        "type": "inject",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/set_temperature",
+        "payload": "{\"amb_temprature\" : 30}",
+        "payloadType": "str",
+        "x": 360,
+        "y": 320,
+        "wires": [
+            [
+                "bfc6e41cb790efdb"
+            ]
+        ]
+    },
+    {
+        "id": "bfc6e41cb790efdb",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/ambient_temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "79559f92abfe8c62",
+        "type": "mqtt in",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/set_temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 720,
+        "wires": [
+            [
+                "4fb582fac1186bb5"
+            ]
+        ]
+    },
+    {
+        "id": "2ade11ff527bf2e6",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/chiller",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1740,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "3d858c3c64ebf0e6",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/boiler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1740,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "1861b942bee540de",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1110,
+        "y": 780,
+        "wires": [
+            [
+                "f6f7275c36c36abf",
+                "854cd777383c5a9e",
+                "50aaac29525b8df9"
+            ]
+        ]
+    },
+    {
+        "id": "f6f7275c36c36abf",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "func": "var chiller_s = msg.payload[0].chiller;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"chiller\";\nmsg.topic = topic_arr.join(\"/\");\nif(chiller_s){\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    }];\n}else{\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 760,
+        "wires": [
+            [
+                "780f0f959216e16a"
+            ]
+        ]
+    },
+    {
+        "id": "854cd777383c5a9e",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "func": "var boiler_s = msg.payload[0].boiler;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"chiller\";\nmsg.topic = topic_arr.join(\"/\");\nif(boiler_s){\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    }];\n}else{\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 840,
+        "wires": [
+            [
+                "a7961e716219b877"
+            ]
+        ]
+    },
+    {
+        "id": "780f0f959216e16a",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1490,
+        "y": 760,
+        "wires": [
+            [
+                "2ade11ff527bf2e6",
+                "99b7727427639750"
+            ]
+        ]
+    },
+    {
+        "id": "a7961e716219b877",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1490,
+        "y": 840,
+        "wires": [
+            [
+                "3d858c3c64ebf0e6",
+                "4890e2e75ac01fb8"
+            ]
+        ]
+    },
+    {
+        "id": "99b7727427639750",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "b40bb9528ec09c8a",
+        "type": "comment",
+        "z": "b32ac2eac68b582e",
+        "name": "Switching on and off boiler and chiller based on temperature   YET TO ADD OCCUPANCY BASED",
+        "info": "Switching on and off boiler and chiller based on temperature and OCCUPANCY BASED",
+        "x": 430,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "f74389bf77b4e61c",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "12fa66d1aeb3a015",
+        "type": "inject",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "payload": "{\"speed\" : 0.5}",
+        "payloadType": "json",
+        "x": 350,
+        "y": 80,
+        "wires": [
+            [
+                "fb56af9095749ebe"
+            ]
+        ]
+    },
+    {
+        "id": "fb56af9095749ebe",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/ahu",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 650,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2d389240b73eae27",
+        "type": "mqtt in",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 800,
+        "wires": [
+            [
+                "f460ff174819894a"
+            ]
+        ]
+    },
+    {
+        "id": "368285f4eee80cde",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1190,
+        "y": 1020,
+        "wires": [
+            [
+                "2424888af8cb55e0",
+                "a5851ef17b31afc6"
+            ]
+        ]
+    },
+    {
+        "id": "2424888af8cb55e0",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "func": "var fan_speed = msg.payload[0].fanspeed;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"ahu\";\nmsg.topic = topic_arr.join(\"/\");\n\nmsg.payload = [{\n    \"time\" : Date.now(),\n    \"speed\" : fan_speed\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 1020,
+        "wires": [
+            [
+                "1835f02541d1083a",
+                "f74389bf77b4e61c"
+            ]
+        ]
+    },
+    {
+        "id": "1835f02541d1083a",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1470,
+        "y": 1020,
+        "wires": [
+            [
+                "de7a4fc339510342"
+            ]
+        ]
+    },
+    {
+        "id": "de7a4fc339510342",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/ahu",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1710,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "9232f723398dd1a1",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "func": "// Thresholds\n\nvar cold_air_state = false;\nvar hot_air_state = false;\n\nvar temp = msg.payload.temp;\nvar temp_thresh = msg.payload.set_temp;\nvar temp_min_thresh = msg.payload.set_min_temp;\nvar temp_max_thresh = msg.payload.set_max_temp;\nvar humidity = msg.payload.humidity;\nvar occupants = msg.payload.occupants;\n\n\n\n// Get the room and floor numbers\nvar arr = msg.topic.split(\"/\");\nvar floorno = arr[3];\nvar roomno = arr[4];\n\n\nif (temp < temp_min_thresh) {\n    if (occupants) {\n        cold_air_state = true;\n        hot_air_state = false;\n    }\n    else {\n        cold_air_state = false;\n        hot_air_state = false;\n    }\n} else if (temp > temp_max_thresh) {\n    if (occupants) {\n        cold_air_state = false;\n        hot_air_state = true;\n    }\n    else {\n        cold_air_state = false;\n        hot_air_state = false;\n    }\n} else {\n    cold_air_state = false;\n    hot_air_state = false;\n}\n\n\n\nmsg.payload = [{\n    \"occupants\": occupants,\n    \"temp_thresh\": temp_thresh,\n    \"temp\": temp,\n    \"chiller\": cold_air_state,\n    \"boiler\": hot_air_state,\n    \"floorno\": parseInt(floorno),\n    \"roomno\": parseInt(roomno),\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 900,
+        "wires": [
+            [
+                "368285f4eee80cde",
+                "7ecacfcae338d140"
+            ]
+        ]
+    },
+    {
+        "id": "7ecacfcae338d140",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "a5851ef17b31afc6",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1470,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "0a2eb289054a3e95",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 600,
+        "wires": [
+            [
+                "8c9ea82053284e7c"
+            ]
+        ]
+    },
+    {
+        "id": "6583501876923909",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 640,
+        "wires": [
+            [
+                "8c9ea82053284e7c",
+                "9232f723398dd1a1",
+                "ce17e83bf117ddb6"
+            ]
+        ]
+    },
+    {
+        "id": "4fb582fac1186bb5",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 680,
+        "wires": [
+            [
+                "8c9ea82053284e7c"
+            ]
+        ]
+    },
+    {
+        "id": "f460ff174819894a",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 720,
+        "wires": [
+            [
+                "8c9ea82053284e7c"
+            ]
+        ]
+    },
+    {
+        "id": "8c9ea82053284e7c",
+        "type": "join",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "1",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 830,
+        "y": 600,
+        "wires": [
+            [
+                "4bf804b324261a4e",
+                "08bd6aadda5626e5"
+            ]
+        ]
+    },
+    {
+        "id": "c7b7e8e810226a49",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "air",
+        "func": "// Thresholds\n\nvar cold_air_state = false;\nvar hot_air_state = false;\n\nvar temp = msg.payload.temp;\nvar temp_thresh = msg.payload.set_temp;\nvar temp_min_thresh = msg.payload.set_min_temp;\nvar temp_max_thresh = msg.payload.set_max_temp;\nvar humidity = msg.payload.humidity;\nvar occupants = msg.payload.occupants;\n\n// Get the room and floor numbers\nvar arr = msg.topic.split(\"/\");\nvar floorno = arr[3];\nvar roomno = arr[4];\n\nif (occupants) {\n    if (temp < temp_min_thresh) {\n    \n            cold_air_state = false;\n            hot_air_state = true;\n        \n    } else if (temp > temp_max_thresh) {\n            cold_air_state = true;\n            hot_air_state = false;\n    \n    } \n}\nelse {\n    cold_air_state = false;\n    hot_air_state = false;\n}\n\n\nmsg.payload = [{\n    \"temp\":temp,\n    \"occupants\": occupants,\n    \"temp_min_thresh\": temp_min_thresh,\n    \"cold_air\": cold_air_state,\n    \"hot_air\": hot_air_state,\n    \"floorno\": parseInt(floorno),\n    \"roomno\": parseInt(roomno),\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 1140,
+        "wires": [
+            [
+                "fb620ae1aa257c6f"
+            ]
+        ]
+    },
+    {
+        "id": "ce17e83bf117ddb6",
+        "type": "join",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 930,
+        "y": 1140,
+        "wires": [
+            [
+                "c7b7e8e810226a49"
+            ]
+        ]
+    },
+    {
+        "id": "fb620ae1aa257c6f",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1190,
+        "y": 1140,
+        "wires": [
+            [
+                "3a1d06e2d7127564",
+                "09a531bd02077c95",
+                "40de06e72e373c31"
+            ]
+        ]
+    },
+    {
+        "id": "3a1d06e2d7127564",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "Humidifier",
+        "func": "\nvar temp = msg.payload[0].temp;\nvar humidifier_state = false;\nvar occupants = msg.payload[0].occupants;\nvar cold_air = msg.payload[0].cold_air_state;\nvar hot_air = msg.payload[0].hot_air_state;\nvar floorno = msg.payload[0].floorno;\nvar roomno = msg.payload[0].roomno;\nvar temp_min_thresh = msg.payload[0].temp_min_thresh; \n\nif((temp < temp_min_thresh) && occupants){\n\n    humidifier_state = true;\n}\nelse{\n    humidifier_state = false;\n\n}\n\nreturn msg.payload = [{\n    \"humidifier\": humidifier_state,\n    \"floorno\": parseInt(floorno),\n    \"roomno\": parseInt(roomno),\n}];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 1160,
+        "wires": [
+            [
+                "a162617b41b1b955"
+            ]
+        ]
+    },
+    {
+        "id": "a162617b41b1b955",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidifier",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1910,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "36db5211d8bf475a",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "humidifier state",
+        "func": "var humidifier = msg.payload[0].boiler;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"humidifier\";\nmsg.topic = topic_arr.join(\"/\");\nif (humidifier) {\n    msg.payload = [{\n        \"time\": Date.now(),\n        \"state\": 1,\n    }];\n} else {\n    msg.payload = [{\n        \"time\": Date.now(),\n        \"state\": 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "09a531bd02077c95",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "hot air duct state",
+        "func": "var hot_sir = msg.payload[0].hot_sir;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"control/temp-thresh-hotairduct\";\n\nmsg.topic = topic_arr.join(\"/\");\nif (hot_sir) {\n    msg.payload = [{\n        \"time\": Date.now(),\n        \"state\": 1,\n    }];\n}\n else {\n    msg.payload = [{\n        \"time\": Date.now(),\n        \"state\": 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 1280,
+        "wires": [
+            [
+                "85e579dac13f762f"
+            ]
+        ]
+    },
+    {
+        "id": "245d90cae0e57087",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/control/temp-thresh-hotairduct",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1910,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "85e579dac13f762f",
+        "type": "join",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1570,
+        "y": 1280,
+        "wires": [
+            [
+                "245d90cae0e57087"
+            ]
+        ]
+    },
+    {
+        "id": "40de06e72e373c31",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "cold air duct state",
+        "func": "var cold_sir = msg.payload[0].cold_sir;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"control/temp-thresh-coldairduct\";\n\nmsg.topic = topic_arr.join(\"/\");\nif (cold_sir) {\n    msg.payload = [{\n        \"time\": Date.now(),\n        \"state\": 1,\n    }];\n}\n else {\n    msg.payload = [{\n        \"time\": Date.now(),\n        \"state\": 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 1420,
+        "wires": [
+            [
+                "360d919dab0c5b4f"
+            ]
+        ]
+    },
+    {
+        "id": "360d919dab0c5b4f",
+        "type": "join",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "mode": "auto",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1570,
+        "y": 1420,
+        "wires": [
+            [
+                "7048a04ba03dd13b"
+            ]
+        ]
+    },
+    {
+        "id": "7048a04ba03dd13b",
+        "type": "mqtt out",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/control/temp-thresh-coldairduct",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1920,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "8ef4ccd3a239021c",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 780,
+        "wires": [
+            [
+                "8c9ea82053284e7c",
+                "fa7da230c2d3814d"
+            ]
+        ]
+    },
+    {
+        "id": "618751b97aa19dfa",
+        "type": "comment",
+        "z": "b32ac2eac68b582e",
+        "name": "Testing",
+        "info": "",
+        "x": 193,
+        "y": 32,
+        "wires": []
+    },
+    {
+        "id": "09cdfbf9e9ad68e6",
+        "type": "mqtt in",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/ambient_temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 920,
+        "wires": [
+            [
+                "8ef4ccd3a239021c"
+            ]
+        ]
+    },
+    {
+        "id": "fa7da230c2d3814d",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 610,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "4890e2e75ac01fb8",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "debug 146",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1770,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "de6146ae7f6054f0",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "function 15",
+        "func": "// var normal_temp = msg.payload.temp;\n// var peack_temp = msg.payload.temp;\nvar normal_temp = 20;\nvar peack_temp = 30;\n// var status = msg.payload.status;\n\n\nvar  time;\nvar tempmodal;\ntime = msg.payload - (Date.now() / 1000);\n\ntempmodal = normal_temp + ((peack_temp - normal_temp) / (peack_temp)) * (time) * Math.exp(-time / 100);\nmsg.payload = [{\n    \"time\": msg.payload,\n    \"amb_temprature\": tempmodal,\n    \"times\":time\n\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nvar startTime = Date.now() / 1000;",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 980,
+        "wires": [
+            [
+                "3ea9b3356c7293d4"
+            ]
+        ]
+    },
+    {
+        "id": "80a1191e4c1e0d8f",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "285bc699a573ccc2",
+        "type": "inject",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 1040,
+        "wires": [
+            [
+                "1523937471bcc742"
+            ]
+        ]
+    },
+    {
+        "id": "3ea9b3356c7293d4",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 530,
+        "y": 1140,
+        "wires": [
+            [
+                "80a1191e4c1e0d8f"
+            ]
+        ]
+    },
+    {
+        "id": "1523937471bcc742",
+        "type": "function",
+        "z": "b32ac2eac68b582e",
+        "name": "function 16",
+        "func": "var time = Date.now()/1000;\n\nfunction sleep(milliseconds) {\n    const date = Date.now();\n    let currentDate = null;\n    do {\n        currentDate = Date.now();\n    } while (currentDate - date < milliseconds);\n}\n\n\ndo {\n    time = Date.now()/1000;\n    sleep(1000);\n    msg.payload = [{\n        \"startTime\": time\n    }];\n    node.send(msg);\n\n} while (true);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 1160,
+        "wires": [
+            [
+                "8f9c62e0563a49f4"
+            ]
+        ]
+    },
+    {
+        "id": "8f9c62e0563a49f4",
+        "type": "json",
+        "z": "b32ac2eac68b582e",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 350,
+        "y": 1280,
+        "wires": [
+            [
+                "da0c799aec0733b8"
+            ]
+        ]
+    },
+    {
+        "id": "da0c799aec0733b8",
+        "type": "debug",
+        "z": "b32ac2eac68b582e",
+        "name": "msg",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 570,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "93a52709f8718a12",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

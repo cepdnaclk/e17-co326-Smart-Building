@@ -1,0 +1,1465 @@
+[
+    {
+        "id": "82f30383af2bd082",
+        "type": "tab",
+        "label": "SCADA_Web",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "906c375c589c18a2",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 540,
+        "wires": [
+            [
+                "6e657d0992815250"
+            ]
+        ]
+    },
+    {
+        "id": "135c718f5fe531dc",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 620,
+        "wires": [
+            [
+                "03435ff9c95e8d5f"
+            ]
+        ]
+    },
+    {
+        "id": "bc9e2de0dab8f0f5",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "5c073f47e29609a8"
+            ]
+        ]
+    },
+    {
+        "id": "6e657d0992815250",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_sensor_temp_floor0/room0",
+        "operation": "find",
+        "x": 540,
+        "y": 540,
+        "wires": [
+            [
+                "48e276fa8e55a96d",
+                "6b69d0cd2b259dde"
+            ]
+        ]
+    },
+    {
+        "id": "03435ff9c95e8d5f",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_sensor_humid_floor0/room0",
+        "operation": "find",
+        "x": 550,
+        "y": 620,
+        "wires": [
+            [
+                "03e462488046b41b",
+                "0c15393196a3ac1b"
+            ]
+        ]
+    },
+    {
+        "id": "5c073f47e29609a8",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_control_boiler",
+        "operation": "find",
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [
+                "4da48392d440b1b2",
+                "9cf3666560e099aa"
+            ]
+        ]
+    },
+    {
+        "id": "a8cc085fb6116246",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "11d1d6cd1d70a93b"
+            ]
+        ]
+    },
+    {
+        "id": "11d1d6cd1d70a93b",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_control_chiller",
+        "operation": "find",
+        "x": 500,
+        "y": 360,
+        "wires": [
+            [
+                "b5f60b5e36498f60",
+                "7855823fb27ca0a0"
+            ]
+        ]
+    },
+    {
+        "id": "47f1a5940041f395",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 700,
+        "wires": [
+            [
+                "27989fbb5d2226da"
+            ]
+        ]
+    },
+    {
+        "id": "27989fbb5d2226da",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_ahu_blower_floor0/room0",
+        "operation": "find",
+        "x": 540,
+        "y": 700,
+        "wires": [
+            [
+                "51213605dd136138"
+            ]
+        ]
+    },
+    {
+        "id": "48e276fa8e55a96d",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 5",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Temperture sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 540,
+        "wires": [
+            [
+                "d0b53ae1e887a87c",
+                "d00435a158cc4640"
+            ]
+        ]
+    },
+    {
+        "id": "03e462488046b41b",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 6",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Humidity sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 620,
+        "wires": [
+            [
+                "2a4cfdb90ee1f1b7",
+                "73544b6eeb7c3635"
+            ]
+        ]
+    },
+    {
+        "id": "4b00532942642632",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 1040,
+        "wires": [
+            [
+                "0510ca5ef9b722ae"
+            ]
+        ]
+    },
+    {
+        "id": "81389f2c021a0844",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 1120,
+        "wires": [
+            [
+                "557339fee6778862"
+            ]
+        ]
+    },
+    {
+        "id": "0510ca5ef9b722ae",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_sensor_temp_floor0/room1",
+        "operation": "find",
+        "x": 540,
+        "y": 1040,
+        "wires": [
+            [
+                "ea4001285edcf5cf"
+            ]
+        ]
+    },
+    {
+        "id": "557339fee6778862",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_sensor_humid_floor0_room1",
+        "operation": "find",
+        "x": 550,
+        "y": 1120,
+        "wires": [
+            [
+                "b5a80ea75d13176d"
+            ]
+        ]
+    },
+    {
+        "id": "d44a0bdd64c44851",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 1200,
+        "wires": [
+            [
+                "d0b5e260ca829ac5"
+            ]
+        ]
+    },
+    {
+        "id": "d0b5e260ca829ac5",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_ahu_blower_floor0/room1",
+        "operation": "find",
+        "x": 540,
+        "y": 1200,
+        "wires": [
+            [
+                "cfe900235e852d8b"
+            ]
+        ]
+    },
+    {
+        "id": "d0b53ae1e887a87c",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "c36f30761da8d520",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temperture sensor reading",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1260,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a4cfdb90ee1f1b7",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "c36f30761da8d520",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity sensor reading",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1250,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea4001285edcf5cf",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 7",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Temperture sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1040,
+        "wires": [
+            [
+                "acddd9ecedb6d23a"
+            ]
+        ]
+    },
+    {
+        "id": "b5a80ea75d13176d",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 8",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Humidity sensor reading\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1120,
+        "wires": [
+            [
+                "6f9fc8968828b167"
+            ]
+        ]
+    },
+    {
+        "id": "acddd9ecedb6d23a",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "d5eeb0bd1f2d49fa",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temperture sensor reading",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1280,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f9fc8968828b167",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "d5eeb0bd1f2d49fa",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temperture sensor reading",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1280,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc4b68f0ec6bf731",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "e695fb1ea5810c6d",
+        "order": 2,
+        "width": "12",
+        "height": "12",
+        "label": "Boiler State",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#2e84f5",
+            "#7b3f0a",
+            "#2ca02c",
+            "#98df8a",
+            "#ed0c0c",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1390,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4da48392d440b1b2",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 9",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = JSON.parse(payload[i].data).state\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Boiler State\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 280,
+        "wires": [
+            [
+                "fae2aa567e5822e8",
+                "fc4b68f0ec6bf731"
+            ]
+        ]
+    },
+    {
+        "id": "b5f60b5e36498f60",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 10",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = JSON.parse(payload[i].data).state\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"Chiller State\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 360,
+        "wires": [
+            [
+                "8cf194fe172bb316",
+                "eb89057932c0b512"
+            ]
+        ]
+    },
+    {
+        "id": "8cf194fe172bb316",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "e695fb1ea5810c6d",
+        "order": 4,
+        "width": "12",
+        "height": "12",
+        "label": "Chiller State",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1390,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51213605dd136138",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 11",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"AHU State\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 700,
+        "wires": [
+            [
+                "e6539eb1a500ff28"
+            ]
+        ]
+    },
+    {
+        "id": "e6539eb1a500ff28",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "c36f30761da8d520",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "AHU State",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1290,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cfe900235e852d8b",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 12",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"AHU State\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 1200,
+        "wires": [
+            [
+                "bf085c15a2389c55"
+            ]
+        ]
+    },
+    {
+        "id": "bf085c15a2389c55",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "d5eeb0bd1f2d49fa",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "AHU State",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1290,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cf3666560e099aa",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fae2aa567e5822e8",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ddbd8eac7777dad4",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 800,
+        "wires": [
+            [
+                "9f4fb8b4780b8234"
+            ]
+        ]
+    },
+    {
+        "id": "9f4fb8b4780b8234",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_sensor_press_floor0/room0",
+        "operation": "find",
+        "x": 550,
+        "y": 800,
+        "wires": [
+            [
+                "1e1dfe2260188414"
+            ]
+        ]
+    },
+    {
+        "id": "1e1dfe2260188414",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 50",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"AHU State\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 800,
+        "wires": [
+            [
+                "b71806e246660552"
+            ]
+        ]
+    },
+    {
+        "id": "b71806e246660552",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "c36f30761da8d520",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Pressure sensor reading",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32b6bba2563bff5b",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 1280,
+        "wires": [
+            [
+                "04b5ac85a738f9e0"
+            ]
+        ]
+    },
+    {
+        "id": "04b5ac85a738f9e0",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_sensor_press_floor0/room1",
+        "operation": "find",
+        "x": 550,
+        "y": 1280,
+        "wires": [
+            [
+                "246abfc99736df59"
+            ]
+        ]
+    },
+    {
+        "id": "246abfc99736df59",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 51",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let value = payload[i].data.temp\n        let time = payload[i].time\n        data.push({ \"x\": time, \"y\": value })\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = [{\n    \"series\": [\"AHU State\"],\n    \"data\": [data],\n    \"labels\": [\"\"]\n}]\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 1280,
+        "wires": [
+            [
+                "ae70fdf7cf73f233"
+            ]
+        ]
+    },
+    {
+        "id": "ae70fdf7cf73f233",
+        "type": "ui_chart",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "group": "d5eeb0bd1f2d49fa",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Pressure sensor reading",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7855823fb27ca0a0",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "eb89057932c0b512",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6b69d0cd2b259dde",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d00435a158cc4640",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0c15393196a3ac1b",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "73544b6eeb7c3635",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "6219f63f20c6eec4",
+        "type": "inject",
+        "z": "82f30383af2bd082",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 1540,
+        "wires": [
+            [
+                "b9e06f1b5d689ecb"
+            ]
+        ]
+    },
+    {
+        "id": "b9e06f1b5d689ecb",
+        "type": "mongodb in",
+        "z": "82f30383af2bd082",
+        "mongodb": "6c36cda79d9fbc4e",
+        "name": "",
+        "collection": "co326_hvac_control_boiler",
+        "operation": "find",
+        "x": 460,
+        "y": 1540,
+        "wires": [
+            [
+                "56a4b1aeabd1fa0c",
+                "3ca7b529d1860519"
+            ]
+        ]
+    },
+    {
+        "id": "56a4b1aeabd1fa0c",
+        "type": "function",
+        "z": "82f30383af2bd082",
+        "name": "function 57",
+        "func": "async function sendSingleObj(payload) {\n    var data = []\n    for (let i = 0; i < payload.length; i++) {\n        let state = JSON.parse(payload[i].data).state\n        if(state==1){\n            state=true\n        }else{\n            state=false\n        }\n        let timeStamp =new Date(payload[i].time).getTime()/1000\n        let nowDate =new Date(Date.now())\n        let d = new Date(timeStamp*1000)\n        let dateComing = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear()\n        let dateToday = nowDate.getDate() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getFullYear()\n        if(dateComing!=dateToday){\n            data.push({ \"state\": state, \"timestamp\": timeStamp })\n        }\n    }\n    return data;\n}\nvar data = await sendSingleObj(msg.payload)\nmsg.payload = data\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 1540,
+        "wires": [
+            [
+                "56f4bf52f8909a41",
+                "f163f7a881cfa6c1"
+            ]
+        ]
+    },
+    {
+        "id": "3ca7b529d1860519",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "56f4bf52f8909a41",
+        "type": "debug",
+        "z": "82f30383af2bd082",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "f163f7a881cfa6c1",
+        "type": "ui_statetrail",
+        "z": "82f30383af2bd082",
+        "group": "21d7344759a4100e",
+        "order": 2,
+        "width": "24",
+        "height": "4",
+        "name": "",
+        "label": "States of Boiler",
+        "states": [
+            {
+                "state": true,
+                "col": "#009933",
+                "t": "bool",
+                "label": "ON"
+            },
+            {
+                "state": false,
+                "col": "#ff0000",
+                "t": "bool",
+                "label": "OF"
+            }
+        ],
+        "periodLimit": "24",
+        "periodLimitUnit": "3600",
+        "timeformat": "HH:mm:ss",
+        "tickmarks": 4,
+        "persist": false,
+        "legend": 1,
+        "combine": true,
+        "blanklabel": "",
+        "x": 1300,
+        "y": 1540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b0a0c21d8d9f990",
+        "type": "ui_spacer",
+        "z": "82f30383af2bd082",
+        "name": "spacer",
+        "group": "beca7617f8ab4aae",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b91b1179782e25ea",
+        "type": "ui_spacer",
+        "z": "82f30383af2bd082",
+        "name": "spacer",
+        "group": "beca7617f8ab4aae",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8c62c29ee18cea11",
+        "type": "ui_spacer",
+        "z": "82f30383af2bd082",
+        "name": "spacer",
+        "group": "beca7617f8ab4aae",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6c36cda79d9fbc4e",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "c36f30761da8d520",
+        "type": "ui_group",
+        "name": "Room0",
+        "tab": "e22e266406b720e6",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d5eeb0bd1f2d49fa",
+        "type": "ui_group",
+        "name": "Room1",
+        "tab": "e22e266406b720e6",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e695fb1ea5810c6d",
+        "type": "ui_group",
+        "name": "Boilers And Chillers",
+        "tab": "e22e266406b720e6",
+        "order": 2,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "21d7344759a4100e",
+        "type": "ui_group",
+        "name": "Today States",
+        "tab": "e22e266406b720e6",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e22e266406b720e6",
+        "type": "ui_tab",
+        "name": "Historical Data",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
