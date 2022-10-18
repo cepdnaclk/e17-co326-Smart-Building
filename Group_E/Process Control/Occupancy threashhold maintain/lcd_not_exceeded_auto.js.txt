@@ -1,0 +1,12 @@
+//when room limlit not exceeded send a false to lcd
+
+var roomlimit = global.get("sensorCount");
+
+
+
+if (roomlimit==="OFF") {
+    global.set("roomlimit1", "OFF");
+    msg.payload=false;
+   return msg;
+
+}

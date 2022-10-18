@@ -1,0 +1,18 @@
+//receive incoming payload from the database
+//save count/floor_number/room_number from incoming payload
+
+var count = msg.payload.count;
+var floor = msg.payload.floor_number;
+var room = msg.payload.room_number;
+
+//When count exceeds the threashhold value save it on a gloabal variable
+
+if (count>10) {
+   global.set("sensorCount", "ON");
+   return msg;
+
+}
+else{
+   global.set("sensorCount", "OFF");
+   return msg;
+}
