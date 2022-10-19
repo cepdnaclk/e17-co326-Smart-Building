@@ -1,0 +1,13 @@
+//reading incoming signal from scada button
+//save the working mode on a gloabal variable
+
+var automode1 = msg.payload;
+
+if (automode1) {
+    
+    global.set("automode","ON");
+    return msg;
+}else{
+    global.set("automode", "OFF");
+    return msg;
+}
