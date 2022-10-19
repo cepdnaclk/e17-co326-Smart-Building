@@ -31,4 +31,4 @@ The `room_temp.py` and `room_pressure.py` scripts expect a floor number and room
 
 ## Process Controller
 
-The process controller is also written in Python and requires the `paho-mqtt` package as a dependency. It controls the overall behaviour of the system by monitoring sensor data and controlling actuators accordingly.
+The process controller is also written in Python and requires the `paho-mqtt` package as a dependency. It controls the overall behaviour of the system by monitoring sensor data and controlling actuators accordingly. It consists of two components: the boiler-chiller control script found at `process-controller v3/boilert-chiller-controller/main.py` and the room control script found at `process-controller v3/room-controller.py`
