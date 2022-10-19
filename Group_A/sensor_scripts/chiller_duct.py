@@ -21,7 +21,7 @@ def on_model(temp):
 
 
 # Boiler Off Model
-off_model = lambda temp, t : 35 + (temp - 35)*exp(-t/2100)
+off_model = lambda temp, t : 35 + (temp - 35)*exp(-t/120000)
 
 
 # Initial values

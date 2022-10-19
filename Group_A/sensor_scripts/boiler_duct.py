@@ -1,4 +1,3 @@
-import tempfile
 import paho.mqtt.client as mqtt
 import json
 from time import asctime, time, sleep
@@ -22,7 +21,7 @@ def on_model(temp):
 
 
 # Boiler Off Model
-off_model = lambda temp, t : 30 + (temp - 30)*exp(-t/2100)
+off_model = lambda temp, t : 30 + (temp - 30)*exp(-t/120000)
 
 
 # Initial values
