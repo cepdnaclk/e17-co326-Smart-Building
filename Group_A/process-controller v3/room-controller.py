@@ -3,6 +3,8 @@ import paho.mqtt.client as mqtt
 import json
 import datetime
 
+from pyparsing import one_of
+
 client = mqtt.Client("room-controller")
 
 # sensing topics
@@ -34,8 +36,8 @@ pressureThreashold = 1 # default
 pressureThreashold2 = 1 # default
 
 # allowed ranges
-tempCanChange = 2
-tempCanChange2 = 2
+tempCanChange = 1
+tempCanChange2 = 1
 
 pressureCanChange = 0.1
 pressureCanChange2 = 0.1
@@ -62,7 +64,7 @@ def on_message_for_temp(client, userdata, message):
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed,
-            "ratio": previousRatio
+            "ratio": round(previousRatio, 2)
         }
         client.publish(ahuControlTopic, json.dumps(x))
         print("published to topic " + ahuControlTopic + " new ratio - " + str(previousRatio))
@@ -75,7 +77,7 @@ def on_message_for_temp(client, userdata, message):
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed,
-            "ratio": previousRatio
+            "ratio": round(previousRatio, 2)
         }
         client.publish(ahuControlTopic, json.dumps(x))
         print("published to topic " + ahuControlTopic + " new ratio - " + str(previousRatio))
@@ -90,21 +92,21 @@ def on_message_for_pressure(client, userdata, message):
     global previousRatio
 
     if (pressure < (pressureThreashold - pressureCanChange)):  # increase the blower speed by 1
-        previousBlowerSpeed += 1
+        previousBlowerSpeed = min(previousBlowerSpeed+1, 100)
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed,
-            "ratio": previousRatio
+            "ratio": round(previousRatio, 2)
         }
         client.publish(ahuControlTopic, json.dumps(x))
         print("published to topic " + ahuControlTopic + " new blower speed - " + str(previousBlowerSpeed))
 
     elif (pressure > pressureThreashold + pressureCanChange):
-        previousBlowerSpeed -= 1
+        previousBlowerSpeed = max(previousBlowerSpeed-1, 0)
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed,
-            "ratio": previousRatio
+            "ratio": round(previousRatio, 2)
         }
         client.publish(ahuControlTopic, json.dumps(x))
         print("published to topic " + ahuControlTopic + " new blower speed - " + str(previousBlowerSpeed))
@@ -129,7 +131,6 @@ def on_message_for_temp_threshold(client, userdata, message):
 # changing pressure threashold
 def on_message_for_pressure_threshold(client, userdata, message):
     data = json.loads(message.payload)
-    print("dsfsdfsdfsfd")
     global pressureThreashold
     values = list(data.values())
     pressureThreashold = values[1]
@@ -156,7 +157,7 @@ def on_message_for_temp2(client, userdata, message):
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed2,
-            "ratio": previousRatio2
+            "ratio": round(previousRatio2, 2)
         }
         client.publish(ahuControlTopic2, json.dumps(x))
         print("published to topic " + ahuControlTopic2 + " new ratio - " + str(previousRatio2))
@@ -169,7 +170,7 @@ def on_message_for_temp2(client, userdata, message):
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed2,
-            "ratio": previousRatio2
+            "ratio": round(previousRatio2, 2)
         }
         client.publish(ahuControlTopic2, json.dumps(x))
         print("published to topic " + ahuControlTopic2 + " new ratio - " + str(previousRatio2))
@@ -184,21 +185,21 @@ def on_message_for_pressure2(client, userdata, message):
     global previousRatio2
 
     if (pressure < (pressureThreashold2 - pressureCanChange2)):  # increase the blower speed by 1
-        previousBlowerSpeed2 += 1
+        previousBlowerSpeed2 = min(previousBlowerSpeed2+1, 100)
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed2,
-            "ratio": previousRatio2
+            "ratio": round(previousRatio2, 2)
         }
         client.publish(ahuControlTopic2, json.dumps(x))
         print("published to topic " + ahuControlTopic2 + " new blower speed - " + str(previousBlowerSpeed2))
 
     elif (pressure > pressureThreashold2 + pressureCanChange2):
-        previousBlowerSpeed2 -= 1
+        previousBlowerSpeed2 = max(previousBlowerSpeed2-1, 0)
         x = {
             "time": datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S'),
             "speed": previousBlowerSpeed2,
-            "ratio": previousRatio2
+            "ratio": round(previousRatio2, 2)
         }
         client.publish(ahuControlTopic2, json.dumps(x))
         print("published to topic " + ahuControlTopic2 + " new blower speed - " + str(previousBlowerSpeed2))
@@ -244,7 +245,6 @@ client.message_callback_add(tempSensorTopic2, on_message_for_temp2)
 client.message_callback_add(presSensorTopic2, on_message_for_pressure2)
 client.message_callback_add(tempThreasholdChangeTopic2, on_message_for_temp_threshold2)
 client.message_callback_add(pressureThreasholdChangeTopic2, on_message_for_pressure_threshold2)
-
 
 client.connect("10.40.18.10", port=1883)
 

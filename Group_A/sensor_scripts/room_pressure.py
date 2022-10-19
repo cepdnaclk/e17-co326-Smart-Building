@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 from time import asctime, time, sleep
 from math import exp
-
+from sys import argv
 
 # Pressure Model
 target_pressure = lambda speed : 0.012 * speed
@@ -10,7 +10,7 @@ target_pressure = lambda speed : 0.012 * speed
 def pressure_model(speed, pressure, t):
     target = target_pressure(speed)
 
-    return target + (pressure - target) * exp(-t / 100)
+    return target + (pressure - target) * exp(-t / 10)
 
 
 # Initialize start time
@@ -18,12 +18,14 @@ start_time = time()
 speed = 0
 pressure = 1
 
+floorno = argv[1]
+roomno = argv[2]
 
 # MQTT info
 broker_addr = "10.40.18.10"
 broker_port = 1883
-ahu_topic = "326project/smartbuilding/hvac/0/0/control/ahu"
-room_pressure_topic = "326project/smartbuilding/hvac/0/0/pressure"
+ahu_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/control/ahu"
+room_pressure_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/pressure"
 
 
 # Get duct temps and AHU data via MQTT

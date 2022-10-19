@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 from time import asctime, time, sleep
 from math import exp
-
+from sys import argv
 
 # AHU Model
 target_temp = lambda r, Tb, Tc : r * Tb  +  (1-r) * Tc
@@ -22,15 +22,17 @@ speed = 1
 temp = 30
 # humidity = 0
 
+floorno = argv[1]
+roomno = argv[2]
 
 # MQTT info
 broker_addr = "10.40.18.10"
 broker_port = 1883
 chiller_temp_topic = "326project/smartbuilding/hvac/coldairduct/temperature"
 boiler_temp_topic = "326project/smartbuilding/hvac/hotairduct/temperature"
-ahu_topic = "326project/smartbuilding/hvac/0/0/control/ahu"
-room_temp_topic = "326project/smartbuilding/hvac/0/0/temperature"
-room_humidity_topic = "326project/smartbuilding/hvac/0/0/humidity"
+ahu_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/control/ahu"
+room_temp_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/temperature"
+room_humidity_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/humidity"
 
 
 # Get duct temps and AHU data via MQTT
