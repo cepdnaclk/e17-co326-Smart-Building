@@ -44,12 +44,16 @@ sensor_topic = "326project/smartbuilding/hvac/coldairduct/temperature"
 def on_message(client, userdata, message):
     global state, start_time
 
+    old_state = state
+
     data = json.loads(message.payload.decode("utf-8"))
 
     # Update state and start time
     state = True if data['state'] == 1 else False
-    print(f"Chiller {'ON' if state is True else 'OFF' }")
-    start_time = time()
+
+    if state != old_state:
+        print(f"Chiller {'ON' if state is True else 'OFF' }")
+        start_time = time()
 
 
 # Create MQTT client instance and connect to broker
@@ -76,7 +80,11 @@ while True:
             temp = on_model(temp) if temp > min_temp else min_temp
 
         case False:
-            temp = off_model(temp, elapsed_time) if temp < max_temp else max_temp
+            # Keep temperature dropping for some time after actuator shuts down
+            if elapsed_time < 10:
+                temp = on_model(temp) if temp > min_temp else min_temp
+            else:
+                temp = off_model(temp, elapsed_time) if temp < max_temp else max_temp
 
     # Publish to MQTT topic
     data = json.dumps({"time": asctime(), "temp": round(temp, 2)})

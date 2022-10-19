@@ -10,7 +10,7 @@ target_temp = lambda r, Tb, Tc : r * Tb  +  (1-r) * Tc
 def ahu_model(speed, temp, r, Tb, Tc, t):
     target = target_temp(r, Tb, Tc)
 
-    return target + (temp - target)*exp(-t/ (4000*speed))
+    return target + (temp - target)*exp(-t/ (800/(50 + 0.5* speed)))
 
 
 # Initialize start time

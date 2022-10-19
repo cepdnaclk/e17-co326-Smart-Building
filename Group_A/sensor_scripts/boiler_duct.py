@@ -1,3 +1,4 @@
+from multiprocessing.spawn import old_main_modules
 import paho.mqtt.client as mqtt
 import json
 from time import asctime, time, sleep
@@ -44,12 +45,16 @@ sensor_topic = "326project/smartbuilding/hvac/hotairduct/temperature"
 def on_message(client, userdata, message):
     global state, start_time
 
+    old_state = state
+
     data = json.loads(message.payload.decode("utf-8"))
 
     # Update state and start time
     state = True if data['state'] == 1 else False
-    print(f"Boiler {'ON' if state is True else 'OFF' }")
-    start_time = time()
+
+    if state != old_state:
+        print(f"Boiler {'ON' if state is True else 'OFF' }")
+        start_time = time()
 
 
 # Create MQTT client instance and connect to broker
@@ -76,7 +81,11 @@ while True:
             temp = on_model(temp) if temp < max_temp else max_temp
 
         case False:
-            temp = off_model(temp, elapsed_time) if temp > min_temp else min_temp
+            # Keep temperature rising for some time after actuator shuts down
+            if elapsed_time < 10:
+                temp = on_model(temp) if temp < max_temp else max_temp
+            else:
+                temp = off_model(temp, elapsed_time) if temp > min_temp else min_temp
 
     # Publish to MQTT topic
     data = json.dumps({"time": asctime(), "temp": round(temp, 2)})
