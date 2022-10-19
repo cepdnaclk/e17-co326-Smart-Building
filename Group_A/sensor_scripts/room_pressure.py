@@ -47,7 +47,7 @@ def on_message(client, userdata, message):
     
 
 # Create MQTT client instance and connect to broker
-client = mqtt.Client("Room0Pressure")
+client = mqtt.Client(f"Floor{floorno}Room{roomno}Pressure")
 client.connect(broker_addr, broker_port)
 print("Connected to broker")
 
