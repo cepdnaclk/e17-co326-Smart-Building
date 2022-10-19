@@ -18,7 +18,7 @@ start_time = time()
 boiler_temp = 30
 chiller_temp = 30
 ratio = 0
-speed = 0
+speed = 1
 temp = 30
 # humidity = 0
 
@@ -26,11 +26,11 @@ temp = 30
 # MQTT info
 broker_addr = "10.40.18.10"
 broker_port = 1883
-chiller_temp_topic = "326project/smartbuilding/hvac/sensor/chiller"
-boiler_temp_topic = "326project/smartbuilding/hvac/sensor/boiler"
-ahu_topic = "326project/smartbuilding/hvac/actuator/ahu/0/1"
-room_temp_topic = "326project/smartbuilding/hvac/temperature/room1"
-room_humidity_topic = "326project/smartbuilding/hvac/humidity/room1"
+chiller_temp_topic = "326project/smartbuilding/hvac/coldairduct/temperature"
+boiler_temp_topic = "326project/smartbuilding/hvac/hotairduct/temperature"
+ahu_topic = "326project/smartbuilding/hvac/0/0/control/ahu"
+room_temp_topic = "326project/smartbuilding/hvac/0/0/temperature"
+room_humidity_topic = "326project/smartbuilding/hvac/0/0/humidity"
 
 
 # Get duct temps and AHU data via MQTT
