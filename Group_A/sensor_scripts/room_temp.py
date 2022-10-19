@@ -10,7 +10,7 @@ target_temp = lambda r, Tb, Tc : r * Tb  +  (1-r) * Tc
 def ahu_model(speed, temp, r, Tb, Tc, t):
     target = target_temp(r, Tb, Tc)
 
-    return target + (temp - target)*exp(-t/ (800/(50 + 0.5* speed)))
+    return target + (temp - target)*exp(-t/ (500/(50 + 0.5* speed)))
 
 
 # Initialize start time
@@ -68,7 +68,7 @@ def on_message(client, userdata, message):
     
 
 # Create MQTT client instance and connect to broker
-client = mqtt.Client("Room0Temp")
+client = mqtt.Client(f"Floor{floorno}Room{roomno}Temp")
 client.connect(broker_addr, broker_port)
 print("Connected to broker")
 
