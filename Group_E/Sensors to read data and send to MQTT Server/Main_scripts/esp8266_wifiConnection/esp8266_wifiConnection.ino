@@ -7,6 +7,7 @@
 const char* ssid = "Eng-Student";
 const char* password = "3nG5tuDt";
 
+//MQTT broker and the Topics
 const char* mqtt_server = "10.40.18.10";
 const char* sensorTopic = "326project/smartbuilding/occupancy/0/1/ultrasonic";
 const char* rfidTopic = "326project/smartbuilding/occupancy/0/1/rfid";
@@ -73,7 +74,7 @@ void reconnect() {
 void setup() {
   Serial.begin(115200);
   mySerial.begin(9600);
-  
+  delay(2000);
   Serial.println("==========================================");
   Serial.println("             Smart Building");
   Serial.println("==========================================");
@@ -105,6 +106,7 @@ void loop() {
       Serial.println("A person detected");
       Serial.println(payload);
       client.publish(sensorTopic, payload.c_str());
+      delay(2000);
     }
 
     //For rfid
@@ -121,8 +123,8 @@ void loop() {
       Serial.println(F("A password entered"));
       Serial.println(payload);
       client.publish(keyPadTopic, payload.c_str());    
+      delay(2000);
     }
     msg = "";
-    
   }
 }
