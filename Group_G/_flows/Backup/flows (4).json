@@ -1,0 +1,1096 @@
+[
+    {
+        "id": "c806ef9f9466cb37",
+        "type": "tab",
+        "label": "Fire Control",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5e449120a2eca7e4",
+        "type": "mqtt in",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/pullstation",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 340,
+        "wires": [
+            [
+                "7519811702bbfa5e"
+            ]
+        ]
+    },
+    {
+        "id": "847af1bd2cea53f2",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "36a672ade94b46ac",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/safety/0/1/pullstation",
+        "payload": "{\"state\" : 1}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "09e386357bc527f8"
+            ]
+        ]
+    },
+    {
+        "id": "09e386357bc527f8",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/pullstation",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 690,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7519811702bbfa5e",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "32af1bc3bec0a661"
+            ]
+        ]
+    },
+    {
+        "id": "780d8e1520155c14",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "func": "var sprinkler_s = msg.payload.sprinkler;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload.floorno;\ntopic_arr[4] = msg.payload.roomno;\ntopic_arr[5] = \"sprinkler\";\nmsg.topic = topic_arr.join(\"/\");\nmsg.payload = {};\nif(sprinkler_s){\n    msg.payload = {\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    };\n    return msg;\n}\n// else{\n//     msg.payload = [{\n//         \"time\" : Date.now(),\n//         \"state\" : 0,\n//     }];\n// }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1180,
+        "y": 260,
+        "wires": [
+            [
+                "a3fcc4a2146923a6"
+            ]
+        ]
+    },
+    {
+        "id": "442070900e8cee37",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1110,
+        "y": 320,
+        "wires": [
+            [
+                "780d8e1520155c14",
+                "499170350938ff8d",
+                "1b83cc8cf255d4f3",
+                "b666ca69dae615fa",
+                "4e91227336c8e5dc"
+            ]
+        ]
+    },
+    {
+        "id": "a3fcc4a2146923a6",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1370,
+        "y": 340,
+        "wires": [
+            [
+                "03c24a3b9a8c8b88"
+            ]
+        ]
+    },
+    {
+        "id": "4cd847eae3678d78",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/safety/0/1/pullstation",
+        "payload": "{\"state\" : 1}",
+        "payloadType": "json",
+        "x": 280,
+        "y": 160,
+        "wires": [
+            [
+                "2a7d1c7b12c9ed49"
+            ]
+        ]
+    },
+    {
+        "id": "2a7d1c7b12c9ed49",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/1/1/pullstation",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "81593203ae5fb478",
+        "type": "mqtt in",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/1/1/pullstation",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 420,
+        "wires": [
+            [
+                "7519811702bbfa5e"
+            ]
+        ]
+    },
+    {
+        "id": "499170350938ff8d",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "func": "var fire_alarm_s = msg.payload.fire_alarm;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload.floorno;\ntopic_arr[4] = msg.payload.roomno;\ntopic_arr[5] = \"firealarm\";\nmsg.topic = topic_arr.join(\"/\");\nif (fire_alarm_s){\n    msg.payload = {\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    };\n    return msg;\n}\n// else{\n//     msg.payload = {\n//         \"time\" : Date.now(),\n//         \"state\" : 0,\n//     };\n// }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 400,
+        "wires": [
+            [
+                "377ffa035db418b7"
+            ]
+        ]
+    },
+    {
+        "id": "377ffa035db418b7",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1370,
+        "y": 460,
+        "wires": [
+            [
+                "e980738e8209646a",
+                "847af1bd2cea53f2"
+            ]
+        ]
+    },
+    {
+        "id": "03c24a3b9a8c8b88",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "Sprinker",
+        "topic": "",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 1560,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e980738e8209646a",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "Fire Alarm",
+        "topic": "",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 1550,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "1b83cc8cf255d4f3",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "func": "var indicate_lights_s = msg.payload.indicate_lights;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload.floorno;\ntopic_arr[4] = msg.payload.roomno;\ntopic_arr[5] = \"indicatelights\";\nmsg.topic = topic_arr.join(\"/\");\nif (indicate_lights_s){\n    msg.payload = {\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    };\n    return msg;\n}\n// else{\n//     msg.payload = {\n//         \"time\" : Date.now(),\n//         \"state\" : 0,\n//     };\n// }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 520,
+        "wires": [
+            [
+                "2aa313d5de418ebe"
+            ]
+        ]
+    },
+    {
+        "id": "2aa313d5de418ebe",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 1450,
+        "y": 560,
+        "wires": [
+            [
+                "92a7ca50ac122f01"
+            ]
+        ]
+    },
+    {
+        "id": "92a7ca50ac122f01",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "Indicate Lights",
+        "topic": "",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 1600,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "844285fe8504efa9",
+        "type": "mqtt in",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/control/0/1/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 680,
+        "wires": [
+            [
+                "c2a38a0d3d589d02"
+            ]
+        ]
+    },
+    {
+        "id": "c2a38a0d3d589d02",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "23c0eebe021fe791",
+        "type": "mqtt in",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/smoke",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 540,
+        "wires": [
+            [
+                "d26f923504e93eef"
+            ]
+        ]
+    },
+    {
+        "id": "fe9db88f01d2e2e4",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/safety/0/1/smoke",
+        "payload": "{\"Gas\" : 45}",
+        "payloadType": "json",
+        "x": 290,
+        "y": 120,
+        "wires": [
+            [
+                "89695515442eaca5"
+            ]
+        ]
+    },
+    {
+        "id": "89695515442eaca5",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/0/1/smoke",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "527099a6a9db0ae7",
+        "type": "mqtt in",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 600,
+        "wires": [
+            [
+                "1cea6a3c205c3098"
+            ]
+        ]
+    },
+    {
+        "id": "8e07313de021bc39",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "payload": "{\"temp\" : 28.5}",
+        "payloadType": "json",
+        "x": 890,
+        "y": 120,
+        "wires": [
+            [
+                "d6d490331aa9bdfe"
+            ]
+        ]
+    },
+    {
+        "id": "d6d490331aa9bdfe",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 1160,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2978d0a3e0a33752",
+        "type": "mqtt in",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/control/0/1/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 780,
+        "wires": [
+            [
+                "94f980e68ed2b26e"
+            ]
+        ]
+    },
+    {
+        "id": "8f989140b09f2bd4",
+        "type": "mongodb out",
+        "z": "c806ef9f9466cb37",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 660,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "1a564af72859faaf",
+        "type": "mongodb in",
+        "z": "c806ef9f9466cb37",
+        "mongodb": "abea49972fb74d1e",
+        "name": "",
+        "collection": "co326_safety_fire_alarm",
+        "operation": "find",
+        "x": 600,
+        "y": 1320,
+        "wires": [
+            [
+                "5771940d1b205579"
+            ]
+        ]
+    },
+    {
+        "id": "ce7816a548fe7e7a",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 1420,
+        "wires": [
+            [
+                "d59f9b0da97ee9ff"
+            ]
+        ]
+    },
+    {
+        "id": "6ea4163995c59b4a",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "89bdc0bd1aeffe80",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "_id",
+                "v": "",
+                "vt": "date"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"count\":6,\"room_number\":3,\"floor_number\":1}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 1180,
+        "wires": [
+            [
+                "fa2aadd507c3aafa",
+                "e3e2473602dbcdad"
+            ]
+        ]
+    },
+    {
+        "id": "d59f9b0da97ee9ff",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "function 1",
+        "func": "// msg.limit = 1;\n// msg.skip = 0;\n// // msg.payload = {\"roomno\":1};\n// msg.sort = {_id:-1};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1320,
+        "wires": [
+            [
+                "1a564af72859faaf"
+            ]
+        ]
+    },
+    {
+        "id": "fa2aadd507c3aafa",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "function 2",
+        "func": "msg.collection = \"co326_safety_fire_alarm\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1140,
+        "wires": [
+            [
+                "8f989140b09f2bd4"
+            ]
+        ]
+    },
+    {
+        "id": "e3e2473602dbcdad",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "b666ca69dae615fa",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "function 3",
+        "func": "var indicate_lights_s = msg.payload.indicate_lights;\nif (indicate_lights_s){\n    msg = {};\n    msg.collection = \"326_occupancy_room\";\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 740,
+        "wires": [
+            [
+                "3c087b13c2584636"
+            ]
+        ]
+    },
+    {
+        "id": "3c087b13c2584636",
+        "type": "mongodb in",
+        "z": "c806ef9f9466cb37",
+        "mongodb": "abea49972fb74d1e",
+        "name": "Occupancy ",
+        "collection": "",
+        "operation": "find",
+        "x": 1270,
+        "y": 840,
+        "wires": [
+            [
+                "6488e184b85c6795"
+            ]
+        ]
+    },
+    {
+        "id": "7fbb372da157fa5f",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1530,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "4e91227336c8e5dc",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "func": "var hvac_speed_curr = msg.payload.hvac_speed;\nvar hvac_speed_change_p = msg.payload.hvac_speed_change;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload.floorno;\ntopic_arr[4] = msg.payload.roomno;\ntopic_arr[5] = \"hvac\";\nmsg.topic = topic_arr.join(\"/\");\nif(hvac_speed_curr==0){\n    msg.payload = {\n        \"time\": Date.now(),\n        \"speed\": 0,\n    };\n    return msg;\n}\nif (hvac_speed_change_p != 0 && (hvac_speed_change_p != NaN || hvac_speed_curr != NaN)){\n    msg.payload = {\n        \"time\" : Date.now(),\n        \"speed\" : hvac_speed_curr + hvac_speed_change_p,\n    };\n    return msg;\n}\n// return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 640,
+        "wires": [
+            [
+                "f319fc4f1d5137eb",
+                "7fbb372da157fa5f"
+            ]
+        ]
+    },
+    {
+        "id": "f096dcf973d77aaf",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "func": "// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\nvar pull_state = msg.payload.state;\nvar gas_level = msg.payload.Gas;\nvar temp = msg.payload.temp;\nvar hvac_speed = 0;\nhvac_speed = msg.payload.speed;\nvar hvac_speed_change = 0;\n\n// Get the room and floor numbers\nvar arr = msg.topic.split(\"/\");\nvar floorno = arr[3];\nvar roomno = arr[4];\n\n// Initializing actuaters\nvar sprinkler = 0;\nvar fire_alarm = 0;\nvar indicate_lights = 0;\n\n// if pull station is triggered\nif (pull_state == 1){\n    sprinkler = 1;\n    fire_alarm = 1;\n    indicate_lights = 1;\n    hvac_speed = 0;\n    hvac_speed_change = -1*hvac_speed;\n}\n\n// if gas level exceeded without the pull station\nif (gas_level > gas_thresh && temp>temp_thresh){\n    indicate_lights = 1;\n}\n\n// if gas level exceeded without the pull station \n// and the temperature is low.\nif (gas_level > gas_thresh && temp<temp_thresh){\n    hvac_speed_change += 0.2;\n}\n\nmsg.payload = {\n    \"sprinkler\" : sprinkler,\n    \"fire_alarm\" : fire_alarm,\n    \"indicate_lights\" : indicate_lights,\n    \"floorno\" : parseInt(floorno),\n    \"roomno\" : parseInt(roomno),\n    \"hvac_speed\": hvac_speed,\n    \"hvac_speed_change\" : hvac_speed_change,\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 420,
+        "wires": [
+            [
+                "442070900e8cee37"
+            ]
+        ]
+    },
+    {
+        "id": "53d29f1d4279f57c",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2f1f76346b365639",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/control/0/1/ahu",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1270,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f5ba63b980751702",
+        "type": "inject",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"speed\" : 0.5}",
+        "payloadType": "json",
+        "x": 970,
+        "y": 180,
+        "wires": [
+            [
+                "2f1f76346b365639"
+            ]
+        ]
+    },
+    {
+        "id": "32af1bc3bec0a661",
+        "type": "join",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "1",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 770,
+        "y": 380,
+        "wires": [
+            [
+                "f096dcf973d77aaf",
+                "53d29f1d4279f57c"
+            ]
+        ]
+    },
+    {
+        "id": "94f980e68ed2b26e",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 610,
+        "y": 420,
+        "wires": [
+            [
+                "32af1bc3bec0a661"
+            ]
+        ]
+    },
+    {
+        "id": "d26f923504e93eef",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 610,
+        "y": 480,
+        "wires": [
+            [
+                "32af1bc3bec0a661"
+            ]
+        ]
+    },
+    {
+        "id": "1cea6a3c205c3098",
+        "type": "json",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 630,
+        "y": 540,
+        "wires": [
+            [
+                "32af1bc3bec0a661"
+            ]
+        ]
+    },
+    {
+        "id": "f319fc4f1d5137eb",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "hvac",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1430,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5771940d1b205579",
+        "type": "debug",
+        "z": "c806ef9f9466cb37",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "6488e184b85c6795",
+        "type": "split",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1470,
+        "y": 820,
+        "wires": [
+            [
+                "b189c5ec211d91d4"
+            ]
+        ]
+    },
+    {
+        "id": "b189c5ec211d91d4",
+        "type": "function",
+        "z": "c806ef9f9466cb37",
+        "name": "function 7",
+        "func": "var count = msg.payload.payload.count;\nvar roomno = msg.payload.payload.room_number;\nvar floorno = msg.payload.payload.floor_number;\nif(count!=0){\n    msg = {};\n    msg.topic = \"326project/smartbuilding/lighting/\"+floorno.toString()+\"/\"+roomno.toString()+\"indicatelights\";\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 1,\n    };\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 880,
+        "wires": [
+            [
+                "7ccae64ad76d9910"
+            ]
+        ]
+    },
+    {
+        "id": "7ccae64ad76d9910",
+        "type": "mqtt out",
+        "z": "c806ef9f9466cb37",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1790,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "1828911842d7dda6",
+        "type": "comment",
+        "z": "c806ef9f9466cb37",
+        "name": "For testing purposes only",
+        "info": "For testing purposes only",
+        "x": 310,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "93a52709f8718a12",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

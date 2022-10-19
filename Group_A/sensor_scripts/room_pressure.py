@@ -16,14 +16,14 @@ def pressure_model(speed, pressure, t):
 # Initialize start time
 start_time = time()
 speed = 0
-pressure = 0
+pressure = 1
 
 
 # MQTT info
 broker_addr = "10.40.18.10"
 broker_port = 1883
-ahu_topic = "326project/smartbuilding/hvac/actuator/ahu/0/1"
-room_pressure_topic = "326project/smartbuilding/hvac/dps/ro"
+ahu_topic = "326project/smartbuilding/hvac/0/0/control/ahu"
+room_pressure_topic = "326project/smartbuilding/hvac/0/0/pressure"
 
 
 # Get duct temps and AHU data via MQTT

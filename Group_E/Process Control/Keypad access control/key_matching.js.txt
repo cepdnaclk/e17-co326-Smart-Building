@@ -1,0 +1,13 @@
+//check the incoming key with the key on the database
+
+
+let pass = msg.payload[0].keypad;
+
+if (pass === global.get("01_keypad")) {
+    msg.payload = "true";
+}
+else {
+    msg.payload = "false";
+}
+//msg.payload = global.get("01_keypad");
+return msg;

@@ -1,0 +1,21 @@
+//according to the access given send a string to the scada
+
+
+var entering_state = false;
+
+
+var access = msg.payload;
+
+
+
+if (access == 1) {
+    entering_state = true;
+
+}
+
+
+if (!entering_state) {
+    msg.payload="no access"
+    return msg;
+
+}
