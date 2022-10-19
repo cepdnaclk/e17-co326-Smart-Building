@@ -30,15 +30,15 @@ pressureThreasholdChangeTopic2 = "326project/smartbuilding/hvac/0/1/control/pres
 tempThreashold = 30 # default
 tempThreashold2 = 30 # default
 
-pressureThreashold = 30 # default
-pressureThreashold2 = 30 # default
+pressureThreashold = 1 # default
+pressureThreashold2 = 1 # default
 
 # allowed ranges
 tempCanChange = 2
 tempCanChange2 = 2
 
-pressureCanChange = 2
-pressureCanChange2 = 2
+pressureCanChange = 0.1
+pressureCanChange2 = 0.1
 
 # previous values
 previousBlowerSpeed = 40 # default
@@ -129,7 +129,7 @@ def on_message_for_temp_threshold(client, userdata, message):
 # changing pressure threashold
 def on_message_for_pressure_threshold(client, userdata, message):
     data = json.loads(message.payload)
-
+    print("dsfsdfsdfsfd")
     global pressureThreashold
     values = list(data.values())
     pressureThreashold = values[1]

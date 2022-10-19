@@ -16,7 +16,7 @@ def pressure_model(speed, pressure, t):
 # Initialize start time
 start_time = time()
 speed = 0
-pressure = 0
+pressure = 1
 
 
 # MQTT info
