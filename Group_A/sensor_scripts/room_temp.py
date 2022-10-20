@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 from time import asctime, time, sleep
 from math import exp
-
+from sys import argv
 
 # AHU Model
 target_temp = lambda r, Tb, Tc : r * Tb  +  (1-r) * Tc
@@ -10,7 +10,7 @@ target_temp = lambda r, Tb, Tc : r * Tb  +  (1-r) * Tc
 def ahu_model(speed, temp, r, Tb, Tc, t):
     target = target_temp(r, Tb, Tc)
 
-    return target + (temp - target)*exp(-t/ (4000*speed))
+    return target + (temp - target)*exp(-t/ (500/(50 + 0.5* speed)))
 
 
 # Initialize start time
@@ -18,19 +18,21 @@ start_time = time()
 boiler_temp = 30
 chiller_temp = 30
 ratio = 0
-speed = 0
+speed = 1
 temp = 30
 # humidity = 0
 
+floorno = argv[1]
+roomno = argv[2]
 
 # MQTT info
 broker_addr = "10.40.18.10"
 broker_port = 1883
-chiller_temp_topic = "326project/smartbuilding/hvac/sensor/chiller"
-boiler_temp_topic = "326project/smartbuilding/hvac/sensor/boiler"
-ahu_topic = "326project/smartbuilding/hvac/actuator/ahu/0/1"
-room_temp_topic = "326project/smartbuilding/hvac/temperature/room1"
-room_humidity_topic = "326project/smartbuilding/hvac/humidity/room1"
+chiller_temp_topic = "326project/smartbuilding/hvac/coldairduct/temperature"
+boiler_temp_topic = "326project/smartbuilding/hvac/hotairduct/temperature"
+ahu_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/control/ahu"
+room_temp_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/temperature"
+room_humidity_topic = f"326project/smartbuilding/hvac/{floorno}/{roomno}/humidity"
 
 
 # Get duct temps and AHU data via MQTT
@@ -66,7 +68,7 @@ def on_message(client, userdata, message):
     
 
 # Create MQTT client instance and connect to broker
-client = mqtt.Client("Room0Temp")
+client = mqtt.Client(f"Floor{floorno}Room{roomno}Temp")
 client.connect(broker_addr, broker_port)
 print("Connected to broker")
 
