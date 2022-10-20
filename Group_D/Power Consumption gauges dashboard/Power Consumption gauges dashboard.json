@@ -1,0 +1,2027 @@
+[
+    {
+        "id": "5b6f2319221bd7de",
+        "type": "tab",
+        "label": "Power consumption Overview",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cfd07d4d1b13fdb2",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 0",
+        "info": "",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "31d2d0962c0694d6",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "co326project/smartbuilding/energy/floor0/room0/l/power",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "6f2da96c2ca09d2e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "fc9ab6405c716e06"
+            ]
+        ]
+    },
+    {
+        "id": "548f87fc920b42e9",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 1",
+        "info": "",
+        "x": 90,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3b0ddd77cc065eab",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 260,
+        "wires": [
+            [
+                "2e44b2740bd94ae2"
+            ]
+        ]
+    },
+    {
+        "id": "99bed59a29295f9d",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "95e23b9cb19a2df6",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 710,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9a7df0192e08b1b6",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 2",
+        "info": "",
+        "x": 110,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f049ad8422613440",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "1f3bb1146d030521",
+        "order": 1,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 690,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e39e13cffdd98e14",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "0862c0fd14a9ed1b"
+            ]
+        ]
+    },
+    {
+        "id": "d8a6a59a2412c234",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/b/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 460,
+        "wires": [
+            [
+                "78aebcd14237ab25"
+            ]
+        ]
+    },
+    {
+        "id": "2799e8bf6e5fe209",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "1f3bb1146d030521",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Boiler power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 690,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a406198f1b8dc391",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/c/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 600,
+        "wires": [
+            [
+                "705f9e1178cb6564"
+            ]
+        ]
+    },
+    {
+        "id": "363e0e7d770fe8c1",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 540,
+        "wires": [
+            [
+                "09521d9579242455"
+            ]
+        ]
+    },
+    {
+        "id": "2cb99b8164479b44",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "1f3bb1146d030521",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 690,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "67edda766fc34c4d",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "1f3bb1146d030521",
+        "order": 4,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Chiller power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 690,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "413cc3b264f9d8bb",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 3",
+        "info": "",
+        "x": 90,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "2d2ad9100ac26eaa",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "e2d79bd1ef8f553c",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 750,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "f63b3a5a371f6502",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 780,
+        "wires": [
+            [
+                "8c0b0475a830440c"
+            ]
+        ]
+    },
+    {
+        "id": "6a9b23eadd863664",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 860,
+        "wires": [
+            [
+                "530a3d552cec3e4c"
+            ]
+        ]
+    },
+    {
+        "id": "9a9dc642c21e64de",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "e2d79bd1ef8f553c",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 750,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "4363dff850118edd",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 4",
+        "info": "",
+        "x": 90,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "5ea7fceb890e05d9",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 1020,
+        "wires": [
+            [
+                "6d69d0c9a75414fd"
+            ]
+        ]
+    },
+    {
+        "id": "9d60607869645c7c",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "d36b38764bdc226f",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 770,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "db5dd6a6f8051f10",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 5",
+        "info": "",
+        "x": 90,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "2c04544ced9101d7",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "e73d95d92f095114",
+        "order": 1,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 790,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "bf3adf3f21d93a58",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1160,
+        "wires": [
+            [
+                "4ab86023106aa5cc"
+            ]
+        ]
+    },
+    {
+        "id": "27924fd78bf47dbe",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/b/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 1220,
+        "wires": [
+            [
+                "28bc5f416f7b6fc3"
+            ]
+        ]
+    },
+    {
+        "id": "fb1bfa05cced3a78",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "e73d95d92f095114",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Boiler power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 770,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "09892fb57c065d50",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/c/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 1340,
+        "wires": [
+            [
+                "c92dc2dff1d78527"
+            ]
+        ]
+    },
+    {
+        "id": "3d947b682f473ab6",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 1280,
+        "wires": [
+            [
+                "c42a05a189cd64ee"
+            ]
+        ]
+    },
+    {
+        "id": "8ea3a6713301fa34",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "e73d95d92f095114",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 770,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "98179bd555036fec",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "e73d95d92f095114",
+        "order": 4,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Chiller power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 770,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "02a5d1c30be9b08d",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 6",
+        "info": "",
+        "x": 90,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "21f04b14addb013c",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "132d6a63d9459949",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 850,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "49a603e965c298e8",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 370,
+        "y": 1500,
+        "wires": [
+            [
+                "0950f35394b21e67"
+            ]
+        ]
+    },
+    {
+        "id": "8d4cfab1099a8fa4",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 1620,
+        "wires": [
+            [
+                "ea59a7295ef2c790"
+            ]
+        ]
+    },
+    {
+        "id": "80ee2b5bb82e949d",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "132d6a63d9459949",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 870,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "273b92d3f17e1eee",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 7",
+        "info": "",
+        "x": 130,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "7cab440a3abb082a",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "9cfc06eaabbff2ee",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 790,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "e2e21ce13f750258",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 1800,
+        "wires": [
+            [
+                "5afe2b819abc74c6"
+            ]
+        ]
+    },
+    {
+        "id": "cbb106b6226b5908",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 1920,
+        "wires": [
+            [
+                "ffe5c8b5a2ec1f3f"
+            ]
+        ]
+    },
+    {
+        "id": "e87631998929e6fc",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "9cfc06eaabbff2ee",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 810,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "72579628cd67b02d",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 8",
+        "info": "",
+        "x": 130,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "59ae9edeb6fc5ad7",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "8cb92c93b81a32c4",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 750,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "c4bef2641bf02c83",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 2080,
+        "wires": [
+            [
+                "528688775fa276b8"
+            ]
+        ]
+    },
+    {
+        "id": "a5b022be34d61569",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 2200,
+        "wires": [
+            [
+                "f071533a3f1ddd24"
+            ]
+        ]
+    },
+    {
+        "id": "f5695e82b6bd7b53",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "8cb92c93b81a32c4",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 750,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "88447c69568cf229",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 9",
+        "info": "",
+        "x": 130,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "89f546f3af06942b",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "8347b59c61b3433e",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "AHU power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 770,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "79da8624a90fdba0",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/ahu/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 2360,
+        "wires": [
+            [
+                "fb7dfd38625d06d3"
+            ]
+        ]
+    },
+    {
+        "id": "1246d35fdc6d54f8",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 2480,
+        "wires": [
+            [
+                "262782f03f1f3fe0"
+            ]
+        ]
+    },
+    {
+        "id": "4b7f4d015bbd42be",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "8347b59c61b3433e",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 850,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "bcd2b4f784d602b8",
+        "type": "comment",
+        "z": "5b6f2319221bd7de",
+        "name": "Room 10",
+        "info": "",
+        "x": 140,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "a2d68c97f42d7cb3",
+        "type": "mqtt in",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 2640,
+        "wires": [
+            [
+                "c7f73202e221888c"
+            ]
+        ]
+    },
+    {
+        "id": "c73e136ef871e6b3",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "9ae8707636270f9c",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 830,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "acb8cca39abe10cd",
+        "type": "inject",
+        "z": "5b6f2319221bd7de",
+        "name": "35.6",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "35.6",
+        "payloadType": "json",
+        "x": 310,
+        "y": 60,
+        "wires": [
+            [
+                "1aaa4d0d1ce68d15"
+            ]
+        ]
+    },
+    {
+        "id": "1aaa4d0d1ce68d15",
+        "type": "mqtt out",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/power",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6f2da96c2ca09d2e",
+        "x": 780,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "fc9ab6405c716e06",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 11",
+        "func": "//return (msg.payload).power;\n\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "eb7851fc64f3aae1",
+                "1cae30c1ea07a9a9"
+            ]
+        ]
+    },
+    {
+        "id": "2e44b2740bd94ae2",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 12",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 260,
+        "wires": [
+            [
+                "99bed59a29295f9d"
+            ]
+        ]
+    },
+    {
+        "id": "0862c0fd14a9ed1b",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 13",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "f049ad8422613440"
+            ]
+        ]
+    },
+    {
+        "id": "78aebcd14237ab25",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 14",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "2799e8bf6e5fe209"
+            ]
+        ]
+    },
+    {
+        "id": "09521d9579242455",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 15",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 540,
+        "wires": [
+            [
+                "2cb99b8164479b44"
+            ]
+        ]
+    },
+    {
+        "id": "705f9e1178cb6564",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 16",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "67edda766fc34c4d"
+            ]
+        ]
+    },
+    {
+        "id": "8c0b0475a830440c",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 17",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 780,
+        "wires": [
+            [
+                "2d2ad9100ac26eaa"
+            ]
+        ]
+    },
+    {
+        "id": "530a3d552cec3e4c",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 18",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 860,
+        "wires": [
+            [
+                "9a9dc642c21e64de"
+            ]
+        ]
+    },
+    {
+        "id": "6d69d0c9a75414fd",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 19",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1020,
+        "wires": [
+            [
+                "9d60607869645c7c"
+            ]
+        ]
+    },
+    {
+        "id": "4ab86023106aa5cc",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 20",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1160,
+        "wires": [
+            [
+                "2c04544ced9101d7"
+            ]
+        ]
+    },
+    {
+        "id": "28bc5f416f7b6fc3",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 21",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1220,
+        "wires": [
+            [
+                "fb1bfa05cced3a78"
+            ]
+        ]
+    },
+    {
+        "id": "c42a05a189cd64ee",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 22",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1280,
+        "wires": [
+            [
+                "8ea3a6713301fa34"
+            ]
+        ]
+    },
+    {
+        "id": "c92dc2dff1d78527",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 23",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1340,
+        "wires": [
+            [
+                "98179bd555036fec"
+            ]
+        ]
+    },
+    {
+        "id": "0950f35394b21e67",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 24",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 1500,
+        "wires": [
+            [
+                "21f04b14addb013c"
+            ]
+        ]
+    },
+    {
+        "id": "ea59a7295ef2c790",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 25",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 1620,
+        "wires": [
+            [
+                "80ee2b5bb82e949d"
+            ]
+        ]
+    },
+    {
+        "id": "5afe2b819abc74c6",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 26",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1800,
+        "wires": [
+            [
+                "7cab440a3abb082a"
+            ]
+        ]
+    },
+    {
+        "id": "ffe5c8b5a2ec1f3f",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 27",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1920,
+        "wires": [
+            [
+                "e87631998929e6fc"
+            ]
+        ]
+    },
+    {
+        "id": "528688775fa276b8",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 28",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 2080,
+        "wires": [
+            [
+                "59ae9edeb6fc5ad7"
+            ]
+        ]
+    },
+    {
+        "id": "f071533a3f1ddd24",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 29",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 2200,
+        "wires": [
+            [
+                "f5695e82b6bd7b53"
+            ]
+        ]
+    },
+    {
+        "id": "fb7dfd38625d06d3",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 30",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 2360,
+        "wires": [
+            [
+                "89f546f3af06942b"
+            ]
+        ]
+    },
+    {
+        "id": "262782f03f1f3fe0",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 31",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 2480,
+        "wires": [
+            [
+                "4b7f4d015bbd42be"
+            ]
+        ]
+    },
+    {
+        "id": "c7f73202e221888c",
+        "type": "function",
+        "z": "5b6f2319221bd7de",
+        "name": "function 32",
+        "func": "\nvar newobject = {};\nlet str = msg.topic;\nnewobject = {\n    \"power\": (msg.payload).power\n}\nmsg.payload = newobject.power;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 2640,
+        "wires": [
+            [
+                "c73e136ef871e6b3"
+            ]
+        ]
+    },
+    {
+        "id": "eb7851fc64f3aae1",
+        "type": "ui_gauge",
+        "z": "5b6f2319221bd7de",
+        "name": "",
+        "group": "980e96c4811e70a0",
+        "order": 2,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Light power ",
+        "label": "Watts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "",
+        "className": "",
+        "x": 610,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1cae30c1ea07a9a9",
+        "type": "debug",
+        "z": "5b6f2319221bd7de",
+        "name": "debug 74",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7d0697b73a75a82e",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "95e23b9cb19a2df6",
+        "order": 1,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "5e91178158948836",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "e2d79bd1ef8f553c",
+        "order": 1,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "1bc55e5fd17c0c2f",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "e2d79bd1ef8f553c",
+        "order": 4,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "a2d7631db9a3eeca",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "d36b38764bdc226f",
+        "order": 1,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "5de922718719404a",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "d36b38764bdc226f",
+        "order": 3,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "589de17b91cbd26c",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "132d6a63d9459949",
+        "order": 1,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "c9efe3387dcc7fec",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "132d6a63d9459949",
+        "order": 4,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "fa3f06c91049229f",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "9cfc06eaabbff2ee",
+        "order": 1,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "011a1919d4967802",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "9cfc06eaabbff2ee",
+        "order": 4,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "01253cd0b5b35de5",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "8cb92c93b81a32c4",
+        "order": 1,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "934ed160b3eca5c2",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "8cb92c93b81a32c4",
+        "order": 4,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "1f0cd946836761a9",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "8347b59c61b3433e",
+        "order": 1,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "bb04027f4c252907",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "8347b59c61b3433e",
+        "order": 4,
+        "width": "4",
+        "height": "1"
+    },
+    {
+        "id": "69fda5b7db2fa9dc",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "9ae8707636270f9c",
+        "order": 1,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "474439e39ec39c9a",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "9ae8707636270f9c",
+        "order": 3,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "b48b72fed57183e8",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "",
+        "order": 1,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "62282d772886a4f4",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "",
+        "order": 3,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "cd6c34737a8f17ed",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "c8715019c0d2db5a",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "fb2690166d991526",
+        "type": "ui_spacer",
+        "z": "5b6f2319221bd7de",
+        "name": "spacer",
+        "group": "980e96c4811e70a0",
+        "order": 3,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "6f2da96c2ca09d2e",
+        "type": "mqtt-broker",
+        "name": "mqtt.server",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "fcfecd717798b8b6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "95e23b9cb19a2df6",
+        "type": "ui_group",
+        "name": "Room 01",
+        "tab": "5261e6d345108920",
+        "order": 2,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1f3bb1146d030521",
+        "type": "ui_group",
+        "name": "Room 02",
+        "tab": "5261e6d345108920",
+        "order": 3,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e2d79bd1ef8f553c",
+        "type": "ui_group",
+        "name": "Room 03",
+        "tab": "5261e6d345108920",
+        "order": 4,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d36b38764bdc226f",
+        "type": "ui_group",
+        "name": "Room 04",
+        "tab": "5261e6d345108920",
+        "order": 5,
+        "disp": true,
+        "width": 16,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e73d95d92f095114",
+        "type": "ui_group",
+        "name": "Room 05",
+        "tab": "5261e6d345108920",
+        "order": 6,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "132d6a63d9459949",
+        "type": "ui_group",
+        "name": "Room 06",
+        "tab": "5261e6d345108920",
+        "order": 7,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9cfc06eaabbff2ee",
+        "type": "ui_group",
+        "name": "Room 07",
+        "tab": "5261e6d345108920",
+        "order": 8,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8cb92c93b81a32c4",
+        "type": "ui_group",
+        "name": "Room 08",
+        "tab": "5261e6d345108920",
+        "order": 9,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8347b59c61b3433e",
+        "type": "ui_group",
+        "name": "Room 09",
+        "tab": "5261e6d345108920",
+        "order": 10,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9ae8707636270f9c",
+        "type": "ui_group",
+        "name": "Room 10",
+        "tab": "5261e6d345108920",
+        "order": 11,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "980e96c4811e70a0",
+        "type": "ui_group",
+        "name": "Room 0",
+        "tab": "5261e6d345108920",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5261e6d345108920",
+        "type": "ui_tab",
+        "name": "Floor 0",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

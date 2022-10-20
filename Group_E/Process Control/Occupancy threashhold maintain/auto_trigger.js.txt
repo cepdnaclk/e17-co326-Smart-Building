@@ -1,0 +1,13 @@
+//when in auto mode and count limit exceeds
+//forward a message to make triggers on scada
+
+
+var modestatus = global.get("automode");
+var sensorstatus = global.get("sensorCount");
+
+
+if (modestatus == "ON") {
+    if (sensorstatus == "ON")
+    return msg;
+
+}

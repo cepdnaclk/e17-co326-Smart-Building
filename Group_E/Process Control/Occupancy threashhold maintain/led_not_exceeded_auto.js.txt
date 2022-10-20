@@ -1,0 +1,9 @@
+//send a msg to led when roomlimit not exceeded
+var roomlimit = global.get("sensorCount");
+
+if (roomlimit==="OFF") {
+    global.set("roomlimit1", "OFF");
+    msg.payload=false;
+  // return msg;
+
+}
