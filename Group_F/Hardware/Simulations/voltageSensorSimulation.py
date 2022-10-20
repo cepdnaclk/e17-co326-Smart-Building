@@ -22,7 +22,7 @@ client.loop_start()
 print("MQTT Data generator is started...")
 
 # max voltage output 31.6v
-csvreader = csv.reader(open("..\\..\\Data\\simulation_data\\Plant_2_Time_vs_DCPower_Data.csv", 'r'))
+csvreader = list(csv.reader(open("..\\..\\Data\\simulation_data\\Plant_2_Time_vs_DCPower_Data.csv", 'r')))
 while(1):
 	try:
 		for row in csvreader:
