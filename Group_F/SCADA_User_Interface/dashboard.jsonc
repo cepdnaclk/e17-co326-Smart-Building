@@ -1,0 +1,1421 @@
+[
+    {
+        "id": "4cb98af524e094f8",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "Web interface for PV",
+        "env": []
+    },
+    {
+        "id": "41657d18377c384c",
+        "type": "http request",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=7.2547059&lon=80.5913157&appid=520452d295af1be588821916953f7706",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "a1c42574b0686d16",
+                "1d73de49a19e5445"
+            ]
+        ]
+    },
+    {
+        "id": "539458d2cbb1fcac",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 240,
+        "wires": [
+            [
+                "41657d18377c384c"
+            ]
+        ]
+    },
+    {
+        "id": "67473b8f4ce931e5",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a1c42574b0686d16",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 9",
+        "func": "var data = msg.payload;\nmsg.payload = { \n    \"temp\" : Math.round(data[\"main\"][\"temp\"] - 273), \n    \"wind\" : data[\"wind\"][\"speed\"],\n    \"sunrise\": data[\"sys\"][\"sunrise\"],\n    \"sunset\": data[\"sys\"][\"sunset\"] \n    };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "e24c92af1d4f5408",
+                "1bc3b02d580faf67",
+                "bfb46057a825a829",
+                "1c252d629aea1b8c"
+            ]
+        ]
+    },
+    {
+        "id": "43caf7cc5f53a54d",
+        "type": "ui_text",
+        "z": "4cb98af524e094f8",
+        "d": true,
+        "group": "11bbfaf41e37215a",
+        "order": 16,
+        "width": 1,
+        "height": 1,
+        "name": "",
+        "label": "Room Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 970,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e24c92af1d4f5408",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 10",
+        "func": "msg.payload = msg.payload[\"temp\"]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 100,
+        "wires": [
+            [
+                "43caf7cc5f53a54d",
+                "67473b8f4ce931e5",
+                "e2dbdb65c15cc253"
+            ]
+        ]
+    },
+    {
+        "id": "bf8a216b0dd58858",
+        "type": "ui_text",
+        "z": "4cb98af524e094f8",
+        "d": true,
+        "group": "11bbfaf41e37215a",
+        "order": 15,
+        "width": 1,
+        "height": 1,
+        "name": "",
+        "label": "Wind Speed",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 950,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d991e9ea4ce5d429",
+        "type": "ui_text",
+        "z": "4cb98af524e094f8",
+        "group": "11bbfaf41e37215a",
+        "order": 18,
+        "width": 4,
+        "height": 2,
+        "name": "",
+        "label": "Sun rise at",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 950,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7ce816dec4b7715b",
+        "type": "ui_text",
+        "z": "4cb98af524e094f8",
+        "group": "11bbfaf41e37215a",
+        "order": 19,
+        "width": 4,
+        "height": 2,
+        "name": "",
+        "label": "Sun sets at",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 950,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "1bc3b02d580faf67",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 11",
+        "func": "msg.payload = msg.payload[\"wind\"]\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 200,
+        "wires": [
+            [
+                "bf8a216b0dd58858",
+                "b6a76bc524ad3228",
+                "b4c0be72319bd65a"
+            ]
+        ]
+    },
+    {
+        "id": "bfb46057a825a829",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 12",
+        "func": "var time = new Date(msg.payload[\"sunrise\"] * 1000).toLocaleTimeString('en-SL', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\nmsg.payload = time.toUpperCase();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "d991e9ea4ce5d429",
+                "1fb3384843a95618"
+            ]
+        ]
+    },
+    {
+        "id": "1c252d629aea1b8c",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 13",
+        "func": "var time = new Date(msg.payload[\"sunset\"] * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\nmsg.payload = time.toUpperCase();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 480,
+        "wires": [
+            [
+                "7ce816dec4b7715b",
+                "36179b522854954b"
+            ]
+        ]
+    },
+    {
+        "id": "b6a76bc524ad3228",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1fb3384843a95618",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug 15",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "36179b522854954b",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug 16",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "1d73de49a19e5445",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1390fa4881beec69",
+        "type": "mqtt in",
+        "z": "4cb98af524e094f8",
+        "name": "mqtt: Battery Level",
+        "topic": "326project/smartbuilding/pv/battery/voltage",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 840,
+        "wires": [
+            [
+                "5b44668d4a860d52",
+                "35c6e0e4c8258d49"
+            ]
+        ]
+    },
+    {
+        "id": "515dc0d8bd0d8180",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug: Battery Level",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "e2ef59efcfd1024b",
+        "type": "mqtt in",
+        "z": "4cb98af524e094f8",
+        "name": "mqtt: Switch 2 Status",
+        "topic": "326project/smartbuilding/pv/controls/sw2",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d9af299d07b13199",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 660,
+        "wires": [
+            [
+                "985a69ea8e1ed439"
+            ]
+        ]
+    },
+    {
+        "id": "985a69ea8e1ed439",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 15",
+        "func": "msg.payload = msg.payload[\"sw2\"];\nif (msg.payload[\"sw2\"] == \"ON\"){\n    msg.message = \"Battery\";\n} else {\n    msg.message = \"Main Grid\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 660,
+        "wires": [
+            [
+                "982c540809f2615b",
+                "571bb0f170d42c70"
+            ]
+        ]
+    },
+    {
+        "id": "982c540809f2615b",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug: Battery power consumption",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "d9328c7a03b642d9",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "dummy: Battery Level",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "dummy_battery_level",
+        "payload": "{ \"time\": 1665740669.7882793, \"value\": 12.4555}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2b9cc7c220b42916",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "dummy: Switch 2 Status (ON)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "dummy_battery_level",
+        "payload": "{ \"time\": 123, \"sw2\": \"ON\"}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56553780fc35fd28",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "dummy: Switch 2 Status (OFF)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2.5",
+        "topic": "dummy_battery_level",
+        "payload": "{ \"time\": 123, \"sw2\": \"OFF\"}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "336c21bf98502e7f",
+        "type": "ui_level",
+        "z": "4cb98af524e094f8",
+        "group": "416cb751fd5c4aa1",
+        "order": 2,
+        "width": 5,
+        "height": 1,
+        "name": "Battery Level",
+        "label": "",
+        "colorHi": "#00ff2a",
+        "colorWarn": "#ff9900",
+        "colorNormal": "#ff0000",
+        "colorOff": "#595959",
+        "min": 0,
+        "max": 100,
+        "segWarn": "",
+        "segHigh": "",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "soft",
+        "shape": 2,
+        "colorschema": "rainbow",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 750,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "2f2c058cca8caf3a",
+        "type": "ui_text",
+        "z": "4cb98af524e094f8",
+        "group": "416cb751fd5c4aa1",
+        "order": 5,
+        "width": 3,
+        "height": 1,
+        "name": "Battery power consumption status",
+        "label": "",
+        "format": "Battery Status",
+        "layout": "col-center",
+        "className": "text-center",
+        "x": 800,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "571bb0f170d42c70",
+        "type": "ui_led",
+        "z": "4cb98af524e094f8",
+        "order": 6,
+        "group": "416cb751fd5c4aa1",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "right",
+        "labelAlignment": "center",
+        "colorForValue": [
+            {
+                "color": "#ff531a",
+                "value": "OFF",
+                "valueType": "str"
+            },
+            {
+                "color": "#2eff2e",
+                "value": "ON",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": true,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "Battery power consumption",
+        "x": 800,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "e2dbdb65c15cc253",
+        "type": "ui_widget_thermometer",
+        "z": "4cb98af524e094f8",
+        "group": "11bbfaf41e37215a",
+        "order": 4,
+        "width": 4,
+        "height": 4,
+        "name": "Room Temperature",
+        "title": "",
+        "colorTop": "#f4541f",
+        "colorMiddle": "#94ff1a",
+        "colorBottom": "#3487f4",
+        "unit": "°C",
+        "scale": "small",
+        "minTemp": "5",
+        "maxTemp": "32",
+        "x": 1190,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b4c0be72319bd65a",
+        "type": "ui_gauge",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "group": "11bbfaf41e37215a",
+        "order": 2,
+        "width": 4,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Wind Gauge",
+        "label": "MPH",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#29ff54",
+            "#00d5ff",
+            "#ffbb00"
+        ],
+        "seg1": "5",
+        "seg2": "10",
+        "className": "",
+        "x": 1170,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c734f1ee0d0c65c0",
+        "type": "ui_media",
+        "z": "4cb98af524e094f8",
+        "group": "11bbfaf41e37215a",
+        "name": "Sunrise",
+        "width": 2,
+        "height": 2,
+        "order": 10,
+        "category": "weather",
+        "file": "sunrise1.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 940,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "37d7473e813d1fe5",
+        "type": "ui_media",
+        "z": "4cb98af524e094f8",
+        "group": "11bbfaf41e37215a",
+        "name": "Sunset",
+        "width": 2,
+        "height": 2,
+        "order": 12,
+        "category": "weather",
+        "file": "sunset1.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 940,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a4481217e533d45",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 1150,
+        "y": 380,
+        "wires": [
+            [
+                "b4c0be72319bd65a"
+            ]
+        ]
+    },
+    {
+        "id": "e81033f685da6b1f",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 1250,
+        "y": 420,
+        "wires": [
+            [
+                "b4c0be72319bd65a"
+            ]
+        ]
+    },
+    {
+        "id": "e2d5d56c3a700491",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "26",
+        "payloadType": "num",
+        "x": 1450,
+        "y": 420,
+        "wires": [
+            [
+                "b4c0be72319bd65a"
+            ]
+        ]
+    },
+    {
+        "id": "c578c8ec28e5e606",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "15",
+        "payloadType": "num",
+        "x": 1490,
+        "y": 320,
+        "wires": [
+            [
+                "b4c0be72319bd65a"
+            ]
+        ]
+    },
+    {
+        "id": "5b44668d4a860d52",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug 18",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "35c6e0e4c8258d49",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 16",
+        "func": "// const MIN_V = 10.5;\n// const MAX_V = 13;\n\nvar charge = msg.payload[\"soc\"];\n// var percentage = (((charge - MIN_V) / (MAX_V - MIN_V)) * 100).toFixed(2)\nmsg.payload = charge;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 840,
+        "wires": [
+            [
+                "515dc0d8bd0d8180",
+                "336c21bf98502e7f"
+            ]
+        ]
+    },
+    {
+        "id": "342913ed1a0320cf",
+        "type": "ui_button",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "group": "416cb751fd5c4aa1",
+        "order": 14,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Connect",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{ \"time\": 1665995644785, \"sw2\": \"ON\", \"from\": \"NodeDash\", \"mode\": \"MANUAL\" }",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 1360,
+        "wires": [
+            [
+                "46d588809bf7c644",
+                "b75b60cb28a32809"
+            ]
+        ]
+    },
+    {
+        "id": "46d588809bf7c644",
+        "type": "mqtt out",
+        "z": "4cb98af524e094f8",
+        "name": "sw2 manual control",
+        "topic": "326project/smartbuilding/pv/controls/sw2/dash",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 530,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "5e0e16dd1ef03059",
+        "type": "ui_button",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "group": "416cb751fd5c4aa1",
+        "order": 15,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "Disconnect",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{ \"time\": 1665995644785, \"sw2\": \"OFF\", \"from\": \"NodeDash\", \"mode\": \"MANUAL\"  }",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 1480,
+        "wires": [
+            [
+                "46d588809bf7c644",
+                "b75b60cb28a32809"
+            ]
+        ]
+    },
+    {
+        "id": "33264e5b8f97860f",
+        "type": "ui_switch",
+        "z": "4cb98af524e094f8",
+        "name": "Enable Auto Mode",
+        "label": "Enable Auto Battery Management",
+        "tooltip": "",
+        "group": "416cb751fd5c4aa1",
+        "order": 10,
+        "width": 7,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "green",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "blue",
+        "animate": true,
+        "className": "",
+        "x": 830,
+        "y": 1540,
+        "wires": [
+            [
+                "c570e28b523d754c"
+            ]
+        ]
+    },
+    {
+        "id": "e8db9395b0d1e133",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 32",
+        "func": "// let time = Date.now();\n// if (msg.payload == false) {\n//     msg.payload = { \"time\": time, \"sw2\": \"OFF\", \"from\": \"NodeDash\", \"mode\": \"MANUAL\" }\n//     return msg;\n// }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 1620,
+        "wires": [
+            [
+                "8fe3ea8bfe8eddde"
+            ]
+        ]
+    },
+    {
+        "id": "c570e28b523d754c",
+        "type": "switch",
+        "z": "4cb98af524e094f8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "jsonata"
+            },
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1090,
+        "y": 1580,
+        "wires": [
+            [
+                "c1ca029800584a9e",
+                "5748d64d825c0b23"
+            ],
+            [
+                "032aef2b60848bca",
+                "e8db9395b0d1e133"
+            ]
+        ]
+    },
+    {
+        "id": "c1ca029800584a9e",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug: Auto Mode Switch",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1370,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "032aef2b60848bca",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug: Auto Mode Switch OFF",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "5748d64d825c0b23",
+        "type": "mqtt out",
+        "z": "4cb98af524e094f8",
+        "name": "sw2 enable auto",
+        "topic": "326project/smartbuilding/pv/controls/sw2/auto",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 1340,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "b75b60cb28a32809",
+        "type": "function",
+        "z": "4cb98af524e094f8",
+        "name": "function 33",
+        "func": "// if (msg.payload['mode'] == 'MANUAL') {\n//     msg.payload = false;\n// } else {\n    msg.payload = false;\n// }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1580,
+        "wires": [
+            [
+                "33264e5b8f97860f",
+                "b55616a4fd34fe4c"
+            ]
+        ]
+    },
+    {
+        "id": "8fe3ea8bfe8eddde",
+        "type": "mqtt out",
+        "z": "4cb98af524e094f8",
+        "name": "sw2 manual control",
+        "topic": "326project/smartbuilding/pv/controls/sw2/dash",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d9af299d07b13199",
+        "x": 1530,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "b55616a4fd34fe4c",
+        "type": "debug",
+        "z": "4cb98af524e094f8",
+        "name": "debug: auto mode",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "063dab6faad83676",
+        "type": "ui_text",
+        "z": "4cb98af524e094f8",
+        "group": "416cb751fd5c4aa1",
+        "order": 13,
+        "width": 4,
+        "height": 2,
+        "name": "",
+        "label": "Manual Switching",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 530,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "83bb7223bdefec7c",
+        "type": "inject",
+        "z": "4cb98af524e094f8",
+        "name": "Prerecorded weather data",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"main\": {         \"temp\": 296.59,         \"feels_like\": 297.21,         \"temp_min\": 296.59,         \"temp_max\": 296.59,         \"pressure\": 1014,         \"humidity\": 85,         \"sea_level\": 1014,         \"grnd_level\": 959     },     \"visibility\": 10000,     \"wind\": {         \"speed\": 1.12,         \"deg\": 251,         \"gust\": 2.61     },     \"rain\": {         \"1h\": 0.1     },     \"clouds\": {         \"all\": 98     },     \"dt\": 1666237713,     \"sys\": {         \"country\": \"LK\",         \"sunrise\": 1666225452,         \"sunset\": 1666268428     }}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "a1c42574b0686d16"
+            ]
+        ]
+    },
+    {
+        "id": "6695a0ff12ed4cb2",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 1,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "9d618f709da4db67",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "169a90e0bc400b77",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f6c9d7cf13796e51",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "dd1356e3cb768c3e",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "833dca69c08f7ede",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 8,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "deeabf85d5cd19f7",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f73c9ac9e14abee0",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 11,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "1376c582aa55c86e",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 13,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "cb46d9fc7e786c03",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 14,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4f31e072ffdf06ae",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 17,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "784bad292b03ea97",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 20,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "97828fcb1986d25f",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "11bbfaf41e37215a",
+        "order": 21,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "dbc05c97e0cb63bc",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 1,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "67b125b8f7c07964",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 3,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "622f45074ed281ce",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 4,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "22754466720e2dbf",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 7,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "3cdc110b05f3cba7",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 8,
+        "width": 9,
+        "height": 1
+    },
+    {
+        "id": "0fcae4edd270de55",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "2d16d044ae7ce8fc",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "7dab69f16fcfc168",
+        "type": "ui_spacer",
+        "z": "4cb98af524e094f8",
+        "name": "spacer",
+        "group": "416cb751fd5c4aa1",
+        "order": 12,
+        "width": 9,
+        "height": 1
+    },
+    {
+        "id": "11bbfaf41e37215a",
+        "type": "ui_group",
+        "name": "Weather",
+        "tab": "b5cde9f8cf987270",
+        "order": 2,
+        "disp": true,
+        "width": 9,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d9af299d07b13199",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "416cb751fd5c4aa1",
+        "type": "ui_group",
+        "name": "Battery",
+        "tab": "b5cde9f8cf987270",
+        "order": 3,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b5cde9f8cf987270",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "fa-home",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
