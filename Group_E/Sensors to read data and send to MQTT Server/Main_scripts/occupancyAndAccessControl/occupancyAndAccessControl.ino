@@ -109,7 +109,7 @@ char keys[n_rows][n_cols] = {
 };
  
 byte colPins[n_rows] = {5, 4, 3, 2};
-byte rowPins[n_cols] = {1, 0, 7, 6};
+byte rowPins[n_cols] = {17, 8, 7, 6};
  
 Keypad myKeypad = Keypad( makeKeymap(keys), rowPins, colPins, n_rows, n_cols); 
 String password = "";
@@ -161,7 +161,7 @@ void loop() {
   
   // Reads the echoPin, returns the sound wave travel time in microseconds
   duration1 = pulseIn(echoPin1, HIGH);
-  delay(2);
+  delay(10);
 
   // Clears the trigPin
   digitalWrite(trigPin2, LOW);
@@ -180,15 +180,15 @@ void loop() {
 
   int diff = distance2 - distance1;
 
-  if (diff > 1){
+  if (diff > 2){
     Serial.println('A');
     Serial.println(1);
-    delay(2000);
+    //delay(2000);
   }
-  else if (diff < -1){
+  else if (diff < -2){
     Serial.println('A');
     Serial.println(-1);
-    delay(2000);
+    //delay(2000);
   }
 
 /*----------------------------------------------------------------------------*/
@@ -222,8 +222,11 @@ void loop() {
   }
 
   else if (key == '#' && pw ==1){
-    Serial.println('C');
-    Serial.println(password);
+    for(int i=1; i<4;i++){
+      Serial.println('C');
+      Serial.println(password);
+      delay(400);
+    }
     password = "";
     pw = 0;
   }
@@ -231,7 +234,7 @@ void loop() {
   else if (key != NULL && pw ==1 ){
     password = password + key;
   }  
-  delay(100);
+  delay(250);
 }
 
 /**

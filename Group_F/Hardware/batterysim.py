@@ -6,7 +6,7 @@ import numpy as np
 from scipy.interpolate import interp1d
 import paho.mqtt.client as mqtt
 
-BAT_CAPACITY = 65000 # mAh
+BAT_CAPACITY = 50000 # mAh
 MQTT_SERVER = "10.40.18.10"
 MQTT_PORT = 1883
 MQTT_TOPIC = "326project/smartbuilding/pv"
@@ -83,11 +83,10 @@ def on_disconnect(client, userdata, rc):
 battery = Battery(BAT_CAPACITY, 0, 0)
 
 if __name__ == '__main__':
-    # 4 MQTT clients are running simultaneously for:
-    # 1. Loading the battery.
-    # 2. Subscribing to SW1 and deciding whether to charge the battery.
-    # 3. Subscribing to SW2 and deciding whether to connect the battery to the load.
-    # 4. Publishing battery voltage, SoC and battery ready status.
+    # 3 MQTT clients are running simultaneously for:
+    # 1. Subscribing to SW1 and deciding whether to charge the battery.
+    # 2. Subscribing to SW2 and deciding whether to connect the battery to the load.
+    # 3. Publishing battery voltage, SoC and battery ready status.
     clients = []
 
     # This function mimics the loading of the battery by iteratively consuming power from the battery.
@@ -102,8 +101,8 @@ if __name__ == '__main__':
             c3.acquire()
             c3.wait()
             print("Load is consuming power...")
-            # 60 Wh load
-            battery.load(60000)
+            # 40 Wh load
+            battery.load(40000)
             c3.release()
 
     # This function subscribes to SW1 and either shuts down charging or starts charging at the specified power level accordingly.

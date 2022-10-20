@@ -1,0 +1,3048 @@
+[
+    {
+        "id": "d353a2dae9f54c6a",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1f193de307ab25c2",
+        "type": "ui_button",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "d7ce6ed80fc1fe19",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "Green",
+        "className": "",
+        "icon": "",
+        "payload": "1",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 550,
+        "y": 580,
+        "wires": [
+            [
+                "4a8d4913487dfc7b",
+                "e331e093082e7a83"
+            ]
+        ]
+    },
+    {
+        "id": "d56b5ebadaf9b29c",
+        "type": "ui_button",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "d7ce6ed80fc1fe19",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "Red",
+        "className": "",
+        "icon": "",
+        "payload": "0",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 550,
+        "y": 620,
+        "wires": [
+            [
+                "4a8d4913487dfc7b",
+                "e331e093082e7a83"
+            ]
+        ]
+    },
+    {
+        "id": "d16fe55bd6f79295",
+        "type": "ui_button",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "501dc4d2cc2c91f0",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "Green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 550,
+        "y": 860,
+        "wires": [
+            [
+                "6840938cbbd7eba7",
+                "334fb564222780e4"
+            ]
+        ]
+    },
+    {
+        "id": "64ccb9dca14e7b6a",
+        "type": "ui_button",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "501dc4d2cc2c91f0",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "Red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 550,
+        "y": 900,
+        "wires": [
+            [
+                "6840938cbbd7eba7",
+                "334fb564222780e4"
+            ]
+        ]
+    },
+    {
+        "id": "5376e040ef2e4074",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a6fdaffffc5d92b7",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "Current State",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 950,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "633d2b26447f28a8",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "f7c120bffca73d37",
+        "order": 1,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "Current State",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 950,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a36db98386fd74a8",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a3378c8178c980c8",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Temperature :",
+        "format": "{{msg.payload}} °C",
+        "layout": "row-center",
+        "className": "",
+        "x": 700,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "a21bc02705415b23",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "a3378c8178c980c8",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Humidity :",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2460,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "d29c9a6dab52bca3",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a3378c8178c980c8",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Air Pressure :",
+        "format": "{{msg.payload}} In H2O",
+        "layout": "row-center",
+        "className": "",
+        "x": 700,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "a416e258df0c842c",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a3378c8178c980c8",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Occupancy Status :",
+        "format": "{{msg.payload}} pax",
+        "layout": "row-center",
+        "className": "",
+        "x": 710,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "8f15983a5722983f",
+        "type": "ui_switch",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Humidifier ON/OFF",
+        "tooltip": "",
+        "group": "a3378c8178c980c8",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2350,
+        "y": 1200,
+        "wires": [
+            [
+                "59f10558c7ad5b18"
+            ]
+        ]
+    },
+    {
+        "id": "4b8fbd93c7e5ce98",
+        "type": "ui_switch",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Air Remover ON/OFF",
+        "tooltip": "",
+        "group": "a3378c8178c980c8",
+        "order": 17,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2320,
+        "y": 1240,
+        "wires": [
+            [
+                "1d810971cec47ee1"
+            ]
+        ]
+    },
+    {
+        "id": "716dd1b466592714",
+        "type": "ui_gauge",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "a3378c8178c980c8",
+        "order": 7,
+        "width": "4",
+        "height": "4",
+        "gtype": "donut",
+        "title": "Blower Speed",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 800,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "41923dc5014edf77",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "bf8e161457509e95",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Temperature :",
+        "format": "{{msg.payload}} °C",
+        "layout": "row-center",
+        "className": "",
+        "x": 680,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "7112999dc2a87c6d",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "bf8e161457509e95",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Humidity :",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 2400,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "9d236ab6ea3a7a45",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "bf8e161457509e95",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Air Pressure :",
+        "format": "{{msg.payload}} In H2O",
+        "layout": "row-center",
+        "className": "",
+        "x": 680,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "842a77a31f3ff010",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "bf8e161457509e95",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Occupancy Status :",
+        "format": "{{msg.payload}} pax",
+        "layout": "row-center",
+        "className": "",
+        "x": 690,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "5381b330d564dc9d",
+        "type": "ui_switch",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Blower ON/OFF",
+        "tooltip": "",
+        "group": "bf8e161457509e95",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2440,
+        "y": 1800,
+        "wires": [
+            [
+                "44adc72ddd0d43f4"
+            ]
+        ]
+    },
+    {
+        "id": "a3bd7f043d0e183c",
+        "type": "ui_switch",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Humidifier ON/OFF",
+        "tooltip": "",
+        "group": "bf8e161457509e95",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2410,
+        "y": 1840,
+        "wires": [
+            [
+                "3d09969dd95d5156"
+            ]
+        ]
+    },
+    {
+        "id": "67e7f186838c3853",
+        "type": "ui_switch",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Air Remover ON/OFF",
+        "tooltip": "",
+        "group": "bf8e161457509e95",
+        "order": 17,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2380,
+        "y": 1880,
+        "wires": [
+            [
+                "40ec839a343c211f"
+            ]
+        ]
+    },
+    {
+        "id": "99f0684f311b7191",
+        "type": "ui_gauge",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "bf8e161457509e95",
+        "order": 7,
+        "width": "4",
+        "height": "4",
+        "gtype": "donut",
+        "title": "Blower Speed",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 740,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "64e75e6de00d211c",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/pressure",
+        "topic": "326project/smartbuilding/hvac/0/1/pressure",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1800,
+        "wires": [
+            [
+                "634cdf56aee6dee9"
+            ]
+        ]
+    },
+    {
+        "id": "2e2531cef394af2a",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/humidity",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1980,
+        "y": 1740,
+        "wires": [
+            [
+                "0d291a71dfa3c437"
+            ]
+        ]
+    },
+    {
+        "id": "26257cdfadc15523",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/temperature",
+        "topic": "326project/smartbuilding/hvac/0/1/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1680,
+        "wires": [
+            [
+                "edb45c79acc10cad"
+            ]
+        ]
+    },
+    {
+        "id": "76ff40b6c0bbfef7",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/pressure",
+        "topic": "326project/smartbuilding/hvac/0/0/pressure",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1200,
+        "wires": [
+            [
+                "f89ab26ffd4991d1"
+            ]
+        ]
+    },
+    {
+        "id": "6c55bb38089774f0",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/humidity",
+        "topic": "326project/smartbuilding/hvac/0/0/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1980,
+        "y": 1080,
+        "wires": [
+            [
+                "87c1de6bb334b0c9"
+            ]
+        ]
+    },
+    {
+        "id": "f69ba807180cefdc",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/temperature",
+        "topic": "326project/smartbuilding/hvac/0/0/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1080,
+        "wires": [
+            [
+                "e7b8c9e7b0f44412"
+            ]
+        ]
+    },
+    {
+        "id": "f67247273d27d93f",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/hotairduct/temperature",
+        "topic": "326project/smartbuilding/hvac/hotairduct/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 680,
+        "wires": [
+            [
+                "4eefcbe6fa59dc35"
+            ]
+        ]
+    },
+    {
+        "id": "bc656ac6215d5c5a",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/coldairduct/temperature",
+        "topic": "326project/smartbuilding/hvac/coldairduct/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 1000,
+        "wires": [
+            [
+                "6ee8846b607d494b"
+            ]
+        ]
+    },
+    {
+        "id": "c24df87340e78e3d",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/boiler",
+        "topic": "326project/smartbuilding/hvac/control/boiler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 1090,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "8912e8ec890676cb",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/chiller",
+        "topic": "326project/smartbuilding/hvac/control/chiller",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 1090,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "53bdd778b4ec075f",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/occupancy/0/0/count",
+        "topic": "326project/smartbuilding/occupancy/0/0/count",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1260,
+        "wires": [
+            [
+                "e7c1a4565d355b0a"
+            ]
+        ]
+    },
+    {
+        "id": "992a6cfda5da620b",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/occupancy/0/1/count",
+        "topic": "326project/smartbuilding/occupancy/0/1/count",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1860,
+        "wires": [
+            [
+                "abf610af60aedaed"
+            ]
+        ]
+    },
+    {
+        "id": "a8cbd2907904ff37",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/boiler",
+        "topic": "326project/smartbuilding/hvac/control/boiler",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "046f68ee23bd7184"
+            ]
+        ]
+    },
+    {
+        "id": "f8ca9d1854c9720b",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/chiller",
+        "topic": "326project/smartbuilding/hvac/control/chiller",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 780,
+        "wires": [
+            [
+                "5a544f987c1d8789"
+            ]
+        ]
+    },
+    {
+        "id": "37d93a3db6dce470",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/temp-thresh-coldairduct",
+        "topic": "326project/smartbuilding/hvac/control/temp-thresh-coldairduct",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 1020,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "07e7971ee4132a4f",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/temp-thresh-hotairduct",
+        "topic": "326project/smartbuilding/hvac/control/temp-thresh-hotairduct",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 1020,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "8d4d5c55981efb6d",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/control/ahu",
+        "topic": "326project/smartbuilding/hvac/0/0/control/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1340,
+        "wires": [
+            [
+                "05737530b8f3ac37",
+                "9525e766d536ac53"
+            ]
+        ]
+    },
+    {
+        "id": "3c6efbf3bc2f294a",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/control/ahu",
+        "topic": "326project/smartbuilding/hvac/0/1/control/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1920,
+        "wires": [
+            [
+                "6b929307073b5b77",
+                "33267d344fc30e43"
+            ]
+        ]
+    },
+    {
+        "id": "3daf98ba5dfd3fcb",
+        "type": "ui_chart",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "a6fdaffffc5d92b7",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Hot Air Duct Temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 850,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07c9cf0952f09793",
+        "type": "ui_chart",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "f7c120bffca73d37",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Cold Air Duct Temp.",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 850,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b7863f022257186c",
+        "type": "ui_gauge",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "d7ce6ed80fc1fe19",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Current Threshold(hot air duct)",
+        "label": "Celcius",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 930,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "848721dcf8581a1b",
+        "type": "ui_gauge",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "501dc4d2cc2c91f0",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "gtype": "gage",
+        "title": "Current Threshold(cold air duct)",
+        "label": "Celcius",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "30",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 930,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d9508a65d90378f3",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/state/ahu/blower",
+        "topic": "326project/smartbuilding/hvac/0/0/state/ahu/blower",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2010,
+        "y": 1280,
+        "wires": [
+            [
+                "b224305dbe1ae164"
+            ]
+        ]
+    },
+    {
+        "id": "6e4504c4c89f2a9b",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/state/ahu/humidifier",
+        "topic": "326project/smartbuilding/hvac/0/0/state/ahu/humidifier",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2020,
+        "y": 1320,
+        "wires": [
+            [
+                "a731749245adde63"
+            ]
+        ]
+    },
+    {
+        "id": "151fcda1611bf414",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/state/ahu/airremover",
+        "topic": "326project/smartbuilding/hvac/0/0/state/ahu/airremover",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2020,
+        "y": 1360,
+        "wires": [
+            [
+                "19120c209a170385"
+            ]
+        ]
+    },
+    {
+        "id": "1bf7a087bb548939",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "a3378c8178c980c8",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Blower State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2810,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "ab245d0aa1869d37",
+        "type": "ui_switch",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Blower ON/OFF",
+        "tooltip": "",
+        "group": "a3378c8178c980c8",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 2380,
+        "y": 1160,
+        "wires": [
+            [
+                "78e84d3416d865b6"
+            ]
+        ]
+    },
+    {
+        "id": "cc994c5db7bcb18b",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "a3378c8178c980c8",
+        "order": 14,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Humidifier State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2820,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "9746de4217f6303f",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "a3378c8178c980c8",
+        "order": 16,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Air Remover State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2830,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "bbd429df04a5dd58",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/state/ahu/blower",
+        "topic": "326project/smartbuilding/hvac/0/1/state/ahu/blower",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2010,
+        "y": 1920,
+        "wires": [
+            [
+                "92ade521d3b75a7f"
+            ]
+        ]
+    },
+    {
+        "id": "18393997b35b74f3",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/state/ahu/humidifier",
+        "topic": "326project/smartbuilding/hvac/0/1/state/ahu/humidifier",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2020,
+        "y": 1960,
+        "wires": [
+            [
+                "ddcc66a4b0d975d7"
+            ]
+        ]
+    },
+    {
+        "id": "37710fc2fbc85041",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/state/ahu/airremover",
+        "topic": "326project/smartbuilding/hvac/0/1/state/ahu/airremover",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2020,
+        "y": 2000,
+        "wires": [
+            [
+                "3c618154d9cabfd0"
+            ]
+        ]
+    },
+    {
+        "id": "8267d8fe31c258b3",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "bf8e161457509e95",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Blower State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2830,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "0ca4e8d106564e46",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "bf8e161457509e95",
+        "order": 14,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Humidifier State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2840,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "6cd9168d77e46f8c",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "bf8e161457509e95",
+        "order": 16,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Air Remover State",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 2850,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "e7b8c9e7b0f44412",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 13",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"temp\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1080,
+        "wires": [
+            [
+                "a36db98386fd74a8"
+            ]
+        ]
+    },
+    {
+        "id": "87c1de6bb334b0c9",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 14",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"humidity\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2270,
+        "y": 1080,
+        "wires": [
+            [
+                "a21bc02705415b23"
+            ]
+        ]
+    },
+    {
+        "id": "f89ab26ffd4991d1",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 15",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"pressure\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1200,
+        "wires": [
+            [
+                "d29c9a6dab52bca3"
+            ]
+        ]
+    },
+    {
+        "id": "e7c1a4565d355b0a",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 16",
+        "func": "var data = JSON.parse(msg.payload);\nvar count = data[\"count\"];\nif(count>0){\n    msg.payload = \"OCCUPIED\";\n}else{\n    msg.payload = \"NOT OCCUPIED\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1260,
+        "wires": [
+            [
+                "a416e258df0c842c"
+            ]
+        ]
+    },
+    {
+        "id": "4a8d4913487dfc7b",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 17",
+        "func": "var state = msg.payload\nif(state){\n    msg.payload = \"ON\";\n}else{\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 500,
+        "wires": [
+            [
+                "5376e040ef2e4074"
+            ]
+        ]
+    },
+    {
+        "id": "6840938cbbd7eba7",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 18",
+        "func": "var state = msg.payload\nif(state){\n    msg.payload = \"ON\";\n}else{\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 780,
+        "wires": [
+            [
+                "633d2b26447f28a8"
+            ]
+        ]
+    },
+    {
+        "id": "da2560e7edb4ebe2",
+        "type": "inject",
+        "z": "d353a2dae9f54c6a",
+        "name": "Default",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "5e5a90ed3b35f242"
+            ]
+        ]
+    },
+    {
+        "id": "77fe923feb7db35c",
+        "type": "inject",
+        "z": "d353a2dae9f54c6a",
+        "name": "Default",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "6012443b7e67a96a"
+            ]
+        ]
+    },
+    {
+        "id": "71f40a4b8d806977",
+        "type": "ui_numeric",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Set Default Room temprature",
+        "tooltip": "",
+        "group": "d504e8555a56184a",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "50",
+        "step": 1,
+        "className": "",
+        "x": 1760,
+        "y": 80,
+        "wires": [
+            [
+                "41d42530d63e0025",
+                "e64a689fe15349d2"
+            ]
+        ]
+    },
+    {
+        "id": "787a0e01b0c485ed",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/temp-thresh",
+        "topic": "326project/smartbuilding/hvac/control/temp-thresh",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 2370,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a8444bef0920e82f",
+        "type": "inject",
+        "z": "d353a2dae9f54c6a",
+        "name": "Default",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "24",
+        "payloadType": "num",
+        "x": 1480,
+        "y": 80,
+        "wires": [
+            [
+                "71f40a4b8d806977"
+            ]
+        ]
+    },
+    {
+        "id": "b9e4cc89dc125153",
+        "type": "ui_numeric",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "",
+        "label": "Set Humidity Threshold",
+        "tooltip": "",
+        "group": "d504e8555a56184a",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 1730,
+        "y": 180,
+        "wires": [
+            [
+                "bb1a09ab9d1f007f",
+                "f168e78ab352e54b"
+            ]
+        ]
+    },
+    {
+        "id": "cd4d06e1c82e392d",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/control/humid-thresh",
+        "topic": "326project/smartbuilding/hvac/control/humid-thresh",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 2350,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d092c78d066aeb6a",
+        "type": "inject",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "name": "Default",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "40",
+        "payloadType": "num",
+        "x": 1480,
+        "y": 180,
+        "wires": [
+            [
+                "b9e4cc89dc125153"
+            ]
+        ]
+    },
+    {
+        "id": "e331e093082e7a83",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 19",
+        "func": "var state = msg.payload\nif (state) {\n    msg.payload = {\n        \"timestamp\" : Date.now(),\n        \"state\":1\n    }\n} else {\n    msg.payload = {\n        \"timestamp\": Date.now(),\n        \"state\": 0\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 600,
+        "wires": [
+            [
+                "c24df87340e78e3d"
+            ]
+        ]
+    },
+    {
+        "id": "4eefcbe6fa59dc35",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 20",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"temp\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 700,
+        "wires": [
+            [
+                "3daf98ba5dfd3fcb",
+                "a6565cfcfada91ea"
+            ]
+        ]
+    },
+    {
+        "id": "334fb564222780e4",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 21",
+        "func": "var state = msg.payload\nif (state) {\n    msg.payload = {\n        \"timestamp\" : Date.now(),\n        \"state\":1\n    }\n} else {\n    msg.payload = {\n        \"timestamp\": Date.now(),\n        \"state\": 0\n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 880,
+        "wires": [
+            [
+                "8912e8ec890676cb"
+            ]
+        ]
+    },
+    {
+        "id": "6ee8846b607d494b",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 22",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"temp\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1000,
+        "wires": [
+            [
+                "07c9cf0952f09793",
+                "49fe294d4c55fd73"
+            ]
+        ]
+    },
+    {
+        "id": "b224305dbe1ae164",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 23",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1280,
+        "wires": [
+            [
+                "78e84d3416d865b6"
+            ]
+        ]
+    },
+    {
+        "id": "a731749245adde63",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 24",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1320,
+        "wires": [
+            [
+                "59f10558c7ad5b18"
+            ]
+        ]
+    },
+    {
+        "id": "19120c209a170385",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 25",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1360,
+        "wires": [
+            [
+                "1d810971cec47ee1"
+            ]
+        ]
+    },
+    {
+        "id": "78e84d3416d865b6",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 26",
+        "func": "if (msg.payload) {\n    msg.payload = \"ON\";\n}\nelse {\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2570,
+        "y": 1280,
+        "wires": [
+            [
+                "1bf7a087bb548939"
+            ]
+        ]
+    },
+    {
+        "id": "59f10558c7ad5b18",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 27",
+        "func": "if (msg.payload) {\n    msg.payload = \"ON\";\n}\nelse {\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2570,
+        "y": 1320,
+        "wires": [
+            [
+                "cc994c5db7bcb18b"
+            ]
+        ]
+    },
+    {
+        "id": "1d810971cec47ee1",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 28",
+        "func": "if (msg.payload) {\n    msg.payload = \"ON\";\n}\nelse {\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2570,
+        "y": 1360,
+        "wires": [
+            [
+                "9746de4217f6303f"
+            ]
+        ]
+    },
+    {
+        "id": "05737530b8f3ac37",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 29",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"speed\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1340,
+        "wires": [
+            [
+                "716dd1b466592714"
+            ]
+        ]
+    },
+    {
+        "id": "92ade521d3b75a7f",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 32",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2390,
+        "y": 1920,
+        "wires": [
+            [
+                "44adc72ddd0d43f4"
+            ]
+        ]
+    },
+    {
+        "id": "ddcc66a4b0d975d7",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 33",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2390,
+        "y": 1960,
+        "wires": [
+            [
+                "3d09969dd95d5156"
+            ]
+        ]
+    },
+    {
+        "id": "3c618154d9cabfd0",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 34",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2390,
+        "y": 2000,
+        "wires": [
+            [
+                "40ec839a343c211f"
+            ]
+        ]
+    },
+    {
+        "id": "44adc72ddd0d43f4",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 35",
+        "func": "if (msg.payload) {\n    msg.payload = \"ON\";\n}\nelse {\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2630,
+        "y": 1920,
+        "wires": [
+            [
+                "8267d8fe31c258b3"
+            ]
+        ]
+    },
+    {
+        "id": "3d09969dd95d5156",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 36",
+        "func": "if (msg.payload) {\n    msg.payload = \"ON\";\n}\nelse {\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2630,
+        "y": 1960,
+        "wires": [
+            [
+                "0ca4e8d106564e46"
+            ]
+        ]
+    },
+    {
+        "id": "40ec839a343c211f",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 37",
+        "func": "if (msg.payload) {\n    msg.payload = \"ON\";\n}\nelse {\n    msg.payload = \"OFF\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2630,
+        "y": 2000,
+        "wires": [
+            [
+                "6cd9168d77e46f8c"
+            ]
+        ]
+    },
+    {
+        "id": "edb45c79acc10cad",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 38",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"temp\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1680,
+        "wires": [
+            [
+                "41923dc5014edf77"
+            ]
+        ]
+    },
+    {
+        "id": "0d291a71dfa3c437",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 39",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"humidity\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2230,
+        "y": 1740,
+        "wires": [
+            [
+                "7112999dc2a87c6d"
+            ]
+        ]
+    },
+    {
+        "id": "abf610af60aedaed",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 41",
+        "func": "var data = JSON.parse(msg.payload);\nvar count = data[\"count\"];\nif(count > 0) {\n    msg.payload = \"OCCUPIED\";\n} else {\n    msg.payload = \"NOT OCCUPIED\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1860,
+        "wires": [
+            [
+                "842a77a31f3ff010"
+            ]
+        ]
+    },
+    {
+        "id": "6b929307073b5b77",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 42",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"speed\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 1920,
+        "wires": [
+            [
+                "99f0684f311b7191"
+            ]
+        ]
+    },
+    {
+        "id": "5a544f987c1d8789",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 43",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 780,
+        "wires": [
+            [
+                "6840938cbbd7eba7"
+            ]
+        ]
+    },
+    {
+        "id": "046f68ee23bd7184",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 44",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"state\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 500,
+        "wires": [
+            [
+                "4a8d4913487dfc7b"
+            ]
+        ]
+    },
+    {
+        "id": "a65903eee3d15d5f",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 45",
+        "func": "var val = msg.payload\nmsg.payload = {\n    \"timestamp\": Date.now(),\n    \"temp\": val\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 80,
+        "wires": [
+            [
+                "07e7971ee4132a4f"
+            ]
+        ]
+    },
+    {
+        "id": "676abb1d4d07c301",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 46",
+        "func": "var val = msg.payload\nmsg.payload = {\n    \"timestamp\": Date.now(),\n    \"temp\": val\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "37d93a3db6dce470"
+            ]
+        ]
+    },
+    {
+        "id": "41d42530d63e0025",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 47",
+        "func": "var val = msg.payload\nmsg.payload = {\n    \"timestamp\": Date.now(),\n    \"temp\": val\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2050,
+        "y": 40,
+        "wires": [
+            [
+                "787a0e01b0c485ed"
+            ]
+        ]
+    },
+    {
+        "id": "bb1a09ab9d1f007f",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 48",
+        "func": "var val = msg.payload\nmsg.payload = {\n    \"timestamp\": Date.now(),\n    \"humid\": val\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2030,
+        "y": 140,
+        "wires": [
+            [
+                "cd4d06e1c82e392d"
+            ]
+        ]
+    },
+    {
+        "id": "e2bfa0ec2628f6a3",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "68a0e302837ef7cc",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "*",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 350,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "bc949b9f0df96c76",
+        "type": "inject",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "NOT AVAILABLE",
+        "payloadType": "str",
+        "x": 150,
+        "y": 2280,
+        "wires": [
+            [
+                "e2bfa0ec2628f6a3"
+            ]
+        ]
+    },
+    {
+        "id": "b6c76e6385bfc1fd",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a8ada1d3fa3b0368",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "*",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "x": 350,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "1798e98e70cd0006",
+        "type": "inject",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "NOT AVAILABLE",
+        "payloadType": "str",
+        "x": 170,
+        "y": 2340,
+        "wires": [
+            [
+                "b6c76e6385bfc1fd"
+            ]
+        ]
+    },
+    {
+        "id": "e64a689fe15349d2",
+        "type": "ui_widget_thermometer",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "d504e8555a56184a",
+        "order": 7,
+        "width": "4",
+        "height": "6",
+        "name": "",
+        "title": "Current Default Room Temp.",
+        "colorTop": "#2196f3",
+        "colorMiddle": "#8bc34a",
+        "colorBottom": "#f44336",
+        "unit": "°C",
+        "scale": "normal",
+        "minTemp": 0,
+        "maxTemp": "50",
+        "x": 2250,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "f168e78ab352e54b",
+        "type": "ui_widget_humidity_tree",
+        "z": "d353a2dae9f54c6a",
+        "d": true,
+        "group": "d504e8555a56184a",
+        "order": 11,
+        "width": "4",
+        "height": "7",
+        "name": "",
+        "title": "Curr. Humidity Threshold",
+        "colorHumidMax": "#006000",
+        "colorHumidMin": "#945818",
+        "x": 2230,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "634cdf56aee6dee9",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 40",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"pressure\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 1800,
+        "wires": [
+            [
+                "9d236ab6ea3a7a45"
+            ]
+        ]
+    },
+    {
+        "id": "d287df54af0a35ba",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/control/temp-thresh",
+        "topic": "326project/smartbuilding/hvac/0/1/control/temp-thresh",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 1020,
+        "y": 2100,
+        "wires": []
+    },
+    {
+        "id": "2f38f4eb8f0fe53a",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 55",
+        "func": "var speed = msg.payload;\nmsg.payload={\n    \"timestamp\" : Date.now(),\n    \"temp\":speed\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 2100,
+        "wires": [
+            [
+                "d287df54af0a35ba"
+            ]
+        ]
+    },
+    {
+        "id": "a3c1661e9b0d06c8",
+        "type": "ui_slider",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "label": "Set Target Temperature",
+        "tooltip": "",
+        "group": "bf8e161457509e95",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "40",
+        "step": 1,
+        "className": "",
+        "x": 150,
+        "y": 2100,
+        "wires": [
+            [
+                "2f38f4eb8f0fe53a"
+            ]
+        ]
+    },
+    {
+        "id": "9d81551fd39fa976",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/control/temp-thresh",
+        "topic": "326project/smartbuilding/hvac/0/0/control/temp-thresh",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 700,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "6e19a943920bdf3c",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 56",
+        "func": "var speed = msg.payload;\nmsg.payload={\n    \"timestamp\" : Date.now(),\n    \"temp\":speed\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1540,
+        "wires": [
+            [
+                "9d81551fd39fa976"
+            ]
+        ]
+    },
+    {
+        "id": "4cddb7748d7de40e",
+        "type": "ui_slider",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "label": "Set Target Temperature",
+        "tooltip": "",
+        "group": "a3378c8178c980c8",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "40",
+        "step": 1,
+        "className": "",
+        "x": 150,
+        "y": 1540,
+        "wires": [
+            [
+                "6e19a943920bdf3c"
+            ]
+        ]
+    },
+    {
+        "id": "6978634096bf8d29",
+        "type": "ui_gauge",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "a3378c8178c980c8",
+        "order": 8,
+        "width": "4",
+        "height": "4",
+        "gtype": "donut",
+        "title": "Air Mix Ratio",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1",
+        "colors": [
+            "#001eff",
+            "#ffff01",
+            "#ff0000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 810,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "9525e766d536ac53",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 58",
+        "func": "var data = JSON.parse(msg.payload);\nglobal.set(\"ratio00\", data[\"ratio\"]);\nmsg.payload = data[\"ratio\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1460,
+        "wires": [
+            [
+                "6978634096bf8d29"
+            ]
+        ]
+    },
+    {
+        "id": "33267d344fc30e43",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 59",
+        "func": "// var data = JSON.parse(msg.payload);\n// msg.payload = data[\"ratio\"];\n// return msg;\n\nvar data = JSON.parse(msg.payload);\nglobal.set(\"ratio10\", data[\"ratio\"]);\nmsg.payload = data[\"ratio\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 2060,
+        "wires": [
+            [
+                "d0a67f8eca020f05"
+            ]
+        ]
+    },
+    {
+        "id": "d0a67f8eca020f05",
+        "type": "ui_gauge",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "group": "bf8e161457509e95",
+        "order": 8,
+        "width": "4",
+        "height": "4",
+        "gtype": "donut",
+        "title": "Air Mix Ratio",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1",
+        "colors": [
+            "#001eff",
+            "#ffff00",
+            "#ff0000"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 750,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "48fec07318efa3e0",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "bf8e161457509e95",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Target Temperature :",
+        "format": "{{msg.payload}} °C",
+        "layout": "row-center",
+        "className": "",
+        "x": 780,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "7c8552af711407f6",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/control/temp-thresh",
+        "topic": "326project/smartbuilding/hvac/0/1/control/temp-thresh",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 1740,
+        "wires": [
+            [
+                "f5272dcb8aef085e"
+            ]
+        ]
+    },
+    {
+        "id": "f5272dcb8aef085e",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 54",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"temp\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 1740,
+        "wires": [
+            [
+                "48fec07318efa3e0"
+            ]
+        ]
+    },
+    {
+        "id": "114191db9cfa7282",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a3378c8178c980c8",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "name": "",
+        "label": "Target Temperature :",
+        "format": "{{msg.payload}} °C",
+        "layout": "row-center",
+        "className": "",
+        "x": 720,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "7262c8de54355305",
+        "type": "mqtt in",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/control/temp-thresh",
+        "topic": "326project/smartbuilding/hvac/0/0/control/temp-thresh",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "93a52709f8718a12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1140,
+        "wires": [
+            [
+                "3770fb0f6695f599"
+            ]
+        ]
+    },
+    {
+        "id": "3770fb0f6695f599",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 53",
+        "func": "var data = JSON.parse(msg.payload);\nmsg.payload = data[\"temp\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 1140,
+        "wires": [
+            [
+                "114191db9cfa7282"
+            ]
+        ]
+    },
+    {
+        "id": "6012443b7e67a96a",
+        "type": "ui_slider",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "label": "Hot Air Duct Threshold Temperature",
+        "tooltip": "Set the threshold temprature of hot air duct in Celsius",
+        "group": "d504e8555a56184a",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "30",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "a65903eee3d15d5f",
+                "b7863f022257186c"
+            ]
+        ]
+    },
+    {
+        "id": "5e5a90ed3b35f242",
+        "type": "ui_slider",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "label": "Cold Air Duct Threshold Temperature",
+        "tooltip": "Set the threshold temprature of cold air duct in Celsius",
+        "group": "d504e8555a56184a",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "35",
+        "step": 1,
+        "className": "",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "676abb1d4d07c301",
+                "848721dcf8581a1b"
+            ]
+        ]
+    },
+    {
+        "id": "a6565cfcfada91ea",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "a6fdaffffc5d92b7",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Hot Air Duct Current Temp",
+        "label": "",
+        "format": "{{msg.payload}} °C",
+        "layout": "col-center",
+        "className": "",
+        "x": 890,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "49fe294d4c55fd73",
+        "type": "ui_text",
+        "z": "d353a2dae9f54c6a",
+        "group": "f7c120bffca73d37",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Cold Air Duct Current Temp",
+        "label": "",
+        "format": "{{msg.payload}} °C",
+        "layout": "col-center",
+        "className": "",
+        "x": 860,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "5b5cf20e85a0e8e3",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/0/control/pressure-thresh",
+        "topic": "326project/smartbuilding/hvac/0/0/control/pressure-thresh",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 710,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "1bde26b873411df1",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 63",
+        "func": "var pressure = msg.payload;\nmsg.payload={\n    \"timestamp\" : Date.now(),\n    \"pressure\":pressure\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1600,
+        "wires": [
+            [
+                "5b5cf20e85a0e8e3"
+            ]
+        ]
+    },
+    {
+        "id": "a529ddadb9be5ffc",
+        "type": "ui_slider",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "label": "Set Air Pressure",
+        "tooltip": "",
+        "group": "a3378c8178c980c8",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "1.2",
+        "step": "0.1",
+        "className": "",
+        "x": 120,
+        "y": 1600,
+        "wires": [
+            [
+                "1bde26b873411df1"
+            ]
+        ]
+    },
+    {
+        "id": "cc4135692f31ba71",
+        "type": "mqtt out",
+        "z": "d353a2dae9f54c6a",
+        "name": "326project/smartbuilding/hvac/0/1/control/pressure-thresh",
+        "topic": "326project/smartbuilding/hvac/0/1/control/pressure-thresh",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61abc1473f6fc2e9",
+        "x": 770,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "23cdda54bc8ee366",
+        "type": "function",
+        "z": "d353a2dae9f54c6a",
+        "name": "function 64",
+        "func": "var pressure = msg.payload;\nmsg.payload={\n    \"timestamp\" : Date.now(),\n    \"pressure\":pressure\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 2160,
+        "wires": [
+            [
+                "cc4135692f31ba71"
+            ]
+        ]
+    },
+    {
+        "id": "6f07bab91593cc1b",
+        "type": "ui_slider",
+        "z": "d353a2dae9f54c6a",
+        "name": "",
+        "label": "Set Air Pressure",
+        "tooltip": "",
+        "group": "bf8e161457509e95",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "1.2",
+        "step": "0.1",
+        "className": "",
+        "x": 180,
+        "y": 2160,
+        "wires": [
+            [
+                "23cdda54bc8ee366"
+            ]
+        ]
+    },
+    {
+        "id": "72f157b1dbcf24dc",
+        "type": "ui_spacer",
+        "z": "d353a2dae9f54c6a",
+        "name": "spacer",
+        "group": "a3378c8178c980c8",
+        "order": 6,
+        "width": "2",
+        "height": "4"
+    },
+    {
+        "id": "4d0da72e127f772e",
+        "type": "ui_spacer",
+        "z": "d353a2dae9f54c6a",
+        "name": "spacer",
+        "group": "a3378c8178c980c8",
+        "order": 9,
+        "width": "12",
+        "height": "1"
+    },
+    {
+        "id": "b2ce8345b56ce210",
+        "type": "ui_spacer",
+        "z": "d353a2dae9f54c6a",
+        "name": "spacer",
+        "group": "bf8e161457509e95",
+        "order": 6,
+        "width": "2",
+        "height": "4"
+    },
+    {
+        "id": "7ec9b23bd750091e",
+        "type": "ui_spacer",
+        "z": "d353a2dae9f54c6a",
+        "name": "spacer",
+        "group": "bf8e161457509e95",
+        "order": 9,
+        "width": "12",
+        "height": "1"
+    },
+    {
+        "id": "aaec8a758129c2b0",
+        "type": "ui_spacer",
+        "z": "d353a2dae9f54c6a",
+        "name": "spacer",
+        "group": "d7ce6ed80fc1fe19",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "553d3550d3c23bce",
+        "type": "ui_spacer",
+        "z": "d353a2dae9f54c6a",
+        "name": "spacer",
+        "group": "501dc4d2cc2c91f0",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d7ce6ed80fc1fe19",
+        "type": "ui_group",
+        "name": "Boiler Control",
+        "tab": "c951817ea502d2a9",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "501dc4d2cc2c91f0",
+        "type": "ui_group",
+        "name": "Chiller Control",
+        "tab": "c951817ea502d2a9",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a6fdaffffc5d92b7",
+        "type": "ui_group",
+        "name": "Boiler State",
+        "tab": "c951817ea502d2a9",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f7c120bffca73d37",
+        "type": "ui_group",
+        "name": "Chiller State",
+        "tab": "c951817ea502d2a9",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a3378c8178c980c8",
+        "type": "ui_group",
+        "name": "Floor0/Room0",
+        "tab": "c951817ea502d2a9",
+        "order": 6,
+        "disp": true,
+        "width": "12",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "bf8e161457509e95",
+        "type": "ui_group",
+        "name": "Floor0/Room1",
+        "tab": "c951817ea502d2a9",
+        "order": 7,
+        "disp": true,
+        "width": "12",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "93a52709f8718a12",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "61abc1473f6fc2e9",
+        "type": "mqtt-broker",
+        "name": "Localhost",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d504e8555a56184a",
+        "type": "ui_group",
+        "name": "Setup Thresholds",
+        "tab": "c951817ea502d2a9",
+        "order": 1,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "68a0e302837ef7cc",
+        "type": "ui_group",
+        "name": "Floor0/Room3",
+        "tab": "c951817ea502d2a9",
+        "order": 8,
+        "disp": true,
+        "width": "12",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "a8ada1d3fa3b0368",
+        "type": "ui_group",
+        "name": "Floor0/Room4",
+        "tab": "c951817ea502d2a9",
+        "order": 9,
+        "disp": true,
+        "width": "12",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "c951817ea502d2a9",
+        "type": "ui_tab",
+        "name": "HVAC System",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
