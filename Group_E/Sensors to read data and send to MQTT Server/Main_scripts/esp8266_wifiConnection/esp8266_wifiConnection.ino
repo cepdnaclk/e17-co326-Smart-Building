@@ -7,7 +7,6 @@
 const char* ssid = "Eng-Student";
 const char* password = "3nG5tuDt";
 
-//MQTT broker and the Topics
 const char* mqtt_server = "10.40.18.10";
 const char* sensorTopic = "326project/smartbuilding/occupancy/0/1/ultrasonic";
 const char* rfidTopic = "326project/smartbuilding/occupancy/0/1/rfid";
@@ -126,5 +125,7 @@ void loop() {
       delay(2000);
     }
     msg = "";
+    
   }
+  delay(500); 
 }
