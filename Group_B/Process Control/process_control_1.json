@@ -1,0 +1,942 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Process Controlling",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c634399901a66df7",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "0-1-inside sensor 1",
+        "topic": "326project/smartbuilding/lighting/0/1/lightsensor/inside/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 660,
+        "wires": [
+            [
+                "1c2771dee5e617d4"
+            ]
+        ]
+    },
+    {
+        "id": "1c2771dee5e617d4",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "threshold",
+        "func": "var t = 15;   //treshold value\nvar p = msg.payload;\nif (p < t) {\n    msg.payload = 1;\n}\nelse {\n    msg.payload = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 660,
+        "wires": [
+            [
+                "9cc3a69a14732244"
+            ]
+        ]
+    },
+    {
+        "id": "b70f122648957e36",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "0-1-inside switch 1",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/inside/1",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6c604693389fd1e1",
+        "x": 1010,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e187b2913e7f61b6",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "0-1-inside switch 2",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/inside/2",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6c604693389fd1e1",
+        "x": 1230,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "56c0518121dbc14c",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "db04a6c865342d61",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 210,
+        "y": 580,
+        "wires": [
+            [
+                "1c2771dee5e617d4"
+            ]
+        ]
+    },
+    {
+        "id": "9cc3a69a14732244",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 12",
+        "func": "msg.topic = \"insidesensor\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 660,
+        "wires": [
+            [
+                "b6cb2fd86d3012c3"
+            ]
+        ]
+    },
+    {
+        "id": "e28245f863f0d16b",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "Occupancy",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"room_number\":1,\"floor_number\":30,\"count\":15,\"last_update\":\"date\"}",
+        "payloadType": "json",
+        "x": 80,
+        "y": 740,
+        "wires": [
+            [
+                "f9f038f4265ebedd"
+            ]
+        ]
+    },
+    {
+        "id": "19096fa7bb7e3e90",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 14",
+        "func": "msg.topic  = \"count\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 760,
+        "wires": [
+            [
+                "b6cb2fd86d3012c3"
+            ]
+        ]
+    },
+    {
+        "id": "b6cb2fd86d3012c3",
+        "type": "join",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 810,
+        "y": 760,
+        "wires": [
+            [
+                "6fe968d4ec91ab1b"
+            ]
+        ]
+    },
+    {
+        "id": "6fe968d4ec91ab1b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 15",
+        "func": "var count=msg.payload.count;\nvar light=msg.payload.insidesensor;\nvar manual = msg.payload.manuval;\n\nif(manual==2){\n    msg.payload = 2;\n}else if(manual==0){\n    msg.payload = 0;\n}else{\n    if (count > 0 && light == 1) {\n        msg.payload = 2;\n    }\n    else {\n        msg.payload = 0;\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 760,
+        "wires": [
+            [
+                "e187b2913e7f61b6",
+                "56c0518121dbc14c"
+            ]
+        ]
+    },
+    {
+        "id": "c688959e4a906448",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "time start from 17:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 17 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "c211f28721b1c407",
+                "eaa0533a2d29c8ed",
+                "b70f122648957e36"
+            ]
+        ]
+    },
+    {
+        "id": "c211f28721b1c407",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "name": "Delay 1 Hour",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 180,
+        "wires": [
+            [
+                "d4ace514c59b4fa9"
+            ]
+        ]
+    },
+    {
+        "id": "d4ace514c59b4fa9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 16",
+        "func": "msg.payload=2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 180,
+        "wires": [
+            [
+                "b70f122648957e36"
+            ]
+        ]
+    },
+    {
+        "id": "eaa0533a2d29c8ed",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "21e9307a13134c72",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "time start from 06:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 06 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "4d5ed1714be90317",
+                "b65be31b8584a1a4"
+            ]
+        ]
+    },
+    {
+        "id": "4d5ed1714be90317",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "name": "Delay 1 Hour",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "dcde44d6a9133da4"
+            ]
+        ]
+    },
+    {
+        "id": "dcde44d6a9133da4",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 17",
+        "func": "msg.payload=0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 380,
+        "wires": [
+            [
+                "b65be31b8584a1a4"
+            ]
+        ]
+    },
+    {
+        "id": "b65be31b8584a1a4",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "0-1-inside switch 1",
+        "topic": "326project/smartbuilding/lighting/0/1/switch/inside/1",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6c604693389fd1e1",
+        "x": 1030,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "66ac9b83aaf00146",
+        "type": "ui_multistate_switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "Inside Switch 1",
+        "group": "dc7224ca64557b44",
+        "order": 2,
+        "width": "6",
+        "height": 1,
+        "label": "Inside Switch 1",
+        "stateField": "payload",
+        "enableField": "enable",
+        "passthroughField": "passthrough",
+        "inputMsgField": "inputmsg",
+        "rounded": true,
+        "useThemeColors": false,
+        "hideSelectedLabel": false,
+        "multilineLabel": false,
+        "passThrough": "never",
+        "inputMsg": "all",
+        "userInput": "enabled_show",
+        "options": [
+            {
+                "label": "OFF",
+                "value": "0",
+                "valueType": "num",
+                "color": "#999999"
+            },
+            {
+                "label": "ON",
+                "value": "2",
+                "valueType": "num",
+                "color": "#009933"
+            },
+            {
+                "label": "Auto",
+                "value": "1",
+                "valueType": "num",
+                "color": "#6670ff"
+            }
+        ],
+        "topic": "",
+        "x": 240,
+        "y": 440,
+        "wires": [
+            [
+                "113c6a9892e53a20"
+            ]
+        ]
+    },
+    {
+        "id": "2da5040617784de8",
+        "type": "ui_multistate_switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "Inside Switch 2",
+        "group": "dc7224ca64557b44",
+        "order": 4,
+        "width": "6",
+        "height": 1,
+        "label": "Inside Switch 2",
+        "stateField": "payload",
+        "enableField": "enable",
+        "passthroughField": "passthrough",
+        "inputMsgField": "inputmsg",
+        "rounded": true,
+        "useThemeColors": false,
+        "hideSelectedLabel": false,
+        "multilineLabel": false,
+        "passThrough": "never",
+        "inputMsg": "all",
+        "userInput": "enabled_show",
+        "options": [
+            {
+                "label": "OFF",
+                "value": "0",
+                "valueType": "num",
+                "color": "#999999"
+            },
+            {
+                "label": "ON",
+                "value": "2",
+                "valueType": "num",
+                "color": "#009933"
+            },
+            {
+                "label": "Auto",
+                "value": "1",
+                "valueType": "num",
+                "color": "#6670ff"
+            }
+        ],
+        "topic": "",
+        "x": 180,
+        "y": 860,
+        "wires": [
+            [
+                "8a5e9a48234254f9"
+            ]
+        ]
+    },
+    {
+        "id": "8a5e9a48234254f9",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 18",
+        "func": "msg.topic = \"manuval\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 860,
+        "wires": [
+            [
+                "b6cb2fd86d3012c3"
+            ]
+        ]
+    },
+    {
+        "id": "113c6a9892e53a20",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 19",
+        "func": "msg.topic = \"manuval\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "5f76f2db327063e0"
+            ]
+        ]
+    },
+    {
+        "id": "5f76f2db327063e0",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 730,
+        "y": 440,
+        "wires": [
+            [
+                "b65be31b8584a1a4"
+            ],
+            [
+                "b65be31b8584a1a4"
+            ]
+        ]
+    },
+    {
+        "id": "d1e1907b0a02fd15",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "0-1-inside sensor 1",
+        "topic": "326project/smartbuilding/lighting/0/1/lightsensor/inside/1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 980,
+        "wires": [
+            [
+                "5718873f3d8d5a21"
+            ]
+        ]
+    },
+    {
+        "id": "5718873f3d8d5a21",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 20",
+        "func": "var val=msg.payload;\nvar manualinc = msg.payload.inc;\nvar manualdec = msg.payload.dec;\n\nvar x=(255*val)/1024;\nmsg.payload=x;\n\nif(manualinc=1){\n    x=x+100;\n}\nelse if(manualdec=0){\n    x=x-100;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1020,
+        "wires": [
+            [
+                "eb545e62330c35ba"
+            ]
+        ]
+    },
+    {
+        "id": "422756c650a8eb3a",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 210,
+        "y": 1060,
+        "wires": [
+            [
+                "5718873f3d8d5a21"
+            ]
+        ]
+    },
+    {
+        "id": "eb545e62330c35ba",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "ab9a0688bae8802e",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "Occupancy count",
+        "topic": "326project/smartbuilding/occupancy/count_update",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6c604693389fd1e1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56fd534b0bb5f035",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "f9f038f4265ebedd",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "floor select",
+        "property": "payload.floor_number",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "30",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 230,
+        "y": 740,
+        "wires": [
+            [
+                "7eb4ad89324b5728"
+            ]
+        ]
+    },
+    {
+        "id": "7eb4ad89324b5728",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "room select",
+        "property": "payload.room_number",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 720,
+        "wires": [
+            [
+                "36e5a07638130cdf"
+            ]
+        ]
+    },
+    {
+        "id": "36e5a07638130cdf",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 24",
+        "func": "msg.payload=msg.payload.count;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 780,
+        "wires": [
+            [
+                "56fd534b0bb5f035",
+                "19096fa7bb7e3e90"
+            ]
+        ]
+    },
+    {
+        "id": "2b32f0460f0ca76e",
+        "type": "ui_button",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "cd58c741da4d92a5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Manual increase",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "1",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 160,
+        "y": 1140,
+        "wires": [
+            [
+                "5a556e5006f201dc"
+            ]
+        ]
+    },
+    {
+        "id": "74f6346e1889c95d",
+        "type": "ui_button",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "cd58c741da4d92a5",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Manual decrease",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "0",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 170,
+        "y": 1180,
+        "wires": [
+            [
+                "94ad580824cc242e"
+            ]
+        ]
+    },
+    {
+        "id": "5a556e5006f201dc",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 27",
+        "func": "msg.topic = \"inc\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1140,
+        "wires": [
+            [
+                "5718873f3d8d5a21"
+            ]
+        ]
+    },
+    {
+        "id": "94ad580824cc242e",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 28",
+        "func": "msg.topic = \"dec\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1180,
+        "wires": [
+            [
+                "5718873f3d8d5a21"
+            ]
+        ]
+    },
+    {
+        "id": "6c604693389fd1e1",
+        "type": "mqtt-broker",
+        "name": "mqtt-broker",
+        "broker": "10.40.18.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dc7224ca64557b44",
+        "type": "ui_group",
+        "name": "Room 1 - Control ",
+        "tab": "125ffb95748fc72a",
+        "order": 5,
+        "disp": true,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cd58c741da4d92a5",
+        "type": "ui_group",
+        "name": "Floor 0",
+        "tab": "125ffb95748fc72a",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "125ffb95748fc72a",
+        "type": "ui_tab",
+        "name": "Lighting",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
