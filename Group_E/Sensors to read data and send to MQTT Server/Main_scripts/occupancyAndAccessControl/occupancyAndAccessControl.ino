@@ -183,12 +183,12 @@ void loop() {
   if (diff > 2){
     Serial.println('A');
     Serial.println(1);
-    //delay(2000);
+    delay(500);
   }
   else if (diff < -2){
     Serial.println('A');
     Serial.println(-1);
-    //delay(2000);
+    delay(500);
   }
 
 /*----------------------------------------------------------------------------*/
