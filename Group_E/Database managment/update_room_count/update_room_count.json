@@ -1,6 +1,13 @@
 [
     {
-        "id": "e2b1f59e058d27f9",
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Database",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "acd09c9b23f6e785",
         "type": "group",
         "z": "f6f2187d.f17ca8",
         "style": {
@@ -13,29 +20,812 @@
             "color": "#a4a4a4"
         },
         "nodes": [
-            "d7e6a7f6fe3af104",
-            "a405cf4ad0562c77",
-            "7ab115ec6cf5cbf7",
-            "aaa99f88475670b8",
-            "e3cda0d1dbd299ac",
-            "88577ebb4f08300a",
-            "b3184a6743cb77d9",
-            "b8f136c836abad3d",
-            "9384cb85342809a8",
-            "1221d9338d3217bb",
-            "752c5a80e95b78ff",
-            "f7ad73e1236f4c6f"
+            "5a356f82b3ef1730",
+            "fd26e41e3a17bf14",
+            "91acfa12388eead7",
+            "9dc36cd80d17fc1d",
+            "a7865c16e8bbc547"
         ],
-        "x": 14,
-        "y": 1299,
-        "w": 1412,
-        "h": 147
+        "x": 154,
+        "y": 1879,
+        "w": 852,
+        "h": 202
+    },
+    {
+        "id": "3cc11d24.ff01a2",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
+        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
+        "x": 370,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "d14dacd16fb4defe",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "Ultrasonic_sensor",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "c60c8d7bc953d7fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa630398b64c9557",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 7",
+        "func": "let payload = msg.payload;\n\nlet i = 0;\n\nif(payload == 1){\n    i = 1;\n}else{\n    i = -1;\n}\n\n\n\nmsg.payload = {\n    \"prev\":msg.payload,\n    \"increment value\" : i\n}\n\nmsg.topic = \"us_sensor_value\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "090795567272df1a"
+            ]
+        ]
+    },
+    {
+        "id": "b0727c3bee2b9151",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "882d3e3fc123247b",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 8",
+        "func": "\nmsg.collection = \"co326_count_test\";\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 560,
+        "wires": [
+            [
+                "c502cb872bf45327"
+            ]
+        ]
+    },
+    {
+        "id": "c502cb872bf45327",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "operation": "find",
+        "x": 600,
+        "y": 560,
+        "wires": [
+            [
+                "090795567272df1a",
+                "1745a123bc45cc0d"
+            ]
+        ]
+    },
+    {
+        "id": "1316fae925552c51",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"room_number\":1,\"count\":10}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 180,
+        "wires": [
+            [
+                "d1dcf75e6cd60c0f"
+            ]
+        ]
+    },
+    {
+        "id": "d1dcf75e6cd60c0f",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test2",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 480,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4e8f47932175635c",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "-1",
+        "payloadType": "num",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "b0727c3bee2b9151"
+            ]
+        ]
+    },
+    {
+        "id": "77d1b9533d05c7fb",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "090795567272df1a",
+        "type": "join",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 690,
+        "y": 380,
+        "wires": [
+            [
+                "58f8dfdb34603073"
+            ]
+        ]
+    },
+    {
+        "id": "58f8dfdb34603073",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 9",
+        "func": "\nmsg.payload = msg.payload.us_sensor_value;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 420,
+        "wires": [
+            [
+                "77d1b9533d05c7fb"
+            ]
+        ]
+    },
+    {
+        "id": "1745a123bc45cc0d",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "3eb706123ed8cab8",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "name": "ROOM1_FLOOR1",
+        "info": "",
+        "x": 230,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "35f6aa457952c6ab",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "operation": "find",
+        "x": 480,
+        "y": 1000,
+        "wires": [
+            [
+                "add5560a0354a8ef"
+            ]
+        ]
+    },
+    {
+        "id": "a5422aa9deb89f6f",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 23",
+        "func": "\nmsg.collection = \"co326_count_test2\";\nmsg.query = {  };\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 1000,
+        "wires": [
+            [
+                "35f6aa457952c6ab"
+            ]
+        ]
+    },
+    {
+        "id": "58facc7ecee33692",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 24",
+        "func": "msg.collection = \"co326_count_test2\";\nmsg.operation = \"update\";\nmsg.query = {\"room_number\":3,\"count\":2134}\nmsg.payload = {\"$set\":{\"room_number\" : 3,\"count\":0}};\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 1080,
+        "wires": [
+            [
+                "224a25d22c8b46bc"
+            ]
+        ]
+    },
+    {
+        "id": "31a398221daf9114",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 1080,
+        "wires": [
+            [
+                "a5422aa9deb89f6f",
+                "58facc7ecee33692"
+            ]
+        ]
+    },
+    {
+        "id": "b694cff1de373513",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "224a25d22c8b46bc",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "co326_count_test3",
+        "payonly": true,
+        "upsert": true,
+        "multi": false,
+        "operation": "update",
+        "x": 580,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "8d6cfa5c05d4895c",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "neq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 1060,
+        "wires": [
+            [
+                "b694cff1de373513"
+            ],
+            [
+                "6aa844870d893077"
+            ]
+        ]
+    },
+    {
+        "id": "6aa844870d893077",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "7c9af3ddf10bd2f0",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "add5560a0354a8ef",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 25",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 1060,
+        "wires": [
+            [
+                "8d6cfa5c05d4895c",
+                "7c9af3ddf10bd2f0"
+            ]
+        ]
+    },
+    {
+        "id": "5a356f82b3ef1730",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 810,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "fd26e41e3a17bf14",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 2040,
+        "wires": [
+            [
+                "91acfa12388eead7"
+            ]
+        ]
+    },
+    {
+        "id": "91acfa12388eead7",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "function 28",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"dummy\";\nmsg.operation = \"remove\";\nmsg.payload = { \"room_number\": 1, \"floor_number\":0 }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 2040,
+        "wires": [
+            [
+                "5a356f82b3ef1730",
+                "9dc36cd80d17fc1d"
+            ]
+        ]
+    },
+    {
+        "id": "9dc36cd80d17fc1d",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "debug 39",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "a7865c16e8bbc547",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "acd09c9b23f6e785",
+        "name": "Test function to delete",
+        "info": "",
+        "x": 300,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "b8e20689b85ce73d",
+        "type": "complete",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "scope": [
+            "88577ebb4f08300a"
+        ],
+        "uncaught": false,
+        "x": 190,
+        "y": 1520,
+        "wires": [
+            [
+                "11051deff47e3388"
+            ]
+        ]
+    },
+    {
+        "id": "5cc612fdd55270fc",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "retrive_all_room_data",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"get_all_rooms_data\";\nmsg.operation = \"find\";\nmsg.payload = { }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1520,
+        "wires": [
+            [
+                "83671453577648e9"
+            ]
+        ]
+    },
+    {
+        "id": "83671453577648e9",
+        "type": "mongodb in",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "retirve_all_data",
+        "collection": "326_occupancy_room",
+        "operation": "find",
+        "x": 820,
+        "y": 1520,
+        "wires": [
+            [
+                "2abb4e46ca02d32a"
+            ]
+        ]
+    },
+    {
+        "id": "2abb4e46ca02d32a",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "set_data_format",
+        "func": "let details = []\nlet arr = msg.payload;\n\n// Hnadle uncaught errors\nif (arr.length == 0) return msg;\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\n\n\n\n\nfor (let floor = 0; floor < 4; floor++) {\n    let floor_data = arr.filter(element => element.floor_number === floor);\n    let inner_details = [];\n\n    if (floor_data.length == 0) {\n        for(let temp =1; temp <=2; temp++){\n            inner_details.push({ \"name\": \"room\" + temp, \"count\": 0 });\n        }\n    }\n    else {\n\n        for (let j = 0; j < floor_data.length; j++) {\n            inner_details.push({ \"name\": \"room\" + floor_data[j].room_number, \"count\": floor_data[j].count });\n        }\n\n    }\n\n    details.push({ \"name\": \"floor\" + floor, \"details\": inner_details });\n\n}\n\nmsg.payload = { \"date_time\": offsetTime.toLocaleString(), \"details\": details };\n\nconsole.log(msg.payload);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 1520,
+        "wires": [
+            [
+                "31ec8be0ed1c01eb",
+                "cdb5a2dd3d3c581d"
+            ]
+        ]
+    },
+    {
+        "id": "31ec8be0ed1c01eb",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "check the foramt",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1095,
+        "y": 1480,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "11051deff47e3388",
+        "type": "delay",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 360,
+        "y": 1520,
+        "wires": [
+            [
+                "5cc612fdd55270fc"
+            ]
+        ]
+    },
+    {
+        "id": "4771ce445d7e892a",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 2160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "052e36ecbdefd534",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 590,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "c9e4b1c8699f794d",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 1660,
+        "wires": [
+            [
+                "c2961479d2e02c04"
+            ]
+        ]
+    },
+    {
+        "id": "c2961479d2e02c04",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 30",
+        "func": "msg.payload = {\"room_number\":2,\"floor_number\":0,\"count\":1,\"last_update\":\"12/10/2022 12:57 PM\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1660,
+        "wires": [
+            [
+                "c8ba6fad9eaa4408"
+            ]
+        ]
+    },
+    {
+        "id": "c8ba6fad9eaa4408",
+        "type": "mongodb out",
+        "z": "f6f2187d.f17ca8",
+        "mongodb": "10d3d4a81f37ba61",
+        "name": "",
+        "collection": "326_occupancy_room",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "store",
+        "x": 970,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "cdb5a2dd3d3c581d",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "recent_update",
+        "topic": "326project/smartbuilding/occupancy/recent_update",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c60c8d7bc953d7fa",
+        "x": 1340,
+        "y": 1520,
+        "wires": []
     },
     {
         "id": "d7e6a7f6fe3af104",
         "type": "mqtt in",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "name": "0_1_us_sensor",
         "topic": "326project/smartbuilding/occupancy/0/2/ultrasonic",
         "qos": "2",
@@ -45,7 +835,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
+        "x": 200,
         "y": 1380,
         "wires": [
             [
@@ -57,21 +847,19 @@
         "id": "a405cf4ad0562c77",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "name": "parse_data and check database",
-        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"01_ultrasonic_data\";\nmsg.operation = \"find\";\nmsg.query = {\"room_number\":1,\"floor_number\":0}\n\nreturn msg;",
+        "func": "msg.collection = \"326_occupancy_room\";\nmsg.topic = \"01_ultrasonic_data\";\nmsg.operation = \"find\";\nmsg.query = {\"room_number\":1,\"floor_number\":0}\n\nglobal.set(\"01_us_data\",msg.payload);\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
+        "x": 450,
         "y": 1380,
         "wires": [
             [
                 "7ab115ec6cf5cbf7",
-                "aaa99f88475670b8",
-                "752c5a80e95b78ff"
+                "aaa99f88475670b8"
             ]
         ],
         "icon": "font-awesome/fa-gears"
@@ -80,7 +868,6 @@
         "id": "7ab115ec6cf5cbf7",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "name": "parsed data",
         "active": false,
         "tosidebar": true,
@@ -90,7 +877,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 465,
+        "x": 565,
         "y": 1340,
         "wires": [],
         "l": false
@@ -99,17 +886,16 @@
         "id": "aaa99f88475670b8",
         "type": "mongodb in",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "mongodb": "10d3d4a81f37ba61",
         "name": "get_current_count",
         "collection": "326_occupancy_room",
         "operation": "find",
-        "x": 630,
+        "x": 910,
         "y": 1380,
         "wires": [
             [
                 "e3cda0d1dbd299ac",
-                "b8f136c836abad3d"
+                "88577ebb4f08300a"
             ]
         ]
     },
@@ -117,7 +903,6 @@
         "id": "e3cda0d1dbd299ac",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "name": "db_results",
         "active": false,
         "tosidebar": true,
@@ -127,7 +912,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 705,
+        "x": 985,
         "y": 1340,
         "wires": [],
         "l": false
@@ -136,15 +921,14 @@
         "id": "88577ebb4f08300a",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "name": "update db ",
-        "func": "let arr = msg.payload[\"db_response\"];\nlet sensor_data = msg.payload[\"01_ultrasonic_data\"];\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\nif (arr.length == 0){\n    msg.payload = { \"$set\": { \"room_number\": 1, \"floor_number\": 0, \"count\": 1, \"last_update\": offsetTime.toLocaleString(),}};\n}\nelse{\n    msg.payload = {\"$set\":{\n        \"room_number\": 1, \"floor_number\": 0,\"last_update\":offsetTime.toLocaleString(), \n        \"count\":arr[0].count + sensor_data}}; \n}\n\nmsg.query = {\"room_number\":1,\"floor_number\":0};\nmsg.topic = \"db query\";\nreturn msg;",
+        "func": "let arr = msg.payload;\nlet sensor_data = global.get(\"01_us_data\");\n\n\n//Create the date and time objects\nvar targetTime = new Date();\nvar timeZoneFromDB = 5.45; //time zone value from database\n//get the timezone offset from local time in minutes\nvar tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset();\n//convert the offset to milliseconds, add to targetTime, and make a new Date\nvar offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000);\n\n\nif (arr.length == 0){\n    msg.payload = { \"$set\": { \"room_number\": 1, \"floor_number\": 0, \"count\": 1, \"last_update\": offsetTime.toLocaleString(),}};\n}\nelse{\n    msg.payload = {\"$set\":{\n        \"room_number\": 1, \"floor_number\": 0,\"last_update\":offsetTime.toLocaleString(), \n        \"count\":arr[0].count + sensor_data}}; \n}\n\nmsg.query = {\"room_number\":1,\"floor_number\":0};\nmsg.topic = \"db query\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1120,
+        "x": 1140,
         "y": 1380,
         "wires": [
             [
@@ -157,7 +941,6 @@
         "id": "b3184a6743cb77d9",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "name": "check_payload_query",
         "active": true,
         "tosidebar": true,
@@ -167,65 +950,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1175,
+        "x": 1195,
         "y": 1340,
         "wires": [],
         "l": false
     },
     {
-        "id": "b8f136c836abad3d",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
-        "name": "db response",
-        "func": "msg.topic = \"db_response\";\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 830,
-        "y": 1380,
-        "wires": [
-            [
-                "9384cb85342809a8"
-            ]
-        ]
-    },
-    {
-        "id": "9384cb85342809a8",
-        "type": "join",
-        "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "accumulate": false,
-        "timeout": "",
-        "count": "2",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 990,
-        "y": 1380,
-        "wires": [
-            [
-                "88577ebb4f08300a"
-            ]
-        ]
-    },
-    {
         "id": "1221d9338d3217bb",
         "type": "mongodb out",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
         "mongodb": "10d3d4a81f37ba61",
         "name": "update_count",
         "collection": "326_occupancy_room",
@@ -233,35 +966,19 @@
         "upsert": true,
         "multi": false,
         "operation": "update",
-        "x": 1320,
+        "x": 1360,
         "y": 1380,
         "wires": []
     },
     {
-        "id": "752c5a80e95b78ff",
-        "type": "junction",
+        "id": "494f0495058ad32b",
+        "type": "comment",
         "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
-        "x": 460,
-        "y": 1420,
-        "wires": [
-            [
-                "f7ad73e1236f4c6f"
-            ]
-        ]
-    },
-    {
-        "id": "f7ad73e1236f4c6f",
-        "type": "junction",
-        "z": "f6f2187d.f17ca8",
-        "g": "e2b1f59e058d27f9",
-        "x": 960,
-        "y": 1420,
-        "wires": [
-            [
-                "9384cb85342809a8"
-            ]
-        ]
+        "name": "Update floor1_room1 data",
+        "info": "",
+        "x": 230,
+        "y": 1300,
+        "wires": []
     },
     {
         "id": "c60c8d7bc953d7fa",

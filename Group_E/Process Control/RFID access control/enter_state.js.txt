@@ -1,0 +1,18 @@
+//change the enter state according to the given access
+
+
+var access = msg.payload;
+
+if (access == 1) {
+    global.set("enterstate", "ON");
+    return msg;
+
+}
+
+
+if (access == 0) {
+    global.set("enterstate", "OFF");
+    return msg;
+
+
+}

@@ -1,0 +1,763 @@
+[
+    {
+        "id": "adc77cf01ad52ea1",
+        "type": "tab",
+        "label": "HVAC",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e9a1b996d4c9ac18",
+        "type": "inject",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "payload": "{\"temp\" : 29}",
+        "payloadType": "str",
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "e41b9c7715c10903"
+            ]
+        ]
+    },
+    {
+        "id": "180a54922c298b7f",
+        "type": "mqtt in",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 540,
+        "wires": [
+            [
+                "7f383980f9dc09cb"
+            ]
+        ]
+    },
+    {
+        "id": "e41b9c7715c10903",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 680,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "7f383980f9dc09cb",
+        "type": "json",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 650,
+        "y": 560,
+        "wires": [
+            [
+                "8098fd46e68af756"
+            ]
+        ]
+    },
+    {
+        "id": "421e9d5dc6f6b5b0",
+        "type": "debug",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "4556a9665b61ba32",
+        "type": "inject",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "payload": "{\"humidity\" : 31}",
+        "payloadType": "str",
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "19c9d5dc602be989"
+            ]
+        ]
+    },
+    {
+        "id": "19c9d5dc602be989",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 670,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fc8e60c05b59360a",
+        "type": "mqtt in",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "7f383980f9dc09cb"
+            ]
+        ]
+    },
+    {
+        "id": "8098fd46e68af756",
+        "type": "function",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "func": "// Thresholds\n\nvar boiler_state = false;\nvar chiller_state = false;\n\nvar temp = msg.payload.temp;\nvar temp_thresh = msg.payload.set_temp;\nvar humidity = msg.payload.humidity;\nvar occupants = msg.payload.occupants;\n\n// Get the room and floor numbers\nvar arr = msg.topic.split(\"/\");\nvar floorno = arr[3];\nvar roomno = arr[4];\n\n\nif (temp > temp_thresh){\n    chiller_state = true;\n    boiler_state = false;\n}else if (temp < temp_thresh){\n    chiller_state = false;\n    boiler_state = true;\n}else{\n    chiller_state = false;\n    boiler_state = false;\n}\n\n\n\n\n\nmsg.payload = [{\n    \"occupants\" : occupants,\n    \"temp_thresh\" : temp_thresh,\n    \"temp\" : temp,\n    \"chiller\" : chiller_state,\n    \"boiler\" : boiler_state,\n    \"floorno\" : parseInt(floorno),\n    \"roomno\" : parseInt(roomno),\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 620,
+        "wires": [
+            [
+                "f28e2c7059e1bf31",
+                "421e9d5dc6f6b5b0"
+            ]
+        ]
+    },
+    {
+        "id": "848008cc82298346",
+        "type": "debug",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "18d99b7186d6c076",
+        "type": "mqtt in",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/occupants",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 660,
+        "wires": [
+            [
+                "7f383980f9dc09cb",
+                "4a31d8764ca61134"
+            ]
+        ]
+    },
+    {
+        "id": "be78e1f5f76ee6f5",
+        "type": "inject",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/occupancy/0/1/occupants",
+        "payload": "{\"occupants\" : 31}",
+        "payloadType": "str",
+        "x": 340,
+        "y": 260,
+        "wires": [
+            [
+                "95029f30360cb8ee"
+            ]
+        ]
+    },
+    {
+        "id": "95029f30360cb8ee",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/occupancy/0/1/occupants",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 690,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7c5ca8e7b479c45f",
+        "type": "inject",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/set_temperature",
+        "payload": "{\"set_temp\" : 31}",
+        "payloadType": "str",
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "498472aed6a92831"
+            ]
+        ]
+    },
+    {
+        "id": "498472aed6a92831",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/set_temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 690,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ed0ccdbb07fd7acb",
+        "type": "mqtt in",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/set_temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 290,
+        "y": 720,
+        "wires": [
+            [
+                "7f383980f9dc09cb"
+            ]
+        ]
+    },
+    {
+        "id": "b77238ab46db2a10",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/chiller",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1400,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "2cd60e9acd3308e7",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/boiler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1400,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "f28e2c7059e1bf31",
+        "type": "json",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 770,
+        "y": 780,
+        "wires": [
+            [
+                "42374bb616835384",
+                "57ec881697b713ec",
+                "848008cc82298346"
+            ]
+        ]
+    },
+    {
+        "id": "42374bb616835384",
+        "type": "function",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "func": "var chiller_s = msg.payload[0].chiller;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"chiller\";\nmsg.topic = topic_arr.join(\"/\");\nif(chiller_s){\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    }];\n}else{\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 760,
+        "wires": [
+            [
+                "90b21c81f9990629"
+            ]
+        ]
+    },
+    {
+        "id": "57ec881697b713ec",
+        "type": "function",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "func": "var boiler_s = msg.payload[0].boiler;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"chiller\";\nmsg.topic = topic_arr.join(\"/\");\nif(boiler_s){\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 1,\n    }];\n}else{\n    msg.payload = [{\n        \"time\" : Date.now(),\n        \"state\" : 0,\n    }];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 840,
+        "wires": [
+            [
+                "3471df4eb84b11b0"
+            ]
+        ]
+    },
+    {
+        "id": "90b21c81f9990629",
+        "type": "json",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1150,
+        "y": 760,
+        "wires": [
+            [
+                "b77238ab46db2a10",
+                "c82e281783623a34"
+            ]
+        ]
+    },
+    {
+        "id": "3471df4eb84b11b0",
+        "type": "json",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1150,
+        "y": 840,
+        "wires": [
+            [
+                "2cd60e9acd3308e7"
+            ]
+        ]
+    },
+    {
+        "id": "c82e281783623a34",
+        "type": "debug",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "f2fb846131774460",
+        "type": "comment",
+        "z": "adc77cf01ad52ea1",
+        "name": "Switching on and off boiler and chiller based on temperature   YET TO ADD OCCUPANCY BASED",
+        "info": "Switching on and off boiler and chiller based on temperature \n\nYET TO ADD OCCUPANCY BASED",
+        "x": 430,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "908f642c1aae3331",
+        "type": "debug",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "372e4e15c80a8be2",
+        "type": "inject",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "326project/smartbuilding/hvac/0/1/tempereature",
+        "payload": "{\"speed\" : 0.5}",
+        "payloadType": "json",
+        "x": 350,
+        "y": 80,
+        "wires": [
+            [
+                "c044fe7377411706"
+            ]
+        ]
+    },
+    {
+        "id": "c044fe7377411706",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/ahu",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "93a52709f8718a12",
+        "x": 650,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e461fc09680902c8",
+        "type": "mqtt in",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/ahu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "ad4ebd5fd5645515",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 800,
+        "wires": [
+            [
+                "7f383980f9dc09cb"
+            ]
+        ]
+    },
+    {
+        "id": "3bf4487f4b687c64",
+        "type": "json",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 850,
+        "y": 1020,
+        "wires": [
+            [
+                "76f9c23cfe910d03",
+                "30b1ca2df0705f48"
+            ]
+        ]
+    },
+    {
+        "id": "76f9c23cfe910d03",
+        "type": "function",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "func": "var fan_speed = msg.payload[0].fanspeed;\nvar topic_arr = msg.topic.split(\"/\");\ntopic_arr[3] = msg.payload[0].floorno;\ntopic_arr[4] = msg.payload[0].roomno;\ntopic_arr[5] = \"ahu\";\nmsg.topic = topic_arr.join(\"/\");\n\nmsg.payload = [{\n    \"time\" : Date.now(),\n    \"speed\" : fan_speed\n}];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1020,
+        "wires": [
+            [
+                "08eb76f3f8233c9b",
+                "908f642c1aae3331"
+            ]
+        ]
+    },
+    {
+        "id": "08eb76f3f8233c9b",
+        "type": "json",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1130,
+        "y": 1020,
+        "wires": [
+            [
+                "253feb90b66c3711"
+            ]
+        ]
+    },
+    {
+        "id": "253feb90b66c3711",
+        "type": "mqtt out",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "topic": "326project/smartbuilding/hvac/0/1/ahu",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad4ebd5fd5645515",
+        "x": 1370,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "4a31d8764ca61134",
+        "type": "function",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "func": "// Thresholds\n//chaeck how to get current fanspeed\n\n\n// var humidity = msg.payload.humidity;\nvar ocupants = msg.payload.occupants;\n\nvar occupants = 11;\nvar max_occup = 15;\n\n// Get the room and floor numbers\nvar arr = msg.topic.split(\"/\");\nvar floorno = arr[3];\nvar roomno = arr[4];\n\n\nvar fanspeed = occupants/max_occup * 100;\n\n\n\n\nmsg.payload = [{\n    \"fanspeed\": parseFloat(fanspeed),\n    \"floorno\" : parseInt(floorno),\n    \"roomno\" : parseInt(roomno),\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 900,
+        "wires": [
+            [
+                "3bf4487f4b687c64",
+                "49609c3853e2392d"
+            ]
+        ]
+    },
+    {
+        "id": "49609c3853e2392d",
+        "type": "debug",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "30b1ca2df0705f48",
+        "type": "debug",
+        "z": "adc77cf01ad52ea1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "ad4ebd5fd5645515",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.17.0.11",
+        "port": "8883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "93a52709f8718a12",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.17.0.11",
+        "port": "8883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

@@ -1,0 +1,14 @@
+//receive the incoming key and process it
+
+
+
+let incoming = msg.payload;
+incoming = incoming.substring(1);
+global.set("01_keypad", incoming);
+
+//find the relevent key for the room from the database
+
+msg.collection = "326_occupancy_keypad";
+msg.operation = "find";
+msg.payload = { "floor_number": 0, "room_number": 1 };
+return msg;

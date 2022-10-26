@@ -1,0 +1,215 @@
+[
+    {
+        "id": "cc47db8329015bee",
+        "type": "tab",
+        "label": "Web Interface",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a58be04ce562fc06",
+        "type": "http in",
+        "z": "cc47db8329015bee",
+        "name": "DBdata",
+        "url": "/DBdata",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "8cb4f192c0a2d7c8",
+                "a2757645a997a81e",
+                "00c2a81db378e217"
+            ]
+        ]
+    },
+    {
+        "id": "a2757645a997a81e",
+        "type": "mongodb in",
+        "z": "cc47db8329015bee",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_control",
+        "operation": "find",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "7d1f535ce1afdf41"
+            ]
+        ]
+    },
+    {
+        "id": "7d1f535ce1afdf41",
+        "type": "function",
+        "z": "cc47db8329015bee",
+        "name": "function 4",
+        "func": "msg.payload=msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 120,
+        "wires": [
+            [
+                "47943871e9991e2e"
+            ]
+        ]
+    },
+    {
+        "id": "47943871e9991e2e",
+        "type": "tableify",
+        "z": "cc47db8329015bee",
+        "name": "Control Table",
+        "before": "Control Table Data",
+        "after": "Control Table finish",
+        "tableStyle": "",
+        "theadStyle": "",
+        "tbodyStyle": "",
+        "trStyle": "",
+        "tdStyle": "",
+        "x": 910,
+        "y": 120,
+        "wires": [
+            [
+                "ea517aa62d6336cb"
+            ]
+        ]
+    },
+    {
+        "id": "ea517aa62d6336cb",
+        "type": "http response",
+        "z": "cc47db8329015bee",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1150,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "00c2a81db378e217",
+        "type": "mongodb in",
+        "z": "cc47db8329015bee",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_sensor_data",
+        "operation": "find",
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "2c6ee95482183979"
+            ]
+        ]
+    },
+    {
+        "id": "2c6ee95482183979",
+        "type": "function",
+        "z": "cc47db8329015bee",
+        "name": "function 7",
+        "func": "msg.payload=msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 180,
+        "wires": [
+            [
+                "9f880ae3801e54d8"
+            ]
+        ]
+    },
+    {
+        "id": "9f880ae3801e54d8",
+        "type": "tableify",
+        "z": "cc47db8329015bee",
+        "name": "Sensor Readings Table",
+        "before": "Sensor Readings Data",
+        "after": "Sensor Readings finish",
+        "tableStyle": "",
+        "theadStyle": "",
+        "tbodyStyle": "",
+        "trStyle": "",
+        "tdStyle": "",
+        "x": 910,
+        "y": 180,
+        "wires": [
+            [
+                "ea517aa62d6336cb"
+            ]
+        ]
+    },
+    {
+        "id": "8cb4f192c0a2d7c8",
+        "type": "mongodb in",
+        "z": "cc47db8329015bee",
+        "mongodb": "17ee7c2e0f7a90f8",
+        "name": "",
+        "collection": "co326_lighting_status",
+        "operation": "find",
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "1af4b654069f6e70"
+            ]
+        ]
+    },
+    {
+        "id": "1af4b654069f6e70",
+        "type": "function",
+        "z": "cc47db8329015bee",
+        "name": "function 8",
+        "func": "msg.payload=msg.payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 240,
+        "wires": [
+            [
+                "e1c226996831d968"
+            ]
+        ]
+    },
+    {
+        "id": "e1c226996831d968",
+        "type": "tableify",
+        "z": "cc47db8329015bee",
+        "name": "Light Status Table",
+        "before": "Light Status Data",
+        "after": "Light Status finish",
+        "tableStyle": "",
+        "theadStyle": "",
+        "tbodyStyle": "",
+        "trStyle": "",
+        "tdStyle": "",
+        "x": 910,
+        "y": 240,
+        "wires": [
+            [
+                "ea517aa62d6336cb"
+            ]
+        ]
+    },
+    {
+        "id": "17ee7c2e0f7a90f8",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    }
+]

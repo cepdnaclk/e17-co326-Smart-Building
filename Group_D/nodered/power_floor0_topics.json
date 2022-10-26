@@ -15,10 +15,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -26,8 +22,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "78",
+        "payloadType": "json",
         "x": 210,
         "y": 60,
         "wires": [
@@ -62,10 +58,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -73,8 +65,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "56",
+        "payloadType": "json",
         "x": 210,
         "y": 120,
         "wires": [
@@ -109,10 +101,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -121,7 +109,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 180,
         "wires": [
@@ -156,10 +144,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -168,7 +152,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 240,
         "wires": [
@@ -203,10 +187,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -215,7 +195,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 300,
         "wires": [
@@ -250,10 +230,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -262,7 +238,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 360,
         "wires": [
@@ -297,10 +273,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -309,7 +281,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 420,
         "wires": [
@@ -344,10 +316,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -356,7 +324,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 480,
         "wires": [
@@ -391,10 +359,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -402,8 +366,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "90",
+        "payloadType": "json",
         "x": 210,
         "y": 540,
         "wires": [
@@ -417,8 +381,8 @@
         "type": "mqtt out",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/floor0/rooom8/power",
-        "qos": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/power",
+        "qos": "0",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -438,10 +402,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -449,8 +409,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "68",
+        "payloadType": "json",
         "x": 210,
         "y": 600,
         "wires": [
@@ -485,10 +445,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -496,8 +452,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "19",
+        "payloadType": "json",
         "x": 210,
         "y": 660,
         "wires": [
@@ -532,10 +488,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -544,7 +496,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 720,
         "wires": [
@@ -579,10 +531,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -591,7 +539,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 760,
         "wires": [
@@ -626,10 +574,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -638,7 +582,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 800,
         "wires": [
@@ -673,10 +617,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -685,7 +625,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 840,
         "wires": [
@@ -720,10 +660,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -732,7 +668,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 880,
         "wires": [
@@ -767,10 +703,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -779,7 +711,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 210,
         "y": 920,
         "wires": [
@@ -796,10 +728,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -807,8 +735,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "50",
+        "payloadType": "json",
         "x": 210,
         "y": 980,
         "wires": [
@@ -878,7 +806,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room0",
+        "topic": "326project/smartbuilding/energy/floor0/room0/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -932,7 +860,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room1",
+        "topic": "326project/smartbuilding/energy/floor0/room1/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -985,7 +913,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room2",
+        "topic": "326project/smartbuilding/energy/floor0/room2/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1039,7 +967,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room3",
+        "topic": "326project/smartbuilding/energy/floor0/room3/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1092,7 +1020,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room4",
+        "topic": "326project/smartbuilding/energy/floor0/room4/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1145,7 +1073,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room5",
+        "topic": "326project/smartbuilding/energy/floor0/room5/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1199,7 +1127,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room6",
+        "topic": "326project/smartbuilding/energy/floor0/room6/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1252,7 +1180,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room7",
+        "topic": "326project/smartbuilding/energy/floor0/room7/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1305,7 +1233,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room8",
+        "topic": "326project/smartbuilding/energy/floor0/room8/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1359,7 +1287,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room9",
+        "topic": "326project/smartbuilding/energy/floor0/room9/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1412,7 +1340,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room10",
+        "topic": "326project/smartbuilding/energy/floor0/room10/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1465,7 +1393,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room2/ahu",
+        "topic": "326project/smartbuilding/energy/floor0/room2/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1518,7 +1446,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room3/ahu",
+        "topic": "326project/smartbuilding/energy/floor0/room3/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1571,7 +1499,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room5/ahu",
+        "topic": "326project/smartbuilding/energy/floor0/room5/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1624,7 +1552,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room6/ahu",
+        "topic": "326project/smartbuilding/energy/floor0/room6/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1677,7 +1605,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room7/ahu",
+        "topic": "326project/smartbuilding/energ/floor0/room7/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1685,7 +1613,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 270,
+        "x": 260,
         "y": 2420,
         "wires": [
             [
@@ -1730,7 +1658,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room8/ahu",
+        "topic": "326project/smartbuilding/energy/floor0/room8/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1783,7 +1711,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room9/ahu",
+        "topic": "326project/smartbuilding/energy/floor0/room9/ahu/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -1839,10 +1767,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -1850,8 +1774,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "20",
+        "payloadType": "json",
         "x": 990,
         "y": 60,
         "wires": [
@@ -1886,10 +1810,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -1898,7 +1818,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 120,
         "wires": [
@@ -1933,10 +1853,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -1945,7 +1861,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 180,
         "wires": [
@@ -1980,10 +1896,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -1992,7 +1904,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 240,
         "wires": [
@@ -2024,7 +1936,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room2/b",
+        "topic": "326project/smartbuilding/energy/floor0/room2/b/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2077,7 +1989,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room2/c",
+        "topic": "326project/smartbuilding/energy/floor0/room2/c/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2130,7 +2042,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room5/b",
+        "topic": "326project/smartbuilding/energy/floor0/room5/b/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2183,7 +2095,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room5/c",
+        "topic": "326project/smartbuilding/energy/floor0/room5/c/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2239,10 +2151,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2251,7 +2159,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 300,
         "wires": [
@@ -2286,10 +2194,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2298,7 +2202,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 360,
         "wires": [
@@ -2333,10 +2237,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2345,7 +2245,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 420,
         "wires": [
@@ -2380,10 +2280,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2392,7 +2288,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 460,
         "wires": [
@@ -2427,10 +2323,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2439,7 +2331,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 500,
         "wires": [
@@ -2474,10 +2366,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2486,7 +2374,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 560,
         "wires": [
@@ -2521,10 +2409,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2533,7 +2417,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 620,
         "wires": [
@@ -2568,10 +2452,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2579,8 +2459,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
+        "payload": "2",
+        "payloadType": "json",
         "x": 990,
         "y": 680,
         "wires": [
@@ -2615,10 +2495,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2627,7 +2503,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 740,
         "wires": [
@@ -2662,10 +2538,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2674,7 +2546,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 991.8463134765625,
         "y": 801.0103759765625,
         "wires": [
@@ -2709,10 +2581,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -2721,7 +2589,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
-        "payloadType": "date",
+        "payloadType": "json",
         "x": 990,
         "y": 860,
         "wires": [
@@ -2753,7 +2621,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room0/l",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2806,7 +2674,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room1/l",
+        "topic": "326project/smartbuilding/energy/floor0/room1/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2859,7 +2727,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room2/l",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2912,7 +2780,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room3/l",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -2965,7 +2833,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room4/l",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3018,7 +2886,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room5/l",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3071,7 +2939,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room6/l",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3124,7 +2992,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room7/l",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3177,7 +3045,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room8/l",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3230,7 +3098,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room9/l",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3283,7 +3151,7 @@
         "type": "mqtt in",
         "z": "3d3daf84d823081a",
         "name": "",
-        "topic": "326project/smartbuilding/energy/control/floor0/room10/l",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/power",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "fcfecd717798b8b6",
@@ -3329,6 +3197,2118 @@
         "statusType": "auto",
         "x": 660,
         "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "98dd48e13275ae77",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room0,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1800,
+        "y": 60,
+        "wires": [
+            [
+                "95df6be007c63424"
+            ]
+        ]
+    },
+    {
+        "id": "95df6be007c63424",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2274.4444580078125,
+        "y": 61,
+        "wires": []
+    },
+    {
+        "id": "f24181cb3e5e3216",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room0,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"power\":1111}",
+        "payloadType": "json",
+        "x": 1810,
+        "y": 120,
+        "wires": [
+            [
+                "3549a0aadbe33455"
+            ]
+        ]
+    },
+    {
+        "id": "3549a0aadbe33455",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2294.4444580078125,
+        "y": 121,
+        "wires": []
+    },
+    {
+        "id": "ed103b5086fd5313",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room1,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1820,
+        "y": 200,
+        "wires": [
+            [
+                "327d5cc646868680"
+            ]
+        ]
+    },
+    {
+        "id": "327d5cc646868680",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room1/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2294.4444580078125,
+        "y": 201,
+        "wires": []
+    },
+    {
+        "id": "fd13cb12a5ebd1ab",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room1,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1830,
+        "y": 260,
+        "wires": [
+            [
+                "6ddc32b4ae40575c"
+            ]
+        ]
+    },
+    {
+        "id": "6ddc32b4ae40575c",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room1/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2314.4444580078125,
+        "y": 261,
+        "wires": []
+    },
+    {
+        "id": "3b41f3d5bf925be0",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room2,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1800,
+        "y": 320,
+        "wires": [
+            [
+                "f15fe37ae81de99d"
+            ]
+        ]
+    },
+    {
+        "id": "f15fe37ae81de99d",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2274.4444580078125,
+        "y": 321,
+        "wires": []
+    },
+    {
+        "id": "c8536cd2f0693397",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room2,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1810,
+        "y": 380,
+        "wires": [
+            [
+                "a5ae0ab3c1d712d1"
+            ]
+        ]
+    },
+    {
+        "id": "a5ae0ab3c1d712d1",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2294.4444580078125,
+        "y": 381,
+        "wires": []
+    },
+    {
+        "id": "9adb2db8f74531f0",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room3,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1845.22216796875,
+        "y": 479,
+        "wires": [
+            [
+                "abfa997365748c5c"
+            ]
+        ]
+    },
+    {
+        "id": "abfa997365748c5c",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2429.6666259765625,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "92bc330bece5bca0",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room3,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1865.22216796875,
+        "y": 539,
+        "wires": [
+            [
+                "801885bdbcb47287"
+            ]
+        ]
+    },
+    {
+        "id": "801885bdbcb47287",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2459.6666259765625,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "61dbf987cb89ae68",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room4,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1800,
+        "y": 580,
+        "wires": [
+            [
+                "6f5573dbe0c8eff5"
+            ]
+        ]
+    },
+    {
+        "id": "6f5573dbe0c8eff5",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2274.4444580078125,
+        "y": 581,
+        "wires": []
+    },
+    {
+        "id": "0e34a61957be4890",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room4,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1810,
+        "y": 640,
+        "wires": [
+            [
+                "e9927f50dbd027bc"
+            ]
+        ]
+    },
+    {
+        "id": "e9927f50dbd027bc",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2294.4444580078125,
+        "y": 641,
+        "wires": []
+    },
+    {
+        "id": "be91ca29eaa6a106",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room5,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1800,
+        "y": 700,
+        "wires": [
+            [
+                "8994741cfbd2155f"
+            ]
+        ]
+    },
+    {
+        "id": "8994741cfbd2155f",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2274.4444580078125,
+        "y": 701,
+        "wires": []
+    },
+    {
+        "id": "b7043fce9f9d735e",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room5,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1810,
+        "y": 760,
+        "wires": [
+            [
+                "9902cc55f47e3537"
+            ]
+        ]
+    },
+    {
+        "id": "9902cc55f47e3537",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2294.4444580078125,
+        "y": 761,
+        "wires": []
+    },
+    {
+        "id": "fc5fc7cca99a85e6",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room6,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1820,
+        "y": 820,
+        "wires": [
+            [
+                "add7254509203f27"
+            ]
+        ]
+    },
+    {
+        "id": "add7254509203f27",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2294.4444580078125,
+        "y": 821,
+        "wires": []
+    },
+    {
+        "id": "31a7a715d9e2df2e",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room6,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 1830,
+        "y": 880,
+        "wires": [
+            [
+                "78d570349c89c782"
+            ]
+        ]
+    },
+    {
+        "id": "78d570349c89c782",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 2314.4444580078125,
+        "y": 881,
+        "wires": []
+    },
+    {
+        "id": "7eb52c3bbda882bf",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room7,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2669.5556640625,
+        "y": 69,
+        "wires": [
+            [
+                "c2083ede5bd35198"
+            ]
+        ]
+    },
+    {
+        "id": "c2083ede5bd35198",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3254.0001220703125,
+        "y": 70,
+        "wires": []
+    },
+    {
+        "id": "652b93e984e34918",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room7,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2689.5556640625,
+        "y": 129,
+        "wires": [
+            [
+                "ef3182521c7089d3"
+            ]
+        ]
+    },
+    {
+        "id": "ef3182521c7089d3",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3284.0001220703125,
+        "y": 130,
+        "wires": []
+    },
+    {
+        "id": "85c15732dde77824",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room8,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2702.22216796875,
+        "y": 199,
+        "wires": [
+            [
+                "ee985dd01eb59fe5"
+            ]
+        ]
+    },
+    {
+        "id": "ee985dd01eb59fe5",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3286.6666259765625,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a76f97b64bedf519",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room8,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2722.22216796875,
+        "y": 259,
+        "wires": [
+            [
+                "19db07bf0482e45a"
+            ]
+        ]
+    },
+    {
+        "id": "19db07bf0482e45a",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3316.6666259765625,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ddc948b2a87c380c",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room9,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2731.111083984375,
+        "y": 341,
+        "wires": [
+            [
+                "92f679a18eaaf7c2"
+            ]
+        ]
+    },
+    {
+        "id": "92f679a18eaaf7c2",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3315.5555419921875,
+        "y": 342,
+        "wires": []
+    },
+    {
+        "id": "ac4cad3f414f97f3",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room9,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2751.111083984375,
+        "y": 401,
+        "wires": [
+            [
+                "0662b7e0bb3e2416"
+            ]
+        ]
+    },
+    {
+        "id": "0662b7e0bb3e2416",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3345.5555419921875,
+        "y": 402,
+        "wires": []
+    },
+    {
+        "id": "6c30c1a7ebc60f32",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room10,lights,essential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2857,
+        "y": 476,
+        "wires": [
+            [
+                "80d0a0b702dbd78c"
+            ]
+        ]
+    },
+    {
+        "id": "80d0a0b702dbd78c",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/essential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3441.4444580078125,
+        "y": 477,
+        "wires": []
+    },
+    {
+        "id": "7c5217e879e05092",
+        "type": "inject",
+        "z": "3d3daf84d823081a",
+        "name": "floor0,room10,lights/nonessential",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "json",
+        "x": 2877,
+        "y": 536,
+        "wires": [
+            [
+                "1b50feca769a4e85"
+            ]
+        ]
+    },
+    {
+        "id": "1b50feca769a4e85",
+        "type": "mqtt out",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/nonessential/power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcfecd717798b8b6",
+        "x": 3471.4444580078125,
+        "y": 537,
+        "wires": []
+    },
+    {
+        "id": "574689b47a613aba",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 3760,
+        "wires": [
+            [
+                "8ecec84cee48f45c"
+            ]
+        ]
+    },
+    {
+        "id": "42a27820fba20790",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "95df6be007c63424"
+        ],
+        "x": 560,
+        "y": 3720,
+        "wires": [
+            [
+                "8ecec84cee48f45c"
+            ]
+        ]
+    },
+    {
+        "id": "8ecec84cee48f45c",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 41",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 3760,
+        "wires": []
+    },
+    {
+        "id": "ca659bdfeb4c1e37",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room0/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 3840,
+        "wires": [
+            [
+                "8ac7e894da199af6"
+            ]
+        ]
+    },
+    {
+        "id": "f7b1d42b81bdd7fc",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "3549a0aadbe33455"
+        ],
+        "x": 580,
+        "y": 3800,
+        "wires": [
+            [
+                "8ac7e894da199af6"
+            ]
+        ]
+    },
+    {
+        "id": "8ac7e894da199af6",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 42",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 3840,
+        "wires": []
+    },
+    {
+        "id": "7dea81552978ee0d",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room1/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 3940,
+        "wires": [
+            [
+                "cf3992acd3bd03b9"
+            ]
+        ]
+    },
+    {
+        "id": "49ea12fe5730f0b9",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "327d5cc646868680"
+        ],
+        "x": 580,
+        "y": 3900,
+        "wires": [
+            [
+                "cf3992acd3bd03b9"
+            ]
+        ]
+    },
+    {
+        "id": "cf3992acd3bd03b9",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 3940,
+        "wires": []
+    },
+    {
+        "id": "108c904a5a808f44",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room1/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 300,
+        "y": 4020,
+        "wires": [
+            [
+                "3711edc1c62b6539"
+            ]
+        ]
+    },
+    {
+        "id": "d2ce2b22640936f6",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "6ddc32b4ae40575c"
+        ],
+        "x": 600,
+        "y": 3980,
+        "wires": [
+            [
+                "3711edc1c62b6539"
+            ]
+        ]
+    },
+    {
+        "id": "3711edc1c62b6539",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 4020,
+        "wires": []
+    },
+    {
+        "id": "a04a032013f29c7a",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 4100,
+        "wires": [
+            [
+                "89f70695a39f0b7b"
+            ]
+        ]
+    },
+    {
+        "id": "d457e94ca14395db",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "f15fe37ae81de99d"
+        ],
+        "x": 600,
+        "y": 4060,
+        "wires": [
+            [
+                "89f70695a39f0b7b"
+            ]
+        ]
+    },
+    {
+        "id": "89f70695a39f0b7b",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 45",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 4100,
+        "wires": []
+    },
+    {
+        "id": "09bd8422b5cc61be",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room2/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 4180,
+        "wires": [
+            [
+                "4856596e503db1cf"
+            ]
+        ]
+    },
+    {
+        "id": "0939a1a928b0db84",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "a5ae0ab3c1d712d1"
+        ],
+        "x": 620,
+        "y": 4140,
+        "wires": [
+            [
+                "4856596e503db1cf"
+            ]
+        ]
+    },
+    {
+        "id": "4856596e503db1cf",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 46",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 4180,
+        "wires": []
+    },
+    {
+        "id": "b7b437c00afc305d",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1060,
+        "y": 1140,
+        "wires": [
+            [
+                "adb5bb5a924f7dca"
+            ]
+        ]
+    },
+    {
+        "id": "46d1cf24760f249c",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "abfa997365748c5c"
+        ],
+        "x": 1380,
+        "y": 1100,
+        "wires": [
+            [
+                "adb5bb5a924f7dca"
+            ]
+        ]
+    },
+    {
+        "id": "adb5bb5a924f7dca",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 47",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "14c55f61d93e5af5",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room3/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1100,
+        "y": 1220,
+        "wires": [
+            [
+                "97c131e5e908d454"
+            ]
+        ]
+    },
+    {
+        "id": "d5da37979278f33c",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "801885bdbcb47287"
+        ],
+        "x": 1400,
+        "y": 1180,
+        "wires": [
+            [
+                "97c131e5e908d454"
+            ]
+        ]
+    },
+    {
+        "id": "97c131e5e908d454",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 48",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "611d189e2f4d1af4",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1120,
+        "y": 1300,
+        "wires": [
+            [
+                "31c19f7131372dc6"
+            ]
+        ]
+    },
+    {
+        "id": "b136257b0898ee2c",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "6f5573dbe0c8eff5"
+        ],
+        "x": 1440,
+        "y": 1260,
+        "wires": [
+            [
+                "31c19f7131372dc6"
+            ]
+        ]
+    },
+    {
+        "id": "31c19f7131372dc6",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 49",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "156b12999c4d1adc",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room4/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1160,
+        "y": 1380,
+        "wires": [
+            [
+                "d590e92d909f3882"
+            ]
+        ]
+    },
+    {
+        "id": "e4c3ae969f652b38",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "e9927f50dbd027bc"
+        ],
+        "x": 1460,
+        "y": 1340,
+        "wires": [
+            [
+                "d590e92d909f3882"
+            ]
+        ]
+    },
+    {
+        "id": "d590e92d909f3882",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 50",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1580,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "2ba60b8f730ae2ab",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1160,
+        "y": 1460,
+        "wires": [
+            [
+                "cb98a87eeaf010f7"
+            ]
+        ]
+    },
+    {
+        "id": "30cd6214f4a12b48",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "8994741cfbd2155f"
+        ],
+        "x": 1480,
+        "y": 1420,
+        "wires": [
+            [
+                "cb98a87eeaf010f7"
+            ]
+        ]
+    },
+    {
+        "id": "cb98a87eeaf010f7",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 51",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "16914253ae6c4519",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room5/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1200,
+        "y": 1540,
+        "wires": [
+            [
+                "fbe053942686b6fb"
+            ]
+        ]
+    },
+    {
+        "id": "55e90ed42dd30c71",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "9902cc55f47e3537"
+        ],
+        "x": 1500,
+        "y": 1500,
+        "wires": [
+            [
+                "fbe053942686b6fb"
+            ]
+        ]
+    },
+    {
+        "id": "fbe053942686b6fb",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 52",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "dbf391f36e95a960",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1180,
+        "y": 1620,
+        "wires": [
+            [
+                "29df1c879bcafdc3"
+            ]
+        ]
+    },
+    {
+        "id": "b7eeb84f707fc381",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "add7254509203f27"
+        ],
+        "x": 1500,
+        "y": 1580,
+        "wires": [
+            [
+                "29df1c879bcafdc3"
+            ]
+        ]
+    },
+    {
+        "id": "29df1c879bcafdc3",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "b93f58e2ed2d32de",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room6/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1220,
+        "y": 1700,
+        "wires": [
+            [
+                "daa048b44ede29ed"
+            ]
+        ]
+    },
+    {
+        "id": "e1de16f00965c7ee",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "78d570349c89c782"
+        ],
+        "x": 1520,
+        "y": 1660,
+        "wires": [
+            [
+                "daa048b44ede29ed"
+            ]
+        ]
+    },
+    {
+        "id": "daa048b44ede29ed",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 54",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "424ae26533c23c2b",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1200,
+        "y": 1780,
+        "wires": [
+            [
+                "37754f8fcace9076"
+            ]
+        ]
+    },
+    {
+        "id": "70c8581afb796827",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "c2083ede5bd35198"
+        ],
+        "x": 1520,
+        "y": 1740,
+        "wires": [
+            [
+                "37754f8fcace9076"
+            ]
+        ]
+    },
+    {
+        "id": "37754f8fcace9076",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 55",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "d4cf265750014c1d",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room7/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1240,
+        "y": 1860,
+        "wires": [
+            [
+                "3dd95b2f727e6847"
+            ]
+        ]
+    },
+    {
+        "id": "d72cc1190dcf3e43",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "ef3182521c7089d3"
+        ],
+        "x": 1540,
+        "y": 1820,
+        "wires": [
+            [
+                "3dd95b2f727e6847"
+            ]
+        ]
+    },
+    {
+        "id": "3dd95b2f727e6847",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 56",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "11021ea94b907c9e",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1220,
+        "y": 1960,
+        "wires": [
+            [
+                "d0b5536a58508a08"
+            ]
+        ]
+    },
+    {
+        "id": "432fbb418bca9cd6",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "ee985dd01eb59fe5"
+        ],
+        "x": 1540,
+        "y": 1920,
+        "wires": [
+            [
+                "d0b5536a58508a08"
+            ]
+        ]
+    },
+    {
+        "id": "d0b5536a58508a08",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 57",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "e604d54d9efc159b",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room8/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1260,
+        "y": 2040,
+        "wires": [
+            [
+                "e722c213f2053a42"
+            ]
+        ]
+    },
+    {
+        "id": "9f9f9303ca59afc3",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "19db07bf0482e45a"
+        ],
+        "x": 1560,
+        "y": 2000,
+        "wires": [
+            [
+                "e722c213f2053a42"
+            ]
+        ]
+    },
+    {
+        "id": "e722c213f2053a42",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 58",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "e0d122e4ca64276b",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1220,
+        "y": 2120,
+        "wires": [
+            [
+                "40505cfcd9b26355"
+            ]
+        ]
+    },
+    {
+        "id": "76fe0715f9f66afe",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "92f679a18eaaf7c2"
+        ],
+        "x": 1540,
+        "y": 2080,
+        "wires": [
+            [
+                "40505cfcd9b26355"
+            ]
+        ]
+    },
+    {
+        "id": "40505cfcd9b26355",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 59",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "f9ab1ef61469fe48",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room9/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1260,
+        "y": 2200,
+        "wires": [
+            [
+                "73cedeb40d1f06da"
+            ]
+        ]
+    },
+    {
+        "id": "6e79c34fe4f9a155",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "0662b7e0bb3e2416"
+        ],
+        "x": 1560,
+        "y": 2160,
+        "wires": [
+            [
+                "73cedeb40d1f06da"
+            ]
+        ]
+    },
+    {
+        "id": "73cedeb40d1f06da",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 60",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "a3bb25ab4b8f85d3",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/essential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1210,
+        "y": 2280,
+        "wires": [
+            [
+                "a1807e90afa5ad2a"
+            ]
+        ]
+    },
+    {
+        "id": "0c6b18ba237845b3",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "80d0a0b702dbd78c"
+        ],
+        "x": 1520,
+        "y": 2240,
+        "wires": [
+            [
+                "a1807e90afa5ad2a"
+            ]
+        ]
+    },
+    {
+        "id": "a1807e90afa5ad2a",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 61",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "90e255f4fd91d58b",
+        "type": "mqtt in",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "topic": "326project/smartbuilding/energy/floor0/room10/l/nonessential/power",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcfecd717798b8b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1240,
+        "y": 2360,
+        "wires": [
+            [
+                "62524ed87f107e53"
+            ]
+        ]
+    },
+    {
+        "id": "f801fd1a5d35fdab",
+        "type": "status",
+        "z": "3d3daf84d823081a",
+        "name": "",
+        "scope": [
+            "1b50feca769a4e85"
+        ],
+        "x": 1540,
+        "y": 2320,
+        "wires": [
+            [
+                "62524ed87f107e53"
+            ]
+        ]
+    },
+    {
+        "id": "62524ed87f107e53",
+        "type": "debug",
+        "z": "3d3daf84d823081a",
+        "name": "debug 62",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 2360,
         "wires": []
     },
     {
