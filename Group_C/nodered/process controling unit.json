@@ -1,0 +1,4039 @@
+[
+    {
+        "id": "706f2275aa404cb1",
+        "type": "tab",
+        "label": "Process Controller",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "cc57e2a083024ef5",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "5a4fe231c0529aec",
+                "7cae44e92378f7f4"
+            ]
+        ]
+    },
+    {
+        "id": "36b74bbb66e4b32c",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "6dea0ddf43ebc25c",
+                "b9f9e322df767698"
+            ]
+        ]
+    },
+    {
+        "id": "c88cccf845b3f06b",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1720,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "bf7bb4dd54691058",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1730,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "971a27857e0ebb52",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/control/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1800,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "9634ab0ef63355e4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "\ntry{\n    var smokeState=msg.payload.smoke.smoke;\n}catch{\n    smokeState=0;\n}\n\ntry{\n    var pullState=msg.payload.pull_station.state;\n}catch{\n    pullState=0;\n}\ntry{\n    var tempState=msg.payload.temp.temp;\n}catch{\n    tempState=0;\n}\n\n// Thresholds\nvar gas_thresh = 30.0;\nvar temp_thresh = 104.0;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pullState == 1) {\n    fire = 1;\n}\n\n// if gas level exceeded without the pull station\nelse if (smokeState > gas_thresh || tempState > temp_thresh) {\n    fire = 1;\n}\n\nelse{\n    fire = 0;\n}\n\n// msg.payload = smoke_level.smoke;\n// return msg;\n\n//msg.payload = (fire === 1) ? true : false\n\nif(fire==1){\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 1,\n        \"temp\": tempState,\n    };\n}\nelse{\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 0,\n        \"temp\": tempState,\n    };\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1110,
+        "y": 260,
+        "wires": [
+            [
+                "a60ee0b8b2d8d48c",
+                "0b44c651600418d4",
+                "3ab02892a68adec4"
+            ]
+        ]
+    },
+    {
+        "id": "5a4fe231c0529aec",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "51929b932bd1276c",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room0/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 400,
+        "wires": [
+            [
+                "afb27be18807e1d1",
+                "901f91dea2151f04"
+            ]
+        ]
+    },
+    {
+        "id": "e687e6e958858f2c",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7cb4f9ce1c9e27ba",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function11",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room0\", \"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"room8\", \"E1\", \"E2\", \"E3\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room0\", \"E1\", 1],\n    [\"room2\", \"E2\", 3],\n    [\"room8\", \"E3\", 2],\n    [\"room4\", \"room1\", 6],\n    [\"room1\", \"room2\", 10],\n    [\"room4\", \"room7\", 4],\n    [\"room7\", \"room8\", 7],\n    [\"room4\", \"room5\", 10],\n    [\"room5\", \"room8\", 4],\n    [\"room3\", \"room1\", 2],\n    [\"room6\", \"room7\", 3],\n    [\"room0\", \"room4\", 3]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\nvar fire_room8 = false;\nvar fire_room0 = false;\n\nif (msg.payload.pull_station8 == true)\n    fire_room8 = true\nelse\n    fire_room8 = false\n\nif (msg.payload.fire == true)\n    fire_room0 = true\nelse\n    fire_room8 = false\n\nvar current_status = new Map([\n    [\"room0\", false],\n    [\"room1\", false],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false], \n    [\"room7\", false], \n    [\"room8\", false], \n]);\n\ncurrent_status.set('room0', fire_room0);\ncurrent_status.set('room8', fire_room8);\n\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\n//var room = topic.split('/')[1]\nmsg.payload = results;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1630,
+        "y": 560,
+        "wires": [
+            [
+                "d16a28d27ca18e2f",
+                "5db22a2bd497bf44"
+            ]
+        ]
+    },
+    {
+        "id": "d16a28d27ca18e2f",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1950,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "7cae44e92378f7f4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 17",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"smoke\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 120,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "6dea0ddf43ebc25c",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 18",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"pull_station\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "afb27be18807e1d1",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 20",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"temp\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 420,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "af366433541a9de2",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "1",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 910,
+        "y": 260,
+        "wires": [
+            [
+                "9634ab0ef63355e4",
+                "4b04c177f05f4196",
+                "1ca6196aad8c4d86"
+            ]
+        ]
+    },
+    {
+        "id": "3ab02892a68adec4",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1470,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b9f9e322df767698",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "901f91dea2151f04",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5db22a2bd497bf44",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1820,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4b04c177f05f4196",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0875ed8c1f1171cb",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 920,
+        "wires": [
+            [
+                "e3afc6dad7acea2b",
+                "943353b25b735d92"
+            ]
+        ]
+    },
+    {
+        "id": "bdcd69bc7d1209ad",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1060,
+        "wires": [
+            [
+                "22c2f9e4a0aba76c",
+                "995c1995f376a118"
+            ]
+        ]
+    },
+    {
+        "id": "ed29db0b67defe2a",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "6c3cab84a777d1f0",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1650,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "82a64ae1906feda9",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "24f2a8e912cbd2d5",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 1080,
+        "wires": [
+            [
+                "ed29db0b67defe2a",
+                "6c3cab84a777d1f0",
+                "82a64ae1906feda9",
+                "5593a0180af05757",
+                "d7524d5d46243726",
+                "df7b12a426b4ca5d"
+            ]
+        ]
+    },
+    {
+        "id": "e3afc6dad7acea2b",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "0de0b75985e45978",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1400,
+        "wires": [
+            [
+                "9a064582ef8da641",
+                "dc9a3db47a44d13b"
+            ]
+        ]
+    },
+    {
+        "id": "5593a0180af05757",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "d7524d5d46243726",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 90",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 1380,
+        "wires": [
+            [
+                "974c63b146e92268",
+                "3ab0b415027ad3db"
+            ]
+        ]
+    },
+    {
+        "id": "974c63b146e92268",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "943353b25b735d92",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 91",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room1\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 940,
+        "wires": [
+            [
+                "7e8a77ec267274f2"
+            ]
+        ]
+    },
+    {
+        "id": "22c2f9e4a0aba76c",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 92",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room1\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1020,
+        "wires": [
+            [
+                "7e8a77ec267274f2"
+            ]
+        ]
+    },
+    {
+        "id": "c757b447f0056933",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 93",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room1\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1180,
+        "wires": [
+            [
+                "7e8a77ec267274f2"
+            ]
+        ]
+    },
+    {
+        "id": "9a064582ef8da641",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 94",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room1\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1380,
+        "wires": [
+            [
+                "7e8a77ec267274f2"
+            ]
+        ]
+    },
+    {
+        "id": "7e8a77ec267274f2",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1010,
+        "y": 1080,
+        "wires": [
+            [
+                "24f2a8e912cbd2d5",
+                "3be5d67f7d7a7e40"
+            ]
+        ]
+    },
+    {
+        "id": "df7b12a426b4ca5d",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "995c1995f376a118",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "ed15905b0a0938ee",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "dc9a3db47a44d13b",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "3ab0b415027ad3db",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "3be5d67f7d7a7e40",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "2af4e926115e5245",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1680,
+        "wires": [
+            [
+                "0bc083403b6a8bb9",
+                "af232e0c6b73d618"
+            ]
+        ]
+    },
+    {
+        "id": "8c015c542418740d",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1820,
+        "wires": [
+            [
+                "7d47d427ef46467c",
+                "28cee14ff3f91c2a"
+            ]
+        ]
+    },
+    {
+        "id": "a7e6d2b14a72eae1",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 2000,
+        "wires": [
+            [
+                "51984ab5c6d60436",
+                "bad88306570dd75d"
+            ]
+        ]
+    },
+    {
+        "id": "2a8f6a3e86419cb5",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "1750484654be2214",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1650,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "587e3373914d6b49",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "1be49cfe58f9e54f",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 1840,
+        "wires": [
+            [
+                "2a8f6a3e86419cb5",
+                "1750484654be2214",
+                "587e3373914d6b49",
+                "6d8d0c71af2ddc46",
+                "bdb596d2178d844a",
+                "ca2847cde74e71c5"
+            ]
+        ]
+    },
+    {
+        "id": "0bc083403b6a8bb9",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "d70aadea7d1d59bc",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room2/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2160,
+        "wires": [
+            [
+                "2c91ccd571827de6",
+                "bdf75e8b0b17ddee"
+            ]
+        ]
+    },
+    {
+        "id": "6d8d0c71af2ddc46",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "bdb596d2178d844a",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 95",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 2140,
+        "wires": [
+            [
+                "b0d3204c06bec48f",
+                "7830073d37cce36f"
+            ]
+        ]
+    },
+    {
+        "id": "b0d3204c06bec48f",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "af232e0c6b73d618",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 96",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room2\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1700,
+        "wires": [
+            [
+                "d2a56b1ee8dd7b96"
+            ]
+        ]
+    },
+    {
+        "id": "7d47d427ef46467c",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 97",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room2\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1780,
+        "wires": [
+            [
+                "d2a56b1ee8dd7b96"
+            ]
+        ]
+    },
+    {
+        "id": "51984ab5c6d60436",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 98",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room2\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1940,
+        "wires": [
+            [
+                "d2a56b1ee8dd7b96"
+            ]
+        ]
+    },
+    {
+        "id": "2c91ccd571827de6",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 99",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room2\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 2140,
+        "wires": [
+            [
+                "d2a56b1ee8dd7b96"
+            ]
+        ]
+    },
+    {
+        "id": "d2a56b1ee8dd7b96",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1010,
+        "y": 1840,
+        "wires": [
+            [
+                "1be49cfe58f9e54f",
+                "e427ebf10f8cb435"
+            ]
+        ]
+    },
+    {
+        "id": "ca2847cde74e71c5",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "28cee14ff3f91c2a",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "bad88306570dd75d",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "bdf75e8b0b17ddee",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "7830073d37cce36f",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "e427ebf10f8cb435",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "1de736c55512a831",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 2520,
+        "wires": [
+            [
+                "7b7256706ca4b808",
+                "b1157f94baa001f0"
+            ]
+        ]
+    },
+    {
+        "id": "ad8943b9c4d6b0a8",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 2660,
+        "wires": [
+            [
+                "743df11f55eed1e4",
+                "fc9534e5c336af30"
+            ]
+        ]
+    },
+    {
+        "id": "3faa05b920f19d4b",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 2840,
+        "wires": [
+            [
+                "a910d240788b1c8e",
+                "c911c288c8baf17d"
+            ]
+        ]
+    },
+    {
+        "id": "775ab3db31dbfa2c",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "c715a624ec83d2f2",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1650,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "0eb28c811203cbe2",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 2700,
+        "wires": []
+    },
+    {
+        "id": "a12152f10bab53f5",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 2680,
+        "wires": [
+            [
+                "775ab3db31dbfa2c",
+                "c715a624ec83d2f2",
+                "0eb28c811203cbe2",
+                "e01915026abc1040",
+                "94153e5147c3462d",
+                "35a409afbbb60576"
+            ]
+        ]
+    },
+    {
+        "id": "7b7256706ca4b808",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 2440,
+        "wires": []
+    },
+    {
+        "id": "08488f5f4af987d2",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room3/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 3000,
+        "wires": [
+            [
+                "63d5b61ef34ccd8d",
+                "5cc8d1128572d924"
+            ]
+        ]
+    },
+    {
+        "id": "e01915026abc1040",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 2760,
+        "wires": []
+    },
+    {
+        "id": "94153e5147c3462d",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 100",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 2980,
+        "wires": [
+            [
+                "16078209aba59bfc",
+                "3ee5537c034e9937"
+            ]
+        ]
+    },
+    {
+        "id": "16078209aba59bfc",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 2880,
+        "wires": []
+    },
+    {
+        "id": "b1157f94baa001f0",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 101",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room0\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 2540,
+        "wires": [
+            [
+                "f9874ab6d5063caa"
+            ]
+        ]
+    },
+    {
+        "id": "743df11f55eed1e4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 102",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room3\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 2620,
+        "wires": [
+            [
+                "f9874ab6d5063caa"
+            ]
+        ]
+    },
+    {
+        "id": "a910d240788b1c8e",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 103",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room3\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 2780,
+        "wires": [
+            [
+                "f9874ab6d5063caa"
+            ]
+        ]
+    },
+    {
+        "id": "63d5b61ef34ccd8d",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 104",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room3\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 2980,
+        "wires": [
+            [
+                "f9874ab6d5063caa"
+            ]
+        ]
+    },
+    {
+        "id": "f9874ab6d5063caa",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1010,
+        "y": 2680,
+        "wires": [
+            [
+                "a12152f10bab53f5",
+                "d4f9af4269dc4752"
+            ]
+        ]
+    },
+    {
+        "id": "35a409afbbb60576",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "fc9534e5c336af30",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 2720,
+        "wires": []
+    },
+    {
+        "id": "c911c288c8baf17d",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 2880,
+        "wires": []
+    },
+    {
+        "id": "5cc8d1128572d924",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 3060,
+        "wires": []
+    },
+    {
+        "id": "3ee5537c034e9937",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 3060,
+        "wires": []
+    },
+    {
+        "id": "d4f9af4269dc4752",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 2540,
+        "wires": []
+    },
+    {
+        "id": "4e0bb59060203fc2",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 3340,
+        "wires": [
+            [
+                "fcf9af321867ecf7",
+                "ea6d204d32d4c9ec"
+            ]
+        ]
+    },
+    {
+        "id": "6b112a61a73424b1",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 3480,
+        "wires": [
+            [
+                "456a19b0aa298f0e",
+                "d51ad91ac24b9501"
+            ]
+        ]
+    },
+    {
+        "id": "f01c20250985f616",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 3660,
+        "wires": [
+            [
+                "36f9c31cce4b83bd",
+                "863e6c9d325bf8fa"
+            ]
+        ]
+    },
+    {
+        "id": "b80059974268fd03",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 3400,
+        "wires": []
+    },
+    {
+        "id": "fdb5a527d3e32638",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1650,
+        "y": 3460,
+        "wires": []
+    },
+    {
+        "id": "2d21f1ae1968ec86",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 3520,
+        "wires": []
+    },
+    {
+        "id": "7c066b6de5b25eb6",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 3500,
+        "wires": [
+            [
+                "b80059974268fd03",
+                "fdb5a527d3e32638",
+                "2d21f1ae1968ec86",
+                "bb5fdc732c8345ae",
+                "1765d283c27132c5",
+                "5a6d379611bd3585"
+            ]
+        ]
+    },
+    {
+        "id": "fcf9af321867ecf7",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 3260,
+        "wires": []
+    },
+    {
+        "id": "b943f0beefa8eac2",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room4/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 3820,
+        "wires": [
+            [
+                "60e4c90b8efa84a4",
+                "30776d032485895e"
+            ]
+        ]
+    },
+    {
+        "id": "bb5fdc732c8345ae",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 3580,
+        "wires": []
+    },
+    {
+        "id": "1765d283c27132c5",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 105",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 3800,
+        "wires": [
+            [
+                "0fb6a618d2c84947",
+                "bd5035fa4d8e5c89"
+            ]
+        ]
+    },
+    {
+        "id": "0fb6a618d2c84947",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 3700,
+        "wires": []
+    },
+    {
+        "id": "ea6d204d32d4c9ec",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 106",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room4\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 3360,
+        "wires": [
+            [
+                "7331287443b54373"
+            ]
+        ]
+    },
+    {
+        "id": "456a19b0aa298f0e",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 107",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room4\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 3440,
+        "wires": [
+            [
+                "7331287443b54373"
+            ]
+        ]
+    },
+    {
+        "id": "36f9c31cce4b83bd",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 108",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room4\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 3600,
+        "wires": [
+            [
+                "7331287443b54373"
+            ]
+        ]
+    },
+    {
+        "id": "60e4c90b8efa84a4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 109",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room4\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 3800,
+        "wires": [
+            [
+                "7331287443b54373"
+            ]
+        ]
+    },
+    {
+        "id": "7331287443b54373",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1010,
+        "y": 3500,
+        "wires": [
+            [
+                "7c066b6de5b25eb6",
+                "2756b6374b8a3e38"
+            ]
+        ]
+    },
+    {
+        "id": "5a6d379611bd3585",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "d51ad91ac24b9501",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 3540,
+        "wires": []
+    },
+    {
+        "id": "863e6c9d325bf8fa",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 3700,
+        "wires": []
+    },
+    {
+        "id": "30776d032485895e",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 3880,
+        "wires": []
+    },
+    {
+        "id": "bd5035fa4d8e5c89",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 3880,
+        "wires": []
+    },
+    {
+        "id": "2756b6374b8a3e38",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 3360,
+        "wires": []
+    },
+    {
+        "id": "3145b7d89344fb45",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 4100,
+        "wires": [
+            [
+                "8231cca8ea73ce5a",
+                "da512eb03d97ff82"
+            ]
+        ]
+    },
+    {
+        "id": "a9249e83282a41f0",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 4240,
+        "wires": [
+            [
+                "272a8aee23ed9af1",
+                "c7d4c5a7593148dc"
+            ]
+        ]
+    },
+    {
+        "id": "51129ef7f7f3812e",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 4420,
+        "wires": [
+            [
+                "bb74d913e80f8692",
+                "4aa4879295ec0e38"
+            ]
+        ]
+    },
+    {
+        "id": "cb02758c8d069798",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 4160,
+        "wires": []
+    },
+    {
+        "id": "2102bf15e8ac99d9",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1650,
+        "y": 4220,
+        "wires": []
+    },
+    {
+        "id": "982884f88145ce63",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1640,
+        "y": 4280,
+        "wires": []
+    },
+    {
+        "id": "0dea28f4cf33243e",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 104;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n} else {\n    fire = 0;\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n} else\n    fire = 0;\n\n//msg.payload = (fire === 1) ? true : false\n\nif (fire) {\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 1,\n    };\n    return msg;\n}\n\nmsg.payload = {\n    \"time\": Date.now(),\n    \"state\": 0,\n};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 4260,
+        "wires": [
+            [
+                "5a802e0853a7b6da",
+                "7c0ff98eda626bc0"
+            ]
+        ]
+    },
+    {
+        "id": "8231cca8ea73ce5a",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 4020,
+        "wires": []
+    },
+    {
+        "id": "69bcd8211852dffb",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room5/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 4580,
+        "wires": [
+            [
+                "26c4fa7e633b8c91",
+                "d4f90f27b2aaac94"
+            ]
+        ]
+    },
+    {
+        "id": "83a043bfce154f37",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 4340,
+        "wires": []
+    },
+    {
+        "id": "5a802e0853a7b6da",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 110",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 4560,
+        "wires": [
+            [
+                "1d932200f82e4e6b",
+                "9a5f1484a79861d5"
+            ]
+        ]
+    },
+    {
+        "id": "1d932200f82e4e6b",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1590,
+        "y": 4460,
+        "wires": []
+    },
+    {
+        "id": "da512eb03d97ff82",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 111",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room5\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 4120,
+        "wires": [
+            [
+                "810faf6d804a18fc"
+            ]
+        ]
+    },
+    {
+        "id": "272a8aee23ed9af1",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 112",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room5\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 4200,
+        "wires": [
+            [
+                "810faf6d804a18fc"
+            ]
+        ]
+    },
+    {
+        "id": "bb74d913e80f8692",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 113",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room5\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 4360,
+        "wires": [
+            [
+                "810faf6d804a18fc"
+            ]
+        ]
+    },
+    {
+        "id": "26c4fa7e633b8c91",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 114",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room5\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 4560,
+        "wires": [
+            [
+                "810faf6d804a18fc"
+            ]
+        ]
+    },
+    {
+        "id": "810faf6d804a18fc",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 930,
+        "y": 4240,
+        "wires": [
+            [
+                "0dea28f4cf33243e",
+                "0b397a5cc35da93f"
+            ]
+        ]
+    },
+    {
+        "id": "68efa391d2ee68d3",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 4100,
+        "wires": []
+    },
+    {
+        "id": "c7d4c5a7593148dc",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 4300,
+        "wires": []
+    },
+    {
+        "id": "4aa4879295ec0e38",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 4460,
+        "wires": []
+    },
+    {
+        "id": "d4f90f27b2aaac94",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 4640,
+        "wires": []
+    },
+    {
+        "id": "9a5f1484a79861d5",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 4640,
+        "wires": []
+    },
+    {
+        "id": "0b397a5cc35da93f",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 4120,
+        "wires": []
+    },
+    {
+        "id": "1aaf4adea4f81e5c",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room6/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2570,
+        "y": 520,
+        "wires": [
+            [
+                "b03031cb8d14cb9a",
+                "7eb545730428ead2"
+            ]
+        ]
+    },
+    {
+        "id": "1cc501d1eae69982",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room6/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2590,
+        "y": 660,
+        "wires": [
+            [
+                "baabb794a8801a37",
+                "391a3c69f8df3040"
+            ]
+        ]
+    },
+    {
+        "id": "2dfe2306c3e342df",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor6/room6/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2590,
+        "y": 840,
+        "wires": [
+            [
+                "56f0be8c19925cd6",
+                "b2de10999b096b8c"
+            ]
+        ]
+    },
+    {
+        "id": "8696b5f0221d88ca",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room6/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 4000,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "c4ba947f03c67443",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room6/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 4010,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e7730f4d379ac1f3",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room6/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 4000,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "871e3dbd3b0d0d3e",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3570,
+        "y": 680,
+        "wires": [
+            [
+                "8696b5f0221d88ca",
+                "c4ba947f03c67443",
+                "e7730f4d379ac1f3",
+                "29bc708dc87bb0d7",
+                "3caaba632df3154c",
+                "74753cefba73c1b2"
+            ]
+        ]
+    },
+    {
+        "id": "b03031cb8d14cb9a",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3010,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d013444b2aa86c42",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room6/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2570,
+        "y": 1000,
+        "wires": [
+            [
+                "c414a79f71fe2e42",
+                "56cd67bb2da9c675"
+            ]
+        ]
+    },
+    {
+        "id": "29bc708dc87bb0d7",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 3950,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "3caaba632df3154c",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 115",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3690,
+        "y": 980,
+        "wires": [
+            [
+                "84b7e1dd9764d0ef",
+                "af315465c721922e"
+            ]
+        ]
+    },
+    {
+        "id": "84b7e1dd9764d0ef",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 3950,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "7eb545730428ead2",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 116",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room6\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 540,
+        "wires": [
+            [
+                "7c6c8be43f77451d"
+            ]
+        ]
+    },
+    {
+        "id": "baabb794a8801a37",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 117",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room6\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 620,
+        "wires": [
+            [
+                "7c6c8be43f77451d"
+            ]
+        ]
+    },
+    {
+        "id": "56f0be8c19925cd6",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 118",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room6\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 780,
+        "wires": [
+            [
+                "7c6c8be43f77451d"
+            ]
+        ]
+    },
+    {
+        "id": "c414a79f71fe2e42",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 119",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room6\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 980,
+        "wires": [
+            [
+                "7c6c8be43f77451d"
+            ]
+        ]
+    },
+    {
+        "id": "7c6c8be43f77451d",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 3370,
+        "y": 680,
+        "wires": [
+            [
+                "871e3dbd3b0d0d3e",
+                "b4b10e7d7dbdd2fd"
+            ]
+        ]
+    },
+    {
+        "id": "74753cefba73c1b2",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3910,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "391a3c69f8df3040",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3030,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "b2de10999b096b8c",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3030,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "56cd67bb2da9c675",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3010,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "af315465c721922e",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3820,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "b4b10e7d7dbdd2fd",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3450,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ec79e7df0575369f",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/sensor/smoke",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2570,
+        "y": 1340,
+        "wires": [
+            [
+                "0df7ca881163aa1e",
+                "0edf2505b838b336"
+            ]
+        ]
+    },
+    {
+        "id": "d74d6907e7152e34",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2590,
+        "y": 1480,
+        "wires": [
+            [
+                "1e2202a600605ce8",
+                "05c5053edf0faf27"
+            ]
+        ]
+    },
+    {
+        "id": "8471bca91a2b5e9e",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2590,
+        "y": 1660,
+        "wires": [
+            [
+                "92224bc4662b4005",
+                "49a465fa3c6a1f13"
+            ]
+        ]
+    },
+    {
+        "id": "ed3aaa26f9396932",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/control/sprinkler",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 4000,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "2721dc77e086e5ee",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 4010,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "885039903b72f462",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/contral/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 4000,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "754358de8532a780",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var smoke_level = msg.payload.smoke;\nvar pull_state = msg.payload.pull_station;\nvar temp = msg.payload.temp;\nvar fire_detector = msg.payload.fire_detector;\n\n// Thresholds\nvar gas_thresh = 20;\nvar temp_thresh = 90;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state == 1) {\n    fire = 1\n}\n\n// if gas level exceeded without the pull station\nif (smoke_level > gas_thresh || temp > temp_thresh || fire_detector) {\n    fire = 1;\n}\n\nmsg.payload = (fire === 1) ? true : false\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3570,
+        "y": 1500,
+        "wires": [
+            [
+                "ed3aaa26f9396932",
+                "2721dc77e086e5ee",
+                "885039903b72f462",
+                "6ddf5588f37e5938",
+                "636b307b7eac69a4",
+                "012f0df2f2192cfb"
+            ]
+        ]
+    },
+    {
+        "id": "0df7ca881163aa1e",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Smoke",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3010,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "23298da5881d600f",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room7/sensor/temp",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2570,
+        "y": 1820,
+        "wires": [
+            [
+                "adcba5d18e6a1831",
+                "6c5a9225962c9211"
+            ]
+        ]
+    },
+    {
+        "id": "6ddf5588f37e5938",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/control/alert",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 3950,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "636b307b7eac69a4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 120",
+        "func": "//helper class for PriorityQueue\nclass Node {\n    constructor(val, priority) {\n        this.val = val;\n        this.priority = priority;\n    }\n}\n\nclass PriorityQueue {\n    constructor() {\n        this.values = [];\n    }\n    enqueue(val, priority) {\n        let newNode = new Node(val, priority);\n        this.values.push(newNode);\n        this.bubbleUp();\n    }\n    bubbleUp() {\n        let idx = this.values.length - 1;\n        const element = this.values[idx];\n        while (idx > 0) {\n            let parentIdx = Math.floor((idx - 1) / 2);\n            let parent = this.values[parentIdx];\n            if (element.priority >= parent.priority) break;\n            this.values[parentIdx] = element;\n            this.values[idx] = parent;\n            idx = parentIdx;\n        }\n    }\n    dequeue() {\n        const min = this.values[0];\n        const end = this.values.pop();\n        if (this.values.length > 0) {\n            this.values[0] = end;\n            this.sinkDown();\n        }\n        return min;\n    }\n    sinkDown() {\n        let idx = 0;\n        const length = this.values.length;\n        const element = this.values[0];\n        while (true) {\n            let leftChildIdx = 2 * idx + 1;\n            let rightChildIdx = 2 * idx + 2;\n            let leftChild, rightChild;\n            let swap = null;\n\n            if (leftChildIdx < length) {\n                leftChild = this.values[leftChildIdx];\n                if (leftChild.priority < element.priority) {\n                    swap = leftChildIdx;\n                }\n            }\n            if (rightChildIdx < length) {\n                rightChild = this.values[rightChildIdx];\n                if (\n                    (swap === null && rightChild.priority < element.priority) ||\n                    (swap !== null && rightChild.priority < leftChild.priority)\n                ) {\n                    swap = rightChildIdx;\n                }\n            }\n            if (swap === null) break;\n            this.values[idx] = this.values[swap];\n            this.values[swap] = element;\n            idx = swap;\n        }\n    }\n}\n\n//-----------------------------Dijkstra's algorithm ----------------------------------\n\nclass WeightedGraph {\n    constructor() {\n        this.adjacencyList = {};\n    }\n    addVertex(vertex) {\n        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\n    }\n    addEdge(vertex1, vertex2, weight) {\n        this.adjacencyList[vertex1].push({ node: vertex2, weight });\n        this.adjacencyList[vertex2].push({ node: vertex1, weight });\n    }\n    Dijkstra(start, finish) {\n        const nodes = new PriorityQueue();\n        const distances = {};\n        const previous = {};\n        let path = [[], []]; //to return at end\n        let smallest;\n        //build up initial state\n        for (let vertex in this.adjacencyList) {\n            if (vertex === start) {\n                distances[vertex] = 0;\n                nodes.enqueue(vertex, 0);\n            } else {\n                distances[vertex] = Infinity;\n                nodes.enqueue(vertex, Infinity);\n            }\n            previous[vertex] = null;\n        }\n        // as long as there is something to visit\n        while (nodes.values.length) {\n            var dnode = nodes.dequeue();\n            smallest = dnode.val;\n            var val = dnode.priority;\n            if (smallest === finish) {\n                console.log(val)\n                path[0] = val;\n                //WE ARE DONE\n                //BUILD UP PATH TO RETURN AT END\n                while (previous[smallest]) {\n                    path[1].push(smallest);\n                    smallest = previous[smallest];\n                }\n                break;\n            }\n            if (smallest || distances[smallest] !== Infinity) {\n                for (let neighbor in this.adjacencyList[smallest]) {\n                    //find neighboring node\n                    let nextNode = this.adjacencyList[smallest][neighbor];\n                    //calculate new distance to neighboring node\n                    let candidate = distances[smallest] + nextNode.weight;\n                    let nextNeighbor = nextNode.node;\n                    if (candidate < distances[nextNeighbor]) {\n                        //updating new smallest distance to neighbor\n                        distances[nextNeighbor] = candidate;\n                        //updating previous - How we got to neighbor\n                        previous[nextNeighbor] = smallest;\n                        //enqueue in priority queue with new priority\n\n                        nodes.enqueue(nextNeighbor, candidate);\n                    }\n                }\n            }\n        }\n        path[1] = path[1].concat(smallest);\n        //.reverse();\n        return {distt:path[0], pathh: path[1]};\n    }\n}\n\n\n\nvar nodes = [\"room1\", \"room2\", \"room3\", \"room4\", \"room5\", \"room6\", \"room7\", \"E1\", \"E2\", \"E3\", \"E4\"]\n\n \n// ------------------------------- SAMPLE DISTANCE DATA ---------------------------------------\n\nvar dist = [\n    [\"room4\", \"room3\", 2],\n    [\"room3\", \"room2\", 1],\n    [\"room2\", \"room1\", 5],\n    [\"room6\", \"room5\", 3],\n    [\"room5\", \"room1\", 2],\n    [\"room1\", \"room7\", 2],\n    [\"room3\", \"E2\", 3],\n    [\"room1\", \"E3\", 3],\n    [\"room5\", \"E1\", 1],\n    [\"room6\", \"E4\", 5]]\n\n\n//------------------ SAMPLE REAL TIME DATA -------------------------------------------------------\n\n\nvar current_status = new Map([\n    [\"room1\", true],\n    [\"room2\", false],\n    [\"room3\", false],\n    [\"room4\", false],\n    [\"room5\", false],\n    [\"room6\", false],\n    [\"room7\", false], \n]);\n\nvar safe_nodes = [];\nvar safe_rooms = [];\n\n// -------------------------- FIND SAFE NODES ----------------------------------\n\ncurrent_status.forEach(function (value, key) {\n    if(value==false){\n        safe_nodes.push(key)\n        safe_rooms.push(key)\n\n    }    \n})\n\nsafe_nodes.push(\"E1\")\nsafe_nodes.push(\"E2\")\nsafe_nodes.push(\"E3\")\nsafe_nodes.push(\"E4\")\n\n\n//------------------------- CREATE GRAPH ------------------------------------\nvar graph = new WeightedGraph();\n\n\n// add vetices\nfor (let i = 0; i < safe_nodes.length; i++) \n    graph.addVertex(safe_nodes[i])\n\n\n//add edges\nfor(let i=0; i<dist.length;i++){\n    if ((safe_nodes.indexOf(dist[i][0]) !== -1) && (safe_nodes.indexOf(dist[i][1]) !== -1))\n        graph.addEdge(dist[i][0], dist[i][1], dist[i][2])\n}\n\n\n\nvar results = {} \nlet exits = ['E1', 'E2', 'E3', 'E4'];\nvar mm = []\n\n//-------------- FOR EACH SAFE NODE FIND NEAREST EXIT ---------------------------------------------\n\nfor(let i =0;i<safe_rooms.length;i++){  // for each safe node\n\n    var shortest_distance = Number.MAX_VALUE;\n    let exit;\n    let path = [];\n    for(let j=0; j<exits.length;j++){       // for each exit \n    \n        var {distt, pathh} = graph.Dijkstra(exits[j], safe_rooms[i])\n\n        if(Number(distt) < shortest_distance){     // find min\n            shortest_distance = distt;\n            path = pathh;\n            exit = exits[j];\n            //mm.push(exits[j], safe_rooms[i],shortest_distance, path, exit)\n            results[safe_rooms[i]] = { Nearest_exit: exit, path: path, shortest_distance: shortest_distance };\n\n        }\n\n    }\n\n}\n\n//var {distt, pathh } = graph.Dijkstra(\"E1\", \"room6\")\nvar topic = msg.topic\nvar room = topic.split('/')[1]\nmsg.payload = results\nmsg.topic = \"floor0/path\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3690,
+        "y": 1800,
+        "wires": [
+            [
+                "212801315c116f8c",
+                "e9f7f585e76225ff"
+            ]
+        ]
+    },
+    {
+        "id": "212801315c116f8c",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/control/exit",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 3950,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "0edf2505b838b336",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 121",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room7\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 1360,
+        "wires": [
+            [
+                "030a1076cf045407"
+            ]
+        ]
+    },
+    {
+        "id": "1e2202a600605ce8",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 122",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room7\"\nif(msg.payload){\n    msg.payload = true\n}else{\n    msg.payload =false\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 1440,
+        "wires": [
+            [
+                "030a1076cf045407"
+            ]
+        ]
+    },
+    {
+        "id": "92224bc4662b4005",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 123",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room7\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 1600,
+        "wires": [
+            [
+                "030a1076cf045407"
+            ]
+        ]
+    },
+    {
+        "id": "adcba5d18e6a1831",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 124",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"floor0/room7\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2970,
+        "y": 1800,
+        "wires": [
+            [
+                "030a1076cf045407"
+            ]
+        ]
+    },
+    {
+        "id": "030a1076cf045407",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 3370,
+        "y": 1500,
+        "wires": [
+            [
+                "754358de8532a780",
+                "94575512c28715f3"
+            ]
+        ]
+    },
+    {
+        "id": "012f0df2f2192cfb",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessControl_FireDetected",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3910,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "05c5053edf0faf27",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3030,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "49a465fa3c6a1f13",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_FireDetect",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3030,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "6c5a9225962c9211",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Temp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3010,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "e9f7f585e76225ff",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "func 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3820,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "94575512c28715f3",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "join",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3450,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "bfc73bad4686695a",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room01",
+        "info": "",
+        "x": 120,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "02cfc1740353cc94",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room02",
+        "info": "",
+        "x": 140,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "07d7f66e23b8e0c0",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room03",
+        "info": "",
+        "x": 180,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "f81bbcbbfdcaba79",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room04",
+        "info": "",
+        "x": 160,
+        "y": 3240,
+        "wires": []
+    },
+    {
+        "id": "e11e47dc299b2995",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "ROOM 0",
+        "info": "",
+        "x": 80,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "44e8a72a25b91b84",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room05",
+        "info": "",
+        "x": 140,
+        "y": 4020,
+        "wires": []
+    },
+    {
+        "id": "6da4480d1bcfb5c3",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room06",
+        "info": "",
+        "x": 2600,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "67d87cd5d0022a1d",
+        "type": "comment",
+        "z": "706f2275aa404cb1",
+        "name": "Room07",
+        "info": "",
+        "x": 2560,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "7c0ff98eda626bc0",
+        "type": "json",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1310,
+        "y": 4180,
+        "wires": [
+            [
+                "cb02758c8d069798",
+                "2102bf15e8ac99d9",
+                "982884f88145ce63",
+                "83a043bfce154f37"
+            ]
+        ]
+    },
+    {
+        "id": "a60ee0b8b2d8d48c",
+        "type": "json",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1390,
+        "y": 260,
+        "wires": [
+            [
+                "c88cccf845b3f06b",
+                "bf7bb4dd54691058",
+                "e687e6e958858f2c"
+            ]
+        ]
+    },
+    {
+        "id": "91eb27ef8851d03f",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room8/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 510,
+        "y": 4840,
+        "wires": [
+            [
+                "de26776e90f3c277",
+                "0c89f877bb8b1287"
+            ]
+        ]
+    },
+    {
+        "id": "de26776e90f3c277",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "ProcessController_Pull_Station",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 4900,
+        "wires": []
+    },
+    {
+        "id": "0c89f877bb8b1287",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "var pull_state = msg.payload;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pull_state.state == 1) {\n    fire = 1\n} else {\n    fire = 0;\n}\n\n\n//msg.payload = (fire === 1) ? true : false\n\nif (fire) {\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 1,\n    };\n}\nelse{\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 0,\n    };\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 4780,
+        "wires": [
+            [
+                "2ed4ec108f9efe17"
+            ]
+        ]
+    },
+    {
+        "id": "2ed4ec108f9efe17",
+        "type": "json",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1270,
+        "y": 4780,
+        "wires": [
+            [
+                "e71a98c3c185a662",
+                "f0e731a42439c7cf"
+            ]
+        ]
+    },
+    {
+        "id": "e71a98c3c185a662",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room8/control/exit_light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1620,
+        "y": 4840,
+        "wires": []
+    },
+    {
+        "id": "d40c98570e5f48c0",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room1/sensor/FireDetector",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 1240,
+        "wires": [
+            [
+                "c757b447f0056933",
+                "ed15905b0a0938ee"
+            ]
+        ]
+    },
+    {
+        "id": "de79b26a7d89cf0f",
+        "type": "mqtt in",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room8/sensor/PullStation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9faa1e76cfab210b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 620,
+        "wires": [
+            [
+                "a4f714ad77a50ccc",
+                "d47d7ec46e1af421"
+            ]
+        ]
+    },
+    {
+        "id": "d47d7ec46e1af421",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 259",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"pull_station8\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 580,
+        "wires": [
+            [
+                "af366433541a9de2"
+            ]
+        ]
+    },
+    {
+        "id": "a4f714ad77a50ccc",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "Pullstation8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "1ca6196aad8c4d86",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "ContrlolActuators",
+        "func": "\ntry {\n    var smokeState = msg.payload.smoke.smoke;\n} catch {\n    smokeState = 0;\n}\n\ntry {\n    var pullState = msg.payload.pull_station.state;\n} catch {\n    pullState = 0;\n}\ntry {\n    var tempState = msg.payload.temp.temp;\n} catch {\n    tempState = 0;\n}\ntry {\n    var pullstate8 = msg.payload.pull_station8.state;\n} catch {\n    pullstate8 = 0;\n}\n// Thresholds\nvar gas_thresh = 30.0;\nvar temp_thresh = 104.0;\n\n// fire detection\nvar fire = 0;\n\n// if pull station is triggered\nif (pullState == 1) {\n    fire = 1;\n}\n\n// if gas level exceeded without the pull station\nelse if (smokeState > gas_thresh || tempState > temp_thresh) {\n    fire = 1;\n}\n\nelse {\n    fire = 0;\n}\nif (pullstate8==1){\n    fire=0\n}\n\nif (fire == 1) {\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 1,\n        \"temp\": tempState,\n    };\n}\nelse {\n    msg.payload = {\n        \"time\": Date.now(),\n        \"state\": 0,\n        \"temp\": tempState,\n    };\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1110,
+        "y": 340,
+        "wires": [
+            [
+                "971a27857e0ebb52",
+                "271ba2e46f7cce70"
+            ]
+        ]
+    },
+    {
+        "id": "271ba2e46f7cce70",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "debug 27",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1340,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "0b44c651600418d4",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 260",
+        "func": "msg.topic = \"fire\";\nif (msg.payload.state == 1)\n    msg.payload = true\nelse \n    msg.payload = false\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 560,
+        "wires": [
+            [
+                "32e3dfd480bad68d"
+            ]
+        ]
+    },
+    {
+        "id": "32e3dfd480bad68d",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "debug 28",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1480,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8e006c6251ea8569",
+        "type": "join",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "",
+        "count": "1",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1450,
+        "y": 680,
+        "wires": [
+            [
+                "7cb4f9ce1c9e27ba",
+                "f795456b55bb9f54"
+            ]
+        ]
+    },
+    {
+        "id": "f795456b55bb9f54",
+        "type": "debug",
+        "z": "706f2275aa404cb1",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "f0e731a42439c7cf",
+        "type": "mqtt out",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "topic": "326project/smartbuilding/safety/floor0/room8/control/fire_alarm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9faa1e76cfab210b",
+        "x": 1630,
+        "y": 4940,
+        "wires": []
+    },
+    {
+        "id": "7c4a850e8b1dda88",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 268",
+        "func": "msg.topic = \"fire\";\n// if (msg.payload.state == 1)\n//     msg.payload = true\n// else \n//     msg.payload = false\n\nmsg.payload = true\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 640,
+        "wires": [
+            [
+                "8e006c6251ea8569"
+            ]
+        ]
+    },
+    {
+        "id": "5cb7879ffeabac93",
+        "type": "function",
+        "z": "706f2275aa404cb1",
+        "name": "function 269",
+        "func": "//msg.payload = \"payload1 changed\"\n\nmsg.topic = \"pull_station8\"\nmsg.payload = false\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 700,
+        "wires": [
+            [
+                "8e006c6251ea8569"
+            ]
+        ]
+    },
+    {
+        "id": "ae2313425b64aee4",
+        "type": "inject",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1060,
+        "y": 640,
+        "wires": [
+            [
+                "7c4a850e8b1dda88"
+            ]
+        ]
+    },
+    {
+        "id": "cc6a32bdd71b6de0",
+        "type": "inject",
+        "z": "706f2275aa404cb1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1060,
+        "y": 700,
+        "wires": [
+            [
+                "5cb7879ffeabac93"
+            ]
+        ]
+    },
+    {
+        "id": "9faa1e76cfab210b",
+        "type": "mqtt-broker",
+        "name": "new_mqtt",
+        "broker": "mosquitto_326",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
