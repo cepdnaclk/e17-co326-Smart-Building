@@ -1,0 +1,1302 @@
+[
+    {
+        "id": "dc8276e1cdebe060",
+        "type": "tab",
+        "label": "Data Visualization",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4c23185df36bee0e",
+        "type": "mongodb in",
+        "z": "dc8276e1cdebe060",
+        "mongodb": "b99d7a2e4e883e7a",
+        "name": "",
+        "collection": "co326_pv_currentSensor",
+        "operation": "find",
+        "x": 700,
+        "y": 340,
+        "wires": [
+            [
+                "3ac5aa9fcaae08b5",
+                "4b4e6a2238a3a86a",
+                "6194ceec2b8ccdf1"
+            ]
+        ]
+    },
+    {
+        "id": "0ec0dae592e4eafe",
+        "type": "ui_chart",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "group": "0aac6d4803b8c63d",
+        "order": 2,
+        "width": 12,
+        "height": 7,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "cubic",
+        "nodata": "Current",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "20",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "888b69f804870a0c",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "Current Supply (Historic)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"1\": {\"time\": 123, \"current\": 5.6}, \"2\": {\"time\": 125, \"current\": 2.4}}",
+        "payloadType": "json",
+        "x": 450,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "627a7c9f0aa8dcc9",
+        "type": "ui_table",
+        "z": "dc8276e1cdebe060",
+        "group": "0aac6d4803b8c63d",
+        "name": "Current Data Table",
+        "order": 1,
+        "width": 12,
+        "height": 7,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1370,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a2359dd8943ee0d7",
+        "type": "comment",
+        "z": "dc8276e1cdebe060",
+        "name": "Database Visualization",
+        "info": "",
+        "x": 180,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6194ceec2b8ccdf1",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 17",
+        "func": "async function getData(payload){\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        // console.log(\"value = \" + entry[\"payload\"][\"current\"][\"value\"]);\n        // msg.debug = entry[\"payload\"][\"current\"][\"value\"];\n        const time = entry[\"payload\"][\"time\"];\n        const current = entry[\"payload\"][\"current\"]\n        data.push({\"x\": time, \"y\": current});\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = [{\n    \"series\": [\"Current Supply History\"],\n    \"data\": [dbdata],\n    \"labels\": [\"\"]\n}]\n\n\n// return msg;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 340,
+        "wires": [
+            [
+                "34bc99a15f1940c3",
+                "0ec0dae592e4eafe"
+            ]
+        ]
+    },
+    {
+        "id": "6ced01f41743557b",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 340,
+        "wires": [
+            [
+                "de96cb2b99895e20"
+            ]
+        ]
+    },
+    {
+        "id": "3ac5aa9fcaae08b5",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB PV Current",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "de96cb2b99895e20",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 18",
+        "func": "msg.limit = 30;\nmsg.skip = 0;\nmsg.sort = { _id: -1 };\n// msg._id = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 340,
+        "wires": [
+            [
+                "4c23185df36bee0e"
+            ]
+        ]
+    },
+    {
+        "id": "34bc99a15f1940c3",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB PV Current simplified",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1410,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "4b4e6a2238a3a86a",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 19",
+        "func": "async function getData(payload) {\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        const time = entry[\"payload\"][\"time\"];\n        // const time = new Date(sec * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\n        \n        const current = entry[\"payload\"][\"current\"]\n        if (current != undefined && time != undefined){\n            data.push({ \"Time\": time, \"Current Dist\": current });\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = dbdata;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 220,
+        "wires": [
+            [
+                "627a7c9f0aa8dcc9",
+                "9ab19ec5ddad7332"
+            ]
+        ]
+    },
+    {
+        "id": "9ab19ec5ddad7332",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: PV C Table data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "312998e9f6274294",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 20",
+        "func": "async function getData(payload) {\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        const time = entry[\"payload\"][\"time\"];\n        // const time = new Date(sec * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\n        const voltage = entry[\"payload\"][\"voltage\"];\n        if (voltage != undefined && time != undefined){\n            data.push({ \"Time\": time, \"Voltage Dist\": voltage });\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = dbdata;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 560,
+        "wires": [
+            [
+                "0bc6fddff2e14949",
+                "78842e36411c9843"
+            ]
+        ]
+    },
+    {
+        "id": "cf5cbec5f5220d53",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "6a8698c978a8c658"
+            ]
+        ]
+    },
+    {
+        "id": "6a8698c978a8c658",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 21",
+        "func": "msg.limit = 30;\nmsg.skip = 0;\nmsg.sort = { _id: -1 };\n// msg._id = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 680,
+        "wires": [
+            [
+                "2b65af8bcd3b346d"
+            ]
+        ]
+    },
+    {
+        "id": "2b65af8bcd3b346d",
+        "type": "mongodb in",
+        "z": "dc8276e1cdebe060",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_voltageSensor",
+        "operation": "find",
+        "x": 700,
+        "y": 680,
+        "wires": [
+            [
+                "9092f2bb2c4ecc17",
+                "312998e9f6274294",
+                "cfda87ebe3828b34"
+            ]
+        ]
+    },
+    {
+        "id": "cfda87ebe3828b34",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 22",
+        "func": "async function getData(payload){\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        // console.log(\"value = \" + entry[\"payload\"][\"current\"][\"value\"]);\n        // msg.debug = entry[\"payload\"][\"current\"][\"value\"];\n        const time = entry[\"payload\"][\"time\"];\n        const voltage = entry[\"payload\"][\"voltage\"]\n        if (voltage != undefined && time != undefined) {\n            data.push({\"x\": time, \"y\": voltage});\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = [{\n    \"series\": [\"Voltage Supply History\"],\n    \"data\": [dbdata],\n    \"labels\": [\"\"]\n}]\n\n\n// return msg;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 680,
+        "wires": [
+            [
+                "84c97a4bef9f544f",
+                "c9d5601860733d72"
+            ]
+        ]
+    },
+    {
+        "id": "9092f2bb2c4ecc17",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB PV Voltage",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "84c97a4bef9f544f",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB PV Voltage simplified",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1410,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "c9d5601860733d72",
+        "type": "ui_chart",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "group": "1bb2aadd5d899dc0",
+        "order": 2,
+        "width": 12,
+        "height": 7,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "cubic",
+        "nodata": "Voltage",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "20",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "78842e36411c9843",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: PV V Table data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "0bc6fddff2e14949",
+        "type": "ui_table",
+        "z": "dc8276e1cdebe060",
+        "group": "1bb2aadd5d899dc0",
+        "name": "Voltage Data Table",
+        "order": 1,
+        "width": 12,
+        "height": 7,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1370,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "75b916aeeef096ea",
+        "type": "mongodb in",
+        "z": "dc8276e1cdebe060",
+        "mongodb": "b99d7a2e4e883e7a",
+        "name": "",
+        "collection": "co326_pv_kWhmeter",
+        "operation": "find",
+        "x": 680,
+        "y": 1020,
+        "wires": [
+            [
+                "269ad19220718d92",
+                "7d2d334ec4168f02",
+                "97660edf226d0fd3"
+            ]
+        ]
+    },
+    {
+        "id": "e0b7582af9873d71",
+        "type": "ui_chart",
+        "z": "dc8276e1cdebe060",
+        "d": true,
+        "name": "",
+        "group": "eb5fa5865d392b45",
+        "order": 2,
+        "width": 11,
+        "height": 7,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "cubic",
+        "nodata": "Current",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "20",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7dc3ff4d5dfd16d0",
+        "type": "ui_table",
+        "z": "dc8276e1cdebe060",
+        "d": true,
+        "group": "eb5fa5865d392b45",
+        "name": "Current Data Table",
+        "order": 1,
+        "width": 13,
+        "height": 7,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1370,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "97660edf226d0fd3",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 23",
+        "func": "async function getData(payload){\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        // console.log(\"value = \" + entry[\"payload\"][\"current\"][\"value\"]);\n        // msg.debug = entry[\"payload\"][\"current\"][\"value\"];\n        const time = entry[\"payload\"][\"time\"];\n        const current = entry[\"payload\"][\"current\"]\n        data.push({\"x\": time, \"y\": current});\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = [{\n    \"series\": [\"Grid Supply History\"],\n    \"data\": [dbdata],\n    \"labels\": [\"\"]\n}]\n\n\n// return msg;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 1020,
+        "wires": [
+            [
+                "7493cbd78b41d2ab",
+                "e0b7582af9873d71"
+            ]
+        ]
+    },
+    {
+        "id": "69fd92d70c4ef530",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1020,
+        "wires": [
+            [
+                "087248edf8adf762"
+            ]
+        ]
+    },
+    {
+        "id": "269ad19220718d92",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB Grid kWh meter Reading",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "087248edf8adf762",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 24",
+        "func": "msg.limit = 30;\nmsg.skip = 0;\nmsg.sort = { _id: -1 };\n// msg._id = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1020,
+        "wires": [
+            [
+                "75b916aeeef096ea"
+            ]
+        ]
+    },
+    {
+        "id": "7493cbd78b41d2ab",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB Grid kWh meter Reading simplified",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "7d2d334ec4168f02",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 25",
+        "func": "async function getData(payload) {\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        const time = entry[\"payload\"][\"time\"];\n        // const time = new Date(sec * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\n        \n        const current = entry[\"payload\"][\"current\"]\n        if (current != undefined && time != undefined){\n            data.push({ \"Time\": time, \"Current Dist\": current });\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = dbdata;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 900,
+        "wires": [
+            [
+                "7dc3ff4d5dfd16d0",
+                "6ec889ee2e6299dd"
+            ]
+        ]
+    },
+    {
+        "id": "6ec889ee2e6299dd",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: kWh meter Reading",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1400,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "b3ffa3e7d52c28da",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 26",
+        "func": "async function getData(payload) {\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        const time = entry[\"payload\"][\"time\"];\n        // const time = new Date(sec * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\n        const voltage = entry[\"payload\"][\"voltage\"];\n        if (voltage != undefined && time != undefined){\n            data.push({ \"Time\": time, \"Voltage Dist\": voltage });\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = dbdata;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 1240,
+        "wires": [
+            [
+                "b8600d12ca28f6dd",
+                "a27b52bc34a92187"
+            ]
+        ]
+    },
+    {
+        "id": "5be3ca26bde3ba00",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1360,
+        "wires": [
+            [
+                "b59374cf7a439dea"
+            ]
+        ]
+    },
+    {
+        "id": "b59374cf7a439dea",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 27",
+        "func": "// msg.limit = 30;\n// msg.skip = 0;\n// msg.sort = { _id: -1 };\n// // msg._id = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1360,
+        "wires": [
+            [
+                "67186dc7a9f1d48d"
+            ]
+        ]
+    },
+    {
+        "id": "67186dc7a9f1d48d",
+        "type": "mongodb in",
+        "z": "dc8276e1cdebe060",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_Wattmeter",
+        "operation": "find",
+        "x": 680,
+        "y": 1360,
+        "wires": [
+            [
+                "10776aa6edded453",
+                "b3ffa3e7d52c28da",
+                "3f85ed6ccb226bed"
+            ]
+        ]
+    },
+    {
+        "id": "3f85ed6ccb226bed",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 28",
+        "func": "async function getData(payload){\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        // console.log(\"value = \" + entry[\"payload\"][\"current\"][\"value\"]);\n        // msg.debug = entry[\"payload\"][\"current\"][\"value\"];\n        const time = entry[\"payload\"][\"time\"];\n        const voltage = entry[\"payload\"][\"voltage\"]\n        if (voltage != undefined && time != undefined) {\n            data.push({\"x\": time, \"y\": voltage});\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = [{\n    \"series\": [\"Power Consumption History\"],\n    \"data\": [dbdata],\n    \"labels\": [\"\"]\n}]\n\n\n// return msg;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 1360,
+        "wires": [
+            [
+                "092464c29503771b",
+                "597c456626c828ed"
+            ]
+        ]
+    },
+    {
+        "id": "10776aa6edded453",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB Grid Watt meter Reading",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "092464c29503771b",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB Grid Watt meter Reading simplified",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "597c456626c828ed",
+        "type": "ui_chart",
+        "z": "dc8276e1cdebe060",
+        "d": true,
+        "name": "",
+        "group": "f90fb80816c00648",
+        "order": 2,
+        "width": 11,
+        "height": 7,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "cubic",
+        "nodata": "Current",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "20",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 1340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a27b52bc34a92187",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: Grid Watt meter",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1390,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "b8600d12ca28f6dd",
+        "type": "ui_table",
+        "z": "dc8276e1cdebe060",
+        "d": true,
+        "group": "f90fb80816c00648",
+        "name": "Voltage Data Table",
+        "order": 1,
+        "width": 13,
+        "height": 7,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1370,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "9c2c161d87444f22",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 29",
+        "func": "async function getData(payload) {\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        const time = entry[\"payload\"][\"time\"];\n        // const time = new Date(sec * 1000).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'IST' });\n        const voltage = entry[\"payload\"][\"voltage\"];\n        if (voltage != undefined && time != undefined){\n            data.push({ \"Time\": time, \"Voltage Dist\": voltage });\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = dbdata;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 1580,
+        "wires": [
+            [
+                "c34e052dfa49b9e6",
+                "687554306ab7aaf2"
+            ]
+        ]
+    },
+    {
+        "id": "112fc3d3b6c63da8",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1700,
+        "wires": [
+            [
+                "295b4a2fefc0896d"
+            ]
+        ]
+    },
+    {
+        "id": "295b4a2fefc0896d",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 30",
+        "func": "// msg.limit = 30;\n// msg.skip = 0;\n// msg.sort = { _id: -1 };\n// // msg._id = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1700,
+        "wires": [
+            [
+                "c59f8dfc251abce3"
+            ]
+        ]
+    },
+    {
+        "id": "c59f8dfc251abce3",
+        "type": "mongodb in",
+        "z": "dc8276e1cdebe060",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "co326_pv_btReady",
+        "operation": "find",
+        "x": 680,
+        "y": 1700,
+        "wires": [
+            [
+                "ca926f0400b0ca3d",
+                "9c2c161d87444f22",
+                "4e7c9329dec88759"
+            ]
+        ]
+    },
+    {
+        "id": "4e7c9329dec88759",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 31",
+        "func": "async function getData(payload){\n    // var array = payload.length;\n    var data = [];\n\n    for (let index = 0; index < payload.length; index++) {\n        const entry = payload[index];\n        // console.log(\"value = \" + entry[\"payload\"][\"current\"][\"value\"]);\n        // msg.debug = entry[\"payload\"][\"current\"][\"value\"];\n        const time = entry[\"payload\"][\"time\"];\n        const voltage = entry[\"payload\"][\"voltage\"]\n        if (voltage != undefined && time != undefined) {\n            data.push({\"x\": time, \"y\": voltage});\n        }\n    }\n    return data;\n}\n\nvar dbdata = await getData(msg.payload);\nmsg.payload = [{\n    \"series\": [\"Battery Power Draw History\"],\n    \"data\": [dbdata],\n    \"labels\": [\"\"]\n}]\n\n\n// return msg;\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 1700,
+        "wires": [
+            [
+                "421490017523cb4a",
+                "221d6084ebb6eaea"
+            ]
+        ]
+    },
+    {
+        "id": "ca926f0400b0ca3d",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB BT Ready",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "421490017523cb4a",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: DB BT Ready simplified",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1410,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "221d6084ebb6eaea",
+        "type": "ui_chart",
+        "z": "dc8276e1cdebe060",
+        "d": true,
+        "name": "",
+        "group": "9b956485732f7d28",
+        "order": 2,
+        "width": 12,
+        "height": 7,
+        "label": "",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "cubic",
+        "nodata": "Current",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "20",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 1680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "687554306ab7aaf2",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug: BT Ready",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1370,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "c34e052dfa49b9e6",
+        "type": "ui_table",
+        "z": "dc8276e1cdebe060",
+        "d": true,
+        "group": "9b956485732f7d28",
+        "name": "Voltage Data Table",
+        "order": 1,
+        "width": 12,
+        "height": 7,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1370,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "0f8c4b25b2b9fc6e",
+        "type": "mongodb in",
+        "z": "dc8276e1cdebe060",
+        "mongodb": "a332b31db0199404",
+        "name": "",
+        "collection": "326project/smartbuilding/pv/pvCurrent",
+        "operation": "find",
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "d732ce0136937865"
+            ]
+        ]
+    },
+    {
+        "id": "52f6873e8dc5d9a5",
+        "type": "inject",
+        "z": "dc8276e1cdebe060",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "ba20f7693e1da6b2"
+            ]
+        ]
+    },
+    {
+        "id": "ba20f7693e1da6b2",
+        "type": "function",
+        "z": "dc8276e1cdebe060",
+        "name": "function 34",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "0f8c4b25b2b9fc6e"
+            ]
+        ]
+    },
+    {
+        "id": "d732ce0136937865",
+        "type": "debug",
+        "z": "dc8276e1cdebe060",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b99d7a2e4e883e7a",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "0aac6d4803b8c63d",
+        "type": "ui_group",
+        "name": "Solar Current",
+        "tab": "908c32770f6791da",
+        "order": 1,
+        "disp": true,
+        "width": 24,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a332b31db0199404",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "1bb2aadd5d899dc0",
+        "type": "ui_group",
+        "name": "Solar Voltage",
+        "tab": "908c32770f6791da",
+        "order": 2,
+        "disp": true,
+        "width": 24,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "eb5fa5865d392b45",
+        "type": "ui_group",
+        "name": "Grid Energy",
+        "tab": "908c32770f6791da",
+        "order": 5,
+        "disp": true,
+        "width": 24,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f90fb80816c00648",
+        "type": "ui_group",
+        "name": "Grid Power",
+        "tab": "908c32770f6791da",
+        "order": 3,
+        "disp": true,
+        "width": 24,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9b956485732f7d28",
+        "type": "ui_group",
+        "name": "Battery Stats",
+        "tab": "908c32770f6791da",
+        "order": 3,
+        "disp": true,
+        "width": 24,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "908c32770f6791da",
+        "type": "ui_tab",
+        "name": "Stats",
+        "icon": "fa-area-chart",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]

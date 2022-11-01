@@ -1,0 +1,1415 @@
+[
+    {
+        "id": "ecc49aaf2bc6d9b7",
+        "type": "tab",
+        "label": "Data analysis",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0ab5da26d5adbcf2",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_thresh",
+        "func": "global.set('floor0_thresh',msg.payload)\nmsg.payload = global.get('floor0_thresh')\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43f050d574ce355b",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\n\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            arr.push(msg.payload[i].payload.power);\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\n\n\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "0ab5da26d5adbcf2"
+            ]
+        ]
+    },
+    {
+        "id": "94f2521394d19530",
+        "type": "mongodb in",
+        "z": "ecc49aaf2bc6d9b7",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final",
+        "operation": "find",
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "43f050d574ce355b",
+                "218dc831fa4fd7f1",
+                "2e77d66545d70308",
+                "cd5daa7c94b827a5",
+                "18ce60aeae5a7e41",
+                "a71adb5f0b98a92e",
+                "1b3f133913742767",
+                "215d0c808fa45766",
+                "9eb451c01e05f33a",
+                "e0a6cb9e21d1de5c",
+                "75c32d81ba08f29a",
+                "22e1e8d4e46fb012",
+                "92bfa7e64d900816",
+                "232e16d5b05f0426",
+                "f298647179c2bbe5",
+                "4e8414556b3d300f",
+                "5c95eee7cc5de51b",
+                "3e7f100bd6d7aeac",
+                "88113f84ec3a8b7b"
+            ]
+        ]
+    },
+    {
+        "id": "16b13e65ca0a446c",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room0_thresh",
+        "func": "global.set('floor0_room0_thresh',msg.payload)\nmsg.payload = global.get('floor0_room0_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4042ff9443b5fe2",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room7_thresh",
+        "func": "global.set('floor0_room7_thresh',msg.payload)\nmsg.payload = global.get('floor0_room7_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2085561f567f475f",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room6_thresh",
+        "func": "global.set('floor0_room6_thresh',msg.payload)\nmsg.payload = global.get('floor0_room6_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ffc63057c9727e8",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room5_thresh",
+        "func": "global.set('floor0_room5_thresh',msg.payload)\nmsg.payload = global.get('floor0_room5_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7dd0f3b21b0d6718",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room4_thresh",
+        "func": "global.set('floor0_room4_thresh',msg.payload)\nmsg.payload = global.get('floor0_room4_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e75db6ba0fbb152",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room2_thresh",
+        "func": "global.set('floor0_room2_thresh',msg.payload)\nmsg.payload = global.get('floor0_room2_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3ea6a42f28f78fe8",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room1_thresh",
+        "func": "global.set('floor0_room1_thresh',msg.payload)\nmsg.payload = global.get('floor0_room1_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6600463e475ef67b",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room3_thresh",
+        "func": "global.set('floor0_room3_thresh',msg.payload)\nmsg.payload = global.get('floor0_room3_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e77d66545d70308",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room0",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room0\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n} \nif (arr.length < 10){\n    msg.payload = Infinity;\n    return msg;\n}\n\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "16b13e65ca0a446c"
+            ]
+        ]
+    },
+    {
+        "id": "cd5daa7c94b827a5",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room1",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room1\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "3ea6a42f28f78fe8"
+            ]
+        ]
+    },
+    {
+        "id": "18ce60aeae5a7e41",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room2",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room2\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    } \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "4e75db6ba0fbb152"
+            ]
+        ]
+    },
+    {
+        "id": "a71adb5f0b98a92e",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room3",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room3\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\n\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 280,
+        "wires": [
+            [
+                "6600463e475ef67b"
+            ]
+        ]
+    },
+    {
+        "id": "1b3f133913742767",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room4",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room4\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1* std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 320,
+        "wires": [
+            [
+                "7dd0f3b21b0d6718"
+            ]
+        ]
+    },
+    {
+        "id": "215d0c808fa45766",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room5",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room5\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\n\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "1ffc63057c9727e8"
+            ]
+        ]
+    },
+    {
+        "id": "92bfa7e64d900816",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room6",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room6\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 400,
+        "wires": [
+            [
+                "2085561f567f475f"
+            ]
+        ]
+    },
+    {
+        "id": "9eb451c01e05f33a",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room7",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room7\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 440,
+        "wires": [
+            [
+                "d4042ff9443b5fe2"
+            ]
+        ]
+    },
+    {
+        "id": "75c32d81ba08f29a",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room9",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room9\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [
+                "9de23bb463ae364a"
+            ]
+        ]
+    },
+    {
+        "id": "e0a6cb9e21d1de5c",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room8",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room8\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1 * std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 480,
+        "wires": [
+            [
+                "a40394031b7c57dd"
+            ]
+        ]
+    },
+    {
+        "id": "22e1e8d4e46fb012",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "calc_thresh_floor0_room10",
+        "func": "\nlet arr = [];\nlet topic_codes = [];\nfor(let i=0; i<msg.payload.length;++i){\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room10\") {\n                arr.push(msg.payload[i].payload.power);\n            }\n        }\n    }\n    \n}\nif (arr.length < 10) {\n    msg.payload = Infinity;\n    return msg;\n}\n\nlet mean = arr.reduce((acc, curr) => {\n    return acc + curr\n}, 0) / arr.length;\n\n// Assigning (value - mean) ^ 2 to every array item\narr = arr.map((k) => {\n    return (k - mean) ** 2\n})\n\n// Calculating the sum of updated array\nlet sum = arr.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance\nlet variance = sum / arr.length\n\n// Returning the Standered deviation\nlet std = Math.sqrt(sum / arr.length)\nlet thresh = mean + 1* std;\nmsg.payload = thresh;\n//msg.payload = arr;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 560,
+        "wires": [
+            [
+                "560d7a23c4a5ef69"
+            ]
+        ]
+    },
+    {
+        "id": "560d7a23c4a5ef69",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room10_thresh",
+        "func": "global.set('floor0_room10_thresh',msg.payload)\nmsg.payload = global.get('floor0_room10_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9de23bb463ae364a",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room9_thresh",
+        "func": "global.set('floor0_room9_thresh',msg.payload)\nmsg.payload = global.get('floor0_room9_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a40394031b7c57dd",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "set_floor0_room8_thresh",
+        "func": "global.set('floor0_room8_thresh',msg.payload)\nmsg.payload = global.get('floor0_room8_thresh')\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44c90cb8fcbf26b4",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 70,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "218dc831fa4fd7f1",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"floor0\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 90,
+        "y": 140,
+        "wires": [
+            [
+                "44c90cb8fcbf26b4"
+            ]
+        ]
+    },
+    {
+        "id": "813105ce61c237a9",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_lighting",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"floor0\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 20,
+        "wires": [
+            [
+                "7310b9d56ce957ac"
+            ]
+        ]
+    },
+    {
+        "id": "7310b9d56ce957ac",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_lighting",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 900,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d60408b070c15c4",
+        "type": "mongodb in",
+        "z": "ecc49aaf2bc6d9b7",
+        "mongodb": "2558073a309768c2",
+        "name": "",
+        "collection": "co326_energy_final_lighting",
+        "operation": "find",
+        "x": 390,
+        "y": 40,
+        "wires": [
+            [
+                "813105ce61c237a9",
+                "2e77d66545d70308",
+                "cd5daa7c94b827a5",
+                "18ce60aeae5a7e41",
+                "a71adb5f0b98a92e",
+                "1b3f133913742767",
+                "215d0c808fa45766",
+                "92bfa7e64d900816",
+                "9eb451c01e05f33a",
+                "e0a6cb9e21d1de5c",
+                "75c32d81ba08f29a",
+                "22e1e8d4e46fb012",
+                "ef8b65ebf24060e2",
+                "b01871c09f679ee8",
+                "88ed4e2238c6ad6b",
+                "2839957624cc738e",
+                "69ec5547a9b25613",
+                "218dc831fa4fd7f1"
+            ]
+        ]
+    },
+    {
+        "id": "b01871c09f679ee8",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room0_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room0\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"floor0\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 120,
+        "wires": [
+            [
+                "31ac070fe9810677"
+            ]
+        ]
+    },
+    {
+        "id": "31ac070fe9810677",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room0",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1310,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f298647179c2bbe5",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room3_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room3\") { \n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room3\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 280,
+        "wires": [
+            [
+                "521563e6ef98a9e0"
+            ]
+        ]
+    },
+    {
+        "id": "88ed4e2238c6ad6b",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room4_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room4\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room4\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 320,
+        "wires": [
+            [
+                "4064c959e149d7ee"
+            ]
+        ]
+    },
+    {
+        "id": "88113f84ec3a8b7b",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room9_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room9\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room9\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 520,
+        "wires": [
+            [
+                "50d070073e10472b"
+            ]
+        ]
+    },
+    {
+        "id": "3e7f100bd6d7aeac",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room8_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room8\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room8\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 480,
+        "wires": [
+            [
+                "c6228817fcb3a6c4"
+            ]
+        ]
+    },
+    {
+        "id": "4e8414556b3d300f",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room5_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room5\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room5\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 360,
+        "wires": [
+            [
+                "a8152d9c803ecc3d"
+            ]
+        ]
+    },
+    {
+        "id": "5c95eee7cc5de51b",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room6_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room6\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room6\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 400,
+        "wires": [
+            [
+                "fd282711c0f9f90c"
+            ]
+        ]
+    },
+    {
+        "id": "2839957624cc738e",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room7_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room7\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room7\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 440,
+        "wires": [
+            [
+                "c969decf4d3ef5d6"
+            ]
+        ]
+    },
+    {
+        "id": "232e16d5b05f0426",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room2_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room2\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room2\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 240,
+        "wires": [
+            [
+                "071d79bccfcf57e2"
+            ]
+        ]
+    },
+    {
+        "id": "ef8b65ebf24060e2",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room1_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room1\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room1\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 180,
+        "wires": [
+            [
+                "018baffccab588f1"
+            ]
+        ]
+    },
+    {
+        "id": "69ec5547a9b25613",
+        "type": "function",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "floor0_room10_values",
+        "func": "let arr = [];\nlet topic_codes = [];\nvar xyValues = [];\n\nfor (let i = 0; i < msg.payload.length; ++i) {\n    if (typeof msg.payload[i].payload !== 'undefined') {\n        if (msg.payload[i].payload.floor_no === \"floor0\") {\n            if (msg.payload[i].payload.room_no === \"room10\") {\n                xyValues.push({ \"x\": i, \"y\": msg.payload[i].payload.power});\n            }\n        }\n    }\n}\nmsg.payload = [{\n    \"series\": [\"room10\"],\n    \"data\": [\n        xyValues\n    ],\n    \"labels\": [\"\"]\n}];\n\n//msg.payload=arr;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 560,
+        "wires": [
+            [
+                "b55d980dd26318f4"
+            ]
+        ]
+    },
+    {
+        "id": "018baffccab588f1",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room1",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1290,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b55d980dd26318f4",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room10",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1340,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "50d070073e10472b",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room9",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c6228817fcb3a6c4",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room8",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c969decf4d3ef5d6",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room7",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd282711c0f9f90c",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room6",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8152d9c803ecc3d",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room5",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4064c959e149d7ee",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room4",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1330,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "521563e6ef98a9e0",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room3",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "071d79bccfcf57e2",
+        "type": "ui_chart",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "group": "ed02393ce0bb7d9a",
+        "order": 5,
+        "width": "12",
+        "height": "6",
+        "label": "floor0_room2",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1030,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53d277741ea9f857",
+        "type": "inject",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0741d488115afca",
+        "type": "inject",
+        "z": "ecc49aaf2bc6d9b7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 40,
+        "wires": [
+            [
+                "5d60408b070c15c4",
+                "94f2521394d19530"
+            ]
+        ]
+    },
+    {
+        "id": "2558073a309768c2",
+        "type": "mongodb",
+        "hostname": "mongo_326",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "co326",
+        "name": ""
+    },
+    {
+        "id": "ed02393ce0bb7d9a",
+        "type": "ui_group",
+        "name": "power",
+        "tab": "9d9cab374b5e4140",
+        "order": 1,
+        "disp": true,
+        "width": "14",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "9d9cab374b5e4140",
+        "type": "ui_tab",
+        "name": "Data Analysis",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    }
+]

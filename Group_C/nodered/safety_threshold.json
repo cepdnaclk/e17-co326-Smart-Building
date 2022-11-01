@@ -1,0 +1,19 @@
+[
+    {
+        "id": "d823cc97abfc112c",
+        "type": "function",
+        "z": "fc959d220ba826f3",
+        "name": "Thrs",
+        "func": "\nlet tempArray = [89.54, 89.56, 89.59, 89.61, 89.61, 89.64, 89.67, 89.62, 89.69, 89.76, 89.87, 89.56, 89.43, 89.65, 90.53, 90.54, 90.56, 90.59, 90.61, 90.61, 90.64, 90.67, 90.62, 90.69, 90.76, 90.87, 90.56, 90.43, 89.31, 89.33, 89.32, 89.33, 89.34, 89.35, 89.32, 89.31, 89.26, 89.22, 89.25, 89.28, 89.27, 89.28, 89.25, 89.23, 89.23, 89.26, 89.25, 89.23, 89.09, 89.06, 89.12, 89.04, 89.01, 89.35, 89.93, 89.35, 89.83, 89.24, 90.45, 90.34, 90.29,\n];\n//tempArray.push(1);\n\nlet minReadings = 60;\nlet defaultThresh = 105;\n\nlet tempLen = tempArray.length;\n\nif (tempArray.length <= minReadings) {\n    msg.payload = defaultThresh;\n    return msg;\n}\n\n//mean\nlet mean = tempArray.reduce((prev, cur) => prev + cur, 0) / tempArray.length;\n\n// Assigning mean square err to every array item\ntempArray = tempArray.map((k) => {\n    return (k - mean) ** 2;\n});\n\n// Calculating the sum of MSE of Temp\nlet sum = tempArray.reduce((acc, curr) => acc + curr, 0);\n\n// Calculating the variance of temp\nlet variance = sum / tempLen;\n\n// Calculating the Standered deviation\nlet stnDev = Math.sqrt(sum / tempLen);\n\n//assign thres\nlet thres = mean + 26 * stnDev;\n\n//console.log(\"thres- \" + thres);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    }
+]

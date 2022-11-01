@@ -102,7 +102,7 @@ if __name__ == '__main__':
             c3.wait()
             print("Load is consuming power...")
             # 40 Wh load
-            battery.load(40000)
+            battery.load(45900)
             c3.release()
 
     # This function subscribes to SW1 and either shuts down charging or starts charging at the specified power level accordingly.

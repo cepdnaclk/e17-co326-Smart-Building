@@ -18,10 +18,10 @@ const char* topic_sw2 = "326project/smartbuilding/pv/controls/sw2";
 
 const int currentSensor = A0; // Defining LDR PIN 
 const int relay = D7;
-const int batteryReadyPin = D6;
-const int batteryNotReadyPin = D5;
-const int batteryChargingPin = D4;
-const int batteryNotChargingPin = D3;
+const int batteryReadyPin = D2; //D6
+const int batteryNotReadyPin = D3; //D5
+const int batteryChargingPin = D5; //D2
+const int batteryNotChargingPin = D6; //D3
 
 int input_val = 0;  // Varible to store Input values
 
@@ -129,17 +129,20 @@ void callback(String topic, byte* message, unsigned int length) {
     Serial.print("Battery is");
     String pwm_duty = obj["pwm_duty"];
     int pwm = pwm_duty.toInt();
-
-    if(pwm=0){
-      //Battery Charging = D3
-      //Battery Not Charging = D4
+    Serial.print("pwm: ");
+    Serial.print(pwm);
+    if(pwm==0){
+      //Battery Not Charging = D3
+      //Battery Charging = D2
       digitalWrite(batteryNotChargingPin,HIGH);
       digitalWrite(batteryChargingPin,LOW);
+      delay(500);
       Serial.print(" not charging"); 
     }
     else{
       digitalWrite(batteryNotChargingPin,LOW);
       digitalWrite(batteryChargingPin,HIGH);
+      delay(500);
       Serial.print(" Charging");  
     }
   }
